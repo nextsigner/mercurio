@@ -21,14 +21,23 @@ ApplicationWindow{
     property color c3
     property color c4
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
-    Settings{
-        id: appSettings
-        category: 'conf-'+app.moduleName
-        property int currentNumColors
-    }
-    UnikSettings{
+    USettings{
         id: unikSettings
         url:pws+'/launcher.json'
+        function refresh(){
+            var nc=unikSettings.currentNumColor
+            if(unikSettings.defaultColors){
+                var cc1=unikSettings.defaultColors.split('|')
+                var cc2=cc1[nc].split('-')
+                app.c1=cc2[0]
+                app.c2=cc2[1]
+                app.c3=cc2[2]
+                app.c4=cc2[3]
+                app.visible=true
+            }
+        }
+        Component.onCompleted: refresh()
+        onDataChanged:  refresh()
         onCurrentNumColorChanged: {
             if(unikSettings.sound&&currentNumColor>=0){
                 let s=unikSettings.lang==='es'?'Color actual ':'Current color  '
@@ -36,7 +45,7 @@ ApplicationWindow{
                 speak(s)
             }
         }
-        Component.onCompleted: {
+        /*Component.onCompleted: {
             console.log('Seted... ')
             console.log('UnikColorTheme currentNumColor: '+unikSettings.currentNumColor)
             console.log('UnikColorTheme defaultColors: '+unikSettings.defaultColors)
@@ -48,9 +57,8 @@ ApplicationWindow{
             app.c3=cc2[2]
             app.c4=cc2[3]
             app.visible=true
-        }
+        }*/
     }
-
     onIsLandScapeChanged: {
         tOpacidadRaiz.restart()
     }
@@ -91,7 +99,7 @@ ApplicationWindow{
                 }else{
                     unikSettings.currentNumColor=0
                 }
-                appSettings.currentNumColors = unikSettings.currentNumColor
+                //appSettings.currentNumColors = unikSettings.currentNumColor
                 updateUS()
             }
         }
