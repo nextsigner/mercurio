@@ -100,6 +100,13 @@ ApplicationWindow{
                 upd.download('https://github.com/nextsigner/'+moduleName+'.git', pws)
             }
         }
+        UText{
+            color: app.c2
+            text: 'Mercurio'
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: app.fs
+        }
         Grid{
             visible: app.cCasa===-1
             anchors.centerIn: parent
