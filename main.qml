@@ -11,6 +11,7 @@ ApplicationWindow{
     width: Qt.platform.os==='android'?Screen.width:460
     height: Qt.platform.os==='android'?Screen.height:700
     property string moduleName: 'mercurio'
+    property bool rot: app.width>app.height
     property int fs: app.width*0.03
     property var arrayDataCasas: []
     property int cCasa: -1
@@ -111,34 +112,23 @@ ApplicationWindow{
         Grid{
             visible: app.cCasa===-1
             anchors.centerIn: parent
-            columns: 3
-            spacing: app.fs
+            columns: app.rot?6:3
+            spacing: app.rot?app.fs*0.25:app.fs
             Repeater{
                 id: repIconCasas
                 model: 12
-                Rectangle{
-                    width: app.fs*10
+                BotonUX{
+                    width: app.rot?app.fs*4:app.fs*8
                     height: width
-                    radius: app.fs*0.5
-                    color: app.c2
-                    Text{
-                        text: "Casa "+parseInt(modelData + 1)
-                        color: app.c1
-                        font.pixelSize: parent.width*0.15
-                        anchors.centerIn: parent
-                    }
-                    MouseArea{
-                        anchors.fill: parent
-                        onClicked: app.cCasa=index
-                    }
+                    text: "Casa "+parseInt(modelData + 1)
+                    fontSize: app.rot?app.fs:app.fs*2
+                    onClicked: app.cCasa=index
                 }
             }
         }
         Item{
             id: xDataCasas
             visible: app.cCasa!==-1
-            //anchors.centerIn: parent
-
             Repeater{
                 id: repDataCasas
                 Rectangle{
@@ -158,7 +148,7 @@ ApplicationWindow{
                         width: parent.width
                         height: parent.height
                         contentWidth: parent.width
-                        contentHeight: colDataCasas.height+app.fs*2
+                        contentHeight: colDataCasas.height+app.fs*6
                         Column{
                             id: colDataCasas
                             anchors.horizontalCenter: parent.horizontalCenter
@@ -185,6 +175,7 @@ ApplicationWindow{
                                     }
                                 }
                             }
+                            Item{width: 1; height: app.fs}
                             Text{
                                 width: xApp.width-app.fs*2
                                 text: modelData
@@ -209,16 +200,12 @@ ApplicationWindow{
         ULogView{id: logView}
         UWarnings{id: uWarnings}
     }
-
     Shortcut{
         sequence: 'Esc'
         onActivated: Qt.quit()
     }
-
     Component.onCompleted: {
         let d1=unik.getFile('dataCasas.json')
-        //let d2=d1.replace(/\n/g, '<br />')
-        //console.log('D1: '+d2)
         let json = JSON.parse(d1)
         for(let i=1;i<=12;i++){
             console.log('D: '+json['casas']['casa'+i])
@@ -226,7 +213,6 @@ ApplicationWindow{
         }
         repDataCasas.model = app.arrayDataCasas
     }
-
     function updateUS(){
         var nc=unikSettings.currentNumColor
         var cc1=unikSettings.defaultColors.split('|')
@@ -242,5 +228,4 @@ ApplicationWindow{
 
         app.visible=true
     }
-
 }
