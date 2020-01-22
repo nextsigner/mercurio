@@ -53,15 +53,6 @@ ApplicationWindow{
 
     onIsLandScapeChanged: {
         tOpacidadRaiz.restart()
-        /*if(xApp.opacity<=1.0){
-            xApp.opacity+=0.1
-        }else{
-            //stop()
-        }
-        if(uAppWidth !== Screen.width){
-            xApp.opacity=0.0
-        }
-        uAppWidth = Screen.width*/
     }
     Timer{
         id: tOpacidadRaiz
@@ -81,33 +72,9 @@ ApplicationWindow{
             uAppWidth = Screen.width
         }
     }
-
-    MouseArea{
-        anchors.fill: parent
-        onDoubleClicked: Qt.quit()
-    }
     Item {
         id: xApp
         anchors.fill: parent
-        /*Timer{
-            id: tOpacidadRaiz
-            repeat: true
-            running: true
-            interval: 100
-            property int uAppWidth: 0
-            onTriggered: {
-
-                if(xApp.opacity<=1.0){
-                    xApp.opacity+=0.1
-                }else{
-                    //stop()
-                }
-                if(uAppWidth !== Screen.width){
-                    xApp.opacity=0.0
-                }
-                uAppWidth = Screen.width
-            }
-        }*/
         UxBotCirc{
             text: '\uf1fc'//+unikSettings.currentNumColor
             fontSize: app.fs

@@ -14,10 +14,10 @@ Item {
             id: repIconCasas
             model: 12
             BotonUX{
-                width: app.rot?app.fs*4:app.fs*8
+                width: app.isLandScape?app.fs*4:app.fs*8
                 height: width
                 text: "Casa "+parseInt(modelData + 1)
-                fontSize: app.rot?app.fs:app.fs*2
+                fontSize: app.isLandScape?app.fs:app.fs*2
                 onClicked: app.cCasa=index
             }
         }
