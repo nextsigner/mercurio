@@ -5,23 +5,6 @@ Item {
     id: r
     width: parent.width
     height: parent.height
-    onWidthChanged: {
-        r.opacity=0.0
-        tOpacidadRaiz.restart()
-    }
-    Timer{
-        id: tOpacidadRaiz
-        repeat: true
-        running: false
-        interval: 100
-        onTriggered: {
-            if(r.opacity<=1.0){
-                r.opacity+=0.1
-            }else{
-                stop()
-            }
-        }
-    }
     Grid{
         visible: app.cCasa===-1
         anchors.centerIn: parent

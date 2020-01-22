@@ -56,6 +56,23 @@ ApplicationWindow{
     Item {
         id: xApp
         anchors.fill: parent
+        onWidthChanged: {
+            xApp.opacity=0.0
+            tOpacidadRaiz.restart()
+        }
+        Timer{
+            id: tOpacidadRaiz
+            repeat: true
+            running: false
+            interval: 100
+            onTriggered: {
+                if(xApp.opacity<=1.0){
+                    xApp.opacity+=0.1
+                }else{
+                    stop()
+                }
+            }
+        }
         UxBotCirc{
             text: '\uf1fc'//+unikSettings.currentNumColor
             fontSize: app.fs
