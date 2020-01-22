@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
-//import "qrc:/"
 Item{
     id:r
     width: r2.width//+app.fs
@@ -10,6 +9,7 @@ Item{
     property bool glowEnabled: true
     property bool blurEnabled: true
     property int fontSize: app.fs
+    property string fontFamily: unikSettings.fontFamily
     property bool canceled: false
     property string t2
     property color backgroudColor: app.c1
@@ -50,6 +50,7 @@ Item{
         t2: r.t2
         backgroudColor: r.backgroudColor
         fontColor: r.fontColor
+        fontFamily: r.fontFamily
         objToRunQml: r.objToRunQml
         qmlCode: r.qmlCode
         speed: r.speed

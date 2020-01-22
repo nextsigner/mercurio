@@ -86,6 +86,8 @@ ApplicationWindow{
         UxBotCirc{
             text: '\uf1fc'//+unikSettings.currentNumColor
             fontSize: app.fs
+            //width: app.fs
+            //height: width
             animationEnabled: false
             blurEnabled: false
             anchors.left: parent.left

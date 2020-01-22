@@ -35,7 +35,8 @@ Item {
                 color: app.c1
                 onVisibleChanged: {
                     if(visible){
-                        unik.speak((''+modelData).replace(/<br \/>/g, '        '))
+                        let s = (''+modelData).replace(/<br \/>/g, '        ')
+                        unik.speak(s)
                     }
                 }
                 Flickable{
@@ -67,7 +68,9 @@ Item {
                             BotonUX{
                                 text: 'Leer'
                                 onClicked: {
-                                    unik.speak((''+modelData).replace(/<br \/>/g, '        '))
+                                    let s = (''+modelData).replace(/<br \/>/g, '        ')
+                                    //logView.showLog(s)
+                                    unik.speak(s)
                                 }
                             }
                         }
