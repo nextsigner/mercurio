@@ -101,6 +101,7 @@ ApplicationWindow{
             }
         }
         UText{
+            font.pixelSize: app.fs*2
             color: app.c2
             text: 'Mercurio'
             anchors.horizontalCenter: parent.horizontalCenter
