@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
-import "qrc:/"
+//import "qrc:/"
 Item{
     id:r
     width: r2.width//+app.fs
@@ -9,6 +9,8 @@ Item{
     property bool animationEnabled: true
     property bool glowEnabled: true
     property bool blurEnabled: true
+    property int padding: 0
+    property alias bg: r2.bg
     property int fontSize: app.fs
     property bool canceled: false
     property string t2
@@ -33,6 +35,7 @@ Item{
     BotonUX{
         id:  r2
         fontSize: r.fontSize
+        padding: r.padding
         fontFamily: "FontAwesome"
         canceled: r.canceled
         t2: r.t2
@@ -42,8 +45,9 @@ Item{
         qmlCode: r.qmlCode
         speed: r.speed
         text: r.text
-        height: width
-        anchors.centerIn: parent
+        //width: r.width
+        //height: width
+        anchors.centerIn: r
         radius: width*0.5
         opacity: 0.5
         onClicked: {

@@ -2,7 +2,6 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
 import Qt.labs.settings 1.1
-import "qrc:/"
 ApplicationWindow{
     id: app
     visible: true
@@ -45,19 +44,6 @@ ApplicationWindow{
                 speak(s)
             }
         }
-        /*Component.onCompleted: {
-            console.log('Seted... ')
-            console.log('UnikColorTheme currentNumColor: '+unikSettings.currentNumColor)
-            console.log('UnikColorTheme defaultColors: '+unikSettings.defaultColors)
-            var nc=unikSettings.currentNumColor
-            var cc1=unikSettings.defaultColors.split('|')
-            var cc2=cc1[nc].split('-')
-            app.c1=cc2[0]
-            app.c2=cc2[1]
-            app.c3=cc2[2]
-            app.c4=cc2[3]
-            app.visible=true
-        }*/
     }
     onIsLandScapeChanged: {
         tOpacidadRaiz.restart()
@@ -84,12 +70,11 @@ ApplicationWindow{
         id: xApp
         anchors.fill: parent
         UxBotCirc{
+            padding: 0-app.fs*3
             text: '\uf1fc'//+unikSettings.currentNumColor
-            fontSize: app.fs
-            //width: app.fs
-            //height: width
-            animationEnabled: false
-            blurEnabled: false
+            fontSize: app.fs*2
+            animationEnabled: true
+            glowEnabled: true
             anchors.left: parent.left
             anchors.leftMargin: app.fs*0.5
             anchors.top: parent.top
@@ -106,10 +91,10 @@ ApplicationWindow{
             }
         }
         UxBotCirc{
+            padding: 0-app.fs*3
             text: '\uf011'
-            fontSize: app.fs
-            animationEnabled: false
-            blurEnabled: false
+            fontSize: app.fs*2
+            animationEnabled: true
             anchors.right: parent.right
             anchors.rightMargin: app.fs*0.5
             anchors.top: parent.top
@@ -119,9 +104,10 @@ ApplicationWindow{
             }
         }
         UxBotCirc{
+            padding: 0-app.fs*3
             text: '\uf021'
-            animationEnabled: false
-            blurEnabled: false
+            fontSize: app.fs*2
+            animationEnabled: true
             anchors.bottom: parent.bottom
             anchors.bottomMargin: app.fs*0.5
             anchors.left:  parent.left

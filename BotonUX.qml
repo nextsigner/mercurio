@@ -1,8 +1,8 @@
 import QtQuick 2.0
 Rectangle {
     id: r
-    width: a.contentWidth+(r.fontSize*2*(unikSettings.padding*2))+(unikSettings.borderWidth*2)+app.fs
-    height: a.contentHeight+(r.fontSize*2*(unikSettings.padding*2))+(unikSettings.borderWidth*2)+app.fs*2
+    width: a.contentWidth+(r.fontSize*2*(unikSettings.padding*2))+(unikSettings.borderWidth*2)+app.fs+padding
+    height: a.contentHeight+(r.fontSize*2*(unikSettings.padding*2))+(unikSettings.borderWidth*2)+app.fs+padding
     opacity: enabled?1.0:0.5
     objectName: 'sin_nombre'
     color: 'transparent'
@@ -11,6 +11,7 @@ Rectangle {
     border.width: 0
     antialiasing: true
     property var settingObj
+    property int padding: 0
     property int fontSize: app.fs
     property bool canceled: false
     property alias text: a.text
@@ -23,16 +24,17 @@ Rectangle {
     property int speed: 100
     property alias touchEnabled: maBX.enabled
     property alias pressed: maBX.p
+    property alias bg: xR1
     signal clicked
 
     Rectangle{
         id: xR1
         color: 'transparent'
         border.width: unikSettings.borderWidth
-        border.color: r.fontColor
+        border.color: app.c3//r.fontColor
         radius: unikSettings.radius
         width: parent.width
-        height: parent.height/2
+        height: parent.height
         anchors.centerIn: r
         antialiasing: true
         Rectangle{
@@ -49,10 +51,12 @@ Rectangle {
         }
         Rectangle{
             id: b1
-            width: xR1.height
-            height: xR1.width
+            //width: xR1.height
+            //height: xR1.width
+            width: xR1.width
+            height: xR1.height
             radius: unikSettings.radius
-            rotation: -90
+            rotation: -180
             anchors.centerIn: parent
             opacity: 0.5
             antialiasing: true
@@ -71,10 +75,10 @@ Rectangle {
         Rectangle{
             id: b2
             opacity: 0.5-b1.opacity
-            width: xR1.height
-            height: xR1.width
+            width: xR1.width
+            height: xR1.height
             radius: unikSettings.radius
-            rotation: 90//-270
+            //rotation: 90//-270
             //visible: false
             antialiasing: true
             onOpacityChanged: {
@@ -122,9 +126,9 @@ Rectangle {
         color: app.c1
         border.width: unikSettings.borderWidth
         border.color: r.fontColor
-        radius: unikSettings.radius
-        width: parent.width
-        height: parent.height/2
+        radius: xR1.radius
+        width: xR1.width
+        height: xR1.height
         anchors.centerIn: r
         antialiasing: true
         opacity: 0.5
