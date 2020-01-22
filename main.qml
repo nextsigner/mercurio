@@ -1,27 +1,217 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.0
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
+import Qt.labs.settings 1.1
+import "qrc:/"
 ApplicationWindow{
     id: app
     visible: true
-    visibility: "FullScreen"
-    color:"green"
-
-    Column{
-        anchors.centerIn: parent
-        Repeater{
-            model: 12
-            Text{
-                text: "Casa "+modelData
-                color: "white"
-                font.pixelSize: 30
-
+    visibility: Qt.platform.os==='android'?"FullScreen":"Windowed"
+    color:app.c1
+    width: Qt.platform.os==='android'?Screen.width:460
+    height: Qt.platform.os==='android'?Screen.height:700
+    property string moduleName: 'mercurio'
+    property int fs: app.width*0.02
+    property var arrayDataCasas: []
+    property int cCasa: -1
+    property color c1
+    property color c2
+    property color c3
+    property color c4
+    Settings{
+        id: appSettings
+        category: 'conf-'+app.moduleName
+        property int currentNumColors
+    }
+    UnikSettings{
+        id: unikSettings
+        url:pws+'/launcher.json'
+        onCurrentNumColorChanged: {
+            if(unikSettings.sound&&currentNumColor>=0){
+                let s=unikSettings.lang==='es'?'Color actual ':'Current color  '
+                s+=parseInt(currentNumColor+1)
+                speak(s)
             }
         }
+        Component.onCompleted: {
+            console.log('Seted... ')
+            console.log('UnikColorTheme currentNumColor: '+unikSettings.currentNumColor)
+            console.log('UnikColorTheme defaultColors: '+unikSettings.defaultColors)
+            var nc=unikSettings.currentNumColor
+            var cc1=unikSettings.defaultColors.split('|')
+            var cc2=cc1[nc].split('-')
+            app.c1=cc2[0]
+            app.c2=cc2[1]
+            app.c3=cc2[2]
+            app.c4=cc2[3]
+            app.visible=true
+        }
     }
-
-
     MouseArea{
         anchors.fill: parent
         onDoubleClicked: Qt.quit()
     }
+    Item {
+        id: xApp
+        anchors.fill: parent
+        UxBotCirc{
+            text: '\uf1fc'//+unikSettings.currentNumColor
+            fontSize: app.fs
+            animationEnabled: false
+            blurEnabled: false
+            anchors.left: parent.left
+            anchors.leftMargin: app.fs*0.5
+            anchors.top: parent.top
+            anchors.topMargin: app.fs*0.5
+            onClicked: {
+                var cc=unikSettings.defaultColors.split('|').length
+                if(unikSettings.currentNumColor<cc-1){
+                    unikSettings.currentNumColor++
+                }else{
+                    unikSettings.currentNumColor=0
+                }
+                appSettings.currentNumColors = unikSettings.currentNumColor
+                updateUS()
+            }
+        }
+        UxBotCirc{
+            text: '\uf011'
+            fontSize: app.fs
+            animationEnabled: false
+            blurEnabled: false
+            anchors.right: parent.right
+            anchors.rightMargin: app.fs*0.5
+            anchors.top: parent.top
+            anchors.topMargin: app.fs*0.5
+            onClicked: {
+                Qt.quit()
+            }
+        }
+        UxBotCirc{
+            text: '\uf021'
+            animationEnabled: false
+            blurEnabled: false
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: app.fs*0.5
+            anchors.left:  parent.left
+            anchors.leftMargin: app.fs*0.5
+            onClicked: {
+                upd.infoText = unikSettings.lang==='es'?'<b>Actualización: </b>Se ha iniciado la actualización\nde <b>MERCURIO</b>':'<b>Update: </b> Updating <b>MERCURIO</b>'
+                upd.download('https://github.com/nextsigner/'+moduleName+'.git', pws)
+            }
+        }
+        Grid{
+            visible: app.cCasa===-1
+            anchors.centerIn: parent
+            columns: 3
+            spacing: app.fs
+            Repeater{
+                id: repIconCasas
+                model: 12
+                Rectangle{
+                    width: app.fs*12
+                    height: width
+                    radius: app.fs*0.5
+                    color: app.c2
+                    Text{
+                        text: "Casa "+parseInt(modelData + 1)
+                        color: app.c1
+                        font.pixelSize: parent.width*0.15
+                        anchors.centerIn: parent
+                    }
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: app.cCasa=index
+                    }
+                }
+            }
+        }
+        Item{
+            id: xDataCasas
+            visible: app.cCasa!==-1
+            //anchors.centerIn: parent
+
+            Repeater{
+                id: repDataCasas
+                Rectangle{
+                    visible: app.cCasa===index
+                    width: xApp.width
+                    height: xApp.height
+                    radius: app.fs*0.5
+                    Flickable{
+                        anchors.top: parent.top
+                        anchors.topMargin: app.fs*2
+                        width: parent.width
+                        height: parent.height
+                        contentWidth: parent.width
+                        contentHeight: colDataCasas.height+app.fs*2
+                        Column{
+                            id: colDataCasas
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            spacing: app.fs
+                            BotonUX{
+                                text: 'Atras'
+                                onClicked: app.cCasa=-1
+                                //fontSize:  app.fs*2
+                                //fontColor: 'red'
+                                //height: app.fs*3
+                            }
+                            Text{
+                                width: xApp.width-app.fs*2
+                                text: "Casa "+modelData
+                                color: app.c2
+                                font.pixelSize: app.fs*2
+                                wrapMode: Text.WordWrap
+                                textFormat: Text.RichText
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        UProgressDownload{
+            id:upd
+            width: app.width
+            onDownloaded: {
+                unik.setUnikStartSettings('-folder='+unik.currentFolderPath())
+                unik.restartApp()
+            }
+        }
+        ULogView{id: logView}
+        UWarnings{id: uWarnings}
+    }
+
+    Shortcut{
+        sequence: 'Esc'
+        onActivated: Qt.quit()
+    }
+
+    Component.onCompleted: {
+        let d1=unik.getFile('dataCasas.json')
+        //let d2=d1.replace(/\n/g, '<br />')
+        //console.log('D1: '+d2)
+        let json = JSON.parse(d1)
+        for(let i=1;i<=12;i++){
+            console.log('D: '+json['casas']['casa'+i])
+            arrayDataCasas.push(json['casas']['casa'+i])
+        }
+        repDataCasas.model = app.arrayDataCasas
+    }
+
+    function updateUS(){
+        var nc=unikSettings.currentNumColor
+        var cc1=unikSettings.defaultColors.split('|')
+        var cc2=cc1[nc].split('-')
+        app.c1=cc2[0]
+        app.c2=cc2[1]
+        app.c3=cc2[2]
+        app.c4=cc2[3]
+
+        unikSettings.zoom=1.4
+        unikSettings.borderWidth=app.fs*0.5
+        unikSettings.padding=0.5
+
+        app.visible=true
+    }
+
 }
