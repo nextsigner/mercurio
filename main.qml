@@ -55,22 +55,25 @@ ApplicationWindow{
     }
     Item {
         id: xApp
-        anchors.fill: parent
-        onWidthChanged: {
-            xApp.opacity=0.0
-            tOpacidadRaiz.restart()
-        }
+        anchors.fill: parent        
         Timer{
             id: tOpacidadRaiz
             repeat: true
-            running: false
+            running: true
             interval: 100
+            property int uAppWidth: 0
             onTriggered: {
+
                 if(xApp.opacity<=1.0){
                     xApp.opacity+=0.1
                 }else{
-                    stop()
+                    //stop()
                 }
+                if(uAppWidth !== app.width){
+                    xApp.opacity=0.0
+                    //return
+                }
+                uAppWidth = app.width
             }
         }
         UxBotCirc{
