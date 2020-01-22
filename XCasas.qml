@@ -35,7 +35,7 @@ Item {
                 color: app.c1
                 onVisibleChanged: {
                     if(visible){
-                        let s = (''+modelData).replace(/<br \/>/g, '        ')
+                        let s = (''+modelData).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '')
                         unik.speak(s)
                     }
                 }
@@ -68,7 +68,7 @@ Item {
                             BotonUX{
                                 text: 'Leer'
                                 onClicked: {
-                                    let s = (''+modelData).replace(/<br \/>/g, '        ')
+                                    let s = (''+modelData).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '')
                                     //logView.showLog(s)
                                     unik.speak(s)
                                 }
