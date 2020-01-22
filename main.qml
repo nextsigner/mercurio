@@ -12,6 +12,7 @@ ApplicationWindow{
     height: Qt.platform.os==='android'?Screen.height:700
     property string moduleName: 'mercurio'
     property bool rot: app.width>app.height
+    property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
     property int fs: app.width*0.03
     property var arrayDataCasas: []
     property int cCasa: -1
@@ -49,14 +50,46 @@ ApplicationWindow{
             app.visible=true
         }
     }
+
+    onIsLandScapeChanged: {
+        tOpacidadRaiz.restart()
+        /*if(xApp.opacity<=1.0){
+            xApp.opacity+=0.1
+        }else{
+            //stop()
+        }
+        if(uAppWidth !== Screen.width){
+            xApp.opacity=0.0
+        }
+        uAppWidth = Screen.width*/
+    }
+    Timer{
+        id: tOpacidadRaiz
+        repeat: true
+        running: false
+        interval: 100
+        property int uAppWidth: 0
+        onTriggered: {
+            if(xApp.opacity<=1.0){
+                xApp.opacity+=0.1
+            }else{
+                stop()
+            }
+            if(uAppWidth !== Screen.width){
+                xApp.opacity=0.0
+            }
+            uAppWidth = Screen.width
+        }
+    }
+
     MouseArea{
         anchors.fill: parent
         onDoubleClicked: Qt.quit()
     }
     Item {
         id: xApp
-        anchors.fill: parent        
-        Timer{
+        anchors.fill: parent
+        /*Timer{
             id: tOpacidadRaiz
             repeat: true
             running: true
@@ -74,7 +107,7 @@ ApplicationWindow{
                 }
                 uAppWidth = Screen.width
             }
-        }
+        }*/
         UxBotCirc{
             text: '\uf1fc'//+unikSettings.currentNumColor
             fontSize: app.fs
