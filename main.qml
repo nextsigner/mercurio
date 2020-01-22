@@ -69,11 +69,10 @@ ApplicationWindow{
                 }else{
                     //stop()
                 }
-                if(uAppWidth !== app.width){
+                if(uAppWidth !== Screen.width){
                     xApp.opacity=0.0
-                    //return
                 }
-                uAppWidth = app.width
+                uAppWidth = Screen.width
             }
         }
         UxBotCirc{
