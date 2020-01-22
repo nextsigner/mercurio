@@ -109,7 +109,7 @@ ApplicationWindow{
                 id: repIconCasas
                 model: 12
                 Rectangle{
-                    width: app.fs*8
+                    width: app.fs*10
                     height: width
                     radius: app.fs*0.5
                     color: app.c2
@@ -155,12 +155,27 @@ ApplicationWindow{
                             id: colDataCasas
                             anchors.horizontalCenter: parent.horizontalCenter
                             spacing: app.fs
-                            BotonUX{
-                                text: 'Atras'
-                                onClicked: app.cCasa=-1
-                                //fontSize:  app.fs*2
-                                //fontColor: 'red'
-                                //height: app.fs*3
+                            Row{
+                                spacing: app.fs
+                                BotonUX{
+                                    text: 'Atras'
+                                    onClicked: {
+                                        unik.speak('atras')
+                                        app.cCasa=-1
+                                    }
+                                }
+                                BotonUX{
+                                    text: 'Detener Audio'
+                                    onClicked: {
+                                        unik.speak('detenido')
+                                    }
+                                }
+                                BotonUX{
+                                    text: 'Leer'
+                                    onClicked: {
+                                        unik.speak((''+modelData).replace(/<br \/>/g, '        '))
+                                    }
+                                }
                             }
                             Text{
                                 width: xApp.width-app.fs*2
