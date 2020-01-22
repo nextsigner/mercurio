@@ -19,6 +19,7 @@ ApplicationWindow{
     property color c2
     property color c3
     property color c4
+    FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
     Settings{
         id: appSettings
         category: 'conf-'+app.moduleName
