@@ -6,12 +6,35 @@ ApplicationWindow{
     visibility: "FullScreen"
     color:"green"
 	
-	Text{
-		text: "Hola Natalia!"
-		color: "white"
-		font.pixelSize: 30
+    Column{
         anchors.centerIn: parent
-	}
+        Text{
+            text: "Hola Natalia! 1"
+            color: "white"
+            font.pixelSize: 30
+
+        }
+        Text{
+            text: "Hola Natalia! 2"
+            color: "white"
+            font.pixelSize: 30
+
+        }
+        Text{
+            text: "Hola Natalia! 3"
+            color: "white"
+            font.pixelSize: 30
+
+        }
+        Text{
+            text: "Hola Natalia! 4"
+            color: "white"
+            font.pixelSize: 30
+
+        }
+    }
+
+
     MouseArea{
         anchors.fill: parent
         onDoubleClicked: Qt.quit()
