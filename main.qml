@@ -11,7 +11,7 @@ ApplicationWindow{
     width: Qt.platform.os==='android'?Screen.width:460
     height: Qt.platform.os==='android'?Screen.height:700
     property string moduleName: 'mercurio'
-    property int fs: app.width*0.02
+    property int fs: app.width*0.03
     property var arrayDataCasas: []
     property int cCasa: -1
     property color c1
@@ -109,7 +109,7 @@ ApplicationWindow{
                 id: repIconCasas
                 model: 12
                 Rectangle{
-                    width: app.fs*12
+                    width: app.fs*8
                     height: width
                     radius: app.fs*0.5
                     color: app.c2
@@ -138,6 +138,12 @@ ApplicationWindow{
                     width: xApp.width
                     height: xApp.height
                     radius: app.fs*0.5
+                    color: app.c1
+                    onVisibleChanged: {
+                        if(visible){
+                            unik.speak((''+modelData).replace(/<br \/>/g, '        '))
+                        }
+                    }
                     Flickable{
                         anchors.top: parent.top
                         anchors.topMargin: app.fs*2
@@ -158,7 +164,7 @@ ApplicationWindow{
                             }
                             Text{
                                 width: xApp.width-app.fs*2
-                                text: "Casa "+modelData
+                                text: modelData
                                 color: app.c2
                                 font.pixelSize: app.fs*2
                                 wrapMode: Text.WordWrap
