@@ -13,8 +13,9 @@ ApplicationWindow{
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
     property int fs: app.width*0.03
-    property var arrayDataCasas: []
-    property int cCasa: -1
+
+    property int mod: -1
+
     property color c1
     property color c2
     property color c3
@@ -43,27 +44,6 @@ ApplicationWindow{
                 s+=parseInt(currentNumColor+1)
                 speak(s)
             }
-        }
-    }
-    onIsLandScapeChanged: {
-        tOpacidadRaiz.restart()
-    }
-    Timer{
-        id: tOpacidadRaiz
-        repeat: true
-        running: false
-        interval: 100
-        property int uAppWidth: 0
-        onTriggered: {
-            if(xApp.opacity<=1.0){
-                xApp.opacity+=0.1
-            }else{
-                stop()
-            }
-            if(uAppWidth !== Screen.width){
-                xApp.opacity=0.0
-            }
-            uAppWidth = Screen.width
         }
     }
     Item {
@@ -125,7 +105,9 @@ ApplicationWindow{
             anchors.top: parent.top
             anchors.topMargin: app.fs
         }
-        XCasas{id: xCasas}
+        XMenu{id: xMenu; visible: app.mod===-1;}
+        XCasas{id: xCasas; visible: app.mod===0;}
+        XCasasLilith{id: xCasasLilith;visible: app.mod===1;}
         UProgressDownload{
             id:upd
             width: app.width

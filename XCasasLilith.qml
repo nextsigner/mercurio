@@ -18,16 +18,16 @@ Rectangle {
         }
         Text{
             width: xApp.width-app.fs*2
-            text: '<b>Significado de las Casas</b>'
+            text: '<b>Lilith en las Casas</b>'
             color: app.c2
             font.pixelSize: app.fs*2
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
             visible: r.cCasa===-1
-            anchors.horizontalCenter: parent.horizontalCenter
             columns: app.rot?6:3
             spacing: app.rot?app.fs*0.25:app.fs
+            anchors.horizontalCenter: parent.horizontalCenter
             Repeater{
                 id: repIconCasas
                 model: 12
@@ -40,7 +40,6 @@ Rectangle {
                 }
             }
         }
-
     }
     Item{
         id: xDataCasas
@@ -109,7 +108,7 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        let d1=unik.getFile('dataCasas.json')
+        let d1=unik.getFile('dataCasasLilith.json')
         let json = JSON.parse(d1)
         for(let i=1;i<=12;i++){
             console.log('D: '+json['casas']['casa'+i])
