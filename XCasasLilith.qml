@@ -54,7 +54,7 @@ Rectangle {
                 color: app.c1
                 onVisibleChanged: {
                     if(visible){
-                        let s = (''+modelData).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '')
+                        let s = (''+modelData).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '').replace(/LILITH/g, 'la luna negra').replace(/Lilith/g, 'la luna negra').replace(/Casa I/g, 'casa 1').replace(/Casa II/g, 'casa 2').replace(/Casa III/g, 'casa 3').replace(/Casa IV/g, 'casa 4').replace(/Casa V/g, 'casa 5').replace(/Casa VI/g, 'casa 6').replace(/Casa VII/g, 'casa 7').replace(/Casa VIII/g, 'casa 8').replace(/Casa IX/g, 'casa 9').replace(/Casa X/g, 'casa 10').replace(/Casa XI/g, 'casa 11').replace(/Casa XII/g, 'casa 12')
                         unik.speak(s)
                     }
                 }
