@@ -33,7 +33,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             Repeater{
                 id: repIconCasas
-                model: ['Sol', 'Luna', 'Venus', 'Martes']
+                model: ['Sol', 'Luna', 'Mercurio', 'Venus', 'Martes', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton']
                 BotonUX{
                     width: app.rot?app.fs*4:app.fs*8
                     height: width
