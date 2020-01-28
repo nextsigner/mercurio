@@ -14,7 +14,10 @@ Rectangle {
         BotonUX{
             text: 'Atras'
             fontSize: app.rot?app.fs*0.5:app.fs
-            onClicked: app.mod=-1
+            onClicked: {
+                app.mod=-1
+                unik.speak('atras')
+            }
         }
         Text{
             width: xApp.width-app.fs*2
