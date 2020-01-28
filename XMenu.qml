@@ -10,7 +10,7 @@ Item {
         spacing: app.rot?app.fs*0.25:app.fs
         Repeater{
             id: repIconMenu
-            model: ['Significado de las Casas', 'Lilith en las Casas', 'Quirón en las Casas']
+            model: ['Significado de las Casas', 'Lilith en las Casas', 'Quirón en las Casas', 'Significado de los Planetas']
             BotonUX{
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: modelData

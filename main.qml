@@ -109,6 +109,7 @@ ApplicationWindow{
         XCasas{id: xCasas; visible: app.mod===0;}
         XCasasLilith{id: xCasasLilith;visible: app.mod===1;}
         XCasasQuiron{id: xCasasQuron;visible: app.mod===2;}
+        XPlanetas{id: xPlanetas;visible: app.mod===3;}
         UProgressDownload{
             id:upd
             width: app.width
