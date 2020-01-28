@@ -50,6 +50,7 @@ ApplicationWindow{
         id: xApp
         anchors.fill: parent
         UxBotCirc{
+            opacity: labelTit.opacity
             padding: 0-app.fs*3
             text: '\uf1fc'//+unikSettings.currentNumColor
             fontSize: app.fs*2
@@ -71,6 +72,7 @@ ApplicationWindow{
             }
         }
         UxBotCirc{
+            opacity: labelTit.opacity
             padding: 0-app.fs*3
             text: '\uf011'
             fontSize: app.fs*2
@@ -84,6 +86,7 @@ ApplicationWindow{
             }
         }
         UxBotCirc{
+            opacity: labelTit.opacity
             padding: 0-app.fs*3
             text: '\uf021'
             fontSize: app.fs*2
@@ -98,18 +101,22 @@ ApplicationWindow{
             }
         }
         UText{
+            id: labelTit
             font.pixelSize: app.fs*2
             color: app.c2
             text: 'Mercurio'
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: app.fs
+            opacity: xMenu.posY!==0?0.0:1.0
+            Behavior on opacity {NumberAnimation{duration: 500}}
         }
         XMenu{id: xMenu; visible: app.mod===-1;}
-        XCasas{id: xCasas; visible: app.mod===0;}
-        XCasasLilith{id: xCasasLilith;visible: app.mod===1;}
-        XCasasQuiron{id: xCasasQuron;visible: app.mod===2;}
-        XPlanetas{id: xPlanetas;visible: app.mod===3;}
+        XPlanetas{id: xPlanetas;visible: app.mod===0;}
+        XCasas{id: xCasas; visible: app.mod===1;}
+        XCasasLilith{id: xCasasLilith;visible: app.mod===2;}
+        XCasasQuiron{id: xCasasQuron;visible: app.mod===3;}
+
         UProgressDownload{
             id:upd
             width: app.width
