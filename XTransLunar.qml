@@ -13,6 +13,9 @@ Rectangle {
     onVisibleChanged: {
         if(visible)getTransNow()
     }
+    MouseArea{
+        anchors.fill: r
+    }
     Flickable{
         width: r.width
         height: r.height

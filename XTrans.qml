@@ -11,6 +11,9 @@ Rectangle {
     onVisibleChanged: {
         if(visible)getTransNow()
     }
+    MouseArea{
+        anchors.fill: r
+    }
     Column{
         spacing: app.fs
         anchors.centerIn: parent

@@ -8,6 +8,9 @@ Rectangle {
     color: app.c1
     property int cCasa: -1
     property var arrayDataCasas: []
+    MouseArea{
+        anchors.fill: r
+    }
     Column{
         spacing: app.fs
         anchors.centerIn: parent

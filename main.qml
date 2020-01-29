@@ -24,6 +24,16 @@ ApplicationWindow{
     //Variables Globales
     property var signos: ['Aries', 'Tauro', 'Géminis', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']
 
+    onClosing: {
+        if(app.mod===-1){
+            close.accepted = true
+            Qt.quit()
+        }else{
+            close.accepted = false
+            app.mod=-1
+        }
+
+    }
 
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
     USettings{
