@@ -52,14 +52,21 @@ Rectangle {
                 }
                 ComboBox{
                     id: cbAsc
-                    model: ['Seleccionar', 'Natalia', 'Ricardo', 'Nico', 'Fer', 'Dylan', 'Bruno', 'Hugo', 'Ascendente '+app.signos[0], 'Ascendente '+app.signos[1], 'Ascendente '+app.signos[2], 'Ascendente '+app.signos[3], 'Ascendente '+app.signos[4], 'Ascendente '+app.signos[5], 'Ascendente '+app.signos[6], 'Ascendente '+app.signos[7], 'Ascendente '+app.signos[8], 'Ascendente '+app.signos[9], 'Ascendente '+app.signos[10], 'Ascendente '+app.signos[11]]
-                    property var arrayAsc: [0,11, 11, 5, 4, 2, 7, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                    model: ['Seleccionar', 'Natalia', 'Ricardo', 'Nico', 'Fer', 'Dylan', 'Bruno', 'Hugo', 'Ely Dorgan', 'Mario Pizarro', 'Ascendente '+app.signos[0], 'Ascendente '+app.signos[1], 'Ascendente '+app.signos[2], 'Ascendente '+app.signos[3], 'Ascendente '+app.signos[4], 'Ascendente '+app.signos[5], 'Ascendente '+app.signos[6], 'Ascendente '+app.signos[7], 'Ascendente '+app.signos[8], 'Ascendente '+app.signos[9], 'Ascendente '+app.signos[10], 'Ascendente '+app.signos[11]]
+                    property var arrayAsc: [0,11, 11, 5, 4, 2, 7, 12, 1, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     width: r.width-app.fs
                     anchors.horizontalCenter: parent.horizontalCenter
                     onCurrentIndexChanged: {
                         if(currentIndex===0)return
                         let numAsc=parseInt(12 - arrayAsc[currentIndex] + r.cNumSigno)
+                        //console.log('1::::::->'+currentIndex)
+                        //console.log('2::::::->'+r.cNumSigno)
+                        //console.log('3::::::->'+numAsc)
                         let numCasa = getNumCasa(app.signos[parseInt(arrayAsc[currentIndex ] - 1)], r.cNumSigno)
+                        if(numCasa>12){
+                            numCasa=numCasa-12
+                        }
+                        //console.log('4::::::->'+numCasa)
                         let pp=''
                         let pf=''
                         let destinatario=''
@@ -79,6 +86,7 @@ Rectangle {
                         }
                         resTransLunar.text=pp+' tiene la Luna en tránsito por la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
                         resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
+                        resTransLunar.text+=pf+'<br /><br />'
                         r.speak(resTransLunar.text)
                     }
                 }
@@ -195,8 +203,7 @@ Rectangle {
         };
         req.send(null);
     }
-    function capital_letter(str)
-    {
+    function capital_letter(str){
         str = str.split(" ");
 
         for (let i = 0, x = str.length; i < x; i++) {

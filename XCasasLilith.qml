@@ -116,7 +116,7 @@ Rectangle {
         let d1=unik.getFile('dataCasasLilith.json')
         let json = JSON.parse(d1)
         for(let i=1;i<=12;i++){
-            console.log('D: '+json['casas']['casa'+i])
+            //console.log('D: '+json['casas']['casa'+i])
             arrayDataCasas.push(json['casas']['casa'+i])
         }
         repDataCasas.model = r.arrayDataCasas

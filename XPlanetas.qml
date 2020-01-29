@@ -116,7 +116,7 @@ Rectangle {
         let d1=unik.getFile('dataPlanetas.json')
         let json = JSON.parse(d1)
         for(let i=1;i<=10;i++){
-            console.log('D: '+json['items']['item'+i])
+            //console.log('D: '+json['items']['item'+i])
             arrayDataCasas.push(json['items']['item'+i])
         }
         repDataCasas.model = r.arrayDataCasas
