@@ -25,12 +25,30 @@ Rectangle {
             id: col
             spacing: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
-            BotonUX{
-                text: 'Atras'
-                fontSize: app.rot?app.fs*0.5:app.fs
-                onClicked: {
-                    app.mod=-1
-                    unik.speak('atras')
+            Row{
+                BotonUX{
+                    text: 'Atras'
+                    fontSize: app.rot?app.fs*0.5:app.fs
+                    onClicked: {
+                        app.mod=-1
+                        unik.speak('atras')
+                    }
+                }
+                BotonUX{
+                    visible: cbAsc.currentIndex!==0
+                    text: 'Detener Voz'
+                    fontSize: app.rot?app.fs*0.5:app.fs
+                    onClicked: {
+                        unik.speak('Detenido.')
+                    }
+                }
+                BotonUX{
+                    visible: cbAsc.currentIndex!==0
+                    text: 'Leer'
+                    fontSize: app.rot?app.fs*0.5:app.fs
+                    onClicked: {
+                        r.speak(resTransLunar.text)
+                    }
                 }
             }
             Text{
