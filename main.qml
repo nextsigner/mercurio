@@ -20,6 +20,11 @@ ApplicationWindow{
     property color c2
     property color c3
     property color c4
+
+    //Variables Globales
+    property var signos: ['Aries', 'Tauro', 'Géminis', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']
+
+
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
     USettings{
         id: unikSettings
@@ -116,7 +121,8 @@ ApplicationWindow{
         XCasas{id: xCasas; visible: app.mod===1;}
         XCasasLilith{id: xCasasLilith;visible: app.mod===2;}
         XCasasQuiron{id: xCasasQuron;visible: app.mod===3;}
-        XTransLunar{id: xTransLunar;visible: app.mod===4;}
+        XTrans{id: xTrans;visible: app.mod===4;}
+        XTransLunar{id: xTransLunar;visible: app.mod===-1;}
 
 
         UProgressDownload{

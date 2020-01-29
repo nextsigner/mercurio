@@ -1,4 +1,5 @@
-import QtQuick 2.0
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import "qrc:/"
 
 Rectangle {
@@ -6,74 +7,110 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: app.c1
+    property int cNumSigno: -1
     property int cGradoLuna: -1
     property string cSignoLuna: ''
-    Column{
-        spacing: app.fs
-        anchors.centerIn: parent
-        BotonUX{
-            text: 'Atras'
-            fontSize: app.rot?app.fs*0.5:app.fs
-            onClicked: {
-                app.mod=-1
-                unik.speak('atras')
-            }
-        }
-        Text{
-            width: xApp.width-app.fs*2
-            text: '<b>Tránsitos</b>'
-            color: app.c2
-            font.pixelSize: app.fs*2
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+    onVisibleChanged: {
+        if(visible)getTransNow()
+    }
+    Flickable{
+        width: r.width
+        height: r.height
+        contentWidth: width
+        contentHeight: col.height+app.fs*6
         Column{
-            spacing: app.fs*0.5
+            id: col
+            spacing: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
-            Repeater{
-                id: repTrans
-                property var arrayGrados: []
-                property var arraySignos: []
-                Rectangle{
-                    width: rowDataTrans.width+app.fs*2
-                    height: app.fs*2.5
-                    color: app.c1
-                    border.width: 2
-                    border.color: app.c2
-                    radius: app.fs*0.25
+            BotonUX{
+                text: 'Atras'
+                fontSize: app.rot?app.fs*0.5:app.fs
+                onClicked: {
+                    app.mod=-1
+                    unik.speak('atras')
+                }
+            }
+            Text{
+                width: xApp.width-app.fs*2
+                text: '<b>Tránsito Lunar</b>'
+                color: app.c2
+                font.pixelSize: app.fs*2
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+            Column{
+                spacing: app.fs*0.5
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text{
+                    width: xApp.width-app.fs*2
+                    text: 'La Luna está en el signo número '+r.cNumSigno
+                    color: app.c2
+                    font.pixelSize: app.fs*2
                     anchors.horizontalCenter: parent.horizontalCenter
-                    Row{
-                        id: rowDataTrans
-                        spacing: app.fs*0.5
-                        anchors.centerIn: parent
-                        UText{
-                            text: modelData
-                            font.pixelSize: app.fs*1.5
-                        }
-                        UText{
-                            text: repTrans.arrayGrados[index]
-                            font.pixelSize: app.fs*1.5
-                        }
-                        UText{
-                            text: repTrans.arraySignos[index]
-                            font.pixelSize: app.fs*1.5
+                }
+                ComboBox{
+                    id: cbAsc
+                    model: ['Seleccionar', 'Natalia', 'Ricardo', 'Nico', 'Fer', 'Dylan', 'Bruno', 'Hugo', 'Ascendente '+app.signos[0], 'Ascendente '+app.signos[1], 'Ascendente '+app.signos[2], 'Ascendente '+app.signos[3], 'Ascendente '+app.signos[4], 'Ascendente '+app.signos[5], 'Ascendente '+app.signos[6], 'Ascendente '+app.signos[7], 'Ascendente '+app.signos[8], 'Ascendente '+app.signos[9], 'Ascendente '+app.signos[10], 'Ascendente '+app.signos[11]]
+                    property var arrayAsc: [0,11, 11, 5, 4, 2, 7, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                    width: r.width-app.fs
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    onCurrentIndexChanged: {
+                        if(currentIndex===0)return
+                        let numAsc=parseInt(12 - arrayAsc[currentIndex] + r.cNumSigno)
+                        let numCasa = getNumCasa(app.signos[parseInt(arrayAsc[currentIndex ] - 1)], r.cNumSigno)
+                        resTransLunar.text='Actualmente tu Luna está en tránsito por la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
+                        let gradoActualDeLuna = r.cGradoLuna
+                        resTransLunar.text+='<br /><br />'+getAsunto(numCasa)
+                        if(gradoActualDeLuna<12){
+                            resTransLunar.text+='<br /><br />La persona va a estar así hoy y mañana.'
+                        }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
+                            resTransLunar.text+='La persona va a estar así hoy y mañana cambia a la casa número '+parseInt(numAsc+1)+' en el signo '+app.signos[r.cNumSigno]
+                        }else{
+                            resTransLunar.text+='La persona va a estar así hoy'
                         }
                     }
                 }
-            }
-        }
+                UText{
+                    id: resTransLunar
+                    visible: cbAsc.currentIndex!==0
+                    width: r.width-app.fs
+                    text: 'Seleccionar un nombre o Ascendente'
+                    font.pixelSize: app.fs*1.5
+                    wrapMode: Text.WordWrap
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
 
+            }
+
+        }
     }
     Component.onCompleted: {
         getTransNow()
     }
     function speak(text){
-        let s = (''+text).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '').replace(/LILITH/g, 'la luna negra').replace(/Lilith/g, 'la luna negra').replace(/Casa IV/g, 'casa 4').replace(/Casa IX/g, 'casa 9').replace(/Casa III/g, 'casa 3').replace(/Casa II/g, 'casa 2').replace(/Casa I/g, 'casa 1').replace(/Casa V/g, 'casa 5').replace(/Casa VIII/g, 'casa 8').replace(/Casa VII/g, 'casa 7').replace(/Casa VI/g, 'casa 6').replace(/Casa X/g, 'casa 10').replace(/Casa XII/g, 'casa 12').replace(/Casa XI/g, 'casa 11').replace(/CASA IV/g, 'casa 4').replace(/CASA IX/g, 'casa 9').replace(/CASA III/g, 'casa 3').replace(/CASA II/g, 'casa 2').replace(/CASA I/g, 'casa 1').replace(/CASA V/g, 'casa 5').replace(/CASA VIII/g, 'casa 8').replace(/CASA VII/g, 'casa 7').replace(/CASA VI/g, 'casa 6').replace(/CASA X/g, 'casa 10').replace(/CASA XII/g, 'casa 12').replace(/CASA XI/g, 'casa 11')
+        let s = ''
         unik.speak(s)
     }
+    function getNumCasa(asc, currentSigno){
+        let ci = app.signos.indexOf(asc)
+        let numCasa = 12 -  ci  + currentSigno
+        //console.log('ci0::::::::::::::'+asc)
+        //console.log('ci::::::::::::::'+ci)
+        return numCasa
+    }
+    function getAsunto(casa){
+        let ret=''
+        if(casa===1){
+            ret='El corazón y los sentimientos de la persona van a estar conectados a la vitalidad, a la fortaleza en el momento de un inicio de algo que sucede a su alrrededor mientras ocurre este tránsito. El corazón siente que algo comienza y se conecta con fuerzas y sentimientos de la infancia, ansiedad, impaciencia, nervios por el inicio de un evento o acción que se va a iniciar. Las emociones impulsan a la persona a juntar fuerzas.'
+        }
+        if(casa===2){
+            ret='El corazón y los sentimientos de la persona van a estar enfocados en asuntos relacionados con la administración de sus valores, objetos, dinero o recursos. Estará pensando en el cuidado con los excesos en los gastos, en las deudas, las fuentes de ingresos, las propiedades y el cierre de sus cuentas y balances a los fines de procurar no tener problemas de falta de recursos.'
+        }
+        if(casa===3){
+            ret='El corazón y los sentimientos de la persona van a estar conectados con el entorno cercano. Va a estar interesado en comunicarse, prestar atención a sus vínculos más próximos, esas personas que considera de su grupo. <br /><br />Va a tener un impulso y una predisposición en escuchar, conversar o decir cosas a esas personas que lo rodean. Si no es escuchada, si es ignorada o no logra comunicarse con su entorno, posiblemente se sienta triste, enojada o desanimada. Si logra conectar con su entorno cercano a travez de una comunicación fluida, estará mejor de ánimo.'
+        }
+        return ret
+    }
     function getTransNow(){
-        repTrans.model= []
-        repTrans.arrayGrados= []
-        repTrans.arraySignos= []
         var req = new XMLHttpRequest();
         req.open('GET', 'https://www.astro.com/h/awt/ppos2_s.htm?code=f0aa269af58bda9dbf95d64c2a4e8a07', true);
         req.onreadystatechange = function (aEvt) {
@@ -93,17 +130,24 @@ Rectangle {
                         //Grados
                         let g0=m1[3].split('>')
                         let g1=g0[1].split('<')
-                        repTrans.arrayGrados.push(' está a °'+g1[0]+ ' de ')
+                        //repTrans.arrayGrados.push(' está a °'+g1[0]+ ' de ')
 
                         //Signo
                         let s0=m1[4].split('alt=\"')
                         let s1=s0[1].split('\"')
-                        repTrans.arraySignos.push(s1[0])
+                        let s2=''+s1[0]
+                        //repTrans.arraySignos.push(s2)
+                        if(s2.indexOf('Aries')>=0){
+                            cNumSigno=1
+                        }else if(s2.indexOf('Tauro')>=0){
+                            cNumSigno=2
+                        }else{
+                            r.cNumSigno=-2
+                        }
 
                         //logView.showLog(s0)
                     }
-                    repTrans.model= ['Sol', 'Luna', 'Mercurio', 'Venus', 'Marte', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton', 'Nodo Norte', 'Quirón']
-
+                    //repTrans.model= ['Sol', 'Luna', 'Mercurio', 'Venus', 'Marte', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton', 'Nodo Norte', 'Quirón']
                 }else{
                     logView.showLog("Error loading page\n");
                 }
