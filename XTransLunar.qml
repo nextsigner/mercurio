@@ -61,7 +61,7 @@ Rectangle {
                         let pf=''
                         let destinatario=''
                         if(model[currentIndex].indexOf('Ascendente')===0){
-                            destinatario='persona con Ascendente '+model[currentIndex]
+                            destinatario='persona con '+model[currentIndex]
                         }else{
                             destinatario=model[currentIndex]
                         }
@@ -75,7 +75,7 @@ Rectangle {
                             pf+='La persona va a estar así hoy'
                         }
                         resTransLunar.text=pp+' tiene la Luna en tránsito por la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
-                        resTransLunar.text+='<br /><br />'+getAsunto(numCasa)
+                        resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
                         r.speak(resTransLunar.text)
                     }
                 }
@@ -107,16 +107,16 @@ Rectangle {
         //console.log('ci::::::::::::::'+ci)
         return numCasa
     }
-    function getAsunto(casa){
+    function getAsunto(casa, destinatario){
         let ret=''
         if(casa===1){
-            ret='El corazón y los sentimientos de la persona van a estar conectados a la vitalidad, a la fortaleza en el momento de un inicio de algo que sucede a su alrrededor mientras ocurre este tránsito. El corazón siente que algo comienza y se conecta con fuerzas y sentimientos de la infancia, ansiedad, impaciencia, nervios por el inicio de un evento o acción que se va a iniciar. Las emociones impulsan a la persona a juntar fuerzas.'
+            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados a la vitalidad, a la fortaleza en el momento de un inicio de algo que sucede a su alrrededor mientras ocurre este tránsito. Posiblemente el corazón de '+destinatario+' siente que algo comienza y se conecta con fuerzas y sentimientos de la infancia, ansiedad, impaciencia, nervios por el inicio de un evento o acción que se va a iniciar. Las emociones impulsan a la persona a juntar fuerzas.'
         }
         if(casa===2){
-            ret='El corazón y los sentimientos de la persona van a estar enfocados en asuntos relacionados con la administración de sus valores, objetos, dinero o recursos. Estará pensando en el cuidado con los excesos en los gastos, en las deudas, las fuentes de ingresos, las propiedades y el cierre de sus cuentas y balances a los fines de procurar no tener problemas de falta de recursos.'
+            ret='El corazón y los sentimientos de '+destinatario+' van a estar enfocados en asuntos relacionados con la administración de sus valores, objetos, dinero o recursos. Estará pensando en el cuidado con los excesos en los gastos, en las deudas, las fuentes de ingresos, las propiedades y el cierre de sus cuentas y balances a los fines de procurar no tener problemas de falta de recursos.'
         }
         if(casa===3){
-            ret='El corazón y los sentimientos de la persona van a estar conectados con el entorno cercano. Va a estar interesado en comunicarse, prestar atención a sus vínculos más próximos, esas personas que considera de su grupo. <br /><br />Va a tener un impulso y una predisposición en escuchar, conversar o decir cosas a esas personas que lo rodean. Si no es escuchada, si es ignorada o no logra comunicarse con su entorno, posiblemente se sienta triste, enojada o desanimada. Si logra conectar con su entorno cercano a travez de una comunicación fluida, estará mejor de ánimo.'
+            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados con el entorno cercano. Va a estar interesado en comunicarse, prestar atención a sus vínculos más próximos, esas personas que considera de su grupo. <br /><br />'+capital_letter(destinatario)+' va a tener un impulso y una predisposición en escuchar, conversar o decir cosas a esas personas que lo rodean. Si no es escuchada, si es ignorada o no logra comunicarse con su entorno, posiblemente se sienta triste, enojada o desanimada. Si logra conectar con su entorno cercano a travez de una comunicación fluida, estará mejor de ánimo.'
         }
         return ret
     }
@@ -164,5 +164,15 @@ Rectangle {
             }
         };
         req.send(null);
+    }
+    function capital_letter(str)
+    {
+        str = str.split(" ");
+
+        for (let i = 0, x = str.length; i < x; i++) {
+            str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+        }
+
+        return str.join(" ");
     }
 }
