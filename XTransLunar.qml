@@ -57,16 +57,25 @@ Rectangle {
                         if(currentIndex===0)return
                         let numAsc=parseInt(12 - arrayAsc[currentIndex] + r.cNumSigno)
                         let numCasa = getNumCasa(app.signos[parseInt(arrayAsc[currentIndex ] - 1)], r.cNumSigno)
-                        resTransLunar.text='Actualmente tu Luna está en tránsito por la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
-                        let gradoActualDeLuna = r.cGradoLuna
-                        resTransLunar.text+='<br /><br />'+getAsunto(numCasa)
-                        if(gradoActualDeLuna<12){
-                            resTransLunar.text+='<br /><br />La persona va a estar así hoy y mañana.'
-                        }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
-                            resTransLunar.text+='La persona va a estar así hoy y mañana cambia a la casa número '+parseInt(numAsc+1)+' en el signo '+app.signos[r.cNumSigno]
+                        let pp=''
+                        let pf=''
+                        let destinatario=''
+                        if(model[currentIndex].indexOf('Ascendente')===0){
+                            destinatario='persona con Ascendente '+model[currentIndex]
                         }else{
-                            resTransLunar.text+='La persona va a estar así hoy'
+                            destinatario=model[currentIndex]
                         }
+                        pp='Actualmente '+destinatario
+                        let gradoActualDeLuna = r.cGradoLuna
+                        if(gradoActualDeLuna<12){
+                            pf+='<br /><br />La persona va a estar así hoy y mañana.'
+                        }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
+                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+parseInt(numAsc+1)+' en el signo '+app.signos[r.cNumSigno]
+                        }else{
+                            pf+='La persona va a estar así hoy'
+                        }
+                        resTransLunar.text=pp+' tiene la Luna en tránsito por la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
+                        resTransLunar.text+='<br /><br />'+getAsunto(numCasa)
                         r.speak(resTransLunar.text)
                     }
                 }
