@@ -54,6 +54,25 @@ ApplicationWindow{
     Item {
         id: xApp
         anchors.fill: parent
+        UText{
+            id: labelTit
+            font.pixelSize: app.fs*2
+            color: app.c2
+            text: 'Mercurio'
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: app.fs
+            opacity: xMenu.posY!==0?0.0:1.0
+            Behavior on opacity {NumberAnimation{duration: 500}}
+        }
+        XMenu{id: xMenu; visible: app.mod===-1;}
+        XPlanetas{id: xPlanetas;visible: app.mod===0;}
+        XCasas{id: xCasas; visible: app.mod===1;}
+        XCasasLilith{id: xCasasLilith;visible: app.mod===2;}
+        XCasasQuiron{id: xCasasQuron;visible: app.mod===3;}
+        XTransLunar{id: xTransLunar;visible: app.mod===4;}
+        XTrans{id: xTrans;visible: app.mod===5;}
+
         UxBotCirc{
             opacity: labelTit.opacity
             padding: 0-app.fs*3
@@ -105,24 +124,7 @@ ApplicationWindow{
                 upd.download('https://github.com/nextsigner/'+moduleName+'.git', pws)
             }
         }
-        UText{
-            id: labelTit
-            font.pixelSize: app.fs*2
-            color: app.c2
-            text: 'Mercurio'
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: app.fs
-            opacity: xMenu.posY!==0?0.0:1.0
-            Behavior on opacity {NumberAnimation{duration: 500}}
-        }
-        XMenu{id: xMenu; visible: app.mod===-1;}
-        XPlanetas{id: xPlanetas;visible: app.mod===0;}
-        XCasas{id: xCasas; visible: app.mod===1;}
-        XCasasLilith{id: xCasasLilith;visible: app.mod===2;}
-        XCasasQuiron{id: xCasasQuron;visible: app.mod===3;}
-        XTrans{id: xTrans;visible: app.mod===4;}
-        XTransLunar{id: xTransLunar;visible: app.mod===-1;}
+
 
 
         UProgressDownload{

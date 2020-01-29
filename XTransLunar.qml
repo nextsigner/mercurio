@@ -67,6 +67,7 @@ Rectangle {
                         }else{
                             resTransLunar.text+='La persona va a estar así hoy'
                         }
+                        r.speak(resTransLunar.text)
                     }
                 }
                 UText{
@@ -87,7 +88,7 @@ Rectangle {
         getTransNow()
     }
     function speak(text){
-        let s = ''
+        let s = ''+text.replace(/<br \/>/g, '')
         unik.speak(s)
     }
     function getNumCasa(asc, currentSigno){
