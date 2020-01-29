@@ -116,6 +116,8 @@ ApplicationWindow{
         XCasas{id: xCasas; visible: app.mod===1;}
         XCasasLilith{id: xCasasLilith;visible: app.mod===2;}
         XCasasQuiron{id: xCasasQuron;visible: app.mod===3;}
+        XTransLunar{id: xTransLunar;visible: app.mod===4;}
+
 
         UProgressDownload{
             id:upd
