@@ -23,9 +23,10 @@ Rectangle {
         contentHeight: col.height+app.fs*6
         Column{
             id: col
-            spacing: app.fs
+            spacing: app.fs*2
             anchors.horizontalCenter: parent.horizontalCenter
             Row{
+                spacing: app.fs
                 BotonUX{
                     text: 'Atras'
                     fontSize: app.rot?app.fs*0.5:app.fs
@@ -102,7 +103,7 @@ Rectangle {
                         }else{
                             pf+='La persona va a estar así hoy'
                         }
-                        resTransLunar.text=pp+' tiene la Luna en tránsito por la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
+                        resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
                         resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
                         resTransLunar.text+=pf+'<br /><br />'
                         r.speak(resTransLunar.text)
