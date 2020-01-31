@@ -197,7 +197,7 @@ Rectangle {
                         //Grados
                         let g0=m1[3].split('>')
                         let g1=g0[1].split('<')
-                        app.cGradoLuna=parseInt(g1[0])
+                        r.cGradoLuna=parseInt(g1[0])
                         //repTrans.arrayGrados.push(' está a °'+g1[0]+ ' de ')
 
                         //Signo
