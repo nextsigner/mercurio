@@ -180,7 +180,7 @@ Rectangle {
     function getTransNow(){
         var req = new XMLHttpRequest();
         let d = new Date(Date.now())
-        req.open('GET', 'https://www.astro.com/h/awt/ppos2_s.htm?code=f0aa269af58bda9dbf95d64c2a4e8a07?r='+d.getTime(), true);
+        req.open('GET', 'https://www.astro.com/h/awt/ppos2_s.htm?code=f0aa269af58bda9dbf95d64c2a4e8a07&r='+d.getTime(), true);
         req.onreadystatechange = function (aEvt) {
             if (req.readyState === 4) {
                 if(req.status === 200){
