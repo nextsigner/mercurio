@@ -25,7 +25,8 @@ Rectangle {
             id: col
             spacing: app.fs*2
             anchors.horizontalCenter: parent.horizontalCenter
-            Row{
+            Flow{
+                width:r.width-app.fs
                 spacing: app.fs
                 BotonUX{
                     text: 'Atras'
