@@ -13,7 +13,7 @@ Item {
         anchors.topMargin: app.fs*8
         width: r.width
         height: r.height
-        contentHeight: colMenu.height
+        contentHeight: colMenu.height*1.2
         Column{
             id: colMenu
             spacing: app.rot?app.fs*0.25:app.fs
@@ -24,7 +24,7 @@ Item {
                 BotonUX{
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: modelData
-                    //fontSize: app.rot?app.fs:app.fs*2
+                    fontSize: app.rot?app.fs:app.fs*1.4
                     onClicked: app.mod=index
                 }
             }
