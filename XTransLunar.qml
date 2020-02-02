@@ -60,15 +60,15 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Column{
-                spacing: app.fs*0.5
+                spacing: app.fs
                 anchors.horizontalCenter: parent.horizontalCenter
-                Text{
+                /*Text{
                     width: xApp.width-app.fs*2
                     text: 'La Luna está en el signo número '+r.cNumSigno
                     color: app.c2
                     font.pixelSize: app.fs*2
                     anchors.horizontalCenter: parent.horizontalCenter
-                }
+                }*/
                 ComboBox{
                     id: cbAsc
                     model: ['Seleccionar', 'Natalia', 'Ricardo', 'Nico', 'Fer', 'Dylan', 'Bruno', 'Hugo', 'Ely Dorgan', 'Mario Pizarro', 'Ascendente '+app.signos[0], 'Ascendente '+app.signos[1], 'Ascendente '+app.signos[2], 'Ascendente '+app.signos[3], 'Ascendente '+app.signos[4], 'Ascendente '+app.signos[5], 'Ascendente '+app.signos[6], 'Ascendente '+app.signos[7], 'Ascendente '+app.signos[8], 'Ascendente '+app.signos[9], 'Ascendente '+app.signos[10], 'Ascendente '+app.signos[11]]
