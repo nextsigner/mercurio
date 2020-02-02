@@ -24,7 +24,7 @@ Item {
                 BotonUX{
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: modelData
-                    fontSize: app.rot?app.fs:app.fs*2
+                    //fontSize: app.rot?app.fs:app.fs*2
                     onClicked: app.mod=index
                 }
             }
