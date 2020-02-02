@@ -12,7 +12,7 @@ ApplicationWindow{
     property string moduleName: 'mercurio'
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
-    property int fs: app.width*0.03
+    property int fs: app.rot?app.width*0.03:app.width*0.06
 
     property int mod: -1
 
