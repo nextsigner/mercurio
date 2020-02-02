@@ -38,7 +38,7 @@ Rectangle {
                 id: repIconCasas
                 model: 12
                 BotonUX{
-                    width: app.rot?app.fs*2:app.fs*4
+                    width: app.rot?app.fs*3:app.fs*5
                     height: width
                     text: "Casa "+parseInt(modelData + 1)
                     fontSize: app.rot?app.fs*0.5:app.fs
