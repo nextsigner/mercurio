@@ -201,22 +201,24 @@ Rectangle {
                         //logView.showLog('XXX'+g1[0]+'XXX')
                         if(i===1){
                             r.cGradoLuna=parseInt(g1[0])
-                        }
+                        
                         //repTrans.arrayGrados.push(' está a °'+g1[0]+ ' de ')
 
                         //Signo
                         let s0=m1[4].split('alt=\"')
                         let s1=s0[1].split('\"')
                         let s2=''+s1[0]
+                       
+                        cNumSigno=parseInt(app.signos.indexOf(s2) + 1) 
                         //repTrans.arraySignos.push(s2)
-                        if(s2.indexOf('Aries')>=0){
+                        /*if(s2.indexOf('Aries')>=0){
                             cNumSigno=1
                         }else if(s2.indexOf('Tauro')>=0){
                             cNumSigno=2
                         }else{
                             r.cNumSigno=-2
-                        }
-
+                        }*/
+                      }
                         //logView.showLog(s0)
                     }
                     //repTrans.model= ['Sol', 'Luna', 'Mercurio', 'Venus', 'Marte', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton', 'Nodo Norte', 'Quirón']
