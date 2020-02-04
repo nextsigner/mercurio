@@ -68,7 +68,7 @@ ApplicationWindow{
            id: xMenu
            visible: app.mod===-1
            onPosYChanged: {
-               labelTit.opacity=1.0
+               labelTit.opacity=0.0
                tOcultarMenu.restart()
            }
         }
