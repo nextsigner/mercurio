@@ -13,7 +13,7 @@ Item {
         anchors.topMargin: app.fs*8
         width: r.width
         height: r.height
-        contentHeight: colMenu.height*1.2
+        contentHeight: colMenu.height*1.4
         Column{
             id: colMenu
             spacing: app.rot?app.fs*0.25:app.fs
