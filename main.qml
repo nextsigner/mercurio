@@ -73,7 +73,7 @@ ApplicationWindow{
            }
         }
         Timer{
-           id:tOcultaMenu
+           id:tOcultarMenu
            running:false
            repeat:false
            interval: 1000
