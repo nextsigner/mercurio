@@ -74,7 +74,8 @@ Rectangle {
                         id: colDataCasas
                         anchors.horizontalCenter: parent.horizontalCenter
                         spacing: app.fs
-                        Row{
+                        Flow{
+                            width: r.width-app.fs
                             spacing: app.fs
                             BotonUX{
                                 text: 'Atras'
@@ -103,7 +104,7 @@ Rectangle {
                             width: xApp.width-app.fs*2
                             text: modelData
                             color: app.c2
-                            font.pixelSize: app.fs*2
+                            font.pixelSize: app.fs
                             wrapMode: Text.WordWrap
                             textFormat: Text.RichText
                         }
