@@ -64,7 +64,23 @@ ApplicationWindow{
     Item {
         id: xApp
         anchors.fill: parent
-        XMenu{id: xMenu; visible: app.mod===-1;}
+        XMenu{
+           id: xMenu
+           visible: app.mod===-1
+           onPosYChanged: {
+               labelTit.opacity=1.0
+               tOcultarMenu.restart()
+           }
+        }
+        Timer{
+           id:tOcultaMenu
+           running:false
+           repeat:false
+           interval: 1000
+           onTriggered: {
+              labelTit.opacity=1.0
+           }
+        }
         UxBotCirc{
             opacity: labelTit.opacity
             padding: 0-app.fs*3
@@ -124,7 +140,7 @@ ApplicationWindow{
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: app.fs
-            opacity: xMenu.posY!==0?0.0:1.0
+            //opacity: xMenu.posY!==0?0.0:1.0
             Behavior on opacity {NumberAnimation{duration: 500}}
         }
         XPlanetas{id: xPlanetas;visible: app.mod===0;}
