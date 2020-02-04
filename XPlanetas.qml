@@ -27,8 +27,8 @@ Rectangle {
             text: '<b>Significados de los Planetas</b>'
             color: app.c2
             font.pixelSize: app.fs*2
-            width:r.width-app.fs
-            wrapMode:Text.WordWrap
+            width: r.width-app.fs
+            //wrapMode:Text.WordWrap
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
