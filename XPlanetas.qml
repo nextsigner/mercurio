@@ -38,7 +38,7 @@ Rectangle {
                 id: repIconCasas
                 model: ['Sol', 'Luna', 'Mercurio', 'Venus', 'Martes', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton']
                 BotonUX{
-                    width: app.rot?app.fs*3:app.fs*5
+                    width: app.rot?app.fs*3.5:app.fs*5.5
                     height: width
                     text: modelData
                     fontSize: app.rot?app.fs:app.fs
