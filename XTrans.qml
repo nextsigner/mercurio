@@ -14,9 +14,16 @@ Rectangle {
     MouseArea{
         anchors.fill: r
     }
+    Flickable{
+        id:flTrans
+        width:r.width
+        height: r.height
+        contentWidth:r.width
+        contentHeight:colTrans.height+app.fs*4 
     Column{
+        id:colTrans
         spacing: app.fs
-        anchors.centerIn: parent
+        //anchors.centerIn: parent
         BotonUX{
             text: 'Atras'
             fontSize: app.rot?app.fs*0.5:app.fs
@@ -68,6 +75,7 @@ Rectangle {
             }
         }
 
+    }
     }
     Component.onCompleted: {
 
