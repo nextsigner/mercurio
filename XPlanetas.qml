@@ -26,7 +26,7 @@ Rectangle {
             width: xApp.width-app.fs*2
             text: '<b>Significados de los Planetas</b>'
             color: app.c2
-            font.pixelSize: app.fs*2
+            font.pixelSize: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
