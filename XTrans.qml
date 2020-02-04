@@ -53,15 +53,15 @@ Rectangle {
                         anchors.centerIn: parent
                         UText{
                             text: modelData
-                            font.pixelSize: app.fs*1.5
+                            font.pixelSize: app.fs
                         }
                         UText{
                             text: repTrans.arrayGrados[index]
-                            font.pixelSize: app.fs*1.5
+                            font.pixelSize: app.fs
                         }
                         UText{
                             text: repTrans.arraySignos[index]
-                            font.pixelSize: app.fs*1.5
+                            font.pixelSize: app.fs
                         }
                     }
                 }
