@@ -104,7 +104,7 @@ Rectangle {
                         }else{
                             pf+='La persona va a estar así hoy'
                         }
-                        resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo de '+app.signos[r.cNumSigno - 1]
+                        resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
                         resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
                         resTransLunar.text+=pf+'<br /><br />'
                         r.speak(resTransLunar.text)
@@ -210,19 +210,9 @@ Rectangle {
                         let s1=s0[1].split('\"')
                         let s2=''+s1[0]
                        
-                        cNumSigno=parseInt(app.signos.indexOf(s2) + 1) 
-                        //repTrans.arraySignos.push(s2)
-                        /*if(s2.indexOf('Aries')>=0){
-                            cNumSigno=1
-                        }else if(s2.indexOf('Tauro')>=0){
-                            cNumSigno=2
-                        }else{
-                            r.cNumSigno=-2
-                        }*/
+                        cNumSigno=parseInt(app.signos.indexOf(s2) + 1)                         
                       }
-                        //logView.showLog(s0)
-                    }
-                    //repTrans.model= ['Sol', 'Luna', 'Mercurio', 'Venus', 'Marte', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton', 'Nodo Norte', 'Quirón']
+                    }                    
                 }else{
                     logView.showLog("Error loading page\n");
                 }

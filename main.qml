@@ -22,7 +22,7 @@ ApplicationWindow{
     property color c4
 
     //Variables Globales
-    property var signos: ['Aries', 'Tauro', 'Géminis', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']
+    property var signos: ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']
 
     onClosing: {
         if(app.mod===-1){
