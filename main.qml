@@ -8,7 +8,7 @@ ApplicationWindow{
     visibility: Qt.platform.os==='android'?"FullScreen":"Windowed"
     color:app.c1
     width: Qt.platform.os==='android'?Screen.width:460
-    height: Qt.platform.os==='android'?Screen.height:700
+    height: Qt.platform.os==='android'?Screen.height:900
     property string moduleName: 'mercurio'
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
@@ -143,14 +143,13 @@ ApplicationWindow{
             //opacity: xMenu.posY!==0?0.0:1.0
             Behavior on opacity {NumberAnimation{duration: 500}}
         }
-        XPlanetas{id: xPlanetas;visible: app.mod===0;}
-        XCasas{id: xCasas; visible: app.mod===1;}
-        XCasasLilith{id: xCasasLilith;visible: app.mod===2;}
-        XCasasQuiron{id: xCasasQuron;visible: app.mod===3;}
-        XTransLunar{id: xTransLunar;visible: app.mod===4;}
-        XTrans{id: xTrans;visible: app.mod===5;}
-
-
+        XSignos{id: xSignos;visible: app.mod===0;}
+        XPlanetas{id: xPlanetas;visible: app.mod===1;}
+        XCasas{id: xCasas; visible: app.mod===2;}
+        XCasasLilith{id: xCasasLilith;visible: app.mod===3;}
+        XCasasQuiron{id: xCasasQuron;visible: app.mod===4;}
+        XTransLunar{id: xTransLunar;visible: app.mod===5;}
+        XTrans{id: xTrans;visible: app.mod===6;}
 
         UProgressDownload{
             id:upd
@@ -168,7 +167,9 @@ ApplicationWindow{
         onActivated: Qt.quit()
     }
     Component.onCompleted: {
-
+        if(Qt.platform.os==='linux'&&unikSettings.lang==='es'){
+            unik.ttsLanguageSelected(13)
+        }
     }
     function updateUS(){
         var nc=unikSettings.currentNumColor

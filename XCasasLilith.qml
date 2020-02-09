@@ -26,14 +26,17 @@ Rectangle {
             width: xApp.width-app.fs*2
             text: '<b>Lilith en las Casas</b>'
             color: app.c2
-            font.pixelSize: app.fs*2
+            font.pixelSize: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
-            visible: r.cCasa===-1
+            visible: r.cCasa===-1&&r.visible
             columns: app.rot?6:3
             spacing: app.rot?app.fs*0.25:app.fs
             anchors.horizontalCenter: parent.horizontalCenter
+            onVisibleChanged: {
+                if(visible)unik.speak('Seleccionar casa')
+            }
             Repeater{
                 id: repIconCasas
                 model: 12
@@ -103,7 +106,7 @@ Rectangle {
                             width: xApp.width-app.fs*2
                             text: modelData
                             color: app.c2
-                            font.pixelSize: app.fs*2
+                            font.pixelSize: app.fs
                             wrapMode: Text.WordWrap
                             textFormat: Text.RichText
                         }

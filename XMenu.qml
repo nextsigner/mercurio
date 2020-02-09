@@ -20,7 +20,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             Repeater{
                 id: repIconMenu
-                model: ['Significado de los Planetas', 'Significado de las Casas', 'Lilith en las Casas', 'Quirón en las Casas', 'Tránsito Lunar', 'Tránsitos']
+                model: ['Significado de los Signos', 'Significado de los Planetas', 'Significado de las Casas', 'Lilith en las Casas', 'Quirón en las Casas', 'Tránsito Lunar', 'Tránsitos']
                 BotonUX{
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: modelData

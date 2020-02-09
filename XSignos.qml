@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.12
 import "qrc:/"
 
 Rectangle {
@@ -24,7 +25,7 @@ Rectangle {
         }
         Text{
             width: xApp.width-app.fs*2
-            text: '<b>Qurón en las Casas</b>'
+            text: '<b>Los 12 Signos del Zodíaco</b>'
             color: app.c2
             font.pixelSize: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
@@ -41,11 +42,36 @@ Rectangle {
                 id: repIconCasas
                 model: 12
                 BotonUX{
+                    id: xBotSigno
                     width: app.rot?app.fs*3:app.fs*5
                     height: width
-                    text: "Casa "+parseInt(modelData + 1)
-                    fontSize: app.rot?app.fs:app.fs
+                    text: ''
+                    fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: r.cCasa=index
+                    Column{
+                        anchors.centerIn: parent
+                        spacing: app.fs*0.05-unikSettings.padding-unikSettings.radius
+                        Item{
+                            width: xBotSigno.width*0.7
+                            height: width
+                            Image {
+                                id: iconoSigno
+                                source: "./resources/imgs/signos/"+modelData+".png"
+                                visible: false
+                                anchors.fill: parent
+                            }
+                            ColorOverlay {
+                                anchors.fill: iconoSigno
+                                source: iconoSigno
+                                color: app.c2
+                            }
+                        }
+                        UText{
+                            text: app.signos[index]
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.pixelSize: app.fs*0.8
+                        }
+                    }
                 }
             }
         }
@@ -116,11 +142,12 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        let d1=unik.getFile('dataCasasQuiron.json')
+        let d1=(''+unik.getFile('dataSignos.json')).replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')//.replace(/\"/g,'\\\"').replace(/\t/g,'    ').trim()
+        console.log(d1)
         let json = JSON.parse(d1)
         for(let i=1;i<=12;i++){
             //console.log('D: '+json['casas']['casa'+i])
-            arrayDataCasas.push(json['casas']['casa'+i])
+            arrayDataCasas.push(json['items']['item'+i])
         }
         repDataCasas.model = r.arrayDataCasas
     }
