@@ -178,24 +178,25 @@ ApplicationWindow{
                 uxBotCircCfg.seted=!uxBotCircCfg.seted
                 let cfgFileLocation=pws+'/cfg.json'
                 if(uxBotCircCfg.seted){
-                    let cfgData=('{"arg0":"-folder='+pws+'/'+moduleName+'"}').replace(/ /g, '%20')
+                    let cfgData=('{"arg0":"-folder='+pws+'/'+moduleName+'", "arg1":"https://github.com/nextsigner/'+moduleName+'.git"}').replace(/ /g, '%20')
                     unik.setFile(cfgFileLocation, cfgData)
                 }else{
                     unik.deleteFile(cfgFileLocation)
+                    unik.restartApp()
                 }
-                //upd.infoText = unikSettings.lang==='es'?'<b>Actualización: </b>Se ha iniciado la actualización\nde <b>MERCURIO</b>':'<b>Update: </b> Updating <b>MERCURIO</b>'
-                //upd.download('https://github.com/nextsigner/'+moduleName+'.git', pws)
             }
             Text{
-                visible: !uxBotCircCfg.seted
-                text: '<b>X</b>'
-                font.pixelSize: parent.width*0.8
+                id: xSign
+                visible: false//!uxBotCircCfg.seted
+                text: 'X'
+                font.pixelSize: parent.width*0.6
                 color: 'red'
                 anchors.centerIn: parent
             }
             Component.onCompleted: {
                 let cfgFileLocation=pws+'/cfg.json'
                 seted = unik.fileExist(cfgFileLocation)
+                xSign.visible=false
             }
         }
         XSignos{id: xSignos;visible: app.mod===0;}
