@@ -180,9 +180,9 @@ ApplicationWindow{
         app.c3=cc2[2]
         app.c4=cc2[3]
 
-        unikSettings.zoom=1.4
-        unikSettings.borderWidth=app.fs*0.5
-        unikSettings.padding=0.5
+        //unikSettings.zoom=1.4
+        //unikSettings.borderWidth=app.fs*0.5
+        //unikSettings.padding=0.5
 
         app.visible=true
     }

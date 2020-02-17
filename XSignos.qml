@@ -36,10 +36,10 @@ Rectangle {
             spacing: app.rot?app.fs*0.25:app.fs
             anchors.horizontalCenter: parent.horizontalCenter
             onVisibleChanged: {
-                if(visible)unik.speak('Seleccionar casa')
+                if(visible)unik.speak('Seleccionar signo.')
             }
             Repeater{
-                id: repIconCasas
+                id: repIconSignos
                 model: 12
                 BotonUX{
                     id: xBotSigno
@@ -48,9 +48,11 @@ Rectangle {
                     text: ''
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: r.cCasa=index
+                    radius: 0//unikSettings.radius*0.5
                     Column{
                         anchors.centerIn: parent
-                        spacing: app.fs*0.05-unikSettings.padding-unikSettings.radius
+                        spacing: app.fs*0.05//app.fs*0.05-unikSettings.padding-unikSettings.radius
+                        //height: app.fs*3
                         Item{
                             width: xBotSigno.width*0.7
                             height: width
@@ -68,6 +70,8 @@ Rectangle {
                         }
                         UText{
                             text: app.signos[index]
+                            width: contentWidth
+                            //height: app.fs
                             anchors.horizontalCenter: parent.horizontalCenter
                             font.pixelSize: app.fs*0.8
                         }

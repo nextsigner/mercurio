@@ -75,9 +75,11 @@ Rectangle {
                     contentHeight: colDataCasas.height+app.fs*6
                     Column{
                         id: colDataCasas
+                        width: parent.width-app.fs
                         anchors.horizontalCenter: parent.horizontalCenter
                         spacing: app.fs
-                        Row{
+                        Flow{
+                            width: parent.width
                             spacing: app.fs
                             BotonUX{
                                 text: 'Atras'

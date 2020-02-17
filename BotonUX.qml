@@ -6,7 +6,7 @@ Rectangle {
     opacity: enabled?1.0:0.5
     objectName: 'sin_nombre'
     color: 'transparent'
-    radius: xR1.radius
+    radius: unikSettings.radius
     border.color: xR1.border.color
     border.width: 0
     antialiasing: true
@@ -32,7 +32,7 @@ Rectangle {
         color: 'transparent'
         border.width: unikSettings.borderWidth
         border.color: app.c3//r.fontColor
-        radius: unikSettings.radius
+        radius: r.radius//unikSettings.radius
         width: parent.width
         height: parent.height
         anchors.centerIn: r
@@ -42,7 +42,7 @@ Rectangle {
             opacity: b1.opacity!==0.5?1.0:0.0
             width: parent.width
             height: parent.height
-            radius: unikSettings.radius
+            radius: r.radius
             visible: false
             anchors.centerIn: parent
             color: app.c2
@@ -55,7 +55,7 @@ Rectangle {
             //height: xR1.width
             width: xR1.width
             height: xR1.height
-            radius: unikSettings.radius
+            radius: r.radius
             rotation: -180
             anchors.centerIn: parent
             opacity: 0.5
@@ -77,7 +77,7 @@ Rectangle {
             opacity: 0.5-b1.opacity
             width: xR1.width
             height: xR1.height
-            radius: unikSettings.radius
+            radius: r.radius
             //rotation: 90//-270
             //visible: false
             antialiasing: true
