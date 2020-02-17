@@ -196,7 +196,7 @@ ApplicationWindow{
             Component.onCompleted: {
                 let cfgFileLocation=pws+'/cfg.json'
                 seted = unik.fileExist(cfgFileLocation)
-                xSign.visible=false
+                xSign.visible=!seted
             }
         }
         XSignos{id: xSignos;visible: app.mod===0;}
