@@ -48,11 +48,11 @@ Rectangle {
                     text: ''
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: r.cCasa=index
-                    radius: 0//unikSettings.radius*0.5
+                    //radius: 0//unikSettings.radius*0.5
                     Column{
                         anchors.centerIn: parent
-                        spacing: app.fs*0.05//app.fs*0.05-unikSettings.padding-unikSettings.radius
-                        //height: app.fs*3
+                        anchors.verticalCenterOffset: 0-app.fs*0.5
+                        spacing: 0-app.fs*0.5
                         Item{
                             width: xBotSigno.width*0.7
                             height: width
