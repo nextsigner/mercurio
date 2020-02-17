@@ -118,7 +118,7 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        let d1=unik.getFile('dataCasasLilith.json')
+        let d1=unik.getFile('dataCasasLilith.json').replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')
         let json = JSON.parse(d1)
         for(let i=1;i<=12;i++){
             //console.log('D: '+json['casas']['casa'+i])

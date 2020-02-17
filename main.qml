@@ -178,7 +178,7 @@ ApplicationWindow{
                 uxBotCircCfg.seted=!uxBotCircCfg.seted
                 let cfgFileLocation=pws+'/cfg.json'
                 if(uxBotCircCfg.seted){
-                    let cfgData=('{"arg0":"-folder='+pws+'/'+moduleName+'", "arg1":"https://github.com/nextsigner/mercurio.git"}').replace(/ /g, '%20')
+                    let cfgData=('{"arg0":"-folder='+pws+'/'+moduleName+'", "arg1":"https://github.com/nextsigner/'+moduleName+'.git"}').replace(/ /g, '%20')
                     unik.setFile(cfgFileLocation, cfgData)
                     xSign.visible=false
                 }else{
