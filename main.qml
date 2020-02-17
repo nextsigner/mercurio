@@ -65,21 +65,51 @@ ApplicationWindow{
         id: xApp
         anchors.fill: parent
         XMenu{
-           id: xMenu
-           visible: app.mod===-1
-           onPosYChanged: {
-               labelTit.opacity=0.0
-               tOcultarMenu.restart()
-           }
+            id: xMenu
+            visible: app.mod===-1
+            onPosYChanged: {
+                labelTit.opacity=0.0
+                tOcultarMenu.restart()
+            }
         }
         Timer{
-           id:tOcultarMenu
-           running:false
-           repeat:false
-           interval: 1000
-           onTriggered: {
-              labelTit.opacity=1.0
-           }
+            id:tOcultarMenu
+            running:false
+            repeat:false
+            interval: 1000
+            onTriggered: {
+                labelTit.opacity=1.0
+            }
+        }
+        UText{
+            id: labelTit
+            font.pixelSize: app.fs*2
+            color: app.c2
+            text: 'Mercurio'
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: app.fs
+            Behavior on opacity {NumberAnimation{duration: 500}}
+            Rectangle{
+                width: xApp.width
+                height: app.fs*8
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.00;
+                        color: app.c1;
+                    }
+                    GradientStop {
+                        position: 0.70;
+                        color: app.c1;
+                    }
+                    GradientStop {
+                        position: 1.00;
+                        color: "transparent";
+                    }
+                }
+                z:parent.z-1
+                anchors.centerIn: parent
+            }
         }
         UxBotCirc{
             opacity: labelTit.opacity
@@ -132,16 +162,41 @@ ApplicationWindow{
                 upd.download('https://github.com/nextsigner/'+moduleName+'.git', pws)
             }
         }
-        UText{
-            id: labelTit
-            font.pixelSize: app.fs*2
-            color: app.c2
-            text: 'Mercurio'
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: app.fs
-            //opacity: xMenu.posY!==0?0.0:1.0
-            Behavior on opacity {NumberAnimation{duration: 500}}
+        UxBotCirc{
+            id: uxBotCircCfg
+            opacity: labelTit.opacity
+            padding: 0-app.fs*3
+            text: '\uf015'
+            fontSize: app.fs*2
+            animationEnabled: true
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: app.fs*0.5
+            anchors.right: parent.right
+            anchors.rightMargin: app.fs*0.5
+            property bool seted: false
+            onClicked: {
+                uxBotCircCfg.seted=!uxBotCircCfg.seted
+                let cfgFileLocation=pws+'/cfg.json'
+                if(uxBotCircCfg.seted){
+                    let cfgData=('{"arg0":"-folder='+pws+'/'+moduleName+'"}').replace(/ /g, '%20')
+                    unik.setFile(cfgFileLocation, cfgData)
+                }else{
+                    unik.deleteFile(cfgFileLocation)
+                }
+                //upd.infoText = unikSettings.lang==='es'?'<b>Actualización: </b>Se ha iniciado la actualización\nde <b>MERCURIO</b>':'<b>Update: </b> Updating <b>MERCURIO</b>'
+                //upd.download('https://github.com/nextsigner/'+moduleName+'.git', pws)
+            }
+            Text{
+                visible: !uxBotCircCfg.seted
+                text: '<b>X</b>'
+                font.pixelSize: parent.width*0.8
+                color: 'red'
+                anchors.centerIn: parent
+            }
+            Component.onCompleted: {
+                let cfgFileLocation=pws+'/cfg.json'
+                seted = unik.fileExist(cfgFileLocation)
+            }
         }
         XSignos{id: xSignos;visible: app.mod===0;}
         XPlanetas{id: xPlanetas;visible: app.mod===1;}
