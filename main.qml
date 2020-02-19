@@ -34,7 +34,14 @@ ApplicationWindow{
         }
 
     }
-
+    onModChanged: {
+        let arrayMods=['XSignos', 'XPlanetas', 'XCasas', 'XCasasLilith', 'XCasasQuiron', 'XTransLunar', 'XTrans']
+        for(let i=0;i<xMods.children.length;i++){
+            xMods.children[i].destroy(10)
+        }
+        var comp = Qt.createComponent(arrayMods[mod]+'.qml')
+        var obj = comp.createObject(xMods, {});
+    }
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
     USettings{
         id: unikSettings
@@ -201,14 +208,17 @@ ApplicationWindow{
                 xSign.visible=!seted
             }
         }
-        XSignos{id: xSignos;visible: app.mod===0;}
-        XPlanetas{id: xPlanetas;visible: app.mod===1;}
-        XCasas{id: xCasas; visible: app.mod===2;}
-        XCasasLilith{id: xCasasLilith;visible: app.mod===3;}
-        XCasasQuiron{id: xCasasQuron;visible: app.mod===4;}
-        XTransLunar{id: xTransLunar;visible: app.mod===5;}
-        XTrans{id: xTrans;visible: app.mod===6;}
-
+        Item{
+            id: xMods
+            anchors.fill: parent
+            /*XSignos{id: xSignos;visible: app.mod===0;}
+            XPlanetas{id: xPlanetas;visible: app.mod===1;}
+            XCasas{id: xCasas; visible: app.mod===2;}
+            XCasasLilith{id: xCasasLilith;visible: app.mod===3;}
+            XCasasQuiron{id: xCasasQuron;visible: app.mod===4;}
+            XTransLunar{id: xTransLunar;visible: app.mod===5;}
+            XTrans{id: xTrans;visible: app.mod===6;}*/
+        }
         UProgressDownload{
             id:upd
             width: app.width

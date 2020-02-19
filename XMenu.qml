@@ -6,6 +6,7 @@ Item {
     width: parent.width
     height: parent.height
     property alias posY: flMenu.contentY
+    property var arrayLabels: []
     Flickable{
         id: flMenu
         anchors.horizontalCenter: parent.horizontalCenter
@@ -20,7 +21,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             Repeater{
                 id: repIconMenu
-                model: ['Significado de los Signos', 'Significado de los Planetas', 'Significado de las Casas', 'Lilith en las Casas', 'Quirón en las Casas', 'Tránsito Lunar', 'Tránsitos']
+                model: r.arrayLabels//['Significado de los Signos', 'Significado de los Planetas', 'Significado de las Casas', 'Lilith en las Casas', 'Quirón en las Casas', 'Tránsito Lunar', 'Tránsitos']
                 BotonUX{
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: modelData
@@ -29,5 +30,14 @@ Item {
                 }
             }
         }
+    }
+    Component.onCompleted: {
+        let d1=unik.fileExist('menu.json')?unik.getFile('menu.json'):'{}'
+        let json = JSON.parse(d1)
+        for(let i=0;i<=Object.keys(json['mods']).length-1;i++){
+            //logView.showLog('d'+i+': '+json['mods']['mod'+i].qml)
+            r.arrayLabels.push(json['mods']['mod'+i].label)
+        }
+        repIconMenu.model = r.arrayLabels
     }
 }

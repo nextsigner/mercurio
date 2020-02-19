@@ -1,0 +1,11 @@
+{
+    "mods":{
+        "mod0":{"qml":"XSignos", "label":"Significado de los Signos"},
+        "mod1":{"qml":"XPlanetas", "label":"Significado de los Planetas"},
+        "mod2":{"qml":"XCasas", "label":"Significado de las Casas"},
+        "mod3":{"qml":"XCasasLilith", "label":"Lilith en las Casas"},
+        "mod4":{"qml":"XCasasQuiron", "label":"Quirón en las Casas"},
+        "mod5":{"qml":"XTransLunar", "label":"Tránsito Lunar"},
+        "mod6":{"qml":"XTrans", "label":"Tránsitos"}
+        }
+}
