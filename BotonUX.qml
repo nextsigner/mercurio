@@ -75,7 +75,7 @@ Rectangle {
                     color: r.fontColor;
                 }
             }
-            Behavior on opacity{NumberAnimation{duration:r.speed*5}}
+            Behavior on opacity{NumberAnimation{duration:200}}
         }
         Rectangle{
             id: b1Clon
@@ -209,14 +209,30 @@ Rectangle {
             e=false
             p=false
         }
+        onDoubleClicked: {
+            e=false
+            p=true
+            if(r.qmlCode===''){
+                runNormal.restart()
+                return
+            }
+            run.start()
+        }
         onClicked: {
             e=false
             p=true
             if(r.qmlCode===''){
-                r.clicked()
+                runNormal.restart()
                 return
             }
             run.start()
+        }
+    }
+    Timer{
+        id: runNormal
+        interval: r.speed*10
+        onTriggered: {
+            r.clicked()
         }
     }
     Timer{
@@ -230,26 +246,15 @@ Rectangle {
             r.runQml(qmlCode)
         }
     }
-    /*Timer{
-        id: tBxCancel
-        interval: 3000
-        onTriggered: {
-            r.canceled=true
-            r.enabled=false;
-            maBX.p=false
-            b1.opacity=0.5
-            tBxEnable.start();
-        }
-    }
     Timer{
-        id: tBxEnable
-        interval: 2000
+        id: tBxRefresh
+        running: maBX.p
+        interval: 1500
         onTriggered: {
-            r.canceled=false
-            r.enabled=true
+            maBX.p=false
+            maBX.e=false
         }
     }
-    */
     function run(){
         r.clicked()
     }
