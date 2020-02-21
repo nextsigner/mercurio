@@ -48,6 +48,8 @@ Rectangle {
                     text: ''
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: r.cCasa=index
+                    customRadius: 6
+                    customBorder: 2
                     //radius: 0//unikSettings.radius*0.5
                     Column{
                         anchors.centerIn: parent

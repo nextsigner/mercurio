@@ -8,10 +8,12 @@ Rectangle {
     opacity: enabled?1.0:0.5
     //objectName: 'sin_nombre'
     color: 'transparent'
-    radius: unikSettings.radius
+    radius: customRadius===-1?unikSettings.radius:customRadius
     border.color: xR1.border.color
     border.width: 0
     antialiasing: true
+    property int customRadius: -1
+    property int customBorder: -1
     property var settingObj
     property int padding: 0
     property int fontSize: app.fs
@@ -33,8 +35,8 @@ Rectangle {
     Rectangle{
         id: xR1
         color: 'transparent'
-        border.width: unikSettings.borderWidth
-        border.color: app.c3//r.fontColor
+        border.width: r.customBorder===-1?unikSettings.borderWidth:r.customBorder
+        border.color: app.c3
         radius: r.radius//unikSettings.radius
         width: parent.width
         height: parent.height
@@ -106,8 +108,6 @@ Rectangle {
             width: xR1.width
             height: xR1.height
             radius: r.radius
-            //rotation: 90//-270
-            //visible: false
             antialiasing: true
             onOpacityChanged: {
                 if(opacity>=0.5&&!maBX.p){
@@ -230,7 +230,7 @@ Rectangle {
     }
     Timer{
         id: runNormal
-        interval: r.speed*10
+        interval: r.speed*2
         onTriggered: {
             r.clicked()
         }
@@ -239,10 +239,7 @@ Rectangle {
         id: run
         interval: r.speed*10
         onTriggered: {
-            //tBxCancel.stop()
-            //tBxEnable.start()
             r.clicked()
-            //if(r.canceled){return}
             r.runQml(qmlCode)
         }
     }
@@ -259,6 +256,7 @@ Rectangle {
         r.clicked()
     }
     function runQml(q){
+        r.clicked()
         var obj = Qt.createQmlObject(q, objToRunQml, 'botonUx-'+r.objectName)
     }
 }

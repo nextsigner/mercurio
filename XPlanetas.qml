@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import "qrc:/"
+import QtGraphicalEffects 1.12
 
 Rectangle {
     id: r
@@ -37,14 +37,43 @@ Rectangle {
             spacing: app.rot?app.fs*0.25:app.fs
             anchors.horizontalCenter: parent.horizontalCenter
             Repeater{
-                id: repIconCasas
-                model: ['Sol', 'Luna', 'Mercurio', 'Venus', 'Martes', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton']
+                id: repIconPlanetas
+                model: ['Sol', 'Luna', 'Mercurio', 'Venus', 'Marte', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton']
                 BotonUX{
+                    id: xBotPlaneta
                     width: app.rot?app.fs*3.5:app.fs*5.5
                     height: width
-                    text: modelData
+                    text: ''
                     fontSize: app.rot?app.fs:app.fs
                     onClicked: r.cCasa=index
+                    Column{
+                        anchors.centerIn: parent
+                        anchors.verticalCenterOffset: 0-app.fs*0.5
+                        spacing: 0-app.fs*0.5
+                        Item{
+                            width: xBotPlaneta.width*0.7
+                            height: width
+                            Image {
+                                id: iconoPlaneta
+                                source: "./resources/imgs/planetas/"+(''+modelData).toLowerCase()+".png"
+                                visible: false
+                                anchors.fill: parent
+                            }
+                            ColorOverlay {
+                                anchors.fill: iconoPlaneta
+                                source: iconoPlaneta
+                                color: xBotPlaneta.hovered?app.c1:app.c2
+                            }
+                        }
+                        UText{
+                            text: modelData
+                            width: contentWidth
+                            //height: app.fs
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.pixelSize: app.fs*0.8
+                            color: xBotPlaneta.hovered?app.c1:app.c2
+                        }
+                    }
                 }
             }
         }
