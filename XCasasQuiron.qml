@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import "qrc:/"
 
 Rectangle {
     id: r
@@ -14,6 +13,7 @@ Rectangle {
     Column{
         spacing: app.fs
         anchors.centerIn: parent
+        Item{width: 1;height: app.fs*0.5}
         BotonUX{
             text: 'Atras'
             fontSize: app.rot?app.fs*0.5:app.fs

@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.12
-import "qrc:/"
 
 Rectangle {
     id: r
@@ -15,6 +14,7 @@ Rectangle {
     Column{
         spacing: app.fs
         anchors.centerIn: parent
+        Item{width: 1;height: app.fs*0.5}
         BotonUX{
             text: 'Atras'
             fontSize: app.rot?app.fs*0.5:app.fs
@@ -65,7 +65,7 @@ Rectangle {
                             ColorOverlay {
                                 anchors.fill: iconoSigno
                                 source: iconoSigno
-                                color: app.c2
+                                color: xBotSigno.hovered?app.c1:app.c2
                             }
                         }
                         UText{
@@ -74,6 +74,7 @@ Rectangle {
                             //height: app.fs
                             anchors.horizontalCenter: parent.horizontalCenter
                             font.pixelSize: app.fs*0.8
+                            color: xBotSigno.hovered?app.c1:app.c2
                         }
                     }
                 }

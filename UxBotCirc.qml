@@ -1,17 +1,16 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
-//import "qrc:/"
 Item{
     id:r
-    width: r2.width//+app.fs
-    height: r2.height//+app.fs
+    width: 50
+    height: width
     property string text:'text'
     property bool animationEnabled: true
     property bool glowEnabled: true
     property bool blurEnabled: true
     property int padding: 0
     property alias bg: r2.bg
-    property int fontSize: app.fs
+    property int fontSize: width*0.5
     property bool canceled: false
     property string t2
     property color backgroudColor: app.c1
@@ -34,6 +33,8 @@ Item{
     }
     BotonUX{
         id:  r2
+        width: r.width
+        height: width
         fontSize: r.fontSize
         padding: r.padding
         fontFamily: "FontAwesome"
@@ -45,8 +46,6 @@ Item{
         qmlCode: r.qmlCode
         speed: r.speed
         text: r.text
-        //width: r.width
-        //height: width
         anchors.centerIn: r
         radius: width*0.5
         opacity: 0.5
@@ -56,25 +55,25 @@ Item{
             if(!r.animationEnabled)return
             tRestartAn1.restart()
         }
-        Component.objectName: {
+        Component.onCompleted: {
             var nr = r.width*0.5
             children[0].radius= nr
             children[0].children[0].radius= nr
             children[0].children[1].radius= nr
             children[0].children[2].radius= nr
 
-            children[0].children[0].border.width = app.fs*0.5
-            children[0].children[1].border.width =app.fs*0.5
-            children[0].children[2].border.width = app.fs*0.5
+            children[0].children[0].border.width = r.width*0.05
+            children[0].children[1].border.width =r.width*0.05
+            children[0].children[2].border.width = r.width*0.05
             r2.radius = nr
         }
     }
     FastBlur{
         id: blur
-        width: r2.width+app.fs*0.5
-        height: r2.height+app.fs*0.5
+        width: r2.width
+        height: r2.height
         anchors.centerIn: parent
-        radius: app.fs
+        radius: r.width*0.5
         source: r2
         clip: true
         visible: blurEnabled

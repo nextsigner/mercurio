@@ -1,11 +1,10 @@
 import QtQuick 2.0
-import "qrc:/"
-
 Item {
     id: r
     width: parent.width
     height: parent.height
     property alias posY: flMenu.contentY
+    property var arrayQmls: []
     property var arrayLabels: []
     Flickable{
         id: flMenu
@@ -34,10 +33,12 @@ Item {
     Component.onCompleted: {
         let d1=unik.fileExist('menu.json')?unik.getFile('menu.json'):'{}'
         let json = JSON.parse(d1)
+        let al=[]
         for(let i=0;i<=Object.keys(json['mods']).length-1;i++){
-            //logView.showLog('d'+i+': '+json['mods']['mod'+i].qml)
+            al.push(json['mods']['mod'+i].qml)
             r.arrayLabels.push(json['mods']['mod'+i].label)
         }
         repIconMenu.model = r.arrayLabels
+        r.arrayQmls=al
     }
 }

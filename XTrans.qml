@@ -24,6 +24,7 @@ Rectangle {
         id:colTrans
         spacing: app.fs
         //anchors.centerIn: parent
+        Item{width: 1;height: app.fs*0.5}
         BotonUX{
             text: 'Atras'
             fontSize: app.rot?app.fs*0.5:app.fs

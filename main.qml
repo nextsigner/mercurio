@@ -8,7 +8,7 @@ ApplicationWindow{
     visibility: Qt.platform.os==='android'?"FullScreen":"Windowed"
     color:app.c1
     width: Qt.platform.os==='android'?Screen.width:460
-    height: Qt.platform.os==='android'?Screen.height:900
+    height: Qt.platform.os==='android'?Screen.height:800
     property string moduleName: 'mercurio'
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
@@ -35,12 +35,13 @@ ApplicationWindow{
 
     }
     onModChanged: {
-        let arrayMods=['XSignos', 'XPlanetas', 'XCasas', 'XCasasLilith', 'XCasasQuiron', 'XTransLunar', 'XTrans']
         for(let i=0;i<xMods.children.length;i++){
             xMods.children[i].destroy(10)
         }
-        var comp = Qt.createComponent(arrayMods[mod]+'.qml')
-        var obj = comp.createObject(xMods, {});
+        if(mod>=0){
+            var comp = Qt.createComponent(xMenu.arrayQmls[mod]+'.qml')
+            var obj = comp.createObject(xMods, {});
+        }
     }
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
     USettings{
@@ -120,9 +121,8 @@ ApplicationWindow{
         }
         UxBotCirc{
             opacity: labelTit.opacity
-            padding: 0-app.fs*3
+            width: app.fs*3
             text: '\uf1fc'//+unikSettings.currentNumColor
-            fontSize: app.fs*2
             animationEnabled: true
             glowEnabled: true
             anchors.left: parent.left
@@ -142,9 +142,8 @@ ApplicationWindow{
         }
         UxBotCirc{
             opacity: labelTit.opacity
-            padding: 0-app.fs*3
+            width: app.fs*3
             text: '\uf011'
-            fontSize: app.fs*2
             animationEnabled: true
             anchors.right: parent.right
             anchors.rightMargin: app.fs*0.5
@@ -156,9 +155,8 @@ ApplicationWindow{
         }
         UxBotCirc{
             opacity: labelTit.opacity
-            padding: 0-app.fs*3
+            width: app.fs*3
             text: '\uf021'
-            fontSize: app.fs*2
             animationEnabled: true
             anchors.bottom: parent.bottom
             anchors.bottomMargin: app.fs*0.5
@@ -172,9 +170,8 @@ ApplicationWindow{
         UxBotCirc{
             id: uxBotCircCfg
             opacity: labelTit.opacity
-            padding: 0-app.fs*3
+            width: app.fs*3
             text: '\uf015'
-            fontSize: app.fs*2
             animationEnabled: true
             anchors.bottom: parent.bottom
             anchors.bottomMargin: app.fs*0.5

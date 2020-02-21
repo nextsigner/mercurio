@@ -25,6 +25,7 @@ Rectangle {
             id: col
             spacing: app.fs*2
             anchors.horizontalCenter: parent.horizontalCenter
+            Item{width: 1;height: app.fs*0.5}
             Flow{
                 width:r.width-app.fs
                 spacing: app.fs
@@ -97,16 +98,22 @@ Rectangle {
                         }
                         pp='Actualmente '+destinatario
                         let gradoActualDeLuna = r.cGradoLuna
+                        let proximaCasa=0
+                        if(numCasa>=12){
+                            proximaCasa=12-numCasa+1
+                        }else{
+                            proximaCasa=numCasa+1
+                        }
                         if(gradoActualDeLuna<12){
                             pf+='<br /><br />La persona va a estar así hoy y mañana.'
                         }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
-                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+parseInt(numAsc+1)+' en el signo '+app.signos[r.cNumSigno]
+                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+proximaCasa+' en el signo '+app.signos[r.cNumSigno]
                         }else{
                             pf+='La persona va a estar así hoy'
                         }
-                        resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
+                        resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+proximaCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
                         resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
-                        resTransLunar.text+=pf+'<br /><br />'
+                        resTransLunar.text+='<br /><br />'+pf+'<br /><br />'
                         r.speak(resTransLunar.text)
                     }
                 }
