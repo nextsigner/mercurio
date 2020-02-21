@@ -8,9 +8,6 @@ Rectangle {
     color: app.c1
     property int cGradoLuna: -1
     property string cSignoLuna: ''
-    onVisibleChanged: {
-        if(visible)getTransNow()
-    }
     MouseArea{
         anchors.fill: r
     }
@@ -23,7 +20,7 @@ Rectangle {
     Column{
         id:colTrans
         spacing: app.fs
-        //anchors.centerIn: parent
+        anchors.centerIn: parent
         Item{width: 1;height: app.fs*0.5}
         BotonUX{
             text: 'Atras'
@@ -79,10 +76,10 @@ Rectangle {
     }
     }
     Component.onCompleted: {
-
+        getTransNow()
     }
     function speak(text){
-        let s = (''+text).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '').replace(/LILITH/g, 'la luna negra').replace(/Lilith/g, 'la luna negra').replace(/Casa IV/g, 'casa 4').replace(/Casa IX/g, 'casa 9').replace(/Casa III/g, 'casa 3').replace(/Casa II/g, 'casa 2').replace(/Casa I/g, 'casa 1').replace(/Casa V/g, 'casa 5').replace(/Casa VIII/g, 'casa 8').replace(/Casa VII/g, 'casa 7').replace(/Casa VI/g, 'casa 6').replace(/Casa X/g, 'casa 10').replace(/Casa XII/g, 'casa 12').replace(/Casa XI/g, 'casa 11').replace(/CASA IV/g, 'casa 4').replace(/CASA IX/g, 'casa 9').replace(/CASA III/g, 'casa 3').replace(/CASA II/g, 'casa 2').replace(/CASA I/g, 'casa 1').replace(/CASA V/g, 'casa 5').replace(/CASA VIII/g, 'casa 8').replace(/CASA VII/g, 'casa 7').replace(/CASA VI/g, 'casa 6').replace(/CASA X/g, 'casa 10').replace(/CASA XII/g, 'casa 12').replace(/CASA XI/g, 'casa 11')
+        let s = (''+text)
         unik.speak(s)
     }
     function getTransNow(){

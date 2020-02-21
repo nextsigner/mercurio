@@ -93,7 +93,7 @@ ApplicationWindow{
             id: labelTit
             font.pixelSize: app.fs*2
             color: app.c2
-            text: 'Mercurio'
+            text: 'Mercurio v1.0'
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: app.fs
