@@ -139,7 +139,7 @@ Rectangle {
         for(let i=1;i<=12;i++){
             //console.log('D: '+json['casas']['casa'+i])
             //arrayDataCasas.push(json['casas']['casa'+i])
-            logView.showLog(json['items']['casa'+i].data)
+            //logView.showLog(json['items']['casa'+i].data)
         }
         //repDataCasas.model = r.arrayDataCasas
     }
