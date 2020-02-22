@@ -10,6 +10,7 @@ Rectangle {
     property int cNumSigno: -1
     property int cGradoLuna: -1
     property string cSignoLuna: ''
+    property var jsonDataTransLunar: '{}'
     onVisibleChanged: {
         if(visible)getTransNow()
     }
@@ -111,7 +112,7 @@ Rectangle {
                         }else{
                             pf+='La persona va a estar así hoy'
                         }
-                        resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+proximaCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
+                        resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
                         resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
                         resTransLunar.text+='<br /><br />'+pf+'<br /><br />'
                         r.speak(resTransLunar.text)
@@ -133,6 +134,14 @@ Rectangle {
     }
     Component.onCompleted: {
         getTransNow()
+        let d1=unik.getFile('dataTransLunar.json').replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')
+        let json = JSON.parse(d1)
+        for(let i=1;i<=12;i++){
+            //console.log('D: '+json['casas']['casa'+i])
+            //arrayDataCasas.push(json['casas']['casa'+i])
+            logView.showLog(json['items']['casa'+i].data)
+        }
+        //repDataCasas.model = r.arrayDataCasas
     }
     function speak(text){
         let s = ''+text.replace(/<br \/>/g, '')
@@ -209,17 +218,17 @@ Rectangle {
                         //logView.showLog('XXX'+g1[0]+'XXX')
                         if(i===1){
                             r.cGradoLuna=parseInt(g1[0])
-                        
+
                         //repTrans.arrayGrados.push(' está a °'+g1[0]+ ' de ')
 
                         //Signo
                         let s0=m1[4].split('alt=\"')
                         let s1=s0[1].split('\"')
                         let s2=''+s1[0]
-                       
-                        cNumSigno=parseInt(app.signos.indexOf(s2) + 1)                         
+
+                        cNumSigno=parseInt(app.signos.indexOf(s2) + 1)
                       }
-                    }                    
+                    }
                 }else{
                     logView.showLog("Error loading page\n");
                 }
