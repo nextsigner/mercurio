@@ -46,7 +46,8 @@ ApplicationWindow{
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
     USettings{
         id: unikSettings
-        url:pws+'/launcher.json'
+        //url:pws+'/launcher.json'
+        url:pws+'/mercurio.json'
         function refresh(){
             var nc=unikSettings.currentNumColor
             if(unikSettings.defaultColors){
@@ -93,7 +94,7 @@ ApplicationWindow{
             id: labelTit
             font.pixelSize: app.fs*2
             color: app.c2
-            text: 'Mercurio v1.0'
+            text: 'Mercurio'
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: app.fs
@@ -117,6 +118,15 @@ ApplicationWindow{
                 }
                 z:parent.z-1
                 anchors.centerIn: parent
+            }
+            UText{
+                id: labelTit2
+                font.pixelSize: app.fs
+                color: app.c2
+                text: 'Versión '+version
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 0-app.fs
+                anchors.horizontalCenter: parent.horizontalCenter
             }
         }
         UxBotCirc{
@@ -225,7 +235,10 @@ ApplicationWindow{
             }
         }
         ULogView{id: logView}
-        UWarnings{id: uWarnings}
+        UWarnings{
+            id: uWarnings
+            showEnabled: false
+        }
     }
     Shortcut{
         sequence: 'Esc'

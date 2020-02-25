@@ -105,12 +105,22 @@ Rectangle {
                         }else{
                             proximaCasa=numCasa+1
                         }
+                        let proximoSigno=0
+                        if(r.cNumSigno>=12){
+                            proximoSigno=1
+                        }else{
+                            proximoSigno=r.cNumSigno
+                        }
                         if(gradoActualDeLuna<12){
                             pf+='<br /><br />La persona va a estar así hoy y mañana.'
                         }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
-                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+proximaCasa+' en el signo '+app.signos[r.cNumSigno]
+                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno - 1]
+                        }else if(gradoActualDeLuna>=24&&gradoActualDeLuna<28){
+                            pf+='La persona está así hoy y  pocas horas cambia a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno - 1]
+                        }else if(gradoActualDeLuna>=28){
+                            pf+='La persona en estos momentos está cambiando a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno - 1]+'.'
                         }else{
-                            pf+='La persona va a estar así hoy'
+                            pf+='La persona va a estar así hoy'//+'r.cNumSigno='+r.cNumSigno+' proximoSigno='+proximoSigno+' signo='+app.signos[proximoSigno -1]
                         }
                         resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
                         resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
