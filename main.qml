@@ -39,6 +39,7 @@ ApplicationWindow{
             xMods.children[i].destroy(10)
         }
         if(mod>=0){
+            //logView.showLog('xMenu.arrayQmls[mod]: '+xMenu.arrayQmls[mod])
             var comp = Qt.createComponent(xMenu.arrayQmls[mod]+'.qml')
             var obj = comp.createObject(xMods, {});
         }
@@ -70,6 +71,7 @@ ApplicationWindow{
             }
         }
     }
+
     Item {
         id: xApp
         anchors.fill: parent

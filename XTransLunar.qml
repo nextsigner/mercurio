@@ -64,16 +64,10 @@ Rectangle {
             }
             Column{
                 spacing: app.fs
-                anchors.horizontalCenter: parent.horizontalCenter
-                /*Text{
-                    width: xApp.width-app.fs*2
-                    text: 'La Luna está en el signo número '+r.cNumSigno
-                    color: app.c2
-                    font.pixelSize: app.fs*2
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }*/
+                anchors.horizontalCenter: parent.horizontalCenter               
                 ComboBox{
                     id: cbAsc
+                    font.pixelSize: app.fs
                     model: ['Seleccionar', 'Natalia', 'Ricardo', 'Nico', 'Fer', 'Dylan', 'Bruno', 'Hugo', 'Ely Dorgan', 'Mario Pizarro', 'Ascendente '+app.signos[0], 'Ascendente '+app.signos[1], 'Ascendente '+app.signos[2], 'Ascendente '+app.signos[3], 'Ascendente '+app.signos[4], 'Ascendente '+app.signos[5], 'Ascendente '+app.signos[6], 'Ascendente '+app.signos[7], 'Ascendente '+app.signos[8], 'Ascendente '+app.signos[9], 'Ascendente '+app.signos[10], 'Ascendente '+app.signos[11]]
                     property var arrayAsc: [0,11, 11, 5, 4, 2, 7, 12, 1, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     width: r.width-app.fs
@@ -93,7 +87,7 @@ Rectangle {
                         let pf=''
                         let destinatario=''
                         if(model[currentIndex].indexOf('Ascendente')===0){
-                            destinatario='persona con '+model[currentIndex]
+                            destinatario='la persona con '+model[currentIndex]
                         }else{
                             destinatario=model[currentIndex]
                         }
@@ -112,7 +106,7 @@ Rectangle {
                             proximoSigno=r.cNumSigno
                         }
                         if(gradoActualDeLuna<12){
-                            pf+='<br /><br />La persona va a estar así hoy y mañana.'
+                            pf+='La persona va a estar así hoy y mañana.'
                         }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
                             pf+='La persona va a estar así hoy y mañana cambia a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno - 1]
                         }else if(gradoActualDeLuna>=24&&gradoActualDeLuna<28){
@@ -123,8 +117,8 @@ Rectangle {
                             pf+='La persona va a estar así hoy'//+'r.cNumSigno='+r.cNumSigno+' proximoSigno='+proximoSigno+' signo='+app.signos[proximoSigno -1]
                         }
                         resTransLunar.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
-                        resTransLunar.text+='<br /><br />'+getAsunto(numCasa, destinatario)
-                        resTransLunar.text+='<br /><br />'+pf+'<br /><br />'
+                        resTransLunar.text+='<br />'+getAsunto(numCasa, destinatario)
+                        resTransLunar.text+='<br />'+pf+'<br /><br />'
                         r.speak(resTransLunar.text)
                     }
                 }
@@ -144,14 +138,8 @@ Rectangle {
     }
     Component.onCompleted: {
         getTransNow()
-        let d1=unik.getFile('dataTransLunar.json').replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')
-        let json = JSON.parse(d1)
-        for(let i=1;i<=12;i++){
-            //console.log('D: '+json['casas']['casa'+i])
-            //arrayDataCasas.push(json['casas']['casa'+i])
-            //logView.showLog(json['items']['casa'+i].data)
-        }
-        //repDataCasas.model = r.arrayDataCasas
+        let d1=unik.getFile('dataTransLunar.json').replace(/\n/g,'<br />').replace('}}<br />','}}')
+        jsonDataTransLunar = JSON.parse(d1.replace(/\n\n/g, '\n'))
     }
     function speak(text){
         let s = ''+text.replace(/<br \/>/g, '')
@@ -164,45 +152,13 @@ Rectangle {
         //console.log('ci::::::::::::::'+ci)
         return numCasa
     }
+    function setDestinatario(data, dest){
+        let d0=data.replace(/\ndestinatario/g, '<br />'+capital_letter(dest))
+        let d1=d0.replace(/destinatario/g, capital_letter(dest))
+        return d1;
+    }
     function getAsunto(casa, destinatario){
-        let ret=''
-        if(casa===1){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados a la vitalidad, a la fortaleza en el momento de un inicio de algo que sucede a su alrrededor mientras ocurre este tránsito. Posiblemente el corazón de '+destinatario+' siente que algo comienza y se conecta con fuerzas y sentimientos de la infancia, ansiedad, impaciencia, nervios por el inicio de un evento o acción que se va a iniciar. Las emociones impulsan a la persona a juntar fuerzas.'
-        }
-        if(casa===2){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar enfocados en asuntos relacionados con la administración de sus valores, objetos, dinero o recursos. Estará pensando en el cuidado con los excesos en los gastos, en las deudas, las fuentes de ingresos, las propiedades y el cierre de sus cuentas y balances a los fines de procurar no tener problemas de falta de recursos.'
-        }
-        if(casa===3){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados con el entorno cercano. Va a estar interesado en comunicarse, prestar atención a sus vínculos más próximos, esas personas que considera de su grupo. <br /><br />'+capital_letter(destinatario)+' va a tener un impulso y una predisposición en escuchar, conversar o decir cosas a esas personas que lo rodean. Si no es escuchada, si es ignorada o no logra comunicarse con su entorno, posiblemente se sienta triste, enojada o desanimada. Si logra conectar con su entorno cercano a travez de una comunicación fluida, estará mejor de ánimo.'
-        }
-        if(casa===4){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados con asuntos, emociones y recuerdos relacionados con la familia de donde uno proviene, los hermanos, los padres, abuelos, primos o todo aquello que le haga recordar sus raíces. '+capital_letter(destinatario)+' talvez se sienta algo nostálgica, un poco melancólica o un poco pensativa en el pasado. <br /><br />Si la infancia de '+destinatario+' no ha sido buena es posible que los recuerdos estén afectando su parte mental inconciente y su mal humor se manifieste sin saber a qué razón se debe esa reacción. <br /><br />Si la persona ha tenido una infancia algo feliz o con una felicidad plena, es posible que se sienta con una energía juvenil, con ganas de jugar, de comer comídas o alimentos sabrosos que le recuerden el aroma y el sabor que había en su hogar en sus épocas de infancia. '
-        }
-        if(casa===5){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar vibrando con la energía necesaria para iniciar o estar a pleno en actividades relacionadas con la creatividad, la diversión, la alegría. '+capital_letter(destinatario)+' estará interesada en hacer cosas que logren llamar la atención de los demás. Buscará el reconocimiento de los demás. Tratará de figurar, de decir -Acá estoy, mirenme-, intentará no pasar desapercibido. Lo que su nucleo emocional está demandando es reforzar un poco la propia identidad, el amor propio y el orgullo personal.'
-        }
-        if(casa===6){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados con las rutinas, tareas y actividades que realiza a menudo, que hace muy seguido, con cierta frecuencia.'
-        }
-        if(casa===7){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados con los asuntos relacionados con los compromisos, los acuerdos convivenciales o matrimoniales, con los contratos o sociedades. Estará buscando en su interior y en sus acciones el mayor equilibrio posible entre lo que desea hacer y lo que puede hacer, entre sus desiciones y lo bueno o malo de dichas desiciones. Estará pensando y analizando las consecuencias de sus acciones. Evaluará si está bien o mal y en base a ello intentará buscar el equilibrio deseado.'
-        }
-        if(casa===8){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar removidos por una influencia transformadora relacionada con los peligros, la muerte, el final y la necesidad de renovación de los ciclos naturales de su cuerpo, mente y alma. Estará procesando el modo de percepción de su existencia a traves de los sentidos, del cuerpo, la piel y principalmente el sexo. Estará analizando asuntos relacionados con herencias, bienes ajenos, impuestos, bienes o recursos que otros nos delegan para administrar.'
-        }
-        if(casa===9){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar enfocados en los viajes largos, el extranjero o los lugares lejanos. La necesidad de ampliar los conocimientos y de expandirse mucho más allá de la posición y situación actual.'
-        }
-        if(casa===10){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar enfocados en los asuntos relacionados con la vocación o la vocación en el trabajo. Estará buscando sostener y completar todo lo necesario para afirmar cada vez más el status social para así lograr el reconocimiento social.'
-        }
-        if(casa===11){
-            ret='El corazón y los sentimientos de '+destinatario+' van a estar conectados con las amistades, los grupos o asociaciones a las que pertenezca o quiera pertenecer. Estará moviendose para lograr establecer el contacto y la interacción que le posibilita acceder a una vida social, creando vínculos, charlando, organizando y concurriendo junto a grupos de personas para fusionar su individualidad entre otras personas para vivir nuevas experiencias.'
-        }
-        if(casa===12){
-            ret='El corazón y los sentimientos de '+destinatario+' van a enfocarse en los asuntos relacionados con las enfermedades crónicas, los encierros propios o ajenos, los retiros prolongados, los manicomios, los enemigos o los ladrones. Estará analizando cuales son sus potencialidades y debilidades ante cualquiera de esos males o dificultades.'
-        }
-        return ret
+        return setDestinatario(jsonDataTransLunar['items']['casa'+casa].data, destinatario)
     }
     function getTransNow(){
         var req = new XMLHttpRequest();
@@ -248,11 +204,9 @@ Rectangle {
     }
     function capital_letter(str){
         str = str.split(" ");
-
         for (let i = 0, x = str.length; i < x; i++) {
             str[i] = str[i][0].toUpperCase() + str[i].substr(1);
         }
-
         return str.join(" ");
     }
 }
