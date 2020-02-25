@@ -117,8 +117,8 @@ Rectangle {
                             pf+='La persona va a estar así hoy'//+'r.cNumSigno='+r.cNumSigno+' proximoSigno='+proximoSigno+' signo='+app.signos[proximoSigno -1]
                         }
                         resTransLunar.text='<br />'+pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo  '+app.signos[r.cNumSigno - 1]+'.<br />'
-                        resTransLunar.text+='<br />'+getAsunto(numCasa, app.signos[r.cNumSigno - 1], destinatario)
-                        resTransLunar.text+='<br />'+pf+'<br /><br />'
+                        resTransLunar.text+='<br />'+getAsunto(numCasa, app.signos[r.cNumSigno - 1], destinatario, pf)
+                        //resTransLunar.text+='<br />'+pf+'<br /><br />'
                         r.speak(resTransLunar.text)
                     }
                 }
@@ -157,8 +157,9 @@ Rectangle {
         let d1=d0.replace(/destinatario/g, capital_letter(dest))
         return d1;
     }
-    function getAsunto(casa, signo, destinatario){
+    function getAsunto(casa, signo, destinatario, pf){
         let d=jsonDataTransLunar['items']['casa'+casa].data
+        d+='<br />'+pf
         d+='<br />'+jsonDataTransLunar['items']['casa'+casa][(''+signo).toLowerCase()]
         return setDestinatario(d, destinatario)
     }
