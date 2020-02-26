@@ -39,8 +39,8 @@ ApplicationWindow{
             xMods.children[i].destroy(10)
         }
         if(mod>=0){
-            //logView.showLog('xMenu.arrayQmls[mod]: '+xMenu.arrayQmls[mod])
-            var comp = Qt.createComponent(xMenu.arrayQmls[mod]+'.qml')
+            //logView.showLog('xMenu.arrayQmls['+mod+']: '+xMenu.arrayQmls[mod])
+            var comp = Qt.createComponent(xMenu.arrayQmls[mod+2]+'.qml')
             var obj = comp.createObject(xMods, {});
         }
     }
@@ -78,6 +78,25 @@ ApplicationWindow{
         XMenu{
             id: xMenu
             visible: app.mod===-1
+            cTipo: 'menu'
+            onPosYChanged: {
+                labelTit.opacity=0.0
+                tOcultarMenu.restart()
+            }
+        }
+        XMenu{
+            id: xMenuTrans
+            visible: app.mod===-2
+            cTipo: 'trans'
+            onPosYChanged: {
+                labelTit.opacity=0.0
+                tOcultarMenu.restart()
+            }
+        }
+        XMenu{
+            id: xMenuLearn
+            visible: app.mod===-3
+            cTipo: 'learn'
             onPosYChanged: {
                 labelTit.opacity=0.0
                 tOcultarMenu.restart()
@@ -96,7 +115,7 @@ ApplicationWindow{
             id: labelTit
             font.pixelSize: app.fs*2
             color: app.c2
-            text: 'Mercurio'
+            text: 'Mercurio '+app.mod
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: app.fs

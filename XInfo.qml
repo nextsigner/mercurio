@@ -34,7 +34,7 @@ Rectangle {
                     text: 'Atras'
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: {
-                        app.mod=-2
+                        app.mod=-1
                         unik.speak('atras')
                     }
                 }
