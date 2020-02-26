@@ -45,6 +45,7 @@ Rectangle {
                     id: txtInfo
                     width: r.width-app.fs
                     font.pixelSize: app.fs
+                    textFormat: Text.RichText;
                     wrapMode: Text.WordWrap
                     anchors.horizontalCenter: parent.horizontalCenter
                     onLinkActivated: Qt.openUrlExternally(link)
@@ -53,7 +54,8 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        txtInfo.text='Unik Qml Engine y Mercurio son aplicaciones desarrolladas con el frameworik Qt Open Source por @nextsigner y su equipo de colaboradores.<br />Para más información sobre el Qt Project diríjase a <a href="http://www.qt.io/">www.qt.io/</a><br /><br />'
+        txtInfo.text='<style>a:link { color: '+app.c4+'; }</style>'
+        txtInfo.text+='Unik Qml Engine y Mercurio son aplicaciones desarrolladas con el frameworik Qt Open Source por @nextsigner y su equipo de colaboradores.<br />Para más información sobre el Qt Project diríjase a <a href="http://www.qt.io/">www.qt.io/</a><br /><br />'
         txtInfo.text+='<b>Colaboradores</b><br /><br /><ul><li>Natalia Soledad Pintos</li><li>Ivonne Pizarro</li></ul><br /><br />'
         txtInfo.text+='Para más información sobre Mercurio puedes unirte a el grupo de Whatsapp <b>Usuarios de Mercurio</b>.<br /><br />Enlace para unirse al grupo de Whatsapp: <a href="https://chat.whatsapp.com/IBHvkroLSzi0xYR6ezj4XG">https://chat.whatsapp.com/</a><br /><br /><b>Otras vías de comunicación</b><br /><br />E-Mail: nextsigner@gmail.com<br /><br />Whatsapp: +54 11 3802 4370<br /><br />'
     }
