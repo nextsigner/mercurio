@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "func.js" as JS
 
 Rectangle {
     id: r
@@ -19,7 +20,7 @@ Rectangle {
             fontSize: app.rot?app.fs*0.5:app.fs
             onClicked: {
                 app.mod=-3
-                unik.speak('atras')
+                JS.speak('atras')
             }
         }
         Text{
@@ -35,7 +36,7 @@ Rectangle {
             spacing: app.rot?app.fs*0.25:app.fs
             anchors.horizontalCenter: parent.horizontalCenter
             onVisibleChanged: {
-                if(visible)unik.speak('Seleccionar casa')
+                if(visible)JS.speak('Seleccionar casa')
             }
             Repeater{
                 id: repIconCasas
@@ -84,14 +85,14 @@ Rectangle {
                             BotonUX{
                                 text: 'Atras'
                                 onClicked: {
-                                    unik.speak('atras')
+                                    JS.speak('atras')
                                     r.cCasa=-1
                                 }
                             }
                             BotonUX{
                                 text: 'Detener Audio'
                                 onClicked: {
-                                    unik.speak('detenido')
+                                    JS.speak('detenido')
                                 }
                             }
                             BotonUX{
@@ -128,6 +129,6 @@ Rectangle {
     }
     function speak(text){
         let s = (''+text).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '').replace(/LILITH/g, 'la luna negra').replace(/Lilith/g, 'la luna negra').replace(/Casa IV/g, 'casa 4').replace(/Casa IX/g, 'casa 9').replace(/Casa III/g, 'casa 3').replace(/Casa II/g, 'casa 2').replace(/Casa I/g, 'casa 1').replace(/Casa V/g, 'casa 5').replace(/Casa VIII/g, 'casa 8').replace(/Casa VII/g, 'casa 7').replace(/Casa VI/g, 'casa 6').replace(/Casa X/g, 'casa 10').replace(/Casa XII/g, 'casa 12').replace(/Casa XI/g, 'casa 11').replace(/CASA IV/g, 'casa 4').replace(/CASA IX/g, 'casa 9').replace(/CASA III/g, 'casa 3').replace(/CASA II/g, 'casa 2').replace(/CASA I/g, 'casa 1').replace(/CASA V/g, 'casa 5').replace(/CASA VIII/g, 'casa 8').replace(/CASA VII/g, 'casa 7').replace(/CASA VI/g, 'casa 6').replace(/CASA X/g, 'casa 10').replace(/CASA XII/g, 'casa 12').replace(/CASA XI/g, 'casa 11')
-        unik.speak(s)
+        JS.speak(s)
     }
 }

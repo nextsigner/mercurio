@@ -115,7 +115,7 @@ ApplicationWindow{
             id: labelTit
             font.pixelSize: app.fs*2
             color: app.c2
-            text: 'Mercurio '+app.mod
+            text: 'Mercurio'
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: app.fs
@@ -153,87 +153,15 @@ ApplicationWindow{
         UxBotCirc{
             opacity: labelTit.opacity
             width: app.fs*3
-            text: '\uf1fc'//+unikSettings.currentNumColor
-            animationEnabled: true
-            glowEnabled: true
-            anchors.left: parent.left
-            anchors.leftMargin: app.fs*0.5
-            anchors.top: parent.top
-            anchors.topMargin: app.fs*0.5
-            onClicked: {
-                var cc=unikSettings.defaultColors.split('|').length
-                if(unikSettings.currentNumColor<cc-1){
-                    unikSettings.currentNumColor++
-                }else{
-                    unikSettings.currentNumColor=0
-                }
-                //appSettings.currentNumColors = unikSettings.currentNumColor
-                updateUS()
-            }
-        }
-        UxBotCirc{
-            opacity: labelTit.opacity
-            width: app.fs*3
-            text: '\uf011'
+            text: '\uf013'
             animationEnabled: true
             anchors.right: parent.right
             anchors.rightMargin: app.fs*0.5
             anchors.top: parent.top
             anchors.topMargin: app.fs*0.5
             onClicked: {
-                Qt.quit()
-            }
-        }
-        UxBotCirc{
-            opacity: labelTit.opacity
-            width: app.fs*3
-            text: '\uf021'
-            animationEnabled: true
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: app.fs*0.5
-            anchors.left:  parent.left
-            anchors.leftMargin: app.fs*0.5
-            onClicked: {
-                upd.infoText = unikSettings.lang==='es'?'<b>Actualización: </b>Se ha iniciado la actualización\nde <b>MERCURIO</b>':'<b>Update: </b> Updating <b>MERCURIO</b>'
-                upd.download('https://github.com/nextsigner/'+moduleName+'.git', pws)
-            }
-        }
-        UxBotCirc{
-            id: uxBotCircCfg
-            opacity: labelTit.opacity
-            width: app.fs*3
-            text: '\uf015'
-            animationEnabled: true
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: app.fs*0.5
-            anchors.right: parent.right
-            anchors.rightMargin: app.fs*0.5
-            property bool seted: false
-            onClicked: {
-                uxBotCircCfg.seted=!uxBotCircCfg.seted
-                let cfgFileLocation=pws+'/cfg.json'
-                if(uxBotCircCfg.seted){
-                    let cfgData=('{"arg0":"-folder='+pws+'/'+moduleName+'","arg1":"https://github.com/nextsigner/'+moduleName+'.git"}').replace(/ /g, '%20')
-                    unik.setFile(cfgFileLocation, cfgData)
-                    xSign.visible=false
-                }else{
-                    xSign.visible=true
-                    unik.deleteFile(cfgFileLocation)
-                    unik.restartApp()
-                }
-            }
-            Text{
-                id: xSign
-                visible: false//!uxBotCircCfg.seted
-                text: 'X'
-                font.pixelSize: parent.width*0.6
-                color: 'red'
-                anchors.centerIn: parent
-            }
-            Component.onCompleted: {
-                let cfgFileLocation=pws+'/cfg.json'
-                seted = unik.fileExist(cfgFileLocation)
-                xSign.visible=!seted
+                var comp = Qt.createComponent('XConfig.qml')
+                var obj = comp.createObject(xMods, {});
             }
         }
         Item{

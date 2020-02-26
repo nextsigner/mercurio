@@ -8,6 +8,7 @@
         "mod5":{"tipo":"learn","qml":"XCasasLilith", "label":"Lilith en las Casas", "numMod": 3},
         "mod6":{"tipo":"learn","qml":"XCasasQuiron", "label":"Quirón en las Casas", "numMod": 4},
         "mod7":{"tipo":"trans","qml":"XTransLunar", "label":"Tránsito Lunar", "numMod": 5},
-        "mod8":{"tipo":"trans","qml":"XTrans", "label":"Tránsitos", "numMod": 6}
+        "mod8":{"tipo":"trans","qml":"XTrans", "label":"Tránsitos", "numMod": 6},
+        "mod9":{"tipo":"menu","qml":"XInfo", "label":"Sobre Mercurio", "numMod": 7}
         }
 }

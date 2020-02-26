@@ -57,5 +57,6 @@ Item {
         }
         repIconMenu.model = r.arrayLabels
         r.arrayQmls=al
+        //logView.showLog('Qmls: '+(''+al).split(',').join(' '))
     }
 }

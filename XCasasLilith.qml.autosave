@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtGraphicalEffects 1.12
 import "func.js" as JS
 
 Rectangle {
@@ -25,56 +24,29 @@ Rectangle {
             }
         }
         Text{
-            width: r.width-app.fs*2
-            text: '<b>Significados de los Planetas</b>'
+            width: xApp.width-app.fs*2
+            text: '<b>Lilith en las Casas</b>'
             color: app.c2
-            font.pixelSize: app.fs*2
-            wrapMode:Text.WordWrap
+            font.pixelSize: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
-            visible: r.cCasa===-1
+            visible: r.cCasa===-1&&r.visible
             columns: app.rot?6:3
             spacing: app.rot?app.fs*0.25:app.fs
             anchors.horizontalCenter: parent.horizontalCenter
+            onVisibleChanged: {
+                if(visible)JS.speak('Seleccionar casa')
+            }
             Repeater{
-                id: repIconPlanetas
-                model: ['Sol', 'Luna', 'Mercurio', 'Venus', 'Marte', 'Jupiter', 'Saturno', 'Urano', 'Neptuno', 'Pluton']
+                id: repIconCasas
+                model: 12
                 BotonUX{
-                    id: xBotPlaneta
-                    width: app.rot?app.fs*3.5:app.fs*5.5
+                    width: app.rot?app.fs*3:app.fs*5
                     height: width
-                    text: ''
-                    fontSize: app.rot?app.fs:app.fs
+                    text: "Casa "+parseInt(modelData + 1)
+                    fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: r.cCasa=index
-                    Column{
-                        anchors.centerIn: parent
-                        anchors.verticalCenterOffset: 0-app.fs*0.5
-                        spacing: 0-app.fs*0.5
-                        Item{
-                            width: xBotPlaneta.width*0.7
-                            height: width
-                            Image {
-                                id: iconoPlaneta
-                                source: "./resources/imgs/planetas/"+(''+modelData).toLowerCase()+".png"
-                                visible: false
-                                anchors.fill: parent
-                            }
-                            ColorOverlay {
-                                anchors.fill: iconoPlaneta
-                                source: iconoPlaneta
-                                color: xBotPlaneta.hovered?app.c1:app.c2
-                            }
-                        }
-                        UText{
-                            text: modelData
-                            width: contentWidth
-                            //height: app.fs
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.pixelSize: app.fs*0.8
-                            color: xBotPlaneta.hovered?app.c1:app.c2
-                        }
-                    }
                 }
             }
         }
@@ -104,10 +76,11 @@ Rectangle {
                     contentHeight: colDataCasas.height+app.fs*6
                     Column{
                         id: colDataCasas
+                        width: parent.width-app.fs
                         anchors.horizontalCenter: parent.horizontalCenter
                         spacing: app.fs
                         Flow{
-                            width: r.width-app.fs
+                            width: parent.width
                             spacing: app.fs
                             BotonUX{
                                 text: 'Atras'
@@ -146,11 +119,11 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        let d1=unik.getFile('dataPlanetas.json')
+        let d1=unik.getFile('dataCasasLilith.json').replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')
         let json = JSON.parse(d1)
-        for(let i=1;i<=10;i++){
-            //console.log('D: '+json['items']['item'+i])
-            arrayDataCasas.push(json['items']['item'+i])
+        for(let i=1;i<=12;i++){
+            //console.log('D: '+json['casas']['casa'+i])
+            arrayDataCasas.push(json['casas']['casa'+i])
         }
         repDataCasas.model = r.arrayDataCasas
     }

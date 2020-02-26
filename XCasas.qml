@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "func.js" as JS
 
 Rectangle {
     id: r
@@ -19,7 +20,7 @@ Rectangle {
             fontSize: app.rot?app.fs*0.5:app.fs
             onClicked: {
                 app.mod=-3
-                unik.speak('atras')
+                JS.speak('atras')
             }
         }
         Text{
@@ -62,7 +63,7 @@ Rectangle {
                 onVisibleChanged: {
                     if(visible){
                         let s = (''+modelData).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '')
-                        unik.speak(s)
+                        JS.speak(s)
                     }
                 }
                 Flickable{
@@ -81,14 +82,14 @@ Rectangle {
                             BotonUX{
                                 text: 'Atras'
                                 onClicked: {
-                                    unik.speak('atras')
+                                    JS.speak('atras')
                                     r.cCasa=-1
                                 }
                             }
                             BotonUX{
                                 text: 'Detener Audio'
                                 onClicked: {
-                                    unik.speak('detenido')
+                                    JS.speak('detenido')
                                 }
                             }
                             BotonUX{
@@ -96,7 +97,7 @@ Rectangle {
                                 onClicked: {
                                     let s = (''+modelData).replace(/<br \/>/g, '        ').replace(/<b>/g, '').replace(/<\/b>/g, '')
                                     //logView.showLog(s)
-                                    unik.speak(s)
+                                    JS.speak(s)
                                 }
                             }
                         }

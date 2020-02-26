@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "func.js" as JS
 
 Rectangle {
     id: r

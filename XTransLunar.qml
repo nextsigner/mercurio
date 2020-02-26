@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-import "qrc:/"
+import "func.js" as JS
 
 Rectangle {
     id: r
@@ -35,7 +35,7 @@ Rectangle {
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: {
                         app.mod=-2
-                        unik.speak('atras')
+                        JS.speak('atras')
                     }
                 }
                 BotonUX{
@@ -43,7 +43,7 @@ Rectangle {
                     text: 'Detener Voz'
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: {
-                        unik.speak('Detenido.')
+                        JS.speak('Detenido.')
                     }
                 }
                 BotonUX{
@@ -143,7 +143,7 @@ Rectangle {
     }
     function speak(text){
         let s = ''+text.replace(/<br \/>/g, '')
-        unik.speak(s)
+        JS.speak(s)
     }
     function getNumCasa(asc, currentSigno){
         let ci = app.signos.indexOf(asc)

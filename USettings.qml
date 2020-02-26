@@ -30,6 +30,10 @@ Item{
         if(loaded){
             setCfgFile()
         }
+        if(sound){
+            let m=r.lang==='es'?'Audio activado.':'Audio enabled.'
+            unik.speak(m)
+        }
     }
     onShowBgChanged: {
         if(loaded){

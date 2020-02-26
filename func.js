@@ -8,6 +8,7 @@ function capital_letter(str){
     return str.join(" ");
 }
 function speak(text){
+    if(!unikSettings.sound)return
     let s = ''+text.replace(/<br \/>/g, '')
     unik.speak(s)
 }

@@ -6,7 +6,6 @@ Rectangle {
     width: a.contentWidth+(r.fontSize*2*(unikSettings.padding*2))+(unikSettings.borderWidth*2)+app.fs+padding
     height: a.contentHeight+(r.fontSize*2*(unikSettings.padding*2))+(unikSettings.borderWidth*2)+app.fs+padding
     opacity: enabled?1.0:0.5
-    //objectName: 'sin_nombre'
     color: 'transparent'
     radius: customRadius===-1?unikSettings.radius:customRadius
     border.color: xR1.border.color
@@ -48,7 +47,6 @@ Rectangle {
             width: parent.width
             height: parent.height
             radius: r.radius
-            //visible: false
             anchors.centerIn: parent
             color: app.c2
             antialiasing: true
@@ -144,20 +142,6 @@ Rectangle {
         opacity: 0.0
         Behavior on x{NumberAnimation{duration:200}}
     }
-
-    Rectangle{
-        id: xBg1
-        z:xR1.z-1
-        color: app.c1
-        border.width: unikSettings.borderWidth
-        border.color: r.fontColor
-        radius: xR1.radius
-        width: xR1.width
-        height: xR1.height
-        anchors.centerIn: r
-        antialiasing: true
-        opacity:0.5
-    }   
     Glow {
         anchors.fill: a
         radius: 6
@@ -181,13 +165,11 @@ Rectangle {
         }
         onPChanged: {
             if(p){
-                xBg1.opacity=1.0
                 b1.opacity=1.0
                 a2.opacity=1.0
                 a.opacity=0.0
             }else{
                 e=false
-                xBg1.opacity=0.15
                 b1.opacity=0.15
                 a2.opacity=0.0
                 a.opacity=1.0
