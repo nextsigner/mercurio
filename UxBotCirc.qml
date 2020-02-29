@@ -4,10 +4,9 @@ Item{
     id:r
     width: 50
     height: width
+    clip: true
     property string text:'text'
     property bool animationEnabled: true
-    property bool glowEnabled: true
-    property bool blurEnabled: true
     property int padding: 0
     property alias bg: r2.bg
     property int fontSize: width*0.5
@@ -22,17 +21,10 @@ Item{
     MouseArea{
         anchors.fill: r
     }
-    Glow {
-        visible: r.glowEnabled
-        anchors.fill: r2
-        radius: 8
-        samples: 17
-        color: app.c1
-        source: r2
-        opacity: 1.0
-    }
+
     BotonUX{
         id:  r2
+        clip: true
         width: r.width
         height: width
         fontSize: r.fontSize
@@ -48,7 +40,7 @@ Item{
         text: r.text
         anchors.centerIn: r
         radius: width*0.5
-        opacity: 0.5
+        opacity: 0.75
         onClicked: {
             r.clicked()
             an1.stop()
@@ -62,65 +54,55 @@ Item{
             children[0].children[1].radius= nr
             children[0].children[2].radius= nr
 
-            children[0].children[0].border.width = r.width*0.05
-            children[0].children[1].border.width =r.width*0.05
-            children[0].children[2].border.width = r.width*0.05
+            children[0].children[0].border.width = r.width*0.025
+            children[0].children[1].border.width =r.width*0.025
+            children[0].children[2].border.width = r.width*0.025
             r2.radius = nr
         }
     }
-    FastBlur{
-        id: blur
-        width: r2.width
-        height: r2.height
-        anchors.centerIn: parent
-        radius: r.width*0.5
-        source: r2
-        clip: true
-        visible: blurEnabled
-        Timer{
-            id:tRestartAn1
-            repeat: false
-            interval: 3000
-            running: false
-            onTriggered: an1.start()
+    Timer{
+        id:tRestartAn1
+        repeat: false
+        interval: 3000
+        running: false
+        onTriggered: an1.start()
+    }
+    SequentialAnimation{
+        id: an1
+        running: false//!r2.children[4].p
+        loops: 3//Animation.Infinite
+        onStopped: tRestartAn1.restart()
+        NumberAnimation {
+            target: r2
+            property: "opacity"
+            duration: 2000
+            from: 0.75
+            to: 1.0
+            easing.type: Easing.InOutQuad
         }
-        SequentialAnimation{
-            id: an1
-            running: false//!r2.children[4].p
-            loops: 3//Animation.Infinite
-            onStopped: tRestartAn1.restart()
-            NumberAnimation {
-                target: blur
-                property: "opacity"
-                duration: 1000
-                from: 0.0
-                to: 1.0
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: r2.children[0]
-                property: "rotation"
-                duration: 2000
-                from: 0
-                to: 180
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: r2.children[0]
-                property: "rotation"
-                duration: 2000
-                from: 180
-                to: 0
-                easing.type: Easing.InOutExpo
-            }
-            NumberAnimation {
-                target: blur
-                property: "opacity"
-                duration: 1500
-                from: 1.0
-                to: 0.0
-                easing.type: Easing.InOutQuad
-            }
+        NumberAnimation {
+            target: r2.children[0]
+            property: "rotation"
+            duration: 2000
+            from: 0
+            to: 180
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: r2.children[0]
+            property: "rotation"
+            duration: 2000
+            from: 180
+            to: 0
+            easing.type: Easing.InOutExpo
+        }
+        NumberAnimation {
+            target: r2
+            property: "opacity"
+            duration: 2000
+            from: 1.0
+            to: 0.75
+            easing.type: Easing.InOutQuad
         }
     }
     Timer{
@@ -134,7 +116,7 @@ Item{
         var min = 0
         var max = 4
         let seconds   = Math.floor(Math.random()*(max-min+1)+min);
-        console.log('UxBotCirc: '+unikSettings.lang)
+        //console.log('UxBotCirc: '+unikSettings.lang)
         tinit2.interval = seconds*1000
         tinit2.start()
     }
