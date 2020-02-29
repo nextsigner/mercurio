@@ -48,7 +48,7 @@ Rectangle {
                             width: app.fs*3
                             text: '\uf1fc'//+unikSettings.currentNumColor
                             animationEnabled: true
-                            glowEnabled: true
+                            //glowEnabled: true
                             onClicked: {
                                 var cc=unikSettings.defaultColors.split('|').length
                                 if(unikSettings.currentNumColor<cc-1){
