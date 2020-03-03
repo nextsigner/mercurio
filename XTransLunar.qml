@@ -108,11 +108,11 @@ Rectangle {
                         if(gradoActualDeLuna<12){
                             pf+='La persona va a estar así hoy y mañana.'
                         }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
-                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno - 1]
+                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno]
                         }else if(gradoActualDeLuna>=24&&gradoActualDeLuna<28){
-                            pf+='La persona está así hoy y  pocas horas cambia a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno - 1]
+                            pf+='La persona está así hoy y  pocas horas cambia a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno]
                         }else if(gradoActualDeLuna>=28){
-                            pf+='La persona en estos momentos está cambiando a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno - 1]+'.'
+                            pf+='La persona en estos momentos está cambiando a la casa número '+proximaCasa+' en el signo '+app.signos[proximoSigno]+'.'
                         }else{
                             pf+='La persona va a estar así hoy'//+'r.cNumSigno='+r.cNumSigno+' proximoSigno='+proximoSigno+' signo='+app.signos[proximoSigno -1]
                         }
