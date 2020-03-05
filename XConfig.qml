@@ -30,7 +30,7 @@ Rectangle {
                 Rectangle{
                     width: children[0].width+app.fs*0.5
                     height: children[0].height+app.fs
-                    color: app.c3
+                    color: app.c1
                     border.color: app.c4
                     radius: app.fs*0.5
                     Column{
@@ -65,7 +65,7 @@ Rectangle {
                 Rectangle{
                     width: children[0].width+app.fs*0.5
                     height: children[0].height+app.fs
-                    color: app.c3
+                    color: app.c1
                     border.color: app.c4
                     radius: app.fs*0.5
                     Column{
@@ -98,7 +98,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: children[0].width+app.fs*0.5
                     height: children[0].height+app.fs
-                    color: app.c3
+                    color: app.c1
                     border.color: app.c4
                     radius: app.fs*0.5
                     Column{
@@ -130,7 +130,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: children[0].width+app.fs*0.5
                     height: children[0].height+app.fs
-                    color: app.c3
+                    color: app.c1
                     border.color: app.c4
                     radius: app.fs*0.5
                     Column{
@@ -198,7 +198,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: children[0].width+app.fs*0.5
                     height: children[0].height+app.fs
-                    color: app.c3
+                    color: app.c1
                     border.color: app.c4
                     radius: app.fs*0.5
                     Column{
