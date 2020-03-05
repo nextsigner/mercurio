@@ -159,8 +159,8 @@ Rectangle {
     }
     function getAsunto(casa, signo, destinatario, pf){
         let d=jsonDataTransLunar['items']['casa'+casa].data
-        d+='<br />'+pf
-        d+='<br />'+jsonDataTransLunar['items']['casa'+casa][(''+signo).toLowerCase()]
+        d+='<br /><br />'+pf
+        d+='<br /><br />'+jsonDataTransLunar['items']['casa'+casa][(''+signo).toLowerCase()]
         return setDestinatario(d, destinatario)
     }
     function getTransNow(){
