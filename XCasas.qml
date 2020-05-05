@@ -106,7 +106,7 @@ Rectangle {
                             width: xApp.width-app.fs*2
                             text: modelData
                             color: app.c2
-                            font.pixelSize: app.fs*2
+                            font.pixelSize: app.fs*1.5
                             wrapMode: Text.WordWrap
                             textFormat: Text.RichText
                         }

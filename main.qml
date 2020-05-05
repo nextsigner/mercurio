@@ -7,8 +7,8 @@ ApplicationWindow{
     visible: true
     visibility: Qt.platform.os==='android'?"FullScreen":"Windowed"
     color:app.c1
-    width: Qt.platform.os==='android'?Screen.width:460
-    height: Qt.platform.os==='android'?Screen.height:800
+    width: Qt.platform.os==='android'?Screen.width:360
+    height: Qt.platform.os==='android'?Screen.height:600
     property string moduleName: 'mercurio'
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
