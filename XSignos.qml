@@ -25,10 +25,11 @@ Rectangle {
             }
         }
         Text{
-            width: xApp.width-app.fs*2
             text: '<b>Los 12 Signos del Zodíaco</b>'
             color: app.c2
-            font.pixelSize: app.fs
+            font.pixelSize: app.fs*1.5
+            width: r.width-app.fs
+            wrapMode: Text.WordWrap
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
@@ -140,7 +141,7 @@ Rectangle {
                             width: xApp.width-app.fs*2
                             text: modelData
                             color: app.c2
-                            font.pixelSize: app.fs
+                            font.pixelSize: app.fs*1.5
                             wrapMode: Text.WordWrap
                             textFormat: Text.RichText
                         }

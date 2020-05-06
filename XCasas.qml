@@ -24,10 +24,11 @@ Rectangle {
             }
         }
         Text{
-            width: xApp.width-app.fs*2
             text: '<b>Significado de las Casas</b>'
             color: app.c2
-            font.pixelSize: app.fs*2
+            font.pixelSize: app.fs*1.5
+            width: r.width-app.fs
+            wrapMode: Text.WordWrap
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
