@@ -49,6 +49,14 @@ Item{
             }
         }
     }
+    Rectangle{
+        anchors.fill: lvItems
+        border.width: unikSettings?unikSettings.borderWidth:1
+        border.color: app&&app.c2?app.c2:'black'
+        radius: unikSettings?unikSettings.radius:6
+        color: app&&app.c1?app.c1:'white'
+        visible: lvItems.visible
+    }
     ListView{
         id: lvItems
         anchors.top: r.bottom
