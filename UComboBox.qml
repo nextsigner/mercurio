@@ -11,6 +11,10 @@ Item{
     property int contentHeight: app&&app.fs?app.fs*10:300
     property alias model: lvItems.model
     property int currentIndex: 0
+    property string currentText: model[currentIndex]
+    onCurrentIndexChanged: {
+        currentText=model[currentIndex]
+    }
     Rectangle{
         anchors.fill: r
         border.width: unikSettings?unikSettings.borderWidth:1
@@ -48,14 +52,6 @@ Item{
                 lvItems.visible=!lvItems.visible
             }
         }
-    }
-    Rectangle{
-        anchors.fill: lvItems
-        border.width: unikSettings?unikSettings.borderWidth:1
-        border.color: app&&app.c2?app.c2:'black'
-        radius: unikSettings?unikSettings.radius:6
-        color: app&&app.c1?app.c1:'white'
-        visible: lvItems.visible
     }
     ListView{
         id: lvItems

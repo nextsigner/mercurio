@@ -68,9 +68,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter               
                 UComboBox{
                     id: cbAsc
-                    fontSize: app.fs*1.5
-                    contentHeight: r.height*0.5
-                    z: resTransLunar.z+1
+                    fontSize: app.fs
                     model: ['Seleccionar', 'Natalia', 'Ricardo', 'Nico', 'Fer', 'Dylan', 'Bruno', 'Hugo', 'Ely Dorgan', 'Mario Pizarro', 'Ascendente '+app.signos[0], 'Ascendente '+app.signos[1], 'Ascendente '+app.signos[2], 'Ascendente '+app.signos[3], 'Ascendente '+app.signos[4], 'Ascendente '+app.signos[5], 'Ascendente '+app.signos[6], 'Ascendente '+app.signos[7], 'Ascendente '+app.signos[8], 'Ascendente '+app.signos[9], 'Ascendente '+app.signos[10], 'Ascendente '+app.signos[11]]
                     property var arrayAsc: [0,11, 11, 5, 4, 2, 7, 12, 1, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     width: r.width-app.fs

@@ -10,6 +10,10 @@ Rectangle {
     property int cNumSigno: -1
     property int cGradoLuna: -1
     property string cSignoLuna: ''
+
+    property string lon: ''
+    property string lat: ''
+
     onVisibleChanged: {
         if(visible)getTransNow()
     }
@@ -61,69 +65,196 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Column{
-                spacing: app.fs
+                spacing: app.fs*2
                 anchors.horizontalCenter: parent.horizontalCenter
-                /*Text{
-                    width: xApp.width-app.fs*2
-                    text: 'La Luna está en el signo número '+r.cNumSigno
-                    color: app.c2
-                    font.pixelSize: app.fs*2
+                Column{
+                    spacing: app.fs*0.5
                     anchors.horizontalCenter: parent.horizontalCenter
-                }*/
-                ComboBox{
-                    id: cbAsc
-                    model: ['Seleccionar', 'Natalia', 'Ricardo', 'Nico', 'Fer', 'Dylan', 'Bruno', 'Hugo', 'Ely Dorgan', 'Mario Pizarro', 'Ascendente '+app.signos[0], 'Ascendente '+app.signos[1], 'Ascendente '+app.signos[2], 'Ascendente '+app.signos[3], 'Ascendente '+app.signos[4], 'Ascendente '+app.signos[5], 'Ascendente '+app.signos[6], 'Ascendente '+app.signos[7], 'Ascendente '+app.signos[8], 'Ascendente '+app.signos[9], 'Ascendente '+app.signos[10], 'Ascendente '+app.signos[11]]
-                    property var arrayAsc: [0,11, 11, 5, 4, 2, 7, 12, 1, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-                    width: r.width-app.fs
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    onCurrentIndexChanged: {
-                        if(currentIndex===0)return
-                        let numAsc=parseInt(12 - arrayAsc[currentIndex] + r.cNumSigno)
-                        //console.log('1::::::->'+currentIndex)
-                        //console.log('2::::::->'+r.cNumSigno)
-                        //console.log('3::::::->'+numAsc)
-                        let numCasa = getNumCasa(app.signos[parseInt(arrayAsc[currentIndex ] - 1)], r.cNumSigno)
-                        if(numCasa>12){
-                            numCasa=numCasa-12
-                        }
-                        //console.log('4::::::->'+numCasa)
-                        let pp=''
-                        let pf=''
-                        let destinatario=''
-                        if(model[currentIndex].indexOf('Ascendente')===0){
-                            destinatario='persona con '+model[currentIndex]
-                        }else{
-                            destinatario=model[currentIndex]
-                        }
-                        pp='Actualmente '+destinatario
-                        let gradoActualDeLuna = r.cGradoLuna
-                        if(gradoActualDeLuna<12){
-                            pf+='<br /><br />La persona va a estar así hoy y mañana.'
-                        }else if(gradoActualDeLuna>=12&&gradoActualDeLuna<24){
-                            pf+='La persona va a estar así hoy y mañana cambia a la casa número '+parseInt(numCasa+1)+' en el signo '+app.signos[r.cNumSigno]
-                        }else{
-                            pf+='La persona va a estar así hoy'
-                        }
-                        resCarta.text=pp+' tiene la Luna en tránsito en el grado '+gradoActualDeLuna+' de la casa número '+numCasa+' en el signo  '+app.signos[r.cNumSigno - 1]
-                        resCarta.text+='<br /><br />'+getAsunto(numCasa, destinatario)
-                        resCarta.text+=pf+'<br /><br />'
-                        r.speak(resCarta.text)
+                    UText{
+                        text: '<b>Nombre</b>'
+                    }
+                    UTextInput{
+                        id: tiNombre
+                        label: ''
+                        width:r.width-app.fs
                     }
                 }
-                UText{
-                    id: resCarta
-                    visible: cbAsc.currentIndex!==0
-                    width: r.width-app.fs
-                    text: 'Seleccionar un nombre o Ascendente'
-                    font.pixelSize: app.fs*1.5
-                    wrapMode: Text.WordWrap
+                Column{
+                    spacing: app.fs*0.5
                     anchors.horizontalCenter: parent.horizontalCenter
+                    UText{
+                        text: '<b>Fecha de Nacimiento</b>'
+                    }
+                    Row{
+                        spacing: app.fs
+                        UTextInput{
+                            id: tiDia
+                            label: 'Día:'
+                            width:app.fs*4+diffWidth
+                        }
+                        UTextInput{
+                            id: tiMes
+                            label: 'Mes:'
+                            width:app.fs*4+diffWidth
+                        }
+                        UTextInput{
+                            id: tiAnio
+                            label: 'Año:'
+                            width:app.fs*4+diffWidth
+                        }
+                    }
                 }
-
+                Column{
+                    spacing: app.fs*0.5
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    UText{
+                        text: '<b>Hora de Nacimiento</b>'
+                    }
+                    Row{
+                        spacing: app.fs
+                        UTextInput{
+                            id: tiHora
+                            label: 'Hora:'
+                            width:app.fs*4+diffWidth
+                        }
+                        UTextInput{
+                            id: tiMinutos
+                            label: 'Mes:'
+                            width:app.fs*4+diffWidth
+                        }
+                    }
+                }
+                Column{
+                    spacing: app.fs*0.5
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    UText{
+                        text: '<b>Lugar de Nacimiento</b>'
+                    }
+                    UTextInput{
+                        id: tiCiudad
+                        label: ''
+                        width:r.width-app.fs
+                        onSeted: getCoords(text)
+                    }
+                    UText{
+                        id: statusLugar
+                        font.pixelSize: app.fs*0.5
+                        text: 'Ingresar ciudad'
+                    }
+                    UComboBox{
+                        id: uCbCiudades
+                        width: r.width-app.fs
+                        visible: false
+                        z: statusLugar.z+100
+                        onCurrentIndexChanged: {
+                            if(currentIndex!==0){
+                                tiCiudad.text=currentText
+                                getCoords(currentText)
+                                visible=false
+                            }
+                        }
+                    }
+                }
+                Row{
+                    spacing: app.fs*0.5
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    BotonUX{
+                        id: botEjemplo
+                        text: 'Ejemplo'
+                        onClicked: {
+                            tiNombre.text='Ricardo'
+                            tiDia.text='20'
+                            tiMes.text='06'
+                            tiAnio.text='1975'
+                            tiHora.text='23'
+                            tiMinutos.text='00'
+                            tiCiudad.text='Malargue'
+                            getCoords(tiCiudad.text)
+                        }
+                    }
+                    BotonUX{
+                        id: botEnviar
+                        text: 'Crear'
+                        visible: tiNombre.text!==''&&tiDia.text!==''&&tiMes.text!==''&&tiAnio.text!==''&&tiHora.text!==''&&tiMinutos.text!==''&&r.lon!==''&&r.lat!==''
+                        onClicked: {
+                            let url='d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat
+                            console.log('Url: '+url)
+                        }
+                    }
+                }
             }
         }
     }
     Component.onCompleted: {
-        //https://www.geodatos.net/coordenadas/buscar?q=sfs
-    }    
+        let d0=unik.getFile('resources/codes')
+        let d1=d0.split('\n')
+        for(var i=0;i<d1.length;i++){
+            let d2=d1[i].split(',')
+            r.arrayCodesNames.push(d2[0])
+            r.arrayCodes.push(d2[1])
+        }
+        uCbPais.model=r.arrayCodesNames
+    }
+    function getCoords(text){
+        let md=["Seleccionar Ciudad"]
+        r.lon=''
+        r.lat=''
+        var req = new XMLHttpRequest();
+        req.open('GET', 'https://www.geodatos.net/coordenadas/buscar?q='+text.replace(/ /g, '+')+'', true);
+        req.onreadystatechange = function (aEvt) {
+            if (req.readyState === 4) {
+                if(req.status === 200){
+                    let m0= req.responseText.split('<div class="panel-body">')
+                    for(let i=0;i<m0.length;i++){
+                        let d0 = (''+m0[i])
+                        //console.log('---------------------------------div'+i+': '+m0[i]+'-------------------\n\n\n')
+                        if(d0.indexOf('Coordenadas decimales')>=0){
+                            let m1=m0[i].split('<strong>')
+                            if(m1.length>1){
+                                let m2=m1[1].split('</strong>')
+                                let m3=m2[0].split(', ')
+                                if(m3.length>0){
+                                    r.lon=m3[0]
+                                    r.lat=m3[1]
+                                    statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
+                                }
+                                //console.log('Coordenadas: '+m2[0])
+                                uCbCiudades.currentIndex=0
+                            }
+                            break
+                        }
+                        if(d0.indexOf('No se encontraron resultados')>=0){
+                            let m1=m0[i].split('Lugares similares:')
+                            if(m1.length>1){
+                                statusLugar.text='Opciones: '
+                                //console.log('Opciones: '+m1[1])
+                                let m2=m1[1].split('<li ')
+                                for(let i2=0;i2<m2.length;i2++){
+                                    let m3=m2[i2].split('</span></a>')
+                                    let m4=m3[0].split('>')
+                                    let data=text+' '+(m4[m4.length-1]).replace(/,/g, ' ')
+                                    md.push(data)
+                                    statusLugar.text='Seleccionar una ciudad'
+                                }
+                            }
+                            break
+                        }
+                    }
+                    uCbCiudades.model=md
+                    uCbCiudades.visible=md.length>1
+                }else{
+                    logView.showLog("Error loading page\n");
+                }
+            }
+        };
+        req.send(null);
+    }
 }
+
+/*
+<div class="panel-body">
+                <h4 class="text-info nomargin">Coordenadas decimales
+                <p><small>Formato simple</small></p></h4>
+                <p class="text-info nomargin"><strong>-34.7497482, -58.5845909</strong></p>
+              </div>
+*/
