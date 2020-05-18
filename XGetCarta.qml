@@ -11,6 +11,9 @@ Rectangle {
     property int cGradoLuna: -1
     property string cSignoLuna: ''
 
+    property string serverUrl: 'http://localhost'
+    property string portRequest: '8080'
+    property string portFiles: '8081'
     property string lon: ''
     property string lat: ''
 
@@ -177,8 +180,7 @@ Rectangle {
                         text: 'Crear'
                         visible: tiNombre.text!==''&&tiDia.text!==''&&tiMes.text!==''&&tiAnio.text!==''&&tiHora.text!==''&&tiMinutos.text!==''&&r.lon!==''&&r.lat!==''
                         onClicked: {
-                            let url='d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat
-                            console.log('Url: '+url)
+                            getJson()
                         }
                     }
                 }
@@ -195,6 +197,7 @@ Rectangle {
         }
         uCbPais.model=r.arrayCodesNames
     }
+    //http://localhost:8080/cn/get?d=aaa
     function getCoords(text){
         let md=["Seleccionar Ciudad"]
         r.lon=''
@@ -249,12 +252,39 @@ Rectangle {
         };
         req.send(null);
     }
+    function getJson(){
+        let url='nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat
+        console.log('Url: '+url)
+        var req = new XMLHttpRequest();
+        req.open('GET', r.serverUrl+':'+r.portRequest+'/cn/get/?'+url, true);
+        req.onreadystatechange = function (aEvt) {
+            if (req.readyState === 4) {
+                if(req.status === 200){
+                    if(req.responseText.indexOf('file')>=0&&req.responseText.indexOf(tiNombre.text)>=0){
+                        let obj=JSON.parse(req.responseText)
+                        getJsonData(obj.file)
+                    }
+                }else{
+                    logView.showLog("Error loading page\n");
+                }
+            }
+        };
+        req.send(null);
+    }
+    function getJsonData(file){
+        let url=r.serverUrl+':'+r.portFiles+'/bios-files/'+file+'.json'
+        console.log('Get json data from '+url)
+        var req = new XMLHttpRequest();
+        req.open('GET', url, true);
+        req.onreadystatechange = function (aEvt) {
+            if (req.readyState === 4) {
+                if(req.status === 200){
+                    logView.showLog(req.responseText)
+                }else{
+                    logView.showLog("Error loading page\n");
+                }
+            }
+        };
+        req.send(null);
+    }
 }
-
-/*
-<div class="panel-body">
-                <h4 class="text-info nomargin">Coordenadas decimales
-                <p><small>Formato simple</small></p></h4>
-                <p class="text-info nomargin"><strong>-34.7497482, -58.5845909</strong></p>
-              </div>
-*/

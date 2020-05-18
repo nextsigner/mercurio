@@ -26,24 +26,39 @@ module.exports=function(app, adminEmail, adminEmailPass){
     //Probar Email (hay que tener exportado la variable de entorno EMAILPASS)
     //enviarCorreo('nextsigner@gmail.com','qtpizarro@gmail.com','probando EMAILPASS','Estoy probando');
     var spawn = require('child_process').spawn;
-    function getJsonCN(){
+    var cp
+    function getJsonCN(v1, v2, v3, v4, v5, v6, v7, v8, v9){
         console.log("Creando carta natal...");
-        cp = spawn('/media/nextsigner/ZONA-A11/nsp/unik-dev-apps/zodiacserver/bin/zodiac_server', ['fileName', '1975', '6', '20', '22', '00', '-3', '-35.484462', '-69.5797495', __dirname+'/bios-files/data.json']);
-        cp.stdout.on("data", function(data) {
-            console.log(data.toString().trim());
-        });
-        cp.stderr.on("data", function(data) {
-            console.error(data.toString());
-        });
+        //cp = spawn('/media/nextsigner/ZONA-A11/nsp/unik-dev-apps/zodiacserver/bin/zodiac_server', ['fileName', '1975', '6', '20', '22', '00', '-3', '-35.484462', '-69.5797495', __dirname+'/bios-files/data.json']);
+
     }
 
     newCN = function(req, res){
         console.log('Get new cn...')
-        let v1 = req.query.d
-        console.log('d: '+v1)
-        getJsonCN()
-        res.status(200).send({'user':''+v1})
+        let v1 = req.query.nom
+        let v2 = req.query.d
+        let v3 = req.query.m
+        let v4 = req.query.a
+        let v5 = req.query.h
+        let v6 = req.query.min
+        let v7 = '-3'
+        let v8 = req.query.lon
+        let v9 = req.query.lat
+        let date=new Date(Date.now())
+        let ms=date.getTime()
+        cp = spawn('/media/nextsigner/ZONA-A11/nsp/unik-dev-apps/zodiacserver/bin/zodiac_server', [v1, v2, v3, v4, v5, v6, v7, v8, v9, __dirname+'/bios-files/'+ms+'_'+v1+'.json']);
+        cp.stdout.on("data", function(data) {
+            //console.log(data.toString().trim());
+            if(data.toString().trim().indexOf('AppSettings: saved to')>=0){
+                res.status(200).send({'file':''+ms+'_'+v1})
+            }
+        });
+        cp.stderr.on("data", function(data) {
+            //console.error(data.toString());
+            if(data.toString().trim().indexOf('AppSettings: saved to')>=0){
+                res.status(200).send({'file':''+ms+'_'+v1})
+            }
+        });
     }
-
     app.get('/cn/get', newCN);
 }
