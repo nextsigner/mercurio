@@ -39,8 +39,9 @@ Rectangle {
                     text: 'Atras'
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: {
-                        app.mod=-1
                         unik.speak('atras')
+                        app.mod=-2
+                        r.destroy(10)
                     }
                 }
                 BotonUX{
@@ -197,7 +198,6 @@ Rectangle {
         }
         uCbPais.model=r.arrayCodesNames
     }
-    //http://localhost:8080/cn/get?d=aaa
     function getCoords(text){
         let md=["Seleccionar Ciudad"]
         r.lon=''
