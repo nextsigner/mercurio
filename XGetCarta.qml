@@ -188,6 +188,7 @@ Rectangle {
             }
         }
     }
+    XCnView{id: xCnView;visible: false}
     Component.onCompleted: {
         let d0=unik.getFile('resources/codes')
         let d1=d0.split('\n')
@@ -279,6 +280,7 @@ Rectangle {
         req.onreadystatechange = function (aEvt) {
             if (req.readyState === 4) {
                 if(req.status === 200){
+                    xCnView.xcn.setJson(req.responseText)
                     logView.showLog(req.responseText)
                 }else{
                     logView.showLog("Error loading page\n");
