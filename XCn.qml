@@ -380,6 +380,7 @@ Rectangle {
             unik.mkdir('cns')
         }
         let fn='cns/'+json.params.ms+'_'+json.params.n+'.json'
+        logView.showLog('fn: '+fn)
         unik.setFile(fn, JSON.stringify(json))
         r.parent.visible=true
         r.visible=true

@@ -54,11 +54,17 @@ module.exports=function(app, adminEmail, adminEmailPass){
             if(data.toString().trim().indexOf('AppSettings: saved to')>=0){
                 res.status(200).send({'file':''+ms+'_'+v1})
             }
+            if(data.toString().trim().indexOf('Saving json file')>=0){
+                console.error(data.toString());
+            }
         });
         cp.stderr.on("data", function(data) {
             //console.error(data.toString());
             if(data.toString().trim().indexOf('AppSettings: saved to')>=0){
                 res.status(200).send({'file':''+ms+'_'+v1})
+            }
+            if(data.toString().trim().indexOf('Saving json file')>=0){
+                console.error(data.toString());
             }
         });
     }

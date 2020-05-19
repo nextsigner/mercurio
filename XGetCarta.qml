@@ -259,7 +259,7 @@ Rectangle {
         req.onreadystatechange = function (aEvt) {
             if (req.readyState === 4) {
                 if(req.status === 200){
-                    if(req.responseText.indexOf('file')>=0&&req.responseText.indexOf(tiNombre.text)>=0){
+                    if(req.responseText.indexOf('file')>=0&&req.responseText.replace(/_/g, ' ').indexOf(tiNombre.text)>=0){
                         let obj=JSON.parse(req.responseText)
                         getJsonData(obj.file)
                     }
