@@ -376,6 +376,11 @@ Rectangle {
     }
     function setJson(j){
         let json=JSON.parse(j)
+        if(!unik.folderExist('cns')){
+            unik.mkdir('cns')
+        }
+        let fn='cns/'+json.params.ms+'_'+json.params.n+'.json'
+        unik.setFile(fn, JSON.stringify(json))
         r.parent.visible=true
         r.visible=true
         //console.log('--->'+json.pc.h1.s)

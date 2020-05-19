@@ -11,7 +11,7 @@ Item{
     property int contentHeight: app&&app.fs?app.fs*10:300
     property alias model: lvItems.model
     property int currentIndex: 0
-    property string currentText: model[currentIndex]
+    property string currentText: model.length>0?model[currentIndex]:'Empty'
     onCurrentIndexChanged: {
         currentText=model[currentIndex]
     }
@@ -43,7 +43,7 @@ Item{
             id: labelCurrentText
             font.pixelSize: r.fontSize
             color: app&&app.c2?app.c2:'black'
-            text: r.model[r.currentIndex]
+            text: r.model.length>0?r.model[r.currentIndex]:'Empty'
             anchors.centerIn: parent
         }
         MouseArea{
@@ -61,6 +61,7 @@ Item{
         height: r.contentHeight
         delegate:delItem
         clip: true
+        model: []
         ScrollBar.vertical: ScrollBar{}
     }
     Component{

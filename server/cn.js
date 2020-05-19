@@ -47,8 +47,8 @@ module.exports=function(app, adminEmail, adminEmailPass){
         let date=new Date(Date.now())
         let ms=date.getTime()
         let fn=__dirname+'/bios-files/'+ms+'_'+v1+'.json'
-        console.log('Get new cn: '+v1+' '+v2+' '+v3+' '+v4+' '+v5+' '+v6+' '+v7+' '+v8+' '+v9+' '+v10+' '+fn)
-        cp = spawn('/media/nextsigner/ZONA-A11/nsp/unik-dev-apps/zodiacserver/bin/zodiac_server', [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, fn]);
+        console.log('Get new cn: '+v1+' '+v2+' '+v3+' '+v4+' '+v5+' '+v6+' '+v7+' '+v8+' '+v9+' '+v10+' '+fn+' '+ms)
+        cp = spawn('/media/nextsigner/ZONA-A11/nsp/unik-dev-apps/zodiacserver/bin/zodiac_server', [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, fn, ms]);
         cp.stdout.on("data", function(data) {
             //console.log(data.toString().trim());
             if(data.toString().trim().indexOf('AppSettings: saved to')>=0){

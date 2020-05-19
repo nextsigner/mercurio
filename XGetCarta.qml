@@ -45,21 +45,19 @@ Rectangle {
                     }
                 }
                 BotonUX{
-                    visible: cbAsc.currentIndex!==0
                     text: 'Detener Voz'
                     fontSize: app.rot?app.fs*0.5:app.fs
                     onClicked: {
                         unik.speak('Detenido.')
                     }
                 }
-                BotonUX{
-                    visible: cbAsc.currentIndex!==0
-                    text: 'Leer'
-                    fontSize: app.rot?app.fs*0.5:app.fs
-                    onClicked: {
-                        r.speak(resCarta.text)
-                    }
-                }
+//                BotonUX{
+//                    text: 'Leer'
+//                    fontSize: app.rot?app.fs*0.5:app.fs
+//                    onClicked: {
+//                        r.speak(resCarta.text)
+//                    }
+//                }
             }
             Text{
                 width: xApp.width-app.fs*2
@@ -94,17 +92,17 @@ Rectangle {
                         UTextInput{
                             id: tiDia
                             label: 'Día:'
-                            width:app.fs*4+diffWidth
+                            width:app.fs*6//+diffWidth
                         }
                         UTextInput{
                             id: tiMes
                             label: 'Mes:'
-                            width:app.fs*4+diffWidth
+                            width:app.fs*6//+diffWidth
                         }
                         UTextInput{
                             id: tiAnio
                             label: 'Año:'
-                            width:app.fs*4+diffWidth
+                            width:app.fs*6//+diffWidth
                         }
                     }
                 }
@@ -119,12 +117,12 @@ Rectangle {
                         UTextInput{
                             id: tiHora
                             label: 'Hora:'
-                            width:app.fs*4+diffWidth
+                            width:app.fs*6//+diffWidth
                         }
                         UTextInput{
                             id: tiMinutos
                             label: 'Mes:'
-                            width:app.fs*4+diffWidth
+                            width:app.fs*6//+diffWidth
                         }
                     }
                 }
@@ -190,14 +188,14 @@ Rectangle {
     }
     XCnView{id: xCnView;visible: false}
     Component.onCompleted: {
-        let d0=unik.getFile('resources/codes')
-        let d1=d0.split('\n')
-        for(var i=0;i<d1.length;i++){
-            let d2=d1[i].split(',')
-            r.arrayCodesNames.push(d2[0])
-            r.arrayCodes.push(d2[1])
-        }
-        uCbPais.model=r.arrayCodesNames
+//        let d0=unik.getFile('resources/codes')
+//        let d1=d0.split('\n')
+//        for(var i=0;i<d1.length;i++){
+//            let d2=d1[i].split(',')
+//            r.arrayCodesNames.push(d2[0])
+//            r.arrayCodes.push(d2[1])
+//        }
+//        uCbPais.model=r.arrayCodesNames
     }
     function getCoords(text){
         let md=["Seleccionar Ciudad"]
@@ -282,7 +280,7 @@ Rectangle {
                 if(req.status === 200){
                     xCnView.visible=true
                     xCnView.xcn.setJson(req.responseText)
-                    logView.showLog(req.responseText)
+                    //logView.showLog(req.responseText)
                 }else{
                     logView.showLog("Error loading page\n");
                 }
