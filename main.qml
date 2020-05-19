@@ -15,6 +15,9 @@ ApplicationWindow{
     property int fs: app.rot?app.width*0.03:app.width*0.045
 
     property int mod: -1
+    property string serverUrl: 'http://localhost'
+    property int portRequest: 8080
+    property int portFiles: 8081
 
     property color c1
     property color c2
@@ -199,6 +202,7 @@ ApplicationWindow{
         if(Qt.platform.os==='linux'&&unikSettings.lang==='es'){
             unik.ttsLanguageSelected(13)
         }
+        getServerUrl()
     }
     function updateUS(){
         var nc=unikSettings.currentNumColor
@@ -214,5 +218,29 @@ ApplicationWindow{
         //unikSettings.padding=0.5
 
         app.visible=true
+    }
+    function getServerUrl(){
+        let url='https://raw.githubusercontent.com/nextsigner/nextsigner.github.io/master/mercurio_server'
+        console.log('Get '+app.moduleName+' server from '+url)
+        var req = new XMLHttpRequest();
+        req.open('GET', url, true);
+        req.onreadystatechange = function (aEvt) {
+            if (req.readyState === 4) {
+                if(req.status === 200){
+                    let m0=req.responseText.split('|')
+                    if(m0.length>2){
+                        app.serverUrl=m0[0]
+                        app.portRequest=m0[1]
+                        app.portFiles=m0[2]
+                        console.log('Mercurio Server='+app.serverUrl+' '+app.portRequest+' '+app.portFiles)
+                    }else{
+                        logView.showLog("Error el cargar el servidor de Mercurio. Code 2\n");
+                    }
+                }else{
+                    logView.showLog("Error el cargar el servidor de Mercurio. Code 1\n");
+                }
+            }
+        };
+        req.send(null);
     }
 }

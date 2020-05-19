@@ -11,9 +11,9 @@ Rectangle {
     property int cGradoLuna: -1
     property string cSignoLuna: ''
 
-    property string serverUrl: 'http://localhost'
-    property string portRequest: '8080'
-    property string portFiles: '8081'
+    property string serverUrl: app.serverUrl
+    property int portRequest: app.portRequest
+    property int portFiles: app.portFiles
     property string lon: ''
     property string lat: ''
 
