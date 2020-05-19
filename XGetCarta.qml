@@ -51,13 +51,6 @@ Rectangle {
                         unik.speak('Detenido.')
                     }
                 }
-//                BotonUX{
-//                    text: 'Leer'
-//                    fontSize: app.rot?app.fs*0.5:app.fs
-//                    onClicked: {
-//                        r.speak(resCarta.text)
-//                    }
-//                }
             }
             Text{
                 width: xApp.width-app.fs*2
@@ -179,6 +172,10 @@ Rectangle {
                         text: 'Crear'
                         visible: tiNombre.text!==''&&tiDia.text!==''&&tiMes.text!==''&&tiAnio.text!==''&&tiHora.text!==''&&tiMinutos.text!==''&&r.lon!==''&&r.lat!==''
                         onClicked: {
+                            if(unikSetting.sound){
+                                unik.speak('Creando carta natal. Un momento por favor. Espero unos segundos.')
+                            }
+                            enabled=false
                             getJson()
                         }
                     }
@@ -187,15 +184,16 @@ Rectangle {
         }
     }
     XCnView{id: xCnView;visible: false}
-    Component.onCompleted: {
-//        let d0=unik.getFile('resources/codes')
-//        let d1=d0.split('\n')
-//        for(var i=0;i<d1.length;i++){
-//            let d2=d1[i].split(',')
-//            r.arrayCodesNames.push(d2[0])
-//            r.arrayCodes.push(d2[1])
-//        }
-//        uCbPais.model=r.arrayCodesNames
+    HttpObject{
+        onHttpResponse:{
+            //logView.showLog('R1: '+r)
+        }
+        onHttpResponseError:{
+            logView.showLog('El sistema de Mercurio no está disponible\nPara pedir soporte o conexción escribir a nextsigner@gmail.com')
+        }
+        Component.onCompleted: {
+            getHttp(app.serverUrl+':'+app.portRequest+'/ping')
+        }
     }
     function getCoords(text){
         let md=["Seleccionar Ciudad"]
@@ -261,10 +259,12 @@ Rectangle {
                 if(req.status === 200){
                     if(req.responseText.indexOf('file')>=0&&req.responseText.replace(/_/g, ' ').indexOf(tiNombre.text)>=0){
                         let obj=JSON.parse(req.responseText)
+                        noFocus()
                         getJsonData(obj.file)
                     }
                 }else{
-                    logView.showLog("Error loading page\n");
+                    botEnviar.enabled=true
+                    logView.showLog("Error al cargar datos de la carta. Code 4\n");
                 }
             }
         };
@@ -282,10 +282,20 @@ Rectangle {
                     xCnView.xcn.setJson(req.responseText)
                     //logView.showLog(req.responseText)
                 }else{
-                    logView.showLog("Error loading page\n");
+                    logView.showLog("Error al cargar los datos de la carta. Code 5\n");
                 }
+                botEnviar.enabled=true
             }
         };
         req.send(null);
     }
+    function noFocus(){
+        tiNombre.focus=false
+        tiDia.focus=false
+        tiMes.focus=false
+        tiAnio.focus=false
+        tiHora.focus=false
+        tiMinutos.focus=false
+    }
+
 }

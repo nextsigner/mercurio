@@ -33,6 +33,9 @@ module.exports=function(app, adminEmail, adminEmailPass){
 
     }
 
+    newPing = function(req, res){
+        res.status(200).send({'ping':10})
+    }
     newCN = function(req, res){
         let v1 = req.query.nom
         let v2 = req.query.a
@@ -69,4 +72,5 @@ module.exports=function(app, adminEmail, adminEmailPass){
         });
     }
     app.get('/cn/get', newCN);
+    app.get('/ping', newPing);
 }
