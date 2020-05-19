@@ -378,41 +378,42 @@ Rectangle {
         let json=JSON.parse(j)
         r.parent.visible=true
         r.visible=true
+        //console.log('--->'+json.pc.h1.s)
         if(json.pc.h1.s==='ari'){
-            r.sigRot=0-json.pc.h1.g
+            r.sigRot=0+json.pc.h1.g
         }
         if(json.pc.h1.s==='tau'){
-            r.sigRot=30-json.pc.h1.g
+            r.sigRot=30+json.pc.h1.g
         }
         if(json.pc.h1.s==='gem'){
-            r.sigRot=30*2-json.pc.h1.g
+            r.sigRot=30*2+json.pc.h1.g
         }
         if(json.pc.h1.s==='cnc'){
-            r.sigRot=30*3-json.pc.h1.g
+            r.sigRot=30*3+json.pc.h1.g
         }
         if(json.pc.h1.s==='leo'){
-            r.sigRot=30*4-json.pc.h1.g
+            r.sigRot=30*4+json.pc.h1.g
         }
         if(json.pc.h1.s==='vir'){
-            r.sigRot=30*5-json.pc.h1.g
+            r.sigRot=30*5+json.pc.h1.g
         }
         if(json.pc.h1.s==='lib'){
-            r.sigRot=30*6-json.pc.h1.g
+            r.sigRot=30*6+json.pc.h1.g
         }
         if(json.pc.h1.s==='sco'){
-            r.sigRot=30*7-json.pc.h1.g
+            r.sigRot=30*7+json.pc.h1.g
         }
         if(json.pc.h1.s==='sgr'){
-            r.sigRot=30*8-json.pc.h1.g
+            r.sigRot=30*8+json.pc.h1.g
         }
         if(json.pc.h1.s==='cap'){
-            r.sigRot=30*9-json.pc.h1.g
+            r.sigRot=30*9+json.pc.h1.g
         }
         if(json.pc.h1.s==='aqr'){
-            r.sigRot=30*10-json.pc.h1.g
+            r.sigRot=30*10+json.pc.h1.g
         }
         if(json.pc.h1.s==='psc'){
-            r.sigRot=30*11-json.pc.h1.g
+            r.sigRot=30*11+json.pc.h1.g
         }
 
         let vRSol=30*getSigIndex(json.psc.sun.s)

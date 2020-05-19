@@ -41,11 +41,15 @@ Rectangle {
             }
         }
     }
-    Text{
-        text: 'Z:'+parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
-        font.pixelSize: 30
-        color: 'red'
+    BotonUX{
+        text: 'atras'
+        onClicked: r.visible=false
     }
+    //    Text{
+//        text: 'Z:'+parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
+//        font.pixelSize: 30
+//        color: 'red'
+//    }
     //Component.onCompleted: sCnView.zoom=1
 
 

@@ -218,8 +218,8 @@ Rectangle {
                                 let m2=m1[1].split('</strong>')
                                 let m3=m2[0].split(', ')
                                 if(m3.length>0){
-                                    r.lon=m3[0]
-                                    r.lat=m3[1]
+                                    r.lon=m3[1]
+                                    r.lat=m3[0]
                                     statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
                                 }
                                 //console.log('Coordenadas: '+m2[0])
@@ -254,7 +254,7 @@ Rectangle {
         req.send(null);
     }
     function getJson(){
-        let url='nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat
+        let url='nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')
         console.log('Url: '+url)
         var req = new XMLHttpRequest();
         req.open('GET', r.serverUrl+':'+r.portRequest+'/cn/get/?'+url, true);
@@ -280,6 +280,7 @@ Rectangle {
         req.onreadystatechange = function (aEvt) {
             if (req.readyState === 4) {
                 if(req.status === 200){
+                    xCnView.visible=true
                     xCnView.xcn.setJson(req.responseText)
                     logView.showLog(req.responseText)
                 }else{

@@ -34,19 +34,21 @@ module.exports=function(app, adminEmail, adminEmailPass){
     }
 
     newCN = function(req, res){
-        console.log('Get new cn...')
         let v1 = req.query.nom
-        let v2 = req.query.d
+        let v2 = req.query.a
         let v3 = req.query.m
-        let v4 = req.query.a
+        let v4 = req.query.d
         let v5 = req.query.h
         let v6 = req.query.min
         let v7 = '-3'
-        let v8 = req.query.lon
-        let v9 = req.query.lat
+        let v8 = req.query.lat
+        let v9 = req.query.lon
+        let v10=req.query.loc
         let date=new Date(Date.now())
         let ms=date.getTime()
-        cp = spawn('/media/nextsigner/ZONA-A11/nsp/unik-dev-apps/zodiacserver/bin/zodiac_server', [v1, v2, v3, v4, v5, v6, v7, v8, v9, __dirname+'/bios-files/'+ms+'_'+v1+'.json']);
+        let fn=__dirname+'/bios-files/'+ms+'_'+v1+'.json'
+        console.log('Get new cn: '+v1+' '+v2+' '+v3+' '+v4+' '+v5+' '+v6+' '+v7+' '+v8+' '+v9+' '+v10+' '+fn)
+        cp = spawn('/media/nextsigner/ZONA-A11/nsp/unik-dev-apps/zodiacserver/bin/zodiac_server', [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, fn]);
         cp.stdout.on("data", function(data) {
             //console.log(data.toString().trim());
             if(data.toString().trim().indexOf('AppSettings: saved to')>=0){
