@@ -54,9 +54,9 @@ Rectangle {
             }
             Text{
                 width: xApp.width-app.fs*2
-                text: '<b>Crear Carta Natal</b>'
+                text: '<b>Crear Carta Natal</b><br />'+app.serverUrl+':'+app.portRequest
                 color: app.c2
-                font.pixelSize: app.fs*2
+                font.pixelSize: app.fs*1
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Column{
@@ -172,7 +172,7 @@ Rectangle {
                         text: 'Crear'
                         visible: tiNombre.text!==''&&tiDia.text!==''&&tiMes.text!==''&&tiAnio.text!==''&&tiHora.text!==''&&tiMinutos.text!==''&&r.lon!==''&&r.lat!==''
                         onClicked: {
-                            if(unikSetting.sound){
+                            if(unikSettings.sound){
                                 unik.speak('Creando carta natal. Un momento por favor. Espero unos segundos.')
                             }
                             enabled=false
@@ -250,17 +250,22 @@ Rectangle {
         req.send(null);
     }
     function getJson(){
-        let url='nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')
+        let url=r.serverUrl+':'+r.portRequest+'/cn/get/?'+'nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')
         console.log('Url: '+url)
         var req = new XMLHttpRequest();
-        req.open('GET', r.serverUrl+':'+r.portRequest+'/cn/get/?'+url, true);
+        req.open('GET', url, true);
         req.onreadystatechange = function (aEvt) {
             if (req.readyState === 4) {
+                //logView.showLog("Code 4\n");
                 if(req.status === 200){
                     if(req.responseText.indexOf('file')>=0&&req.responseText.replace(/_/g, ' ').indexOf(tiNombre.text)>=0){
+                        //logView.showLog("Code 200 4\n");
                         let obj=JSON.parse(req.responseText)
                         noFocus()
                         getJsonData(obj.file)
+                    }else{
+                        //logView.showLog("Error al cargar datos de la carta. Code 6\n");
+                        //console.log('RES 100: '+req.responseText)
                     }
                 }else{
                     botEnviar.enabled=true
@@ -271,7 +276,7 @@ Rectangle {
         req.send(null);
     }
     function getJsonData(file){
-        let url=r.serverUrl+':'+r.portFiles+'/bios-files/'+file+'.json'
+        let url=r.serverUrl+':'+r.portFiles+'/files/'+file+'.json'
         console.log('Get json data from '+url)
         var req = new XMLHttpRequest();
         req.open('GET', url, true);

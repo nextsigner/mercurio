@@ -24,11 +24,10 @@ Rectangle {
             }
         }
         Text{
+            width: xApp.width-app.fs*2
             text: '<b>Lilith en las Casas</b>'
             color: app.c2
-            font.pixelSize: app.fs*1.5
-            width: r.width-app.fs
-            wrapMode: Text.WordWrap
+            font.pixelSize: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Grid{
@@ -110,7 +109,7 @@ Rectangle {
                             width: xApp.width-app.fs*2
                             text: modelData
                             color: app.c2
-                            font.pixelSize: app.fs*1.5
+                            font.pixelSize: app.fs
                             wrapMode: Text.WordWrap
                             textFormat: Text.RichText
                         }
