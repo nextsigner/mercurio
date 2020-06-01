@@ -398,15 +398,15 @@ Rectangle {
             }
         }
     }
-    Rectangle{
-        id: mp
-        width: 100
-        height: width
-        radius: width*0.5
-        color: 'red'
-        x: tcn.origin.x-width*0.5
-        y: tcn.origin.y-width*0.5
-    }
+//    Rectangle{
+//        id: mp
+//        width: 100
+//        height: width
+//        radius: width*0.5
+//        color: 'red'
+//        x: tcn.origin.x-width*0.5
+//        y: tcn.origin.y-width*0.5
+//    }
     Component.onCompleted: {
         let json='{
 "psc":{

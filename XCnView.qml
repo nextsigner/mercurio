@@ -25,18 +25,18 @@ Rectangle {
             id: cn
             transformOrigin: Item.TopLeft
         }
-//        function zoomExtents()
-//        {
-//            // Resize image to fit in View
-//            var maxImageBounds = Math.max(cn.width, cn.height)
-//            var minViewBounds = Math.min(flick.width, flick.height)
-//            var mult = minViewBounds / maxImageBounds
-//            cn.scale = mult * 0.99
+        //        function zoomExtents()
+        //        {
+        //            // Resize image to fit in View
+        //            var maxImageBounds = Math.max(cn.width, cn.height)
+        //            var minViewBounds = Math.min(flick.width, flick.height)
+        //            var mult = minViewBounds / maxImageBounds
+        //            cn.scale = mult * 0.99
 
-//            // Center image in view: Works when image's transformOrigin is Center
-//            cn.x = flick.contentX + (flick.width - cn.width) * 0.5
-//            cn.y = flick.contentY + (flick.height - cn.height) * 0.5
-//        }
+        //            // Center image in view: Works when image's transformOrigin is Center
+        //            cn.x = flick.contentX + (flick.width - cn.width) * 0.5
+        //            cn.y = flick.contentY + (flick.height - cn.height) * 0.5
+        //        }
 
         // Zoom About Cursor
         function zoom(delta, target, x, y)
@@ -62,21 +62,24 @@ Rectangle {
             target.y = target.y - dy
         }
 
-        MouseArea {
-            id: dragArea
-            hoverEnabled: true
+        PinchArea{
             anchors.fill: parent
-            drag.target: image
+            MouseArea {
+                id: dragArea
+                hoverEnabled: true
+                anchors.fill: parent
+                drag.target: image
 
-//            onDoubleClicked:
-//            {
-//                flick.zoomExtents()
-//            }
+                //            onDoubleClicked:
+                //            {
+                //                flick.zoomExtents()
+                //            }
 
-            onWheel:
-            {
-                var delta = wheel.angleDelta.y / 120.0
-                flick.zoom(delta, cn, mouseX, mouseY)
+                onWheel:
+                {
+                    var delta = wheel.angleDelta.y / 120.0
+                    flick.zoom(delta, cn, mouseX, mouseY)
+                }
             }
         }
     }
