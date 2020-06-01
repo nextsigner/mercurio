@@ -5,7 +5,7 @@ import "func.js" as JS
 
 Rectangle {
     id: r
-    width: parent.width*zf
+    width: app.fs*30
     height: width
     color: app.c1
     antialiasing: true

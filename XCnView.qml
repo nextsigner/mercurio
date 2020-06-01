@@ -16,27 +16,27 @@ Rectangle {
     Flickable{
         //anchors.fill: r
         id: flick
-        width: r.width//cn.width
-        height: r.height//cn.height
+        width: cn.width//cn.width
+        height: cn.height//cn.height
         anchors.centerIn: r
-        contentWidth: r.width*2.0//*1.5
-        contentHeight: r.height*2.0//*1.5
+        contentWidth: cn.width//*2.0//*1.5
+        contentHeight: cn.height//*2.0//*1.5
         XCn{
             id: cn
             transformOrigin: Item.TopLeft
         }
-        //        function zoomExtents()
-        //        {
-        //            // Resize image to fit in View
-        //            var maxImageBounds = Math.max(cn.width, cn.height)
-        //            var minViewBounds = Math.min(flick.width, flick.height)
-        //            var mult = minViewBounds / maxImageBounds
-        //            cn.scale = mult * 0.99
+        function zoomExtents()
+        {
+            // Resize image to fit in View
+            var maxImageBounds = Math.max(cn.width, cn.height)
+            var minViewBounds = Math.min(flick.width, flick.height)
+            var mult = minViewBounds / maxImageBounds
+            cn.scale = mult * 0.99
 
-        //            // Center image in view: Works when image's transformOrigin is Center
-        //            cn.x = flick.contentX + (flick.width - cn.width) * 0.5
-        //            cn.y = flick.contentY + (flick.height - cn.height) * 0.5
-        //        }
+            // Center image in view: Works when image's transformOrigin is Center
+            cn.x = flick.contentX + (flick.width - cn.width) * 0.5
+            cn.y = flick.contentY + (flick.height - cn.height) * 0.5
+        }
 
         // Zoom About Cursor
         function zoom(delta, target, x, y)
@@ -61,25 +61,21 @@ Rectangle {
             target.x = target.x - dx
             target.y = target.y - dy
         }
-
-        PinchArea{
+        MouseArea {
+            id: dragArea
+            hoverEnabled: true
             anchors.fill: parent
-            MouseArea {
-                id: dragArea
-                hoverEnabled: true
-                anchors.fill: parent
-                drag.target: image
+            drag.target: cn
 
-                //            onDoubleClicked:
-                //            {
-                //                flick.zoomExtents()
-                //            }
+            onDoubleClicked:
+            {
+                flick.zoomExtents()
+            }
 
-                onWheel:
-                {
-                    var delta = wheel.angleDelta.y / 120.0
-                    flick.zoom(delta, cn, mouseX, mouseY)
-                }
+            onWheel:
+            {
+                var delta = wheel.angleDelta.y / 120.0
+                flick.zoom(delta, cn, mouseX, mouseY)
             }
         }
     }
@@ -88,6 +84,7 @@ Rectangle {
         onClicked: r.visible=false
     }
     Text{
+        id: iz
         //text: 'Z:'+parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
         text: 'Z:'+cn.zf
         //text: 'X:'+cn.ppx
