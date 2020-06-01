@@ -65,6 +65,7 @@ Rectangle {
             id: dragArea
             hoverEnabled: true
             anchors.fill: parent
+            enabled: false//Qt.platform.os!=='android'
             drag.target: cn
 
             onDoubleClicked:
@@ -76,6 +77,53 @@ Rectangle {
             {
                 var delta = wheel.angleDelta.y / 120.0
                 flick.zoom(delta, cn, mouseX, mouseY)
+            }
+        }
+        MouseArea {
+            id: dragAreaPhone
+            hoverEnabled: true
+            anchors.fill: parent
+            enabled: Qt.platform.os==='android'
+            property bool inc: false
+            drag.target: cn
+            onPressAndHold: {
+                tz.zoom=!tz.zoom
+            }
+//            onPressed: {
+
+//            }
+            onReleased: {
+                tz.running=false
+            }
+            onClicked: {
+                var delta = 60 / 120.0
+                flick.zoom(delta, cn, dragAreaPhone.mouseX, dragAreaPhone.mouseY)
+                inc=true
+            }
+            onDoubleClicked:{
+                let a=-120
+                if(inc){
+                    a=-240
+                }
+                var delta = a / 120.0
+                flick.zoom(delta, cn, mouseX, mouseY)
+                inc=false
+            }
+            Timer{
+                id: tz
+                running: false
+                repeat: true
+                interval: 100
+                property bool zoom: false
+                onZoomChanged: tz.running=true
+                onTriggered: {
+                    let a=60
+                    if(!zoom){
+                        a=-60
+                    }
+                    var delta = a / 120.0
+                    flick.zoom(delta, cn, dragAreaPhone.mouseX, dragAreaPhone.mouseY)
+                }
             }
         }
     }
