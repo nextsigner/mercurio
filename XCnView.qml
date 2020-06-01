@@ -95,11 +95,11 @@ Rectangle {
             onReleased: {
                 tz.running=false
             }
-            onClicked: {
-                var delta = 60 / 120.0
-                flick.zoom(delta, cn, dragAreaPhone.mouseX, dragAreaPhone.mouseY)
-                inc=true
-            }
+//            onClicked: {
+//                var delta = 60 / 120.0
+//                flick.zoom(delta, cn, dragAreaPhone.mouseX, dragAreaPhone.mouseY)
+//                inc=true
+//            }
             onDoubleClicked:{
                flick.zoomExtents()
             }
@@ -125,14 +125,14 @@ Rectangle {
         text: 'atras'
         onClicked: r.visible=false
     }
-    Text{
-        id: iz
-        //text: 'Z:'+parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
-        text: 'Z:'+cn.zf
-        //text: 'X:'+cn.ppx
-        font.pixelSize: 30
-        color: 'red'
-    }
+//    Text{
+//        id: iz
+//        //text: 'Z:'+parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
+//        text: 'Z:'+cn.zf
+//        //text: 'X:'+cn.ppx
+//        font.pixelSize: 30
+//        color: 'red'
+//    }
     //Component.onCompleted: sCnView.zoom=1
 
 
