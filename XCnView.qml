@@ -1,5 +1,4 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.12
 import Qt.labs.settings 1.0
 import "func.js" as JS
 
@@ -16,28 +15,68 @@ Rectangle {
     }
     Flickable{
         //anchors.fill: r
-        id: flCn
-        width: cn.width
-        height: cn.height
+        id: flick
+        width: r.width//cn.width
+        height: r.height//cn.height
         anchors.centerIn: r
-        contentWidth: cn.width*1.5
-        contentHeight: cn.height*1.5
-        contentX: ((r.width-cn.width)*0.5)*0.75
-        contentY: ((r.height-cn.height)*0.5)*0.75
+        contentWidth: r.width*2.0//*1.5
+        contentHeight: r.height*2.0//*1.5
         XCn{
             id: cn
-            width: r.width*sCnView.zoom//*0.25
-            anchors.centerIn: parent
-            onDoubleClick: {
-                if(sCnView.zoom>3||cn.width>r.width*0.8){
-                    sCnView.zoom-=0.1
-                }else{
-                    sCnView.zoom=2
-                }
-                flCn.contentWidth=r.width*sCnView.zoom*1.25
-                flCn.contentHeight=r.width*sCnView.zoom*1.25
-                flCn.contentX=((r.width-cn.width)*0.5)*0.75
-                flCn.contentY=((r.height-cn.height)*0.5)*0.75
+            transformOrigin: Item.TopLeft
+        }
+//        function zoomExtents()
+//        {
+//            // Resize image to fit in View
+//            var maxImageBounds = Math.max(cn.width, cn.height)
+//            var minViewBounds = Math.min(flick.width, flick.height)
+//            var mult = minViewBounds / maxImageBounds
+//            cn.scale = mult * 0.99
+
+//            // Center image in view: Works when image's transformOrigin is Center
+//            cn.x = flick.contentX + (flick.width - cn.width) * 0.5
+//            cn.y = flick.contentY + (flick.height - cn.height) * 0.5
+//        }
+
+        // Zoom About Cursor
+        function zoom(delta, target, x, y)
+        {
+            // positive delta zoom in, negative delta zoom out
+            var scaleBefore = target.scale;
+            var zoomFactor = 0.8
+            if (delta > 0)
+            {
+                zoomFactor = 1.0/zoomFactor;
+            }
+
+            // Zoom the target
+            target.scale = target.scale * zoomFactor;
+
+            // X,Y coordinates of zoom location relative to top left corner
+            // Calculate displacement of zooming position
+            var dx = (x - target.x) * (zoomFactor - 1)
+            var dy = (y - target.y) * (zoomFactor - 1)
+
+            // Compensate for displacement
+            target.x = target.x - dx
+            target.y = target.y - dy
+        }
+
+        MouseArea {
+            id: dragArea
+            hoverEnabled: true
+            anchors.fill: parent
+            drag.target: image
+
+//            onDoubleClicked:
+//            {
+//                flick.zoomExtents()
+//            }
+
+            onWheel:
+            {
+                var delta = wheel.angleDelta.y / 120.0
+                flick.zoom(delta, cn, mouseX, mouseY)
             }
         }
     }
@@ -45,11 +84,13 @@ Rectangle {
         text: 'atras'
         onClicked: r.visible=false
     }
-    //    Text{
-//        text: 'Z:'+parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
-//        font.pixelSize: 30
-//        color: 'red'
-//    }
+    Text{
+        //text: 'Z:'+parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
+        text: 'Z:'+cn.zf
+        //text: 'X:'+cn.ppx
+        font.pixelSize: 30
+        color: 'red'
+    }
     //Component.onCompleted: sCnView.zoom=1
 
 

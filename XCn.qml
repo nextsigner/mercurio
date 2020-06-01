@@ -5,10 +5,20 @@ import "func.js" as JS
 
 Rectangle {
     id: r
-    width: parent.width
+    width: parent.width*zf
     height: width
     color: app.c1
     antialiasing: true
+//    transform: Scale {
+//        id: tcn;
+//        origin.x: width*0.25;
+//        origin.y: width*0.25;
+//        xScale: 1;
+//        yScale: xScale
+//        onOriginChanged: {
+//            //r.x=r.x+mp.x-r.width*0.5
+//        }
+//    }
     property int fs: r.width*0.05
     property var arrayCasas1: ['Asc', 'II', 'III', 'IV', 'V', 'VI']
     property var arrayCasas2: ['VII', 'VII', 'IX', 'X', 'XI', 'XII']
@@ -16,11 +26,63 @@ Rectangle {
     property var arrayElementsColors: ['#E7B70B', 'brown', '#16E9F6', '#118CC8']
     property int sigRot: 30
     property color axisColor: 'red'
-    signal doubleClick
-    MouseArea{
-        anchors.fill: r
-        onDoubleClicked: r.doubleClick()
+
+    property int ppx: 50
+    property real zf: 0.5
+    onZChanged: {
+       // r.width=r.width*zf
     }
+
+    signal doubleClick
+    signal posChanged(int px, int py)
+//    MouseArea{
+//        anchors.fill: r
+//        hoverEnabled: true
+//        //property int uw: -1
+//        onMouseXChanged: {
+//            r.ppx=(mouseX-r.width*0.5)/r.width*100
+//        }
+//        onClicked: {
+//            console.log(mouse.x + " " + mouse.y)
+//            r.scale += 0.1
+//            //r.yScale += 0.5
+//            r.origin.x = mouse.x
+//            r.origin.y = mouse.y
+//        }
+//        onDoubleClicked: r.doubleClick()
+
+//        onWheel: {
+//            //console.log('W: '+wheel.angleDelta.y)
+//            let crf=0.5
+//            if(r.zf<=1.5&&r.zf>=0.5){
+//                if (wheel.modifiers & Qt.ControlModifier) {
+//                    //r.width=wheel.angleDelta.y / 120;
+//                    //console.log('W: '+wheel.angleDelta.y)
+//                }
+//                if(wheel.angleDelta.y>0){
+//                    r.zf+=0.1
+//                    if(r.zf>1.5){
+//                        r.zf=1.5
+//                    }
+//                    //r.scale+=0.1
+//                    tcn.xScale+=0.1
+//                }else{
+//                    r.zf-=0.1
+//                    if(r.zf<0.5){
+//                        r.zf=0.5
+//                    }
+//                    // r.scale-=0.1
+//                    tcn.xScale-=0.1
+//                }
+//            }
+//            //r.scale=crf
+//            //tcn.origin.x = mouseX
+//            //tcn.origin.y = mouseY
+//            //uw=wheel.angleDelta.y
+//            r.posChanged(mouseX, mouseY)
+//            wheel.accepted=true
+//        }
+//    }
     Item {
         anchors.fill: parent
         Repeater{
@@ -251,8 +313,8 @@ Rectangle {
         width: r.width*0.2
         height: width
         radius: width*0.5
-//        border.width: 1
-//        border.color: r.borderColor
+        //        border.width: 1
+        //        border.color: r.borderColor
         color: r.color
         anchors.centerIn: r
     }
@@ -335,6 +397,15 @@ Rectangle {
                 }
             }
         }
+    }
+    Rectangle{
+        id: mp
+        width: 100
+        height: width
+        radius: width*0.5
+        color: 'red'
+        x: tcn.origin.x-width*0.5
+        y: tcn.origin.y-width*0.5
     }
     Component.onCompleted: {
         let json='{

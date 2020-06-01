@@ -5,14 +5,16 @@ import Qt.labs.settings 1.1
 ApplicationWindow{
     id: app
     visible: true
-    visibility: Qt.platform.os==='android'?"FullScreen":"Windowed"
+    visibility: isPhone?"FullScreen":"Maximized"
     color:app.c1
-    width: Qt.platform.os==='android'?Screen.width:360
-    height: Qt.platform.os==='android'?Screen.height:600
+    width: isPhone?Screen.width:Screen.width-30//360
+    height: isPhone?Screen.height:Screen.height-30//600
     property string moduleName: 'mercurio'
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
-    property int fs: app.rot?app.width*0.03:app.width*0.045
+    property int fs: isPhone?(app.rot?app.width*0.03:app.width*0.045):app.width*0.02
+
+    property bool isPhone: Qt.platform.os==='android'
 
     property int mod: -1
     property string serverUrl: 'http://localhost'
@@ -74,7 +76,6 @@ ApplicationWindow{
             }
         }
     }
-
     Item {
         id: xApp
         anchors.fill: parent
@@ -198,6 +199,10 @@ ApplicationWindow{
         sequence: 'Esc'
         onActivated: Qt.quit()
     }
+//    Shortcut{
+//        sequence: 'Ctrl'
+//        onActivated: Qt.quit()
+//    }
     Component.onCompleted: {
         if(Qt.platform.os==='linux'&&unikSettings.lang==='es'){
             unik.ttsLanguageSelected(13)

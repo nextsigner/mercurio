@@ -18,7 +18,10 @@ Rectangle {
     property string lat: ''
 
     onVisibleChanged: {
-        if(visible)getTransNow()
+        r.focus=visible
+        if(visible){
+            getTransNow()
+        }
     }
     MouseArea{
         anchors.fill: r
