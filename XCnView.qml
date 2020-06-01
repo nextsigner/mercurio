@@ -65,7 +65,7 @@ Rectangle {
             id: dragArea
             hoverEnabled: true
             anchors.fill: parent
-            enabled: false//Qt.platform.os!=='android'
+            enabled: Qt.platform.os!=='android'
             drag.target: cn
 
             onDoubleClicked:
@@ -101,13 +101,7 @@ Rectangle {
                 inc=true
             }
             onDoubleClicked:{
-                let a=-120
-                if(inc){
-                    a=-240
-                }
-                var delta = a / 120.0
-                flick.zoom(delta, cn, mouseX, mouseY)
-                inc=false
+               flick.zoomExtents()
             }
             Timer{
                 id: tz
