@@ -8,6 +8,9 @@ Calendar{
     visible: parent.objectName==='itemCal1'||parent.objectName==='itemCal2'
     property bool setTextInput: false
     property int num:-1
+    property int currentYear: r.selectedDate.getFullYear()
+    property int currentMonth: r.selectedDate.getMonth()+1
+    property int currentDay: r.selectedDate.getDate()
     signal selected(var newDate)
     onVisibleChanged:{
         if(parent.objectName==='itemCal1'){
@@ -21,7 +24,116 @@ Calendar{
         num=-1
     }
     style: CalendarStyle {
+        id: uCalendarStyle
+        navigationBar: Rectangle{
+            width: r.width
+            height: app.fs*4
+            color: app.c1
+            Column{
+                spacing: app.fs
+                anchors.centerIn: parent
+                Row{
+                    spacing: app.fs
+                    BotonUX{
+                        text: '-10'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() - 10);
+                            r.selectedDate=fecha
+                        }
+                    }
+                    BotonUX{
+                        text: '-1'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() - 1);
+                            r.selectedDate=fecha
+                        }
+                    }
+                    Text{
+                        text: r.currentYear
+                        font.pixelSize: app.fs
+                        color: app.c2
+
+                    }
+                    BotonUX{
+                        text: '+1'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() + 1);
+                            r.selectedDate=fecha
+                        }
+                    }
+                    BotonUX{
+                        text: '+10'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() + 10);
+                            r.selectedDate=fecha
+                        }
+                    }
+                }
+                Row{
+                    spacing: app.fs
+                    BotonUX{
+                        text: '-10'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() - 10);
+                            r.selectedDate=fecha
+                        }
+                    }
+                    BotonUX{
+                        text: '-1'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() - 1);
+                            r.selectedDate=fecha
+                        }
+                    }
+                    Text{
+                        text: r.currentMonth
+                        font.pixelSize: app.fs
+                        color: app.c2
+
+                    }
+                    BotonUX{
+                        text: '+1'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() + 1);
+                            r.selectedDate=fecha
+                        }
+                    }
+                    BotonUX{
+                        text: '+10'
+                        height: app.fs
+                        onClicked: {
+                            setTextInput=false
+                            var fecha = r.selectedDate;
+                            fecha.setYear(fecha.getFullYear() + 10);
+                            r.selectedDate=fecha
+                        }
+                    }
+                }
+            }
+        }
         dayDelegate: Rectangle{
+            id: xDayDelegate
             color: styleData.selected ? app.c2 : (styleData.visibleMonth && styleData.valid ? "#111" : "#666");
             Label {
                 text: styleData.date.getDate()
@@ -51,6 +163,9 @@ Calendar{
         }
     }
     onSelectedDateChanged: {
+        currentYear= r.selectedDate.getFullYear()
+        currentMonth= r.selectedDate.getMonth()+1
+        currentDay= r.selectedDate.getDate()
         if(setTextInput){
             var d = selectedDate
             let dia=''+d.getDate()

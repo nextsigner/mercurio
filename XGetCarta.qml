@@ -223,6 +223,7 @@ Rectangle {
         height: app.isPhone?r.height*0.5:r.height
         UCalendar{
             id: calendario
+            visible: true
             onVisibleChanged: {
                 xApp.focus=true
             }
