@@ -39,9 +39,9 @@ Rectangle {
         }
 
         // Zoom About Cursor
-        function zoom(delta, target, x, y)
-        {
+        function zoom(delta, target, x, y){
             // positive delta zoom in, negative delta zoom out
+
             var scaleBefore = target.scale;
             var zoomFactor = 0.8
             if (delta > 0)
@@ -67,7 +67,7 @@ Rectangle {
             anchors.fill: parent
             enabled: Qt.platform.os!=='android'
             drag.target: cn
-
+            property  real ud
             onDoubleClicked:
             {
                 flick.zoomExtents()
@@ -75,8 +75,17 @@ Rectangle {
 
             onWheel:
             {
+
                 var delta = wheel.angleDelta.y / 120.0
-                flick.zoom(delta, cn, mouseX, mouseY)
+                if(cn.scale>2.0){
+                    flick.zoom(0-ud, cn, mouseX, mouseY)
+                    //return
+                }else if(cn.scale<0.5){
+                    flick.zoom(0-ud, cn, mouseX, mouseY)
+                }else{
+                    flick.zoom(delta, cn, mouseX, mouseY)
+                }
+                ud=delta
             }
         }
         MouseArea {

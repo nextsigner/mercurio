@@ -9,16 +9,6 @@ Rectangle {
     height: width
     color: app.c1
     antialiasing: true
-//    transform: Scale {
-//        id: tcn;
-//        origin.x: width*0.25;
-//        origin.y: width*0.25;
-//        xScale: 1;
-//        yScale: xScale
-//        onOriginChanged: {
-//            //r.x=r.x+mp.x-r.width*0.5
-//        }
-//    }
     property int fs: r.width*0.05
     property var arrayCasas1: ['Asc', 'II', 'III', 'IV', 'V', 'VI']
     property var arrayCasas2: ['VII', 'VII', 'IX', 'X', 'XI', 'XII']
@@ -29,60 +19,9 @@ Rectangle {
 
     property int ppx: 50
     property real zf: 0.5
-    onZChanged: {
-       // r.width=r.width*zf
-    }
 
     signal doubleClick
     signal posChanged(int px, int py)
-//    MouseArea{
-//        anchors.fill: r
-//        hoverEnabled: true
-//        //property int uw: -1
-//        onMouseXChanged: {
-//            r.ppx=(mouseX-r.width*0.5)/r.width*100
-//        }
-//        onClicked: {
-//            console.log(mouse.x + " " + mouse.y)
-//            r.scale += 0.1
-//            //r.yScale += 0.5
-//            r.origin.x = mouse.x
-//            r.origin.y = mouse.y
-//        }
-//        onDoubleClicked: r.doubleClick()
-
-//        onWheel: {
-//            //console.log('W: '+wheel.angleDelta.y)
-//            let crf=0.5
-//            if(r.zf<=1.5&&r.zf>=0.5){
-//                if (wheel.modifiers & Qt.ControlModifier) {
-//                    //r.width=wheel.angleDelta.y / 120;
-//                    //console.log('W: '+wheel.angleDelta.y)
-//                }
-//                if(wheel.angleDelta.y>0){
-//                    r.zf+=0.1
-//                    if(r.zf>1.5){
-//                        r.zf=1.5
-//                    }
-//                    //r.scale+=0.1
-//                    tcn.xScale+=0.1
-//                }else{
-//                    r.zf-=0.1
-//                    if(r.zf<0.5){
-//                        r.zf=0.5
-//                    }
-//                    // r.scale-=0.1
-//                    tcn.xScale-=0.1
-//                }
-//            }
-//            //r.scale=crf
-//            //tcn.origin.x = mouseX
-//            //tcn.origin.y = mouseY
-//            //uw=wheel.angleDelta.y
-//            r.posChanged(mouseX, mouseY)
-//            wheel.accepted=true
-//        }
-//    }
     Item {
         anchors.fill: parent
         Repeater{
@@ -120,7 +59,6 @@ Rectangle {
             }
         }
     }
-
     Rectangle{
         id: bg
         width: r.width-r.fs*2
@@ -321,44 +259,8 @@ Rectangle {
     Item{
         id: xPlanetas
         anchors.fill: r
-        Item{
-            id: xSol
-            width: parent.width-r.fs*3
-            height: 1
-            anchors.centerIn: parent
-            Item{
-                width: r.fs*1.5
-                height: width
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                Image {
-                    source: "./resources/imgs/planetas/sol.png"
-                    width: parent.width
-                    height: width
-                    anchors.centerIn: parent
-                    rotation: 0-parent.parent.rotation
-                }
-            }
-        }
-        Item{
-            id: xLuna
-            width: parent.width-r.fs*3
-            height: 1
-            anchors.centerIn: parent
-            Item{
-                width: r.fs*1.5
-                height: width
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                Image {
-                    source: "./resources/imgs/planetas/luna.png"
-                    width: parent.width
-                    height: width
-                    anchors.centerIn: parent
-                    rotation: 0-parent.parent.rotation
-                }
-            }
-        }
+        XAs{id:xSol;fs:r.fs;astro:'sun'}
+        XAs{id:xLuna;fs:r.fs;astro:'moon'}
         Item{
             id: xMercurio
             width: parent.width-r.fs*3
@@ -397,53 +299,204 @@ Rectangle {
                 }
             }
         }
+        Item{
+            id: xMarte
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/marte.png"
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+            }
+        }
+        Item{
+            id: xJupiter
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/jupiter.png"
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+            }
+        }
+        Item{
+            id: xSaturno
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/saturno.png"
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+            }
+        }
+        Item{
+            id: xUrano
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/urano.png"
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+            }
+        }
+        Item{
+            id: xNeptuno
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/neptuno.png"
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+            }
+        }
+        Item{
+            id: xPluton
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/pluton.png"
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+            }
+        }
+        Item{
+            id: xQuiron
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/pluton.png"//rotado
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+                Text{text: 'qurion'; anchors.centerIn: parent; color: 'red'}
+            }
+        }
+        Item{
+            id: xProserpina
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/pluton.png"//rotado
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+                Text{text: 'proserpina'; anchors.centerIn: parent; color: 'red'}
+            }
+        }
+        Item{
+            id: xSelena
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/pluton.png"//rotado
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+                Text{text: 'selena'; anchors.centerIn: parent; color: 'red'}
+            }
+        }
+        Item{
+            id: xLilith
+            width: parent.width-r.fs*3
+            height: 1
+            anchors.centerIn: parent
+            Item{
+                width: r.fs*1.5
+                height: width
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    source: "./resources/imgs/planetas/pluton.png"//rotado
+                    width: parent.width
+                    height: width
+                    anchors.centerIn: parent
+                    rotation: 0-parent.parent.rotation
+                }
+                Text{text: 'lilith'; anchors.centerIn: parent; color: 'red'}
+            }
+        }
     }
-//    Rectangle{
-//        id: mp
-//        width: 100
-//        height: width
-//        radius: width*0.5
-//        color: 'red'
-//        x: tcn.origin.x-width*0.5
-//        y: tcn.origin.y-width*0.5
-//    }
     Component.onCompleted: {
-        let json='{
-"psc":{
-"sun":{"g":28,"m":57,"s":"gem","h":5,"rh":"v"}
-,"moon":{"g":24,"m":36,"s":"sco","h":10,"rh":"x"}
-,"mercury":{"g":15,"m":7,"s":"gem","h":5,"rh":"v"}
-,"venus":{"g":14,"m":18,"s":"leo","h":6,"rh":"vi"}
-,"mars":{"g":22,"m":38,"s":"ari","h":3,"rh":"iii"}
-,"jupiter":{"g":20,"m":10,"s":"ari","h":3,"rh":"iii"}
-,"saturn":{"g":19,"m":20,"s":"cnc","h":6,"rh":"vi"}
-,"uranus":{"g":28,"m":28,"s":"lib","h":10,"rh":"x"}
-,"neptune":{"g":9,"m":54,"s":"sgr","h":11,"rh":"xi"}
-,"pluto":{"g":6,"m":29,"s":"lib","h":9,"rh":"ix"}
-,"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"}
-,"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"}
-,"hiron":{"g":27,"m":25,"s":"ari","h":4,"rh":"iv"}
-,"proserpina":{"g":28,"m":3,"s":"lib","h":10,"rh":"x"}
-,"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"}
-,"lilith":{"g":15,"m":10,"s":"psc","h":1,"rh":"i"}
-}
-,"pc":{
-"h1":{"s":"aqr","g":-27,"m":10}
-,"h2":{"s":"psc","g":16,"m":23}
-,"h3":{"s":"ari","g":5,"m":36}
-,"h4":{"s":"ari","g":24,"m":49}
-,"h5":{"s":"gem","g":5,"m":36}
-,"h6":{"s":"cnc","g":16,"m":23}
-,"h7":{"s":"leo","g":-27,"m":10}
-,"h8":{"s":"vir","g":16,"m":23}
-,"h9":{"s":"lib","g":5,"m":36}
-,"h10":{"s":"lib","g":24,"m":49}
-,"h11":{"s":"sgr","g":5,"m":36}
-,"h12":{"s":"cap","g":16,"m":23}
-}
-}
-'
-        //setJson(json)
+        let json='{"params":{"ms":"1590969573745","n":"Ricardo","a":"1975","m":"06","d":"20","h":"23","min":"00","gmt":"-3","lat":"-35.484462","lon":"-69.5797495"},"psc":{"sun":{"g":29,"m":6,"s":"gem","h":5,"rh":"v"},"moon":{"g":26,"m":51,"s":"sco","h":10,"rh":"x"},"mercury":{"g":15,"m":6,"s":"gem","h":4,"rh":"iv"},"venus":{"g":14,"m":27,"s":"leo","h":6,"rh":"vi"},"mars":{"g":22,"m":45,"s":"ari","h":3,"rh":"iii"},"jupiter":{"g":20,"m":11,"s":"ari","h":3,"rh":"iii"},"saturn":{"g":19,"m":22,"s":"cnc","h":5,"rh":"v"},"uranus":{"g":28,"m":28,"s":"lib","h":9,"rh":"ix"},"neptune":{"g":9,"m":54,"s":"sgr","h":10,"rh":"x"},"pluto":{"g":6,"m":29,"s":"lib","h":8,"rh":"viii"},"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"},"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"},"hiron":{"g":27,"m":25,"s":"ari","h":3,"rh":"iii"},"proserpina":{"g":28,"m":3,"s":"lib","h":9,"rh":"ix"},"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"},"lilith":{"g":15,"m":11,"s":"psc","h":1,"rh":"i"}},"pc":{"h1":{"s":"aqr","g":26,"m":9},"h2":{"s":"psc","g":20,"m":8},"h3":{"s":"ari","g":18,"m":46},"h4":{"s":"tau","g":21,"m":29},"h5":{"s":"gem","g":25,"m":27},"h6":{"s":"cnc","g":27,"m":24},"h7":{"s":"leo","g":26,"m":9},"h8":{"s":"vir","g":20,"m":8},"h9":{"s":"lib","g":18,"m":46},"h10":{"s":"sco","g":21,"m":29},"h11":{"s":"sgr","g":25,"m":27},"h12":{"s":"cap","g":27,"m":24}}}'
+        setJson(json)
     }
     function setJson(j){
         let json=JSON.parse(j)
@@ -497,10 +550,30 @@ Rectangle {
         let vRLuna=30*getSigIndex(json.psc.moon.s)
         let vRMer=30*getSigIndex(json.psc.mercury.s)
         let vRVenus=30*getSigIndex(json.psc.venus.s)
+        let vRMarte=30*getSigIndex(json.psc.mars.s)
+        let vRJupiter=30*getSigIndex(json.psc.jupiter.s)
+        let vRSaturno=30*getSigIndex(json.psc.saturn.s)
+        let vRUrano=30*getSigIndex(json.psc.uranus.s)
+        let vRNeptuno=30*getSigIndex(json.psc.neptune.s)
+        let vRPluto=30*getSigIndex(json.psc.pluto.s)
+        let vRQuiron=30*getSigIndex(json.psc.hiron.s)
+        let vRProserpina=30*getSigIndex(json.psc.proserpina.s)
+        let vRSelena=30*getSigIndex(json.psc.selena.s)
+        let vRLilith=30*getSigIndex(json.psc.lilith.s)
         xSol.rotation=0-vRSol+r.sigRot-json.psc.sun.g
         xLuna.rotation=0-vRLuna+r.sigRot-json.psc.moon.g
         xMercurio.rotation=0-vRMer+r.sigRot-json.psc.mercury.g
         xVenus.rotation=0-vRVenus+r.sigRot-json.psc.venus.g
+        xMarte.rotation=0-vRMarte+r.sigRot-json.psc.mars.g
+        xJupiter.rotation=0-vRJupiter+r.sigRot-json.psc.jupiter.g
+        xSaturno.rotation=0-vRSaturno+r.sigRot-json.psc.saturn.g
+        xUrano.rotation=0-vRUrano+r.sigRot-json.psc.uranus.g
+        xNeptuno.rotation=0-vRNeptuno+r.sigRot-json.psc.neptune.g
+        xPluton.rotation=0-vRPluto+r.sigRot-json.psc.pluto.g
+        xQuiron.rotation=0-vRQuiron+r.sigRot-json.psc.hiron.g
+        xProserpina.rotation=0-vRProserpina+r.sigRot-json.psc.proserpina.g
+        xSelena.rotation=0-vRSelena+r.sigRot-json.psc.selena.g
+        xLilith.rotation=0-vRLilith+r.sigRot-json.psc.lilith.g
 
         //logView.showLog(json.pc.h1.g)
         //logView.showLog(json.pc.h1.m)
