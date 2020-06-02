@@ -57,7 +57,7 @@ Rectangle {
             }
             Text{
                 width: xApp.width-app.fs*2
-                text: '<b>Crear Carta Natal</b><br />'+app.serverUrl+':'+app.portRequest
+                text: '<b>Crear Carta Natal</b><br />'//+app.serverUrl+':'+app.portRequest
                 color: app.c2
                 font.pixelSize: app.fs*1
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -75,6 +75,9 @@ Rectangle {
                         id: tiNombre
                         label: ''
                         width:r.width-app.fs
+                        KeyNavigation.tab: tiDia
+                        regularExp: RegExpValidator{regExp:  /^([A-Za-zÁÉÍÓÚñáéíóúÑ0-9]+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ0-9])/}
+                        maximumLength: 50
                     }
                 }
                 Column{
@@ -83,22 +86,42 @@ Rectangle {
                     UText{
                         text: '<b>Fecha de Nacimiento</b>'
                     }
-                    Row{
-                        spacing: app.fs
-                        UTextInput{
-                            id: tiDia
-                            label: 'Día:'
-                            width:app.fs*6//+diffWidth
+                    Item{
+                        width: rowFecha.width
+                        height: tiDia.height
+                        Row{
+                            id: rowFecha
+                            spacing: app.fs
+                            UTextInput{
+                                id: tiDia
+                                label: 'Día:'
+                                width:app.fs*6//+diffWidth
+                                KeyNavigation.tab: tiMes
+                                regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
+                                maximumLength: 2
+                            }
+                            UTextInput{
+                                id: tiMes
+                                label: 'Mes:'
+                                width:app.fs*6//+diffWidth
+                                KeyNavigation.tab: tiAnio
+                                regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
+                                maximumLength: 2
+                            }
+                            UTextInput{
+                                id: tiAnio
+                                label: 'Año:'
+                                width:app.fs*6//+diffWidth
+                                KeyNavigation.tab: tiHora
+                                regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
+                                maximumLength: 4
+                            }
                         }
-                        UTextInput{
-                            id: tiMes
-                            label: 'Mes:'
-                            width:app.fs*6//+diffWidth
-                        }
-                        UTextInput{
-                            id: tiAnio
-                            label: 'Año:'
-                            width:app.fs*6//+diffWidth
+                        MouseArea{
+                            anchors.fill: parent
+                            onClicked: {
+                                calendario.visible=true
+                            }
                         }
                     }
                 }
@@ -114,11 +137,16 @@ Rectangle {
                             id: tiHora
                             label: 'Hora:'
                             width:app.fs*6//+diffWidth
+                            KeyNavigation.tab: tiMinutos
+                            regularExp: RegExpValidator{regExp:  /^([1-9])[0-9]/}
                         }
                         UTextInput{
                             id: tiMinutos
                             label: 'Mes:'
                             width:app.fs*6//+diffWidth
+                            KeyNavigation.tab: tiCiudad
+                            regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
+                            maximumLength: 2
                         }
                     }
                 }
@@ -132,6 +160,7 @@ Rectangle {
                         id: tiCiudad
                         label: ''
                         width:r.width-app.fs
+                        KeyNavigation.tab: botEnviar
                         onSeted: getCoords(text)
                     }
                     UText{
@@ -174,6 +203,7 @@ Rectangle {
                         id: botEnviar
                         text: 'Crear'
                         visible: tiNombre.text!==''&&tiDia.text!==''&&tiMes.text!==''&&tiAnio.text!==''&&tiHora.text!==''&&tiMinutos.text!==''&&r.lon!==''&&r.lat!==''
+                        KeyNavigation.tab: tiNombre
                         onClicked: {
                             if(unikSettings.sound){
                                 unik.speak('Creando carta natal. Un momento por favor. Espero unos segundos.')
@@ -184,6 +214,15 @@ Rectangle {
                     }
                 }
             }
+        }
+    }
+    UCalendar{
+        id: calendario
+        onVisibleChanged: {
+            xApp.focus=true
+        }
+        onSelected: {
+            enterForm()
         }
     }
     XCnView{id: xCnView;visible: false}
@@ -197,6 +236,9 @@ Rectangle {
         Component.onCompleted: {
             getHttp(app.serverUrl+':'+app.portRequest+'/ping')
         }
+    }
+    Component.onCompleted: {
+        tiNombre.focus=true
     }
     function getCoords(text){
         let md=["Seleccionar Ciudad"]
@@ -305,5 +347,63 @@ Rectangle {
         tiHora.focus=false
         tiMinutos.focus=false
     }
-
+    function upForm(){
+        var fecha = calendario.selectedDate;
+        fecha.setDate(fecha.getDate() - 1);
+        calendario.setTextInput=false
+        calendario.selectedDate=fecha
+    }
+    function downForm(){
+        var fecha = calendario.selectedDate;
+        fecha.setDate(fecha.getDate() + 1);
+        calendario.setTextInput=false
+        calendario.selectedDate=fecha
+    }
+    function rightForm(){
+        var fecha = calendario.selectedDate;
+        fecha.setMonth(fecha.getMonth() + 1);
+        calendario.setTextInput=false
+        calendario.selectedDate=fecha
+    }
+    function leftForm(){
+        var fecha = calendario.selectedDate;
+        fecha.setMonth(fecha.getMonth() - 1);
+        calendario.setTextInput=false
+        calendario.selectedDate=fecha
+    }
+    function shiftRightForm(){
+        var fecha = calendario.selectedDate;
+        fecha.setYear(fecha.getFullYear() + 1);
+        calendario.setTextInput=false
+        calendario.selectedDate=fecha
+    }
+    function shiftLeftForm(){
+        var fecha = calendario.selectedDate;
+        fecha.setYear(fecha.getFullYear() - 1);
+        calendario.setTextInput=false
+        calendario.selectedDate=fecha
+    }
+    function enterForm(){
+        if(calendario.visible){
+            let d = calendario.selectedDate
+            let dia=''+d.getDate()
+            if(d.getDate()<10){
+                dia='0'+dia
+            }
+            let mes=''+parseInt(d.getMonth()+1)
+            if(parseInt(d.getMonth()+1)<10){
+                mes='0'+mes
+            }
+            let an=''+d.getFullYear()
+            let s=''+dia+'/'+mes+'/'+an
+            tiDia.text=dia
+            tiMes.text=mes
+            tiAnio.text=an
+            calendario.visible=false
+        }
+    }
+    function escForm(){
+        calendario.parent=r
+        tiFolio.textInput.focus=true
+    }
 }

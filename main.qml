@@ -179,7 +179,7 @@ ApplicationWindow{
             XTransLunar{id: xTransLunar;visible: app.mod===5;}
             XTrans{id: xTrans;visible: app.mod===6;}*/
             //XGetCarta{}
-            XCnView{}
+            //XCnView{}
         }
         UProgressDownload{
             id:upd
@@ -199,10 +199,48 @@ ApplicationWindow{
         sequence: 'Esc'
         onActivated: Qt.quit()
     }
-//    Shortcut{
-//        sequence: 'Ctrl'
-//        onActivated: Qt.quit()
-//    }
+    Shortcut{
+        sequence: 'Up'
+        onActivated: {
+            xMods.children[0].upForm()
+        }
+    }
+    Shortcut{
+        sequence: 'Down'
+        onActivated: {
+            xMods.children[0].downForm()
+        }
+    }
+    Shortcut{
+        sequence: 'Right'
+        onActivated: {
+            xMods.children[0].rightForm()
+        }
+    }
+    Shortcut{
+        sequence: 'Left'
+        onActivated: {
+            xMods.children[0].leftForm()
+        }
+    }
+    Shortcut{
+        sequence: 'Shift+Right'
+        onActivated: {
+            xMods.children[0].shiftRightForm()
+        }
+    }
+    Shortcut{
+        sequence: 'Shift+Left'
+        onActivated: {
+            xMods.children[0].shiftLeftForm()
+        }
+    }
+    Shortcut{
+        sequence: 'Return'
+        onActivated: {
+            xMods.children[0].enterForm()
+        }
+    }
     Component.onCompleted: {
         if(Qt.platform.os==='linux'&&unikSettings.lang==='es'){
             unik.ttsLanguageSelected(13)
