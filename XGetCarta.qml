@@ -7,6 +7,7 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: app.c1
+    objectName: 'xgetcarta'
     property int cNumSigno: -1
     property int cGradoLuna: -1
     property string cSignoLuna: ''
@@ -216,13 +217,18 @@ Rectangle {
             }
         }
     }
-    UCalendar{
-        id: calendario
-        onVisibleChanged: {
-            xApp.focus=true
-        }
-        onSelected: {
-            enterForm()
+    Item{
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: app.isPhone?r.width:r.width*0.5
+        height: app.isPhone?r.height*0.5:r.height
+        UCalendar{
+            id: calendario
+            onVisibleChanged: {
+                xApp.focus=true
+            }
+            onSelected: {
+                enterForm()
+            }
         }
     }
     XCnView{id: xCnView;visible: false}
@@ -403,7 +409,11 @@ Rectangle {
         }
     }
     function escForm(){
-        calendario.parent=r
-        tiFolio.textInput.focus=true
+        if(calendario.visible){
+            calendario.visible=false
+            return
+        }
+        r.destroy(10)
+        app.mod=-2
     }
 }

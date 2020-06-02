@@ -197,7 +197,13 @@ ApplicationWindow{
     }
     Shortcut{
         sequence: 'Esc'
-        onActivated: Qt.quit()
+        onActivated: {
+            if(xMods.children[0]&&xMods.children[0].objectName==='xgetcarta'){
+                xMods.children[0].escForm()
+                return
+            }
+            Qt.quit()
+        }
     }
     Shortcut{
         sequence: 'Up'
