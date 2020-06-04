@@ -150,17 +150,43 @@ Rectangle {
                     UText{
                         text: '<b>Lugar de Nacimiento</b>'
                     }
-                    UTextInput{
-                        id: tiCiudad
-                        label: ''
-                        width:r.width-app.fs
-                        KeyNavigation.tab: botEnviar
-                        onSeted: getCoords(text)
+                    Row{
+                        spacing: app.fs*0.5
+                        UTextInput{
+                            id: tiCiudad
+                            label: ''
+                            width:r.width-app.fs-botSearch.width-app.fs*0.5
+                            KeyNavigation.tab: botSearch
+                            onSeted: getCoords(text)
+                            anchors.verticalCenter: parent.horizontalCenter
+                            onTextChanged: {
+                                botSearch.enabled=true
+                                statusLugar1.text=''
+                            }
+                        }
+                        BotonUX{
+                            id: botSearch
+                            text: 'Buscar'
+                            opacity: tiCiudad.text!==''?1.0:0.0
+                            KeyNavigation.tab: botEnviar
+                            anchors.verticalCenter: parent.horizontalCenter
+                            onClicked: {
+                                getCoords(tiCiudad.text)
+                            }
+                        }
                     }
-                    UText{
-                        id: statusLugar
-                        font.pixelSize: app.fs*0.5
-                        text: 'Ingresar ciudad'
+                    Row{
+                        spacing: app.fs*2
+                        UText{
+                            id: statusLugar1
+                            font.pixelSize: app.fs*0.5
+                            text: ''
+                        }
+                        UText{
+                            id: statusLugar
+                            font.pixelSize: app.fs*0.5
+                            text: 'Ingresar ciudad'
+                        }
                     }
                     UComboBox{
                         id: uCbCiudades
@@ -407,18 +433,18 @@ Rectangle {
             getCoords(tiCiudad.text)
             return
         }
+    }
+    function escForm(){
+        if(calendario.visible){
+            calendario.visible=false
+            return
+        }
         if(Qt.platform.os==='android'&&xCnView.mod===1){
             xCnView.mod=0
             return
         }
         if(Qt.platform.os==='android'&&xCnView.mod===0){
             xCnView.visible=false
-            return
-        }
-    }
-    function escForm(){
-        if(calendario.visible){
-            calendario.visible=false
             return
         }
         r.destroy(10)
