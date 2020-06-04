@@ -150,6 +150,14 @@ Rectangle {
                     UText{
                         text: '<b>Lugar de Nacimiento</b>'
                     }
+                    UText{
+                        text: 'Escribir Ciudad, Provincia o Región y País'
+                        font.pixelSize: app.fs*0.5
+                    }
+                    UText{
+                        text: 'Ejemplo: Rosario Santa Fe Argentina'
+                        font.pixelSize: app.fs*0.5
+                    }
                     Row{
                         spacing: app.fs*0.5
                         UTextInput{
@@ -161,7 +169,9 @@ Rectangle {
                             anchors.verticalCenter: parent.horizontalCenter
                             onTextChanged: {
                                 botSearch.enabled=true
-                                statusLugar1.text=''
+                                statusLugar.text='Presionar Boton <b>Buscar</b>'
+                                r.lat=''
+                                r.lon=''
                             }
                         }
                         BotonUX{
