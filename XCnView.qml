@@ -136,135 +136,142 @@ Rectangle {
             }
         }
     }
-//    Flickable{
-//        //anchors.fill: r
-//        id: flickCapture
-//        width: cnCapture.width
-//        height: cnCapture.height
-//        anchors.centerIn: r
-//        contentWidth: cnCapture.width
-//        contentHeight: cnCapture.height
-//        visible: r.mod===1
-//        XCnCapture{
-//            id: cnCapture
-//            transformOrigin: Item.TopLeft
-//            url: r.currentImgUrl
-//            onImageLoaded:botMod.imageLoaded=true
-//            onUrlChanged: botMod.imageLoaded=false
-//            //scale: 100/(2880-r.height)*2880
-//        }
-//        function zoomExtents(){
-//            // Resize image to fit in View
-//            var maxImageBounds = Math.max(cnCapture.width, cnCapture.height)
-//            var minViewBounds = Math.min(flickCapture.width, flickCapture.height)
-//            var mult = minViewBounds / maxImageBounds
-//            cnCapture.scale = mult * 0.99
+    Flickable{
+        //anchors.fill: r
+        id: flickCapture
+        width: cnCapture.width
+        height: cnCapture.height
+        anchors.centerIn: r
+        contentWidth: cnCapture.width
+        contentHeight: cnCapture.height
+        visible: r.mod===1&&Qt.platform.os!=='android'
+        XCnCapture{
+            id: cnCapture
+            transformOrigin: Item.TopLeft
+            url: r.currentImgUrl
+            onImageLoaded:botMod.imageLoaded=true
+            onUrlChanged: botMod.imageLoaded=false
+            //scale: 100/(2880-r.height)*2880
+        }
+        function zoomExtents(){
+            // Resize image to fit in View
+            var maxImageBounds = Math.max(cnCapture.width, cnCapture.height)
+            var minViewBounds = Math.min(flickCapture.width, flickCapture.height)
+            var mult = minViewBounds / maxImageBounds
+            cnCapture.scale = mult * 0.99
 
-//            // Center image in view: Works when image's transformOrigin is Center
-//            cnCapture.x = flick.contentX + (flickCapture.width - cnCapture.width) * 0.5
-//            cnCapture.y = flick.contentY + (flickCapture.height - cnCapture.height) * 0.5
-//        }
+            // Center image in view: Works when image's transformOrigin is Center
+            cnCapture.x = flick.contentX + (flickCapture.width - cnCapture.width) * 0.5
+            cnCapture.y = flick.contentY + (flickCapture.height - cnCapture.height) * 0.5
+        }
 
-//        // Zoom About Cursor
-//        function zoom(delta, target, x, y){
-//            // positive delta zoom in, negative delta zoom out
+        // Zoom About Cursor
+        function zoom(delta, target, x, y){
+            // positive delta zoom in, negative delta zoom out
 
-//            var scaleBefore = target.scale;
-//            var zoomFactor = 0.8
-//            if (delta > 0)
-//            {
-//                zoomFactor = 1.0/zoomFactor;
-//            }
+            var scaleBefore = target.scale;
+            var zoomFactor = 0.8
+            if (delta > 0)
+            {
+                zoomFactor = 1.0/zoomFactor;
+            }
 
-//            // Zoom the target
-//            target.scale = target.scale * zoomFactor;
+            // Zoom the target
+            target.scale = target.scale * zoomFactor;
 
-//            // X,Y coordinates of zoom location relative to top left corner
-//            // Calculate displacement of zooming position
-//            var dx = (x - target.x) * (zoomFactor - 1)
-//            var dy = (y - target.y) * (zoomFactor - 1)
+            // X,Y coordinates of zoom location relative to top left corner
+            // Calculate displacement of zooming position
+            var dx = (x - target.x) * (zoomFactor - 1)
+            var dy = (y - target.y) * (zoomFactor - 1)
 
-//            // Compensate for displacement
-//            target.x = target.x - dx
-//            target.y = target.y - dy
-//        }
-//        MouseArea {
-//            id: dragAreaCapture
-//            hoverEnabled: true
-//            anchors.fill: parent
-//            enabled: Qt.platform.os!=='android'
-//            drag.target: cnCapture
-//            property  real ud
-//            onDoubleClicked:
-//            {
-//                flickCapture.zoomExtents()
-//            }
+            // Compensate for displacement
+            target.x = target.x - dx
+            target.y = target.y - dy
+        }
+        MouseArea {
+            id: dragAreaCapture
+            hoverEnabled: true
+            anchors.fill: parent
+            enabled: Qt.platform.os!=='android'
+            drag.target: cnCapture
+            property  real ud
+            onDoubleClicked:
+            {
+                flickCapture.zoomExtents()
+            }
 
-//            onWheel:
-//            {
+            onWheel:
+            {
 
-//                var delta = wheel.angleDelta.y / 120.0
-//                if(cnCapture.scale>2.0){
-//                    flickCapture.zoom(0-ud, cnCapture, mouseX, mouseY)
-//                    //return
-//                }else if(cn.scale<0.5){
-//                    flickCapture.zoom(0-ud, cnCapture, mouseX, mouseY)
-//                }else{
-//                    flickCapture.zoom(delta, cnCapture, mouseX, mouseY)
-//                }
-//                ud=delta
-//            }
-//        }
-//        MouseArea {
-//            id: dragAreaPhoneCapture
-//            hoverEnabled: true
-//            anchors.fill: parent
-//            enabled: Qt.platform.os==='android'
-//            property bool inc: false
-//            drag.target: cnCapture
-//            onPressAndHold: {
-//                tzCapture.zoom=!tzCapture.zoom
-//            }
-//            //            onPressed: {
+                var delta = wheel.angleDelta.y / 120.0
+                if(cnCapture.scale>2.0){
+                    flickCapture.zoom(0-ud, cnCapture, mouseX, mouseY)
+                    //return
+                }else if(cn.scale<0.5){
+                    flickCapture.zoom(0-ud, cnCapture, mouseX, mouseY)
+                }else{
+                    flickCapture.zoom(delta, cnCapture, mouseX, mouseY)
+                }
+                ud=delta
+            }
+        }
+        MouseArea {
+            id: dragAreaPhoneCapture
+            hoverEnabled: true
+            anchors.fill: parent
+            enabled: Qt.platform.os==='android'
+            property bool inc: false
+            drag.target: cnCapture
+            onPressAndHold: {
+                tzCapture.zoom=!tzCapture.zoom
+            }
+            //            onPressed: {
 
-//            //            }
-//            onReleased: {
-//                tzCapture.running=false
-//            }
-//            //            onClicked: {
-//            //                var delta = 60 / 120.0
-//            //                flick.zoom(delta, cn, dragAreaPhone.mouseX, dragAreaPhone.mouseY)
-//            //                inc=true
-//            //            }
-//            onDoubleClicked:{
-//                flickCapture.zoomExtents()
-//            }
-//            Timer{
-//                id: tzCapture
-//                running: false
-//                repeat: true
-//                interval: 100
-//                property bool zoom: false
-//                onZoomChanged: tzCapture.running=true
-//                onTriggered: {
-//                    let a=60
-//                    if(!zoom){
-//                        a=-60
-//                    }
-//                    var delta = a / 120.0
-//                    flickCapture.zoom(delta, cnCapture, dragAreaPhoneCapture.mouseX, dragAreaPhoneCapture.mouseY)
-//                }
-//            }
-//        }
-//    }
+            //            }
+            onReleased: {
+                tzCapture.running=false
+            }
+            //            onClicked: {
+            //                var delta = 60 / 120.0
+            //                flick.zoom(delta, cn, dragAreaPhone.mouseX, dragAreaPhone.mouseY)
+            //                inc=true
+            //            }
+            onDoubleClicked:{
+                flickCapture.zoomExtents()
+            }
+            Timer{
+                id: tzCapture
+                running: false
+                repeat: true
+                interval: 100
+                property bool zoom: false
+                onZoomChanged: tzCapture.running=true
+                onTriggered: {
+                    let a=60
+                    if(!zoom){
+                        a=-60
+                    }
+                    var delta = a / 120.0
+                    flickCapture.zoom(delta, cnCapture, dragAreaPhoneCapture.mouseX, dragAreaPhoneCapture.mouseY)
+                }
+            }
+        }
+    }
 
-    WebView{
-        id: wv
+    Rectangle{
         width: r.width
         height: r.height
-        visible: r.mod===1
-        function loadImage(url){
-            wv.loadHtml('<html><body style="background-color:black; width:200%"><img src="'+url+'" style="width:100%; margin: 0 auto;"/></body></html>', 'http://localhost')
+        color: 'black'
+        anchors.centerIn: r
+        WebView{
+            id: wv
+            width: r.width
+            height: r.height*0.5
+            anchors.centerIn: r
+            visible: r.mod===1&&Qt.platform.os==='android'
+            function loadImage(url){
+                wv.loadHtml('<html><body style="background-color:black; width:200%"><img src="'+url+'" style="width:100%;"/></body></html>', 'http://localhost')
+            }
         }
     }
     Row{
@@ -284,24 +291,24 @@ Rectangle {
             }
         }
     }
-//    Text{
-//        id: iz
-//        text: 'S:'+cnCapture.scale//parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
-//        //text: 'url:'+cnCapture.url
-//        //text: 'X:'+cn.ppx
-//        font.pixelSize: 30
-//        color: 'red'
-//    }
+    //    Text{
+    //        id: iz
+    //        text: 'S:'+cnCapture.scale//parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
+    //        //text: 'url:'+cnCapture.url
+    //        //text: 'X:'+cn.ppx
+    //        font.pixelSize: 30
+    //        color: 'red'
+    //    }
     Timer{
         id: tAlejar
         running: true
         repeat: true
         interval: 100
         onTriggered: {
-             if(cnCapture.scale<0.3){
+            if(cnCapture.scale<0.3){
                 stop()
-                 return
-             }
+                return
+            }
             flickCapture.zoom(-120/120, cnCapture, cnCapture.width*0.5, cnCapture.height*0.5)
         }
     }
