@@ -271,10 +271,10 @@ Rectangle {
         WebView{
             id: wv
             width: r.width
-            height: r.height*0.5
+            height: r.height
             anchors.centerIn: parent
             function loadImage(url){
-                wv.loadHtml('<html><body style="background-color:black; width:200%"><img src="'+url+'" style="width:100%;"/></body></html>', 'http://localhost')
+                wv.loadHtml('<html><body style="background-color:black; width:200%"><img src="'+url+'" style="width:100%; margin-top:50%;"/></body></html>', 'http://localhost')
             }
         }
     }
