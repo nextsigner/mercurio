@@ -48,13 +48,6 @@ Rectangle {
                         r.destroy(10)
                     }
                 }
-                BotonUX{
-                    text: 'Detener Voz'
-                    fontSize: app.rot?app.fs*0.5:app.fs
-                    onClicked: {
-                        unik.speak('Detenido.')
-                    }
-                }
             }
             Text{
                 width: xApp.width-app.fs*2
@@ -223,7 +216,7 @@ Rectangle {
         height: app.isPhone?r.height*0.5:r.height
         UCalendar{
             id: calendario
-            visible: true
+            //visible: true
             onVisibleChanged: {
                 xApp.focus=true
             }
@@ -329,6 +322,7 @@ Rectangle {
     }
     function getJsonData(file){
         let url=r.serverUrl+':'+r.portFiles+'/files/'+file+'.json'
+        xCnView.currentImgUrl=r.serverUrl+':'+r.portFiles+'/files/'+file+'.png'
         console.log('Get json data from '+url)
         var req = new XMLHttpRequest();
         req.open('GET', url, true);
@@ -407,6 +401,9 @@ Rectangle {
             tiMes.text=mes
             tiAnio.text=an
             calendario.visible=false
+        }
+        if(tiCiudad.focus){
+            getCoords(tiCiudad.text)
         }
     }
     function escForm(){

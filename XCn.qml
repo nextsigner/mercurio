@@ -261,44 +261,8 @@ Rectangle {
         anchors.fill: r
         XAs{id:xSol;fs:r.fs;astro:'sun'}
         XAs{id:xLuna;fs:r.fs;astro:'moon'}
-        Item{
-            id: xMercurio
-            width: parent.width-r.fs*3
-            height: 1
-            anchors.centerIn: parent
-            Item{
-                width: r.fs*1.5
-                height: width
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                Image {
-                    source: "./resources/imgs/planetas/mercurio.png"
-                    width: parent.width
-                    height: width
-                    anchors.centerIn: parent
-                    rotation: 0-parent.parent.rotation
-                }
-            }
-        }
-        Item{
-            id: xVenus
-            width: parent.width-r.fs*3
-            height: 1
-            anchors.centerIn: parent
-            Item{
-                width: r.fs*1.5
-                height: width
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                Image {
-                    source: "./resources/imgs/planetas/venus.png"
-                    width: parent.width
-                    height: width
-                    anchors.centerIn: parent
-                    rotation: 0-parent.parent.rotation
-                }
-            }
-        }
+        XAs{id:xMercurio;fs:r.fs;astro:'mercury'}
+        XAs{id:xVenus;fs:r.fs;astro:'venus'}
         Item{
             id: xMarte
             width: parent.width-r.fs*3
