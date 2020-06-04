@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import Qt.labs.settings 1.0
-import "func.js" as JS
+import QtWebView 1.0
 
 Rectangle {
     id: r
@@ -254,6 +254,15 @@ Rectangle {
                     flickCapture.zoom(delta, cnCapture, dragAreaPhoneCapture.mouseX, dragAreaPhoneCapture.mouseY)
                 }
             }
+        }
+    }
+    WebView{
+        id: wv
+        width: r.width
+        height: r.height
+        //url:'http://www.unikode.org/'
+        Component.onCompleted: {
+            wv.loadHtml('<html><body><img src="http://66.97.44.29:8081/files/1591237517000_Ricardo.png" style="width:100%"/></body></html>', 'http://localhost')
         }
     }
     Row{
