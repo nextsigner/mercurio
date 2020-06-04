@@ -13,6 +13,7 @@ Rectangle {
     onVisibleChanged: {
         cnCapture.url=currentImgUrl
     }
+    onCurrentImgUrlChanged: wv.loadImage(currentImgUrl)
     Settings{
         id: sCnView
         fileName: pws+'/'+app.moduleName+'/scnview'
@@ -263,11 +264,12 @@ Rectangle {
         height: r.height
         visible: r.mod===1
         function loadImage(url){
-            wv.loadHtml('<html><body style="background-color:black"><img src="'+url+'" style="width:100%"/></body></html>', 'http://localhost')
+            wv.loadHtml('<html><body style="background-color:black; width:200%"><img src="'+url+'" style="width:100%; margin: 0 auto;"/></body></html>', 'http://localhost')
         }
     }
     Row{
         spacing: app.fs
+        z:wv.z+1
         BotonUX{
             text: 'atras'
             onClicked: r.visible=false
