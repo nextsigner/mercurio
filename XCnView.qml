@@ -149,7 +149,11 @@ Rectangle {
             id: cnCapture
             transformOrigin: Item.TopLeft
             url: r.currentImgUrl
-            onImageLoaded:botMod.imageLoaded=true
+            onImageLoaded:{
+                botMod.imageLoaded=true
+                let d=new Date(Date.now())
+                wv.loadImage(r.currentImgUrl+'?r='+d.getTime())
+            }
             onUrlChanged: botMod.imageLoaded=false
             //scale: 100/(2880-r.height)*2880
         }
