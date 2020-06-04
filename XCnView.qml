@@ -263,12 +263,12 @@ Rectangle {
         height: r.height
         color: 'black'
         anchors.centerIn: r
+        visible: r.mod===1&&Qt.platform.os==='android'
         WebView{
             id: wv
             width: r.width
             height: r.height*0.5
-            anchors.centerIn: r
-            visible: r.mod===1&&Qt.platform.os==='android'
+            anchors.centerIn: parent
             function loadImage(url){
                 wv.loadHtml('<html><body style="background-color:black; width:200%"><img src="'+url+'" style="width:100%;"/></body></html>', 'http://localhost')
             }
@@ -276,7 +276,7 @@ Rectangle {
     }
     Row{
         spacing: app.fs
-        z:wv.z+1
+        z:wv.z+100000
         BotonUX{
             text: 'atras'
             onClicked: r.visible=false
