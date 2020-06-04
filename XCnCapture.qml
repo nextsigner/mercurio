@@ -23,8 +23,10 @@ Rectangle {
         anchors.centerIn: parent
         property int v: 0
         onStatusChanged: {
-            if(cnImage.status===Image.Ready||cnImage.status===Image.Loading){
+            if(cnImage.status===Image.Ready){
                 imageLoaded()
+            }
+            if(cnImage.status===Image.Loading){
                 tReload.stop()
             }
 

@@ -35,6 +35,10 @@ ApplicationWindow{
             Qt.quit()
         }else{
             close.accepted = false
+            if(xMods.children[0]&&xMods.children[0].objectName==='xgetcarta'){
+                xMods.children[0].escForm()
+                return
+            }
             app.mod=-1
         }
 

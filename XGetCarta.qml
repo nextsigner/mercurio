@@ -401,9 +401,19 @@ Rectangle {
             tiMes.text=mes
             tiAnio.text=an
             calendario.visible=false
+            return
         }
         if(tiCiudad.focus){
             getCoords(tiCiudad.text)
+            return
+        }
+        if(Qt.platform.os==='android'&&xCnView.mod===1){
+            xCnView.mod=0
+            return
+        }
+        if(Qt.platform.os==='android'&&xCnView.mod===0){
+            xCnView.visible=false
+            return
         }
     }
     function escForm(){
