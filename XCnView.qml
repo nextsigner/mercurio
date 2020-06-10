@@ -135,6 +135,28 @@ Rectangle {
                 }
             }
         }
+        Item{
+            id: xPlanetas
+            anchors.fill: parent
+            XAs{id:xSol;fs:cn.fs;astro:'sun'; numAstro: 0}
+            XAs{id:xLuna;fs:cn.fs;astro:'moon'; numAstro: 1}
+            XAs{id:xMercurio;fs:cn.fs;astro:'mercury'; numAstro: 2}
+            XAs{id:xVenus;fs:cn.fs;astro:'venus'; numAstro: 3}
+            XAs{id:xMarte;fs:cn.fs;astro:'mars'; numAstro: 4}
+            XAs{id:xJupiter;fs:cn.fs;astro:'jupiter'; numAstro: 5}
+            XAs{id:xSaturno;fs:cn.fs;astro:'saturn'; numAstro: 6}
+            XAs{id:xUrano;fs:cn.fs;astro:'uranus'; numAstro: 7}
+            XAs{id:xNeptuno;fs:cn.fs;astro:'neptune'; numAstro: 8}
+            XAs{id:xPluton;fs:cn.fs;astro:'pluto'; numAstro: 9}
+            XAs{id:xQuiron;fs:cn.fs;astro:'hiron'; numAstro: 10}
+            XAs{id:xProserpina;fs:cn.fs;astro:'proserpina'; numAstro: 11}
+            XAs{id:xSelena;fs:cn.fs;astro:'selena'; numAstro: 12}
+            XAs{id:xLilith;fs:cn.fs;astro:'lilith'; numAstro: 13}
+            function pressed(num, numSign){
+                    unik.speak(''+app.planetas[num]+' en el signo '+app.signos[numSign])
+            }
+        }
+
     }
     Flickable{
         //anchors.fill: r

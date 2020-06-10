@@ -259,24 +259,28 @@ Rectangle {
         color: r.color
         anchors.centerIn: r
     }
-    Item{
-        id: xPlanetas
-        anchors.fill: r
-        XAs{id:xSol;fs:r.fs;astro:'sun'}
-        XAs{id:xLuna;fs:r.fs;astro:'moon'}
-        XAs{id:xMercurio;fs:r.fs;astro:'mercury'}
-        XAs{id:xVenus;fs:r.fs;astro:'venus'}
-        XAs{id:xMarte;fs:r.fs;astro:'mars'}
-        XAs{id:xJupiter;fs:r.fs;astro:'jupiter'}
-        XAs{id:xSaturno;fs:r.fs;astro:'saturn'}
-        XAs{id:xUrano;fs:r.fs;astro:'uranus'}
-        XAs{id:xNeptuno;fs:r.fs;astro:'neptune'}
-        XAs{id:xPluton;fs:r.fs;astro:'pluto'}
-        XAs{id:xQuiron;fs:r.fs;astro:'hiron'}
-        XAs{id:xProserpina;fs:r.fs;astro:'proserpina'}
-        XAs{id:xSelena;fs:r.fs;astro:'selena'}
-        XAs{id:xLilith;fs:r.fs;astro:'lilith'}
-    }
+//    Item{
+//        id: xPlanetas
+//        anchors.fill: r
+//        XAs{id:xSol;fs:r.fs;astro:'sun'; numAstro: 0}
+//        XAs{id:xLuna;fs:r.fs;astro:'moon'; numAstro: 1}
+//        XAs{id:xMercurio;fs:r.fs;astro:'mercury'; numAstro: 2}
+//        XAs{id:xVenus;fs:r.fs;astro:'venus'; numAstro: 3}
+//        XAs{id:xMarte;fs:r.fs;astro:'mars'; numAstro: 4}
+//        XAs{id:xJupiter;fs:r.fs;astro:'jupiter'; numAstro: 5}
+//        XAs{id:xSaturno;fs:r.fs;astro:'saturn'; numAstro: 6}
+//        XAs{id:xUrano;fs:r.fs;astro:'uranus'; numAstro: 7}
+//        XAs{id:xNeptuno;fs:r.fs;astro:'neptune'; numAstro: 8}
+//        XAs{id:xPluton;fs:r.fs;astro:'pluto'; numAstro: 9}
+//        XAs{id:xQuiron;fs:r.fs;astro:'hiron'; numAstro: 10}
+//        XAs{id:xProserpina;fs:r.fs;astro:'proserpina'; numAstro: 11}
+//        XAs{id:xSelena;fs:r.fs;astro:'selena'; numAstro: 12}
+//        XAs{id:xLilith;fs:r.fs;astro:'lilith'; numAstro: 13}
+//        function pressed(num){
+//                unik.speak(''+app.planetas[num])
+//        }
+//    }
+
     Component.onCompleted: {
         let json='{"params":{"ms":"1590969573745","n":"Ricardo","a":"1975","m":"06","d":"20","h":"23","min":"00","gmt":"-3","lat":"-35.484462","lon":"-69.5797495"},"psc":{"sun":{"g":29,"m":6,"s":"gem","h":5,"rh":"v"},"moon":{"g":26,"m":51,"s":"sco","h":10,"rh":"x"},"mercury":{"g":15,"m":6,"s":"gem","h":4,"rh":"iv"},"venus":{"g":14,"m":27,"s":"leo","h":6,"rh":"vi"},"mars":{"g":22,"m":45,"s":"ari","h":3,"rh":"iii"},"jupiter":{"g":20,"m":11,"s":"ari","h":3,"rh":"iii"},"saturn":{"g":19,"m":22,"s":"cnc","h":5,"rh":"v"},"uranus":{"g":28,"m":28,"s":"lib","h":9,"rh":"ix"},"neptune":{"g":9,"m":54,"s":"sgr","h":10,"rh":"x"},"pluto":{"g":6,"m":29,"s":"lib","h":8,"rh":"viii"},"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"},"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"},"hiron":{"g":27,"m":25,"s":"ari","h":3,"rh":"iii"},"proserpina":{"g":28,"m":3,"s":"lib","h":9,"rh":"ix"},"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"},"lilith":{"g":15,"m":11,"s":"psc","h":1,"rh":"i"}},"pc":{"h1":{"s":"aqr","g":26,"m":9},"h2":{"s":"psc","g":20,"m":8},"h3":{"s":"ari","g":18,"m":46},"h4":{"s":"tau","g":21,"m":29},"h5":{"s":"gem","g":25,"m":27},"h6":{"s":"cnc","g":27,"m":24},"h7":{"s":"leo","g":26,"m":9},"h8":{"s":"vir","g":20,"m":8},"h9":{"s":"lib","g":18,"m":46},"h10":{"s":"sco","g":21,"m":29},"h11":{"s":"sgr","g":25,"m":27},"h12":{"s":"cap","g":27,"m":24}}}'
         setJson(json)
@@ -347,59 +351,73 @@ Rectangle {
 
         xSol.rotation=0-vRSol+r.sigRot-json.psc.sun.g
         xSol.pos=objSigns[objSignsNames.indexOf(json.psc.sun.s)]
+        xSol.numSign=objSignsNames.indexOf(json.psc.sun.s)
         objSigns[objSignsNames.indexOf(json.psc.sun.s)]++
 
         xLuna.rotation=0-vRLuna+r.sigRot-json.psc.moon.g
         xLuna.pos=objSigns[objSignsNames.indexOf(json.psc.moon.s)]
+        xLuna.numSign=objSignsNames.indexOf(json.psc.moon.s)
         objSigns[objSignsNames.indexOf(json.psc.moon.s)]++
 
         xMercurio.rotation=0-vRMer+r.sigRot-json.psc.mercury.g
         xMercurio.pos=objSigns[objSignsNames.indexOf(json.psc.mercury.s)]
+        xMercurio.numSign=objSignsNames.indexOf(json.psc.mercury.s)
         objSigns[objSignsNames.indexOf(json.psc.mercury.s)]++
 
         xVenus.rotation=0-vRVenus+r.sigRot-json.psc.venus.g
         xVenus.pos=objSigns[objSignsNames.indexOf(json.psc.venus.s)]
+        xVenus.numSign=objSignsNames.indexOf(json.psc.venus.s)
         objSigns[objSignsNames.indexOf(json.psc.venus.s)]++
 
         xMarte.rotation=0-vRMarte+r.sigRot-json.psc.mars.g
         xMarte.pos=objSigns[objSignsNames.indexOf(json.psc.mars.s)]
+        xMarte.numSign=objSignsNames.indexOf(json.psc.mars.s)
         objSigns[objSignsNames.indexOf(json.psc.mars.s)]++
 
         xJupiter.rotation=0-vRJupiter+r.sigRot-json.psc.jupiter.g
-        objSigns[objSignsNames.indexOf(json.psc.jupiter.s)]++
         xJupiter.pos=objSigns[objSignsNames.indexOf(json.psc.jupiter.s)]
+        xJupiter.numSign=objSignsNames.indexOf(json.psc.jupiter.s)
+        objSigns[objSignsNames.indexOf(json.psc.jupiter.s)]++
 
 
         xSaturno.rotation=0-vRSaturno+r.sigRot-json.psc.saturn.g
         xSaturno.pos=objSigns[objSignsNames.indexOf(json.psc.saturn.s)]
+        xSaturno.numSign=objSignsNames.indexOf(json.psc.saturn.s)
         objSigns[objSignsNames.indexOf(json.psc.saturn.s)]++
 
         xUrano.rotation=0-vRUrano+r.sigRot-json.psc.uranus.g
         xUrano.pos=objSigns[objSignsNames.indexOf(json.psc.uranus.s)]
+        xUrano.numSign=objSignsNames.indexOf(json.psc.uranus.s)
         objSigns[objSignsNames.indexOf(json.psc.uranus.s)]++
 
         xNeptuno.rotation=0-vRNeptuno+r.sigRot-json.psc.neptune.g
         xNeptuno.pos=objSigns[objSignsNames.indexOf(json.psc.neptune.s)]
+        xNeptuno.numSign=objSignsNames.indexOf(json.psc.neptune.s)
         objSigns[objSignsNames.indexOf(json.psc.neptune.s)]++
 
         xPluton.rotation=0-vRPluto+r.sigRot-json.psc.pluto.g
         xPluton.pos=objSigns[objSignsNames.indexOf(json.psc.pluto.s)]
+        xPluton.numSign=objSignsNames.indexOf(json.psc.pluto.s)
         objSigns[objSignsNames.indexOf(json.psc.pluto.s)]++
 
         xQuiron.rotation=0-vRQuiron+r.sigRot-json.psc.hiron.g
         xQuiron.pos=objSigns[objSignsNames.indexOf(json.psc.hiron.s)]
+        xQuiron.numSign=objSignsNames.indexOf(json.psc.hiron.s)
         objSigns[objSignsNames.indexOf(json.psc.hiron.s)]++
 
         xProserpina.rotation=0-vRProserpina+r.sigRot-json.psc.proserpina.g
         xProserpina.pos=objSigns[objSignsNames.indexOf(json.psc.proserpina.s)]
+        xProserpina.numSign=objSignsNames.indexOf(json.psc.proserpina.s)
         objSigns[objSignsNames.indexOf(json.psc.proserpina.s)]++
 
         xSelena.rotation=0-vRSelena+r.sigRot-json.psc.selena.g
         xSelena.pos=objSigns[objSignsNames.indexOf(json.psc.selena.s)]
+        xSelena.numSign=objSignsNames.indexOf(json.psc.selena.s)
         objSigns[objSignsNames.indexOf(json.psc.selena.s)]++
 
         xLilith.rotation=0-vRLilith+r.sigRot-json.psc.lilith.g
         xLilith.pos=objSigns[objSignsNames.indexOf(json.psc.lilith.s)]
+        xLilith.numSign=objSignsNames.indexOf(json.psc.lilith.s)
         objSigns[objSignsNames.indexOf(json.psc.lilith.s)]++
         //console.log('JPosAll:'+r.objSigns.toString())
         //logView.showLog(json.pc.h1.g)
