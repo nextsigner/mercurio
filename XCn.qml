@@ -266,63 +266,9 @@ Rectangle {
         XAs{id:xMarte;fs:r.fs;astro:'mars'}
         XAs{id:xJupiter;fs:r.fs;astro:'jupiter'}
         XAs{id:xSaturno;fs:r.fs;astro:'saturn'}
-        Item{
-            id: xUrano
-            width: parent.width-r.fs*3
-            height: 1
-            anchors.centerIn: parent
-            Item{
-                width: r.fs*1.5
-                height: width
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                Image {
-                    source: "./resources/imgs/planetas/urano.png"
-                    width: parent.width
-                    height: width
-                    anchors.centerIn: parent
-                    rotation: 0-parent.parent.rotation
-                }
-            }
-        }
-        Item{
-            id: xNeptuno
-            width: parent.width-r.fs*3
-            height: 1
-            anchors.centerIn: parent
-            Item{
-                width: r.fs*1.5
-                height: width
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                Image {
-                    source: "./resources/imgs/planetas/neptuno.png"
-                    width: parent.width
-                    height: width
-                    anchors.centerIn: parent
-                    rotation: 0-parent.parent.rotation
-                }
-            }
-        }
-        Item{
-            id: xPluton
-            width: parent.width-r.fs*3
-            height: 1
-            anchors.centerIn: parent
-            Item{
-                width: r.fs*1.5
-                height: width
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                Image {
-                    source: "./resources/imgs/planetas/pluton.png"
-                    width: parent.width
-                    height: width
-                    anchors.centerIn: parent
-                    rotation: 0-parent.parent.rotation
-                }
-            }
-        }
+        XAs{id:xUrano;fs:r.fs;astro:'uranus'}
+        XAs{id:xNeptuno;fs:r.fs;astro:'neptune'}
+        XAs{id:xPluton;fs:r.fs;astro:'pluto'}
         Item{
             id: xQuiron
             width: parent.width-r.fs*3
