@@ -2,11 +2,12 @@ import QtQuick 2.0
 
 Item{
     id: r
-    width: parent.width-r.fs*3
+    width: parent.width-r.fs*3-(r.fs*pos)
     height: 1
     anchors.centerIn: parent
     property string astro
     property int fs
+    property int pos: 1
     Item{
         width: r.fs
         height: width
