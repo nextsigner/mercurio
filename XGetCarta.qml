@@ -18,6 +18,8 @@ Rectangle {
     property string lon: ''
     property string lat: ''
 
+    property int mod: 0
+
     onVisibleChanged: {
         r.focus=visible
         if(visible){
@@ -41,24 +43,33 @@ Rectangle {
                 spacing: app.fs
                 BotonUX{
                     text: 'Atras'
-                    fontSize: app.rot?app.fs*0.5:app.fs
+                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     onClicked: {
                         unik.speak('atras')
                         app.mod=-2
                         r.destroy(10)
                     }
                 }
+                BotonUX{
+                    text: r.mod===0?'Cartas Disponibles':'Crear Carta'
+                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
+                    onClicked: {
+                        r.mod=r.mod===0?1:0
+                    }
+                }
             }
-            Text{
-                width: xApp.width-app.fs*2
-                text: '<b>Crear Carta Natal</b><br />'//+app.serverUrl+':'+app.portRequest
-                color: app.c2
-                font.pixelSize: app.fs*1
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
+
             Column{
+                visible: r.mod===0
                 spacing: app.fs*2
                 anchors.horizontalCenter: parent.horizontalCenter
+                Text{
+                    width: xApp.width-app.fs*2
+                    text: '<b>Crear Carta Natal</b><br />'//+app.serverUrl+':'+app.portRequest
+                    color: app.c2
+                    font.pixelSize: app.fs*1
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
                 Column{
                     spacing: app.fs*0.5
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -244,6 +255,7 @@ Rectangle {
                     }
                 }
             }
+            XCnListDisp{id: xCnListDisp}
         }
     }
     Item{
