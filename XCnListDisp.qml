@@ -19,7 +19,7 @@ Item {
         ListView{
             id: lvCns
             width: r.width
-            height: r.height
+            height: r.height-app.fs*4
             model: flmCns
             delegate: compCns
             spacing: app.fs*0.25

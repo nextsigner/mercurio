@@ -64,6 +64,7 @@ Rectangle {
                     visible: r.mod===1&&xCnListDisp.cFileName!==''
                     onClicked: {
                         xCnView.xcn.setJson(unik.getFile('./cns/'+xCnListDisp.cFileName))
+                        xCnListDisp.cFileName=''
                         xCnView.visible=true
                         r.mod=0
                     }
@@ -73,6 +74,7 @@ Rectangle {
                     text: 'Eliminar'
                     onClicked: {
                         unik.deleteFile('./cns/'+xCnListDisp.cFileName)
+                        xCnListDisp.cFileName=''
                     }
                 }
             }
