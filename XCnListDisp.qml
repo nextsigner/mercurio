@@ -27,8 +27,9 @@ Item {
             Component{
                 id: compCns
                 Rectangle{
+                    id: xItemCnFile
                     width: parent.width-app.fs
-                    height: app.fs*2
+                    height: txtFN.contentHeight+app.fs
                     color: r.cFileName===fileName?app.c2:app.c1
                     border.width: 2
                     border.color: r.cFileName===fileName?app.c1:app.c2
@@ -44,8 +45,11 @@ Item {
                         UText{
                             id: txtFN
                             text: fileName
+                            width: xItemCnFile.width-app.fs
                             color: r.cFileName===fileName?app.c1:app.c2
                             anchors.verticalCenter: parent.verticalCenter
+                            wrapMode: Text.WordWrap
+                            horizontalAlignment: Text.AlignHCenter
                         }
                     }
                     Component.onCompleted: {
