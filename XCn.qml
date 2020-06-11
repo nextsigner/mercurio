@@ -14,8 +14,10 @@ Rectangle {
     property var arrayCasas2: ['VII', 'VII', 'IX', 'X', 'XI', 'XII']
     property string borderColor: app.c2
     property var arrayElementsColors: ['#E7B70B', 'brown', '#16E9F6', '#118CC8']
-    property int sigRot: 30
+    property int sigRot: 0
     property color axisColor: 'red'
+
+    property string cAscName: '?'
 
     property int ppx: 50
     property real zf: 0.5
@@ -36,19 +38,20 @@ Rectangle {
                 rotation: 0-index*30
                 Rectangle{
                     width: parent.width-r.fs
-                    height: 1
+                    height: 3
                     color: 'red'
                     anchors.centerIn: parent
                     antialiasing: true
                 }
                 Text{
-                    text: modelData
+                    text: index!==0?modelData:'Asc\n'+r.cAscName
                     font.pixelSize: r.fs
                     color: 'white'
                     anchors.right: parent.left
                     //anchors.rightMargin: r.fs
                     anchors.verticalCenter: parent.verticalCenter
                     rotation: index*30
+                    horizontalAlignment: index!==0?Text.AlignHCenter:Text.AlignRight
                 }
                 Text{
                     text: r.arrayCasas2[index]
@@ -88,6 +91,7 @@ Rectangle {
                 anchors.centerIn: parent
                 rotation: 0-index*30
                 antialiasing: true
+                //clip: true
                 property color c: index===0?'gray':'green'
                 Repeater{
                     id: repG
@@ -95,8 +99,7 @@ Rectangle {
                     Rectangle{
                         id: xG
                         width: parent.width
-                        height: r.fs*0.5
-                        //anchors.centerIn: parent
+                        height: index!==0?r.width*0.01:r.width*0.0075//r.fs*0.5
                         rotation: 0-index*1
                         color: 'transparent'//parent.c
                         antialiasing: true
@@ -186,17 +189,20 @@ Rectangle {
     }
     Item {
         anchors.fill: parent
+        //        width: r.width
+        //        height: r.height
+        //        anchors.centerIn: r
         Repeater{
             model: 2
             Item{
                 width: r.width
-                height: 2
+                height: 3
                 anchors.centerIn: parent
                 rotation: 0-index*90
                 Rectangle{
                     id: lineAxis
                     width: parent.width-r.fs
-                    height: 1
+                    height: 3
                     color: r.axisColor
                     anchors.centerIn: parent
                     antialiasing: true
@@ -216,6 +222,9 @@ Rectangle {
                             tagHor.visible=true
                         }
                         onExited: tagHor.visible=false
+                        onClicked: {
+                            unik.speak('Ascendente '+r.cAscName)
+                        }
                     }
                     Rectangle{
                         rotation: 45
@@ -246,6 +255,21 @@ Rectangle {
                         }
                     }
                 }
+                Item{
+                    width: r.fs*0.5
+                    height: width
+                    anchors.right:  parent.right
+                    anchors.rightMargin: 0-width*0.5
+                    anchors.verticalCenter: parent.verticalCenter
+                    antialiasing: true
+                    visible: index===1
+                    Rectangle{
+                        anchors.fill: parent
+                        radius: width*0.5
+                        color: app.c2
+                        antialiasing: true
+                    }
+                }
             }
         }
     }
@@ -271,12 +295,22 @@ Rectangle {
         visible: false
         UText{
             id: labelText
-            text:  app.planetas[cAs.numAstro]+'\nSigno '+app.signos[cAs.objData.ns]+'\nGrado °'+cAs.objData.g+' \''+cAs.objData.m
+            //text:  app.planetas[cAs.numAstro]+'\nSigno '+app.signos[cAs.objData.ns]+'\nGrado °'+cAs.objData.g+' \''+cAs.objData.m
             font.pixelSize: parent.width*0.125
             anchors.centerIn: parent
             wrapMode: Text.WordWrap
             textFormat: Text.RichText
             horizontalAlignment: Text.AlignHCenter
+        }
+        Timer{
+            id: tResetTip
+            running: false
+            repeat: false
+            interval: 5000
+            onTriggered: {
+                xPlanetas.cAs=xPlanetas
+                xTip.visible=false
+            }
         }
     }
 
@@ -286,12 +320,13 @@ Rectangle {
         property var cAs: xPlanetas
         onCAsChanged: {
             //if(cAs!==xPlanetas){
-                xTip.visible=cAs!==xPlanetas
+            xTip.visible=cAs!==xPlanetas
             //}
-            labelText.text ='<b style="font-size:'+parseInt(labelText.font.pixelSize*1.35)+'px;">'+app.planetas[cAs.numAstro]+'</b><br /><b>'+app.signos[cAs.objData.ns]+'</b><br /><b>°'+cAs.objData.g+' \''+cAs.objData.m+'</b>'
+            labelText.text ='<b style="font-size:'+parseInt(labelText.font.pixelSize*1.35)+'px;">'+app.planetas[cAs.numAstro]+'</b><br /><b>'+app.signos[cAs.objData.ns]+'</b><br /><b>°'+cAs.objData.g+' \''+cAs.objData.m+'</b><br /><b>Casa '+cAs.objData.h+'</b>'
             xTip.anchors.bottom=cAs.top
             xTip.anchors.bottomMargin=r.fs*2
             xTip.anchors.horizontalCenter=cAs.horizontalCenter
+            tResetTip.restart()
         }
         XAs{id:xSol;fs:r.fs;astro:'sun'; numAstro: 0}
         XAs{id:xLuna;fs:r.fs;astro:'moon'; numAstro: 1}
@@ -308,7 +343,7 @@ Rectangle {
         XAs{id:xSelena;fs:r.fs;astro:'selena'; numAstro: 12}
         XAs{id:xLilith;fs:r.fs;astro:'lilith'; numAstro: 13}
         function pressed(o){
-            unik.speak(''+app.planetas[o.numAstro]+' en '+app.signos[o.objData.ns]+' en el grado '+o.objData.g+' '+o.objData.m+' minutos.')
+            unik.speak(''+app.planetas[o.numAstro]+' en '+app.signos[o.objData.ns]+' en el grado '+o.objData.g+' en la casa '+o.objData.h)
         }
     }
 
@@ -317,7 +352,7 @@ Rectangle {
         //setJson(json)
     }
     function setJson(j){
-        r.objSigns = [0,0,0,0,0,0,0,0,0,0,0,0 ]
+        r.objSigns = [0,0,0,0,0,0,0,0,0,0,0,0]
         let json=JSON.parse(j)
         if(!unik.folderExist('cns')){
             unik.mkdir('cns')
@@ -365,6 +400,8 @@ Rectangle {
             r.sigRot=30*11+json.pc.h1.g
         }
 
+        r.cAscName=app.signos[r.objSignsNames.indexOf(json.pc.h1.s)]
+
         let vRSol=30*getSigIndex(json.psc.sun.s)
         let vRLuna=30*getSigIndex(json.psc.moon.s)
         let vRMer=30*getSigIndex(json.psc.mercury.s)
@@ -390,6 +427,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xSol.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -400,6 +438,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xLuna.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -410,6 +449,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xMercurio.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -420,6 +460,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xVenus.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -430,6 +471,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xMarte.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -440,6 +482,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xJupiter.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -451,6 +494,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xSaturno.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -461,6 +505,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xUrano.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -471,6 +516,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xNeptuno.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -481,6 +527,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xPluton.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -491,6 +538,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xQuiron.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -501,6 +549,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xProserpina.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -511,6 +560,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xSelena.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
@@ -521,6 +571,7 @@ Rectangle {
         o.ns=objSignsNames.indexOf(jo.s)
         o.g=jo.g
         o.m=jo.m
+        o.h=jo.h
         xLilith.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
     }

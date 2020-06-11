@@ -26,7 +26,7 @@ Item{
                 r.parent.cAs=r
             }
             onExited: {
-                r.parent.cAs=r.parent
+                //r.parent.cAs=r.parent
             }
             onClicked: r.parent.pressed(r)
         }

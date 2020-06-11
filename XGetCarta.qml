@@ -41,7 +41,7 @@ Rectangle {
             Flow{
                 id: flowGetCarta
                 width:r.width-app.fs
-                spacing: app.fs
+                spacing: app.fs*0.5
                 BotonUX{
                     text: 'Atras'
                     fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
@@ -84,7 +84,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 Text{
                     width: xApp.width-app.fs*2
-                    text: '<b>Crear Carta Natal</b><br />'//+app.serverUrl+':'+app.portRequest
+                    text: '<b>Crear Carta Natal</b><br />'
                     color: app.c2
                     font.pixelSize: app.fs*1
                     anchors.horizontalCenter: parent.horizontalCenter
