@@ -28,45 +28,6 @@ Rectangle {
         contentWidth: cn.width//*2.0//*1.5
         contentHeight: cn.height//*2.0//*1.5
         visible: r.mod===0
-        XCn{
-            id: cn
-            transformOrigin: Item.TopLeft
-        }
-        function zoomExtents(){
-            // Resize image to fit in View
-            var maxImageBounds = Math.max(cn.width, cn.height)
-            var minViewBounds = Math.min(flick.width, flick.height)
-            var mult = minViewBounds / maxImageBounds
-            cn.scale = mult * 0.99
-
-            // Center image in view: Works when image's transformOrigin is Center
-            cn.x = flick.contentX + (flick.width - cn.width) * 0.5
-            cn.y = flick.contentY + (flick.height - cn.height) * 0.5
-        }
-
-        // Zoom About Cursor
-        function zoom(delta, target, x, y){
-            // positive delta zoom in, negative delta zoom out
-
-            var scaleBefore = target.scale;
-            var zoomFactor = 0.8
-            if (delta > 0)
-            {
-                zoomFactor = 1.0/zoomFactor;
-            }
-
-            // Zoom the target
-            target.scale = target.scale * zoomFactor;
-
-            // X,Y coordinates of zoom location relative to top left corner
-            // Calculate displacement of zooming position
-            var dx = (x - target.x) * (zoomFactor - 1)
-            var dy = (y - target.y) * (zoomFactor - 1)
-
-            // Compensate for displacement
-            target.x = target.x - dx
-            target.y = target.y - dy
-        }
         MouseArea {
             id: dragArea
             hoverEnabled: true
@@ -135,60 +96,20 @@ Rectangle {
                 }
             }
         }
-        Item{
-            id: xPlanetas
-            anchors.fill: parent
-            XAs{id:xSol;fs:cn.fs;astro:'sun'; numAstro: 0}
-            XAs{id:xLuna;fs:cn.fs;astro:'moon'; numAstro: 1}
-            XAs{id:xMercurio;fs:cn.fs;astro:'mercury'; numAstro: 2}
-            XAs{id:xVenus;fs:cn.fs;astro:'venus'; numAstro: 3}
-            XAs{id:xMarte;fs:cn.fs;astro:'mars'; numAstro: 4}
-            XAs{id:xJupiter;fs:cn.fs;astro:'jupiter'; numAstro: 5}
-            XAs{id:xSaturno;fs:cn.fs;astro:'saturn'; numAstro: 6}
-            XAs{id:xUrano;fs:cn.fs;astro:'uranus'; numAstro: 7}
-            XAs{id:xNeptuno;fs:cn.fs;astro:'neptune'; numAstro: 8}
-            XAs{id:xPluton;fs:cn.fs;astro:'pluto'; numAstro: 9}
-            XAs{id:xQuiron;fs:cn.fs;astro:'hiron'; numAstro: 10}
-            XAs{id:xProserpina;fs:cn.fs;astro:'proserpina'; numAstro: 11}
-            XAs{id:xSelena;fs:cn.fs;astro:'selena'; numAstro: 12}
-            XAs{id:xLilith;fs:cn.fs;astro:'lilith'; numAstro: 13}
-            function pressed(num, numSign){
-                    unik.speak(''+app.planetas[num]+' en el signo '+app.signos[numSign])
-            }
-        }
-
-    }
-    Flickable{
-        //anchors.fill: r
-        id: flickCapture
-        width: cnCapture.width
-        height: cnCapture.height
-        anchors.centerIn: r
-        contentWidth: cnCapture.width
-        contentHeight: cnCapture.height
-        visible: r.mod===1&&Qt.platform.os!=='android'
-        XCnCapture{
-            id: cnCapture
+        XCn{
+            id: cn
             transformOrigin: Item.TopLeft
-            url: r.currentImgUrl
-            onImageLoaded:{
-                botMod.imageLoaded=true
-                let d=new Date(Date.now())
-                wv.loadImage(r.currentImgUrl+'?r='+d.getTime())
-            }
-            onUrlChanged: botMod.imageLoaded=false
-            //scale: 100/(2880-r.height)*2880
         }
         function zoomExtents(){
             // Resize image to fit in View
-            var maxImageBounds = Math.max(cnCapture.width, cnCapture.height)
-            var minViewBounds = Math.min(flickCapture.width, flickCapture.height)
+            var maxImageBounds = Math.max(cn.width, cn.height)
+            var minViewBounds = Math.min(flick.width, flick.height)
             var mult = minViewBounds / maxImageBounds
-            cnCapture.scale = mult * 0.99
+            cn.scale = mult * 0.99
 
             // Center image in view: Works when image's transformOrigin is Center
-            cnCapture.x = flick.contentX + (flickCapture.width - cnCapture.width) * 0.5
-            cnCapture.y = flick.contentY + (flickCapture.height - cnCapture.height) * 0.5
+            cn.x = flick.contentX + (flick.width - cn.width) * 0.5
+            cn.y = flick.contentY + (flick.height - cn.height) * 0.5
         }
 
         // Zoom About Cursor
@@ -214,6 +135,16 @@ Rectangle {
             target.x = target.x - dx
             target.y = target.y - dy
         }
+    }
+    Flickable{
+        //anchors.fill: r
+        id: flickCapture
+        width: cnCapture.width
+        height: cnCapture.height
+        anchors.centerIn: r
+        contentWidth: cnCapture.width
+        contentHeight: cnCapture.height
+        visible: r.mod===1&&Qt.platform.os!=='android'
         MouseArea {
             id: dragAreaCapture
             hoverEnabled: true
@@ -282,7 +213,54 @@ Rectangle {
                 }
             }
         }
-    }
+        XCnCapture{
+            id: cnCapture
+            transformOrigin: Item.TopLeft
+            url: r.currentImgUrl
+            onImageLoaded:{
+                botMod.imageLoaded=true
+                let d=new Date(Date.now())
+                wv.loadImage(r.currentImgUrl+'?r='+d.getTime())
+            }
+            onUrlChanged: botMod.imageLoaded=false
+            //scale: 100/(2880-r.height)*2880
+        }
+        function zoomExtents(){
+            // Resize image to fit in View
+            var maxImageBounds = Math.max(cnCapture.width, cnCapture.height)
+            var minViewBounds = Math.min(flickCapture.width, flickCapture.height)
+            var mult = minViewBounds / maxImageBounds
+            cnCapture.scale = mult * 0.99
+
+            // Center image in view: Works when image's transformOrigin is Center
+            cnCapture.x = flick.contentX + (flickCapture.width - cnCapture.width) * 0.5
+            cnCapture.y = flick.contentY + (flickCapture.height - cnCapture.height) * 0.5
+        }
+
+        // Zoom About Cursor
+        function zoom(delta, target, x, y){
+            // positive delta zoom in, negative delta zoom out
+
+            var scaleBefore = target.scale;
+            var zoomFactor = 0.8
+            if (delta > 0)
+            {
+                zoomFactor = 1.0/zoomFactor;
+            }
+
+            // Zoom the target
+            target.scale = target.scale * zoomFactor;
+
+            // X,Y coordinates of zoom location relative to top left corner
+            // Calculate displacement of zooming position
+            var dx = (x - target.x) * (zoomFactor - 1)
+            var dy = (y - target.y) * (zoomFactor - 1)
+
+            // Compensate for displacement
+            target.x = target.x - dx
+            target.y = target.y - dy
+        }
+        }
 
     Rectangle{
         width: r.width
