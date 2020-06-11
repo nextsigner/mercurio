@@ -13,6 +13,7 @@ Calendar{
     property int currentDay: r.selectedDate.getDate()
     property var monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiempre', 'Octubre', 'Noviembre', 'Diciembre']
     property string monthString: 'Mes N°'
+    property int widthBtns:  Qt.platform.os!=='android'?app.fs*1.2:app.fs*2
     signal selected(var newDate)
 
     onVisibleChanged:{
@@ -29,9 +30,10 @@ Calendar{
     style: CalendarStyle {
         id: uCalendarStyle
         navigationBar: Rectangle{
-            width: r.width
-            height: app.fs*4
+            width: r.width-2
+            height: r.widthBtns*4
             color: app.c1
+            anchors.centerIn: parent
             Column{
                 spacing: app.fs
                 anchors.centerIn: parent
@@ -41,7 +43,7 @@ Calendar{
                     BotonUX{
                         text: '-10'
                         width: app.fs*2
-                        height: app.fs*1.2
+                        height: r.widthBtns
                         onClicked: {
                             setTextInput=false
                             var fecha = r.selectedDate;
@@ -52,7 +54,7 @@ Calendar{
                     BotonUX{
                         text: '-1'
                         width: app.fs*2
-                        height: app.fs*1.2
+                        height: r.widthBtns
                         onClicked: {
                             setTextInput=false
                             var fecha = r.selectedDate;
@@ -64,12 +66,12 @@ Calendar{
                         text: r.currentYear
                         font.pixelSize: app.fs
                         color: app.c2
-
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                     BotonUX{
                         text: '+1'
                         width: app.fs*2
-                        height: app.fs*1.2
+                        height: r.widthBtns
                         onClicked: {
                             setTextInput=false
                             var fecha = r.selectedDate;
@@ -80,7 +82,7 @@ Calendar{
                     BotonUX{
                         text: '+10'
                         width: app.fs*2
-                        height: app.fs*1.2
+                        height: r.widthBtns
                         onClicked: {
                             setTextInput=false
                             var fecha = r.selectedDate;
@@ -94,7 +96,7 @@ Calendar{
                     anchors.horizontalCenter: parent.horizontalCenter
                     BotonUX{
                         text: '<'
-                        width: app.fs*1.2
+                        width: r.widthBtns
                         height: width
                         onClicked: {
                             setTextInput=false
@@ -104,15 +106,16 @@ Calendar{
                         }
                     }
                     Text{
-                        text: r.monthString+' '+r.currentMonth+' - '+r.monthNames[r.currentMonth]
+                        text: r.monthString+' '+r.currentMonth+' - '+r.monthNames[r.currentMonth - 1]
                         font.pixelSize: app.fs
                         color: app.c2
-                        width: r.width*0.8
+                        width: r.width*0.6
                         horizontalAlignment: Text.AlignHCenter
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                     BotonUX{
                         text: '>'
-                        width: app.fs*1.2
+                        width: r.widthBtns
                         height: width
                         onClicked: {
                             setTextInput=false
@@ -131,10 +134,25 @@ Calendar{
             border.width: 1
             border.color: app.c2
             Label {
-                text: control.__locale.dayName(styleData.dayOfWeek, control.dayOfWeekFormat)
+                id: l1
+                text:control.__locale.dayName(styleData.dayOfWeek, control.dayOfWeekFormat)
                 font.pixelSize: app.fs
                 anchors.centerIn: parent
                 color: app.c2
+            }
+            Item{
+                visible: styleData.dayOfWeek===1
+                anchors.verticalCenter: l1.verticalCenter
+                anchors.right: parent.left
+                //anchors.rightMargin: parent.width-l1.width
+                width: parent.width
+                height: parent.height
+                Label {
+                    text: unikSettings.lang==='es'?'dom.':'sun.'
+                    font.pixelSize: app.fs
+                    color: app.c2
+                    anchors.centerIn: parent
+                }
             }
             Rectangle {
                 width: parent.width
