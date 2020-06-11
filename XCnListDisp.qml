@@ -5,6 +5,7 @@ Item {
     id: r
     width: parent.width
     height: app.height
+    property string cFileName: ''
     FolderListModel{
         id: flmCns
         folder: './cns'
@@ -22,19 +23,30 @@ Item {
             model: flmCns
             delegate: compCns
             spacing: app.fs*0.25
+            clip: true
             Component{
                 id: compCns
                 Rectangle{
                     width: parent.width-app.fs
                     height: app.fs*2
-                    color: app.c2
+                    color: r.cFileName===fileName?app.c2:app.c1
+                    border.width: 2
+                    border.color: r.cFileName===fileName?app.c1:app.c2
                     radius: app.fs*0.25
                     property var d
-                    UText{
-                        id: txtFN
-                        text: fileName
-                        color: app.c1
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: r.cFileName=fileName
+                    }
+                    Row{
+                        spacing: app.fs*0.5
                         anchors.centerIn: parent
+                        UText{
+                            id: txtFN
+                            text: fileName
+                            color: r.cFileName===fileName?app.c1:app.c2
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
                     }
                     Component.onCompleted: {
                         let m0=fileName.split('_')
@@ -58,7 +70,10 @@ Item {
                         for(var i=1;i<m0.length;i++){
                             of+=m0[i].replace('.json', '')
                         }
-                        txtFN.text='Carta Natal de '+of+' creada el '+s
+                        let jsonData=unik.getFile('./cns/'+fileName)
+                        let json=JSON.parse(jsonData)
+                        let s2=' Nacido a las '+json.params.h+':'+json.params.min+' '
+                        txtFN.text=''+of+' '+s2+' creada el '+s
 
                     }
                 }

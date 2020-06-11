@@ -33,12 +33,13 @@ Rectangle {
         width: r.width
         height: r.height
         contentWidth: width
-        contentHeight: col.height+app.fs*6
+        contentHeight: col.height//+app.fs*6
         Column{
             id: col
             spacing: app.fs*2
             anchors.horizontalCenter: parent.horizontalCenter
             Flow{
+                id: flowGetCarta
                 width:r.width-app.fs
                 spacing: app.fs
                 BotonUX{
@@ -51,10 +52,27 @@ Rectangle {
                     }
                 }
                 BotonUX{
+                    id: botSetMod
                     text: r.mod===0?'Cartas Disponibles':'Crear Carta'
                     fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     onClicked: {
                         r.mod=r.mod===0?1:0
+                    }
+                }
+                BotonUX{
+                    text: 'Ver'
+                    visible: r.mod===1&&xCnListDisp.cFileName!==''
+                    onClicked: {
+                        xCnView.xcn.setJson(unik.getFile('./cns/'+xCnListDisp.cFileName))
+                        xCnView.visible=true
+                        r.mod=0
+                    }
+                }
+                BotonUX{
+                    visible: r.mod===1&&xCnListDisp.cFileName!==''
+                    text: 'Eliminar'
+                    onClicked: {
+                        unik.deleteFile('./cns/'+xCnListDisp.cFileName)
                     }
                 }
             }
@@ -255,7 +273,11 @@ Rectangle {
                     }
                 }
             }
-            XCnListDisp{id: xCnListDisp}
+            XCnListDisp{
+                id: xCnListDisp
+                height: r.height-flowGetCarta.height-col.spacing-app.fs*2
+                visible: r.mod===1
+            }
         }
     }
     Item{
