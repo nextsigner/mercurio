@@ -5,6 +5,7 @@ Item {
     id: r
     width: parent.width
     height: app.height
+    onVisibleChanged: lvCns.focus=visible
     property string cFileName: ''
     FolderListModel{
         id: flmCns

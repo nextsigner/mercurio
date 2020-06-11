@@ -284,10 +284,9 @@ Rectangle {
     Item{
         anchors.horizontalCenter: parent.horizontalCenter
         width: app.isPhone?r.width:r.width*0.5
-        height: app.isPhone?r.height*0.5:r.height
+        height: app.isPhone?r.height*0.75:r.height
         UCalendar{
             id: calendario
-            //visible: true
             onVisibleChanged: {
                 xApp.focus=true
             }

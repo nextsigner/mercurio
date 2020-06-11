@@ -187,6 +187,7 @@ Calendar{
                 onClicked: {
                     r.setTextInput=true
                     r.selectedDate=styleData.date
+                    r.visible=false
                 }
             }
         }
