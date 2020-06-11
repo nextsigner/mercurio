@@ -78,7 +78,6 @@ Rectangle {
                     }
                 }
             }
-
             Column{
                 visible: r.mod===0
                 spacing: app.fs*2

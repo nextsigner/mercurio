@@ -14,7 +14,7 @@ Item {
         spacing: app.fs*0.5
         anchors.horizontalCenter: parent.horizontalCenter
         UText{
-            text: '<b>Cartas Disponibles</b>'
+            text: '<b>Cartas Disponibles '+flmCns.count+'</b>'
         }
         ListView{
             id: lvCns
