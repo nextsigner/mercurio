@@ -294,6 +294,14 @@ Rectangle {
                 r.mod=r.mod===0?1:0
             }
         }
+        BotonUX{
+            id: botCopyUrl
+            text: 'Copiar Enlace'
+            fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
+            onClicked: {
+                clipboard.setText(r.currentImgUrl)
+            }
+        }
     }
     //    Text{
     //        id: iz

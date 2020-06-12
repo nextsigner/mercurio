@@ -1,3 +1,4 @@
 server/bios-files/*
 mercurio-server/*
 cns/*
+!cns/1591241731118_Ricardo.json

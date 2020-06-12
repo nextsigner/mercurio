@@ -19,16 +19,20 @@ Item {
         contentHeight: colMenu.height*1.4
         Column{
             id: colMenu
-            spacing: app.rot?app.fs*0.25:app.fs
+            spacing: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
             BotonUX{
                 anchors.left: parent.left
                 text: 'atras'
-                fontSize: app.rot?app.fs*0.5:app.fs*0.7
+                fontSize: app.fs
                 onClicked: {
                     app.mod=-1
                 }
                 visible: app.mod===-2 || app.mod===-3
+            }
+            Item{
+                width: 1
+                height: app.fs
             }
             Repeater{
                 id: repIconMenu
