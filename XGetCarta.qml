@@ -33,7 +33,7 @@ Rectangle {
         width: r.width
         height: r.height
         contentWidth: width
-        contentHeight: col.height//+app.fs*6
+        contentHeight: col.height+app.fs*6
         Column{
             id: col
             spacing: app.fs*2
@@ -233,10 +233,11 @@ Rectangle {
                         width: r.width-app.fs
                         visible: false
                         z: statusLugar.z+100
+                        property var arrayUrls: []
                         onCurrentIndexChanged: {
                             if(currentIndex!==0){
                                 tiCiudad.text=currentText
-                                getCoords(currentText)
+                                getCoordsByUrl(arrayUrls[currentIndex - 1])
                                 visible=false
                             }
                         }
@@ -310,53 +311,112 @@ Rectangle {
     Component.onCompleted: {
         tiNombre.focus=true
     }
-    function getCoords(text){
+    function getCoordsByUrl(url){
         let md=["Seleccionar Ciudad"]
         r.lon=''
         r.lat=''
         var req = new XMLHttpRequest();
-        req.open('GET', 'https://www.geodatos.net/coordenadas/buscar?q='+text.replace(/ /g, '+')+'', true);
+        req.open('GET', url, true);
         req.onreadystatechange = function (aEvt) {
             if (req.readyState === 4) {
                 if(req.status === 200){
-                    let m0= req.responseText.split('<div class="panel-body">')
-                    for(let i=0;i<m0.length;i++){
-                        let d0 = (''+m0[i])
-                        //console.log('---------------------------------div'+i+': '+m0[i]+'-------------------\n\n\n')
-                        if(d0.indexOf('Coordenadas decimales')>=0){
-                            let m1=m0[i].split('<strong>')
-                            if(m1.length>1){
-                                let m2=m1[1].split('</strong>')
-                                let m3=m2[0].split(', ')
-                                if(m3.length>0){
-                                    r.lon=m3[1]
-                                    r.lat=m3[0]
-                                    statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
-                                }
-                                //console.log('Coordenadas: '+m2[0])
-                                uCbCiudades.currentIndex=0
-                            }
-                            break
-                        }
-                        if(d0.indexOf('No se encontraron resultados')>=0){
-                            let m1=m0[i].split('Lugares similares:')
-                            if(m1.length>1){
-                                statusLugar.text='Opciones: '
-                                //console.log('Opciones: '+m1[1])
-                                let m2=m1[1].split('<li ')
-                                for(let i2=0;i2<m2.length;i2++){
-                                    let m3=m2[i2].split('</span></a>')
-                                    let m4=m3[0].split('>')
-                                    let data=text+' '+(m4[m4.length-1]).replace(/,/g, ' ')
-                                    md.push(data)
-                                    statusLugar.text='Seleccionar una ciudad'
-                                }
-                            }
-                            break
-                        }
+                    let rt=req.responseText
+                    //let m0= rt.split('<div class="flex justify-center text-center">')
+                    //let d0 = (''+m0[1])
+                    //let m1=m0[1].split('<ul')
+                    let m10=rt.split('<h1>Coordenadas')
+                    //console.log('---------------------------------rt:::'+rt+'-------------------\n\n\n')
+                    //console.log('RU: '+rt)
+                    if(m10.length>1){
+                        console.log('m10::::'+m10[1])
+                        let m11=m10[1].split('latitud ')
+                        let m12=m10[1].split('longitud ')
+                        //if(m11.length>1){
+                            let m111=m11[1].split(' ')
+                            let m222=m12[1].split(' ')
+                            //let m3=m2[0].split(', ')
+                            //if(m3.length>0){
+                                r.lon=m222[0]
+                                r.lat=m111[0]
+                                statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
+                            //}
+                            //console.log('Coordenadas: '+m2[0])
+                            //uCbCiudades.currentIndex=0
+                        //}
+                        //uCbCiudades.model=md
+                        //uCbCiudades.visible=md.length>1
+                        //return
                     }
-                    uCbCiudades.model=md
-                    uCbCiudades.visible=md.length>1
+                }else{
+                    logView.showLog("Error loading page\n");
+                }
+            }
+        };
+        req.send(null);
+    }
+
+    function getCoords(text){
+        uCbCiudades.arrayUrls=[]
+        let md=["Seleccionar Ciudad"]
+        r.lon=''
+        r.lat=''
+        var req = new XMLHttpRequest();
+        //req.open('GET', 'https://www.geodatos.net/coordenadas/buscar?q='+text.replace(/ /g, '+')+'', true);
+        ///buscar?qs=rosario+santa+fe&ss=&o=coordenadas
+        let url = 'https://www.geodatos.net/buscar?qs='+text.replace(/ /g, '+')+'&ss=&o=coordenadas'
+        console.log('Url Get Coords: '+url)
+        req.open('GET', url, true);
+        req.onreadystatechange = function (aEvt) {
+            if (req.readyState === 4) {
+                if(req.status === 200){
+                    let rt=req.responseText
+                    let m0= rt.split('<div class="flex justify-center text-center">')
+                    let d0 = (''+m0[1])
+                    let m1=m0[1].split('<ul')
+                    let m10=rt.split('<h1>Coordenadas')
+                    //console.log('---------------------------------rt:::'+rt+'-------------------\n\n\n')
+                    console.log('m10 largo: '+m10.length)
+                    /*if(m10.length>1){
+                        console.log('m10::::'+m10[1])
+                        let m11=m10[1].split('<strong>')
+                        if(m11.length>1){
+                            let m2=m11[1].split('</strong>')
+                            let m3=m2[0].split(', ')
+                            if(m3.length>0){
+                                r.lon=m3[1]
+                                r.lat=m3[0]
+                                statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
+                            }
+                            //console.log('Coordenadas: '+m2[0])
+                            uCbCiudades.currentIndex=0
+                        }
+                        uCbCiudades.model=md
+                        uCbCiudades.visible=md.length>1
+                        return
+                    }*/
+                    if(m1.length>1){
+                        statusLugar.text='Opciones: '
+                        //logView.showLog('Opciones: '+m1[1])
+                        //console.log('Opciones: '+m1[1])
+                        let m2=m1[1].split('<li ')
+                        for(let i2=0;i2<m2.length;i2++){
+                            let m3=m2[i2].split('</a>')
+                            let murl1=m3[0].split('href="')
+                            if(murl1.length>1){
+                                let murl2=murl1[1].split('"')
+                                console.log('D:::'+m3[0])
+                                console.log('Durl:::'+murl2[0])
+                                let m4=m3[0].split('>')
+                                let data=(m4[m4.length-1]).replace(/,/g, ' ')
+                                //console.log('D:::'+data)
+                                uCbCiudades.arrayUrls.push(murl2[0])
+                                md.push(data)
+                                statusLugar.text='Seleccionar una ciudad'
+                            }
+                        }
+                        uCbCiudades.model=md
+                        uCbCiudades.visible=md.length>1
+                    }
                 }else{
                     logView.showLog("Error loading page\n");
                 }
@@ -495,3 +555,57 @@ Rectangle {
         app.mod=-2
     }
 }
+/*
+<div class="flex justify-center text-center">
+                <ul>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag ar mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/argentina/malargue">Malargüe, Mendoza, Argentina</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag ir mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/iran/malard">Malārd, Tehrān, Irán</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag es mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/espana/mala-canarias">Mala, Canarias, España</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag pe mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/peru/mala">Mala, Lima region, Perú</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag cn mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/china/mala-chongqing">Mala, Chongqing, China</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag se mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/suecia/mala-vasterbotten">Malå, Västerbotten, Suecia</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag by mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/bielorrusia/malaryta">Malaryta, Brest, Bielorrusia</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag ca mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/canada/malartic">Malartic, Quebec, Canadá</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag fi mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/finlandia/malax">Malax, Ostrobothnia, Finlandia</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag au mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/australia/malak">Malak, Northern Territory, Australia</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag mw mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/malaui">Malaui</a>
+                        </li>
+                                            <li class="mb-1 flex items-center f16">
+                            <span class="flag my mr-2"></span>
+                            <a class="blue" href="https://www.geodatos.net/coordenadas/malasia">Malasia</a>
+                        </li>
+                                    </ul>
+            </div>
+*/

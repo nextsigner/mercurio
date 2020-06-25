@@ -299,7 +299,8 @@ Rectangle {
             text: 'Copiar Enlace'
             fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
             onClicked: {
-                clipboard.setText(r.currentImgUrl)
+                console.log('Copy to clipboard: '+xCnView.currentImgUrl)
+                clipboard.setText(xCnView.currentImgUrl)
             }
         }
     }

@@ -183,7 +183,7 @@ ApplicationWindow{
             XCasasQuiron{id: xCasasQuron;visible: app.mod===4;}
             XTransLunar{id: xTransLunar;visible: app.mod===5;}
             XTrans{id: xTrans;visible: app.mod===6;}*/
-            //XGetCarta{}
+            XGetCarta{}
             //XCnView{}
         }
         UProgressDownload{
@@ -264,7 +264,7 @@ ApplicationWindow{
                 }
             }
             unik.ttsLanguageSelected(index)
-            unik.speak('Idioma Español seleccionado.')
+            //unik.speak('Idioma Español seleccionado.')
         }
         getServerUrl()
     }
