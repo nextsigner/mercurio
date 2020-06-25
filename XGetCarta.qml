@@ -333,7 +333,7 @@ Rectangle {
                         let m12=m10[1].split('longitud ')
                         //if(m11.length>1){
                             let m111=m11[1].split(' ')
-                            let m222=m12[1].split(' ')
+                            let m222=m12[1].split('. ')
                             //let m3=m2[0].split(', ')
                             //if(m3.length>0){
                                 r.lon=m222[0]
