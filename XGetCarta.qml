@@ -336,8 +336,8 @@ Rectangle {
                             let m222=m12[1].split('. ')
                             //let m3=m2[0].split(', ')
                             //if(m3.length>0){
-                                r.lon=m222[0]
-                                r.lat=m111[0]
+                                r.lon=parseFloat(m222[0])
+                                r.lat=parseFloat(m111[0])
                                 statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
                             //}
                             //console.log('Coordenadas: '+m2[0])

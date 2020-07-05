@@ -299,8 +299,8 @@ Rectangle {
             text: 'Copiar Enlace'
             fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
             onClicked: {
-                console.log('Copy to clipboard: '+xCnView.currentImgUrl)
-                clipboard.setText(xCnView.currentImgUrl)
+                console.log('Copy to clipboard: https://nextsigner.github.io/mercurio_server_redir.html?link='+xCnView.currentImgUrl)
+                clipboard.setText('https://nextsigner.github.io/mercurio_server_redir.html?link='+xCnView.currentImgUrl)
             }
         }
     }
