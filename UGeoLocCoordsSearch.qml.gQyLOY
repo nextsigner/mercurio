@@ -1,0 +1,10 @@
+import QtQuick 2.0
+import QtWebView 1.1
+
+WebView {
+    id: r
+    url: 'https://www.google.com/maps?q=laferrere'
+    onUrlChanged:{
+        console.log('Url: '+url)
+    }
+}

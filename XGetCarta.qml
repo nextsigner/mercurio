@@ -297,6 +297,13 @@ Rectangle {
         }
     }
     XCnView{id: xCnView;visible: false}
+    //    UGeoLocCoordsSearch{
+    //        //url: 'https://www.google.com/maps?q=laferrere'
+    //        url: 'https://www.google.com/maps?q=lsaf ñaslfkñalfdkj'
+    //        onCoordsLoaded: {
+    //            console.log('lon: '+longitude+' lat: '+latitude+' alt: '+altitude)
+    //        }
+    //    }
     HttpObject{
         onHttpResponse:{
             //logView.showLog('R1: '+r)
@@ -332,16 +339,16 @@ Rectangle {
                         let m11=m10[1].split('latitud ')
                         let m12=m10[1].split('longitud ')
                         //if(m11.length>1){
-                            let m111=m11[1].split(' ')
-                            let m222=m12[1].split('. ')
-                            //let m3=m2[0].split(', ')
-                            //if(m3.length>0){
-                                r.lon=parseFloat(m222[0])
-                                r.lat=parseFloat(m111[0])
-                                statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
-                            //}
-                            //console.log('Coordenadas: '+m2[0])
-                            //uCbCiudades.currentIndex=0
+                        let m111=m11[1].split(' ')
+                        let m222=m12[1].split('. ')
+                        //let m3=m2[0].split(', ')
+                        //if(m3.length>0){
+                        r.lon=parseFloat(m222[0])
+                        r.lat=parseFloat(m111[0])
+                        statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
+                        //}
+                        //console.log('Coordenadas: '+m2[0])
+                        //uCbCiudades.currentIndex=0
                         //}
                         //uCbCiudades.model=md
                         //uCbCiudades.visible=md.length>1
@@ -356,7 +363,24 @@ Rectangle {
     }
 
     function getCoords(text){
-        uCbCiudades.arrayUrls=[]
+        let md=["Seleccionar Ciudad"]
+        r.lon=''
+        r.lat=''
+        let c=''
+            +'import QtQuick 2.0'+'\n'
+            +'UGeoLocCoordsSearch{'+'\n'
+            +'  url: \'https://www.google.com/maps?q='+text.replace(/ /g, '%20')+'\''+'\n'
+            +'  onCoordsLoaded: {'+'\n'
+            //+'      console.log(\'Url final: \'+url)'+'\n'
+            //+'      console.log(\'lon: \'+longitude+\' lat: \'+latitude+\' alt: \'+altitude)'+'\n'
+            +'          r.lon=parseFloat(longitude)'+'\n'
+            +'          r.lat=parseFloat(latitude)'+'\n'
+            +'          statusLugar.text=\'Coordenadas: lon: \'+r.lon+\' lat: \'+r.lat'+'\n'
+            +'  }'+'\n'
+            +'}'+'\n'
+        let comp=Qt.createQmlObject(c, r, 'getCoords')
+        //let
+        /*uCbCiudades.arrayUrls=[]
         let md=["Seleccionar Ciudad"]
         r.lon=''
         r.lat=''
@@ -376,24 +400,24 @@ Rectangle {
                     let m10=rt.split('<h1>Coordenadas')
                     //console.log('---------------------------------rt:::'+rt+'-------------------\n\n\n')
                     console.log('m10 largo: '+m10.length)
-                    /*if(m10.length>1){
-                        console.log('m10::::'+m10[1])
-                        let m11=m10[1].split('<strong>')
-                        if(m11.length>1){
-                            let m2=m11[1].split('</strong>')
-                            let m3=m2[0].split(', ')
-                            if(m3.length>0){
-                                r.lon=m3[1]
-                                r.lat=m3[0]
-                                statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
-                            }
-                            //console.log('Coordenadas: '+m2[0])
-                            uCbCiudades.currentIndex=0
-                        }
-                        uCbCiudades.model=md
-                        uCbCiudades.visible=md.length>1
-                        return
-                    }*/
+//                    if(m10.length>1){
+//                        console.log('m10::::'+m10[1])
+//                        let m11=m10[1].split('<strong>')
+//                        if(m11.length>1){
+//                            let m2=m11[1].split('</strong>')
+//                            let m3=m2[0].split(', ')
+//                            if(m3.length>0){
+//                                r.lon=m3[1]
+//                                r.lat=m3[0]
+//                                statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
+//                            }
+//                            //console.log('Coordenadas: '+m2[0])
+//                            uCbCiudades.currentIndex=0
+//                        }
+//                        uCbCiudades.model=md
+//                        uCbCiudades.visible=md.length>1
+//                        return
+//                    }
                     if(m1.length>1){
                         statusLugar.text='Opciones: '
                         //logView.showLog('Opciones: '+m1[1])
@@ -422,7 +446,7 @@ Rectangle {
                 }
             }
         };
-        req.send(null);
+        req.send(null);*/
     }
     function getJson(){
         let url=r.serverUrl+':'+r.portRequest+'/cn/get/?'+'nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')
