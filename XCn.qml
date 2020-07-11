@@ -346,7 +346,10 @@ Rectangle {
             unik.speak(''+app.planetas[o.numAstro]+' en '+app.signos[o.objData.ns]+' en el grado '+o.objData.g+' en la casa '+o.objData.h)
         }
         function doublePressed(o){
-            xWebViews.addConsulta(app.planetas[o.numAstro]+'+en+'+app.signos[o.objData.ns])
+            xConfirmSearchVideoBy.cuerpo=app.planetas[o.numAstro]
+            xConfirmSearchVideoBy.signo=app.signos[o.objData.ns]
+            xConfirmSearchVideoBy.casa=o.objData.h
+            xConfirmSearchVideoBy.visible=true
         }
     }
 

@@ -209,6 +209,7 @@ ApplicationWindow{
                 let obj=comp.createObject(xWebViews, {consulta:cons})
             }
         }
+        XConfirmSearchVideoBy{id: xConfirmSearchVideoBy;visible:false}
         ULogView{id: logView}
         UWarnings{
             id: uWarnings
