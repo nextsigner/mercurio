@@ -29,6 +29,7 @@ Item{
                 //r.parent.cAs=r.parent
             }
             onClicked: r.parent.pressed(r)
+            onDoubleClicked: r.parent.doublePressed(r)
         }
         Image {
             id: img

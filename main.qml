@@ -185,6 +185,7 @@ ApplicationWindow{
             XTrans{id: xTrans;visible: app.mod===6;}*/
             //XGetCarta{}
             //XCnView{}
+            //UGetYouTubeVideo{}
         }
         UProgressDownload{
             id:upd
@@ -192,6 +193,20 @@ ApplicationWindow{
             onDownloaded: {
                 unik.setUnikStartSettings('-folder='+unik.currentFolderPath())
                 unik.restartApp()
+            }
+        }
+        Item{
+            id: xWebViews
+            anchors.fill: parent
+            function clear(){
+                for(var i=0;i<xWebViews.children.length;i++){
+                    xWebViews.children[i].destroy(1)
+                }
+            }
+            function addConsulta(cons){
+               xWebViews.clear()
+                let comp=Qt.createComponent('UGetYouTubeVideo.qml')
+                let obj=comp.createObject(xWebViews, {consulta:cons})
             }
         }
         ULogView{id: logView}

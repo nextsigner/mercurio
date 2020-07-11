@@ -118,33 +118,40 @@ Rectangle {
                             spacing: app.fs
                             UTextInput{
                                 id: tiDia
+                                enabled: false
                                 label: 'Día:'
                                 width:app.fs*6//+diffWidth
+                                anchors.verticalCenter: parent.verticalCenter
                                 KeyNavigation.tab: tiMes
                                 regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
                                 maximumLength: 2
                             }
                             UTextInput{
                                 id: tiMes
+                                enabled: false
                                 label: 'Mes:'
                                 width:app.fs*6//+diffWidth
+                                anchors.verticalCenter: parent.verticalCenter
                                 KeyNavigation.tab: tiAnio
                                 regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
                                 maximumLength: 2
                             }
                             UTextInput{
                                 id: tiAnio
+                                enabled: false
                                 label: 'Año:'
                                 width:app.fs*6//+diffWidth
+                                anchors.verticalCenter: parent.verticalCenter
                                 KeyNavigation.tab: tiHora
                                 regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
                                 maximumLength: 4
                             }
-                        }
-                        MouseArea{
-                            anchors.fill: parent
-                            onClicked: {
-                                calendario.visible=true
+                            BotonUX{
+                                text: 'Elegir Fecha'
+                                anchors.verticalCenter: parent.verticalCenter
+                                onClicked: {
+                                    calendario.visible=true
+                                }
                             }
                         }
                     }
@@ -195,7 +202,6 @@ Rectangle {
                             label: ''
                             width:r.width-app.fs-botSearch.width-app.fs*0.5
                             KeyNavigation.tab: botSearch
-                            onSeted: getCoords(text)
                             anchors.verticalCenter: parent.horizontalCenter
                             onTextChanged: {
                                 botSearch.enabled=true
@@ -557,7 +563,7 @@ Rectangle {
             calendario.visible=false
             return
         }
-        if(tiCiudad.focus){
+        if(tiCiudad.text!==''){
             getCoords(tiCiudad.text)
             return
         }

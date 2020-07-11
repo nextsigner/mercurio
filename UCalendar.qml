@@ -228,4 +228,16 @@ Calendar{
             r.monthString='Month N° '
         }
     }
+    BotonUX{
+        text: 'X'
+        width: app.fs*2
+        height: r.widthBtns
+        anchors.right: parent.right
+        anchors.rightMargin: r.widthBtns*0.25
+        anchors.top: parent.top
+        anchors.topMargin: r.widthBtns*0.25
+        onClicked: {
+            r.visible=false
+        }
+    }
 }
