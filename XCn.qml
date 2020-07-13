@@ -15,6 +15,9 @@ Rectangle {
     property string borderColor: app.c2
     property var arrayElementsColors: ['#E7B70B', 'brown', '#16E9F6', '#118CC8']
     property int sigRot: 0
+    property int ascSignIndex: -1
+    property int ascDegree: -1
+    property int ascMinutes: -1
     property color axisColor: 'red'
 
     property string cAscName: '?'
@@ -44,7 +47,7 @@ Rectangle {
                     antialiasing: true
                 }
                 Text{
-                    text: index!==0?modelData:'Asc\n'+r.cAscName
+                    text: index!==0?modelData:'Asc\n'+r.cAscName+'\n°'+r.ascDegree+' \''+r.ascMinutes
                     font.pixelSize: r.fs
                     color: 'white'
                     anchors.right: parent.left
@@ -223,7 +226,7 @@ Rectangle {
                         }
                         onExited: tagHor.visible=false
                         onClicked: {
-                            unik.speak('Ascendente '+r.cAscName)
+                            unik.speak('Ascendente '+r.cAscName+' en el grado '+r.ascDegree)
                         }
                     }
                     Rectangle{
@@ -455,6 +458,10 @@ Rectangle {
         if(json.pc.h1.s==='psc'){
             r.sigRot=30*11+json.pc.h1.g
         }
+
+        r.ascSignIndex=r.objSignsNames.indexOf(json.pc.h1.s)
+        r.ascDegree=json.pc.h1.g
+        r.ascMinutes=json.pc.h1.m
 
         r.cAscName=app.signos[r.objSignsNames.indexOf(json.pc.h1.s)]
 
