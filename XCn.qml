@@ -164,7 +164,6 @@ Rectangle {
         antialiasing: true
         Repeater{
             id: repH
-            model: 12
             Item{
                 width: parent.width
                 height: 3
@@ -245,17 +244,7 @@ Rectangle {
                             }
                         }
                     }
-                    //                    Rectangle{
-                    //                        id:nh1
-                    //                        width: r.fs*0.33
-                    //                        height: width
-                    //                        radius: width*0.5
-                    //                        color: app.c2
-                    //                        anchors.right: parent.left
-                    //                        anchors.rightMargin: r.fs*0.5
-                    //                        anchors.verticalCenter: parent.verticalCenter
-                    //                        visible: false
-                    //                    }
+
                     Item{
                         id:nh2
                         width: r.fs
@@ -782,7 +771,7 @@ Rectangle {
             //if(cAs!==xPlanetas){
             xTip.visible=cAs!==xPlanetas
             //}
-            labelText.text ='<b style="font-size:'+parseInt(labelText.font.pixelSize*1.35)+'px;">'+app.planetas[cAs.numAstro]+'</b><br /><b>'+app.signos[cAs.objData.ns]+'</b><br /><b>°'+cAs.objData.g+' \''+cAs.objData.m+'</b><br /><b>Casa '+cAs.objData.h+'</b>'
+            labelText.text =cAs!==xPlanetas?'<b style="font-size:'+parseInt(labelText.font.pixelSize*1.35)+'px;">'+app.planetas[cAs.numAstro]+'</b><br /><b>'+app.signos[cAs.objData.ns]+'</b><br /><b>°'+cAs.objData.g+' \''+cAs.objData.m+'</b><br /><b>Casa '+cAs.objData.h+'</b>':'Mercurio'
             xTip.anchors.bottom=cAs.top
             xTip.anchors.bottomMargin=r.fs*2
             xTip.anchors.horizontalCenter=cAs.horizontalCenter
@@ -881,9 +870,10 @@ Rectangle {
         //{"params":{"ms":"1592110344809","n":"Alejo_Lombardi","a":"1999","m":"12","d":"29","h":"7","min":"20","gmt":"-3","lat":"-31.7413197","lon":"-60.5115471"},"psc":{"sun":{"g":0,"m":0,"s":"7","h":-1,"rh":"14"},"moon":{"g":5,"m":24,"s":"lib","h":9,"rh":"ix"},"mercury":{"g":27,"m":8,"s":"sgr","h":12,"rh":"xii"},"venus":{"g":27,"m":52,"s":"sco","h":11,"rh":"xi"},"mars":{"g":25,"m":35,"s":"aqr","h":2,"rh":"ii"},"jupiter":{"g":25,"m":8,"s":"ari","h":4,"rh":"iv"},"saturn":{"g":10,"m":27,"s":"tau","h":4,"rh":"iv"},"uranus":{"g":14,"m":39,"s":"aqr","h":1,"rh":"i"},"neptune":{"g":3,"m":5,"s":"aqr","h":1,"rh":"i"},"pluto":{"g":11,"m":21,"s":"sgr","h":11,"rh":"xi"},"n":{"g":4,"m":2,"s":"leo","h":7,"rh":"vii"},"s":{"g":4,"m":2,"s":"aqr","h":1,"rh":"i"},"hiron":{"g":11,"m":16,"s":"sgr","h":11,"rh":"xi"},"proserpina":{"g":11,"m":50,"s":"sco","h":10,"rh":"x"},"selena":{"g":0,"m":0,"s":"ari","h":3,"rh":"iii"},"lilith":{"g":23,"m":7,"s":"sgr","h":12,"rh":"xii"}},"pc":{"h1":{"s":"cap","g":23,"m":59},"h2":{"s":"aqr","g":16,"m":15},"h3":{"s":"psc","g":11,"m":59},"h4":{"s":"ari","g":12,"m":57},"h5":{"s":"tau","g":18,"m":3},"h6":{"s":"gem","g":22,"m":49},"h7":{"s":"cnc","g":23,"m":59},"h8":{"s":"leo","g":16,"m":15},"h9":{"s":"vir","g":11,"m":59},"h10":{"s":"lib","g":12,"m":57},"h11":{"s":"sco","g":18,"m":3},"h12":{"s":"sgr","g":22,"m":49}}}'
 
         //let json='{"params":{"ms":"1590969573745","n":"Ricardo","a":"1975","m":"06","d":"20","h":"23","min":"00","gmt":"-3","lat":"-35.484462","lon":"-69.5797495"},"psc":{"sun":{"g":29,"m":6,"s":"gem","h":5,"rh":"v"},"moon":{"g":26,"m":51,"s":"sco","h":10,"rh":"x"},"mercury":{"g":15,"m":6,"s":"gem","h":4,"rh":"iv"},"venus":{"g":14,"m":27,"s":"leo","h":6,"rh":"vi"},"mars":{"g":22,"m":45,"s":"ari","h":3,"rh":"iii"},"jupiter":{"g":20,"m":11,"s":"ari","h":3,"rh":"iii"},"saturn":{"g":19,"m":22,"s":"cnc","h":5,"rh":"v"},"uranus":{"g":28,"m":28,"s":"lib","h":9,"rh":"ix"},"neptune":{"g":9,"m":54,"s":"sgr","h":10,"rh":"x"},"pluto":{"g":6,"m":29,"s":"lib","h":8,"rh":"viii"},"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"},"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"},"hiron":{"g":27,"m":25,"s":"ari","h":3,"rh":"iii"},"proserpina":{"g":28,"m":3,"s":"lib","h":9,"rh":"ix"},"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"},"lilith":{"g":15,"m":11,"s":"psc","h":1,"rh":"i"}},"pc":{"h1":{"s":"aqr","g":26,"m":9},"h2":{"s":"psc","g":20,"m":8},"h3":{"s":"ari","g":18,"m":46},"h4":{"s":"tau","g":21,"m":29},"h5":{"s":"gem","g":25,"m":27},"h6":{"s":"cnc","g":27,"m":24},"h7":{"s":"leo","g":26,"m":9},"h8":{"s":"vir","g":20,"m":8},"h9":{"s":"lib","g":18,"m":46},"h10":{"s":"sco","g":21,"m":29},"h11":{"s":"sgr","g":25,"m":27},"h12":{"s":"cap","g":27,"m":24}}}'
-        setJson(json)
+        //setJson(json)
     }
     function setJson(j){
+        repH.model=1
         r.objSigns = [0,0,0,0,0,0,0,0,0,0,0,0]
         let json=JSON.parse(j)
         if(!unik.folderExist('cns')){
@@ -1137,6 +1127,7 @@ Rectangle {
         o.h=jo.h
         xLilith.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
+        repH.model=12
     }
     function getSigIndex(s){
         let ms=['ari', 'tau', 'gem', 'cnc', 'leo', 'vir', 'lib', 'sco', 'sgr', 'cap', 'aqr', 'psc']
