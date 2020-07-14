@@ -45,46 +45,6 @@ Rectangle {
     signal doubleClick
     signal posChanged(int px, int py)
 
-    //    Item {
-    //        anchors.fill: parent
-    //        visible: false
-    //        Repeater{
-    //            model: r.arrayCasas1
-    //            Item{
-    //                width: r.width+r.fs
-    //                height: 3
-    //                anchors.centerIn: parent
-    //                rotation: 0-index*30
-    //                Rectangle{
-    //                    width: parent.width-r.fs
-    //                    height: 3
-    //                    color: 'red'
-    //                    anchors.centerIn: parent
-    //                    antialiasing: true
-    //                }
-    //                Text{
-    //                    text: index!==0?modelData:'Asc\n'+r.cAscName+'\n°'+r.ascDegree+' \''+r.ascMinutes
-    //                    font.pixelSize: r.fs
-    //                    color: 'white'
-    //                    anchors.right: parent.left
-    //                    //anchors.rightMargin: r.fs
-    //                    anchors.verticalCenter: parent.verticalCenter
-    //                    rotation: index*30
-    //                    horizontalAlignment: index!==0?Text.AlignHCenter:Text.AlignRight
-    //                }
-    //                Text{
-    //                    text: r.arrayCasas2[index]
-    //                    font.pixelSize: r.fs
-    //                    color: 'white'
-    //                    anchors.left: parent.right
-    //                    //anchors.rightMargin: r.fs
-    //                    anchors.verticalCenter: parent.verticalCenter
-    //                    rotation: index*30
-    //                }
-    //            }
-    //        }
-    //    }
-
     Rectangle{
         id: bg
         width: r.width-r.fs*2
@@ -231,7 +191,7 @@ Rectangle {
                         visible: false
                         Rectangle{
                             anchors.fill: parent
-                            radius: width*0.5
+                            //radius: width*0.5
                             color: app.c2
                             antialiasing: true
                         }
@@ -285,9 +245,404 @@ Rectangle {
                             }
                         }
                     }
+                    //                    Rectangle{
+                    //                        id:nh1
+                    //                        width: r.fs*0.33
+                    //                        height: width
+                    //                        radius: width*0.5
+                    //                        color: app.c2
+                    //                        anchors.right: parent.left
+                    //                        anchors.rightMargin: r.fs*0.5
+                    //                        anchors.verticalCenter: parent.verticalCenter
+                    //                        visible: false
+                    //                    }
+                    Item{
+                        id:nh2
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.right: parent.left
+                        anchors.rightMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            spacing: r.fs*0.33/3
+                            anchors.centerIn: parent
+                            Rectangle{
+                                width: r.fs*0.33
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Rectangle{
+                                width: r.fs*0.33
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh3
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.right: parent.left
+                        anchors.rightMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            spacing: r.fs*0.25/4
+                            anchors.centerIn: parent
+                            Rectangle{
+                                width: r.fs*0.33
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Rectangle{
+                                width: r.fs*0.33
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Rectangle{
+                                width: r.fs*0.33
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh4
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.right: parent.left
+                        anchors.rightMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Column{
+                            spacing: r.fs*0.25/4
+                            anchors.centerIn: parent
+                            Row{
+                                spacing: r.fs*0.25/4
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                            Row{
+                                spacing: r.fs*0.25/4
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                        }
+                    }
+                    Rectangle{
+                        id:nh5
+                        width: r.fs*0.75
+                        height: width
+                        radius: width*0.5
+                        color: app.c2
+                        anchors.right: parent.left
+                        anchors.rightMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                    }
+                    Item{
+                        id:nh6
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.right: parent.left
+                        anchors.rightMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            spacing: r.fs*0.33/3
+                            anchors.centerIn: parent
+                            Rectangle{
+                                width: r.fs*0.75
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Rectangle{
+                                width: r.fs*0.33
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh7
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.left: parent.right
+                        anchors.leftMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            spacing: r.fs*0.33/3
+                            anchors.centerIn: parent
+                            Column{
+                                spacing: r.fs*0.33/3
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                            Rectangle{
+                                width: r.fs*0.75
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh8
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.left: parent.right
+                        anchors.leftMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            spacing: r.fs*0.33/3
+                            anchors.centerIn: parent
+                            Column{
+                                spacing: r.fs*0.33/3
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                            Rectangle{
+                                width: r.fs*0.75
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh9
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.left: parent.right
+                        anchors.leftMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            spacing: r.fs*0.33/3
+                            anchors.centerIn: parent
+                            Column{
+                                spacing: r.fs*0.33/3
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                            Column{
+                                spacing: r.fs*0.33/3
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                    //anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle{
+                                width: r.fs*0.75
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh10
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.left: parent.right
+                        anchors.leftMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Column{
+                            spacing: r.fs*0.33/3
+                            anchors.centerIn: parent
+                            Rectangle{
+                                width: r.fs*0.75
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                            }
+                            Rectangle{
+                                width: r.fs*0.75
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh11
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.left: parent.right
+                        anchors.leftMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            anchors.centerIn: parent
+                            Rectangle{
+                                width: r.fs*0.33
+                                height: width
+                                radius: width*0.5
+                                color: app.c2
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Column{
+                                spacing: r.fs*0.33/3
+                                Rectangle{
+                                    width: r.fs*0.75
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                }
+                                Rectangle{
+                                    width: r.fs*0.75
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                }
+                            }
+                        }
+                    }
+                    Item{
+                        id:nh12
+                        width: r.fs
+                        height: r.fs*0.33
+                        anchors.left: parent.right
+                        anchors.leftMargin: r.fs*0.5
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: false
+                        Row{
+                            anchors.centerIn: parent
+                            Column{
+                                spacing: r.fs*0.33/3
+                                anchors.verticalCenter: parent.verticalCenter
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                }
+                                Rectangle{
+                                    width: r.fs*0.33
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                }
+                            }
+                            Column{
+                                spacing: r.fs*0.33/3
+                                Rectangle{
+                                    width: r.fs*0.75
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                }
+                                Rectangle{
+                                    width: r.fs*0.75
+                                    height: width
+                                    radius: width*0.5
+                                    color: app.c2
+                                }
+                            }
+                        }
+                    }
                     Text{
                         id: l1
-                        text: index!==0?r.arrayCasas1[index]:'Asc\n'+r.cAscName+'\n°'+r.ascDegree+' \''+r.ascMinutes
+                        text: ''
                         font.pixelSize: r.fs
                         color: app.c2
                         anchors.right: parent.left
@@ -295,66 +650,60 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                         horizontalAlignment: index!==0?Text.AlignHCenter:Text.AlignRight
                     }
-                    Text{
-                        id: l2
-                        text: r.arrayCasas2[index]
-                        font.pixelSize: r.fs
-                        color: app.c2
-                        anchors.left: parent.right
-                        anchors.leftMargin: r.fs*0.5
-                        anchors.verticalCenter: parent.verticalCenter
-                        rotation: index*30
-                    }
                     Timer{
                         running: true
                         repeat: true
-                        interval: 3000
+                        interval: 500
                         onTriggered: axis.setRot()
                     }
                     function setRot() {
                         //console.log('r.ascSignIndex: '+r.ascSignIndex+' index: '+index+' r.sh4: '+r.sh4)
                         if(index===r.sh1){
                             //axis.color='#88ff33'
-                            //l1.text='II'
+                            l1.text='Asc\n'+r.cAscName+'\n°'+r.ascDegree+' \''+r.ascMinutes
                             rectH1.visible=true
-                            l2.rotation=30-r.angleRotH1
+                            nh7.visible=true
+                            //                            l2.text='VII'
+                            //                            l2.rotation=0//r.angleRotH1
                             axis.rotation=0-r.angleRotH1
                         }else if(index===r.sh2){
                             //axis.color='#ff3388'
-                            l1.text='II'
-                            l1.rotation=60-r.angleRotH2
-                            l2.text='VIII'
-                            l2.rotation=60-r.angleRotH2
                             axis.rotation=0-r.angleRotH2
+                            nh2.visible=true
+                            nh8.visible=true
+                            //                            l1.text='II'
+                            //                            l1.rotation=0-axis.rotation
+                            //                            l2.text='VIII'
+                            //                            l2.rotation=l1.rotation
                         }else if(index===r.sh3){
                             //axis.color='#88ff33'
-                            l1.text='III'
-                            l1.rotation=90-r.angleRotH3
-                            l2.text='IX'
-                            l2.rotation=90-r.angleRotH3
                             axis.rotation=0-r.angleRotH3
+                            nh3.visible=true
+                            nh9.visible=true
+                            //                            l1.text='III'
+                            //                            l1.rotation=30-axis.rotation
+                            //                            l2.text='IX'
+                            //                            l2.rotation=l1.rotation
                         }else if(index===r.sh4){
                             //axis.color='#ff8833'
-                            cirH10.visible=true
-                            l1.text='IV'
-                            l1.rotation=90+r.angleRotH4
-                            l2.text='X'
-                            l2.rotation=90+r.angleRotH4
                             axis.rotation=0-r.angleRotH4
+                            cirH10.visible=true
+                            nh4.visible=true
+                            nh10.visible=true
+                            //                            l1.text='IV'
+                            //                            l1.rotation=90//axis.parent.rotation+60
+                            //                            l2.text='X'
+                            //                            l2.rotation=l1.rotation
                         }else if(index===r.sh5){
                             //axis.color='#88dd33'
-                            l1.text='V'
-                            l1.rotation=120+r.angleRotH5
-                            l2.text='XI'
-                            l2.rotation=120+r.angleRotH5
                             axis.rotation=0-r.angleRotH5
+                            nh5.visible=true
+                            nh11.visible=true
                         }else if(index===r.sh6){
                             //axis.color='#99ff22'
-                            l1.text='VI'
-                            l1.rotation=150+r.angleRotH6
-                            l2.text='XII'
-                            l2.rotation=150+r.angleRotH6
                             axis.rotation=0-r.angleRotH6
+                            nh6.visible=true
+                            nh12.visible=true
                         }else{
                             axis.visible=false
                         }
@@ -531,7 +880,7 @@ Rectangle {
         let json='{"params":{"ms":"1594667066141","n":"Florencia_Villalba","a":"1996","m":"01","d":"02","h":"14","min":"30","gmt":"-3","lat":"-34.6157437","lon":"-58.5733832"},"psc":{"sun":{"g":11,"m":36,"s":"cap","h":9,"rh":"ix"},"moon":{"g":7,"m":29,"s":"gem","h":2,"rh":"ii"},"mercury":{"g":1,"m":2,"s":"aqr","h":9,"rh":"ix"},"venus":{"g":14,"m":45,"s":"aqr","h":10,"rh":"x"},"mars":{"g":25,"m":31,"s":"cap","h":9,"rh":"ix"},"jupiter":{"g":29,"m":52,"s":"sgr","h":9,"rh":"ix"},"saturn":{"g":19,"m":31,"s":"psc","h":11,"rh":"xi"},"uranus":{"g":29,"m":27,"s":"cap","h":9,"rh":"ix"},"neptune":{"g":24,"m":44,"s":"cap","h":9,"rh":"ix"},"pluto":{"g":2,"m":0,"s":"sgr","h":8,"rh":"viii"},"n":{"g":23,"m":18,"s":"lib","h":6,"rh":"vi"},"s":{"g":23,"m":18,"s":"ari","h":12,"rh":"xii"},"hiron":{"g":13,"m":41,"s":"lib","h":6,"rh":"vi"},"proserpina":{"g":9,"m":51,"s":"sco","h":7,"rh":"vii"},"selena":{"g":0,"m":0,"s":"ari","h":11,"rh":"xi"},"lilith":{"g":10,"m":41,"s":"cnc","h":3,"rh":"iii"}},"pc":{"h1":{"s":"ari","g":29,"m":40},"h2":{"s":"tau","g":28,"m":14},"h3":{"s":"gem","g":29,"m":47},"h4":{"s":"leo","g":3,"m":16},"h5":{"s":"vir","g":5,"m":57},"h6":{"s":"lib","g":5,"m":3},"h7":{"s":"lib","g":29,"m":40},"h8":{"s":"sco","g":28,"m":14},"h9":{"s":"sgr","g":29,"m":47},"h10":{"s":"aqr","g":3,"m":16},"h11":{"s":"psc","g":5,"m":57},"h12":{"s":"ari","g":5,"m":3}}}'
         //{"params":{"ms":"1592110344809","n":"Alejo_Lombardi","a":"1999","m":"12","d":"29","h":"7","min":"20","gmt":"-3","lat":"-31.7413197","lon":"-60.5115471"},"psc":{"sun":{"g":0,"m":0,"s":"7","h":-1,"rh":"14"},"moon":{"g":5,"m":24,"s":"lib","h":9,"rh":"ix"},"mercury":{"g":27,"m":8,"s":"sgr","h":12,"rh":"xii"},"venus":{"g":27,"m":52,"s":"sco","h":11,"rh":"xi"},"mars":{"g":25,"m":35,"s":"aqr","h":2,"rh":"ii"},"jupiter":{"g":25,"m":8,"s":"ari","h":4,"rh":"iv"},"saturn":{"g":10,"m":27,"s":"tau","h":4,"rh":"iv"},"uranus":{"g":14,"m":39,"s":"aqr","h":1,"rh":"i"},"neptune":{"g":3,"m":5,"s":"aqr","h":1,"rh":"i"},"pluto":{"g":11,"m":21,"s":"sgr","h":11,"rh":"xi"},"n":{"g":4,"m":2,"s":"leo","h":7,"rh":"vii"},"s":{"g":4,"m":2,"s":"aqr","h":1,"rh":"i"},"hiron":{"g":11,"m":16,"s":"sgr","h":11,"rh":"xi"},"proserpina":{"g":11,"m":50,"s":"sco","h":10,"rh":"x"},"selena":{"g":0,"m":0,"s":"ari","h":3,"rh":"iii"},"lilith":{"g":23,"m":7,"s":"sgr","h":12,"rh":"xii"}},"pc":{"h1":{"s":"cap","g":23,"m":59},"h2":{"s":"aqr","g":16,"m":15},"h3":{"s":"psc","g":11,"m":59},"h4":{"s":"ari","g":12,"m":57},"h5":{"s":"tau","g":18,"m":3},"h6":{"s":"gem","g":22,"m":49},"h7":{"s":"cnc","g":23,"m":59},"h8":{"s":"leo","g":16,"m":15},"h9":{"s":"vir","g":11,"m":59},"h10":{"s":"lib","g":12,"m":57},"h11":{"s":"sco","g":18,"m":3},"h12":{"s":"sgr","g":22,"m":49}}}'
 
-        //'{"params":{"ms":"1590969573745","n":"Ricardo","a":"1975","m":"06","d":"20","h":"23","min":"00","gmt":"-3","lat":"-35.484462","lon":"-69.5797495"},"psc":{"sun":{"g":29,"m":6,"s":"gem","h":5,"rh":"v"},"moon":{"g":26,"m":51,"s":"sco","h":10,"rh":"x"},"mercury":{"g":15,"m":6,"s":"gem","h":4,"rh":"iv"},"venus":{"g":14,"m":27,"s":"leo","h":6,"rh":"vi"},"mars":{"g":22,"m":45,"s":"ari","h":3,"rh":"iii"},"jupiter":{"g":20,"m":11,"s":"ari","h":3,"rh":"iii"},"saturn":{"g":19,"m":22,"s":"cnc","h":5,"rh":"v"},"uranus":{"g":28,"m":28,"s":"lib","h":9,"rh":"ix"},"neptune":{"g":9,"m":54,"s":"sgr","h":10,"rh":"x"},"pluto":{"g":6,"m":29,"s":"lib","h":8,"rh":"viii"},"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"},"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"},"hiron":{"g":27,"m":25,"s":"ari","h":3,"rh":"iii"},"proserpina":{"g":28,"m":3,"s":"lib","h":9,"rh":"ix"},"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"},"lilith":{"g":15,"m":11,"s":"psc","h":1,"rh":"i"}},"pc":{"h1":{"s":"aqr","g":26,"m":9},"h2":{"s":"psc","g":20,"m":8},"h3":{"s":"ari","g":18,"m":46},"h4":{"s":"tau","g":21,"m":29},"h5":{"s":"gem","g":25,"m":27},"h6":{"s":"cnc","g":27,"m":24},"h7":{"s":"leo","g":26,"m":9},"h8":{"s":"vir","g":20,"m":8},"h9":{"s":"lib","g":18,"m":46},"h10":{"s":"sco","g":21,"m":29},"h11":{"s":"sgr","g":25,"m":27},"h12":{"s":"cap","g":27,"m":24}}}'
+        //let json='{"params":{"ms":"1590969573745","n":"Ricardo","a":"1975","m":"06","d":"20","h":"23","min":"00","gmt":"-3","lat":"-35.484462","lon":"-69.5797495"},"psc":{"sun":{"g":29,"m":6,"s":"gem","h":5,"rh":"v"},"moon":{"g":26,"m":51,"s":"sco","h":10,"rh":"x"},"mercury":{"g":15,"m":6,"s":"gem","h":4,"rh":"iv"},"venus":{"g":14,"m":27,"s":"leo","h":6,"rh":"vi"},"mars":{"g":22,"m":45,"s":"ari","h":3,"rh":"iii"},"jupiter":{"g":20,"m":11,"s":"ari","h":3,"rh":"iii"},"saturn":{"g":19,"m":22,"s":"cnc","h":5,"rh":"v"},"uranus":{"g":28,"m":28,"s":"lib","h":9,"rh":"ix"},"neptune":{"g":9,"m":54,"s":"sgr","h":10,"rh":"x"},"pluto":{"g":6,"m":29,"s":"lib","h":8,"rh":"viii"},"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"},"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"},"hiron":{"g":27,"m":25,"s":"ari","h":3,"rh":"iii"},"proserpina":{"g":28,"m":3,"s":"lib","h":9,"rh":"ix"},"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"},"lilith":{"g":15,"m":11,"s":"psc","h":1,"rh":"i"}},"pc":{"h1":{"s":"aqr","g":26,"m":9},"h2":{"s":"psc","g":20,"m":8},"h3":{"s":"ari","g":18,"m":46},"h4":{"s":"tau","g":21,"m":29},"h5":{"s":"gem","g":25,"m":27},"h6":{"s":"cnc","g":27,"m":24},"h7":{"s":"leo","g":26,"m":9},"h8":{"s":"vir","g":20,"m":8},"h9":{"s":"lib","g":18,"m":46},"h10":{"s":"sco","g":21,"m":29},"h11":{"s":"sgr","g":25,"m":27},"h12":{"s":"cap","g":27,"m":24}}}'
         setJson(json)
     }
     function setJson(j){
