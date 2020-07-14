@@ -45,45 +45,45 @@ Rectangle {
     signal doubleClick
     signal posChanged(int px, int py)
 
-//    Item {
-//        anchors.fill: parent
-//        visible: false
-//        Repeater{
-//            model: r.arrayCasas1
-//            Item{
-//                width: r.width+r.fs
-//                height: 3
-//                anchors.centerIn: parent
-//                rotation: 0-index*30
-//                Rectangle{
-//                    width: parent.width-r.fs
-//                    height: 3
-//                    color: 'red'
-//                    anchors.centerIn: parent
-//                    antialiasing: true
-//                }
-//                Text{
-//                    text: index!==0?modelData:'Asc\n'+r.cAscName+'\n°'+r.ascDegree+' \''+r.ascMinutes
-//                    font.pixelSize: r.fs
-//                    color: 'white'
-//                    anchors.right: parent.left
-//                    //anchors.rightMargin: r.fs
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    rotation: index*30
-//                    horizontalAlignment: index!==0?Text.AlignHCenter:Text.AlignRight
-//                }
-//                Text{
-//                    text: r.arrayCasas2[index]
-//                    font.pixelSize: r.fs
-//                    color: 'white'
-//                    anchors.left: parent.right
-//                    //anchors.rightMargin: r.fs
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    rotation: index*30
-//                }
-//            }
-//        }
-//    }
+    //    Item {
+    //        anchors.fill: parent
+    //        visible: false
+    //        Repeater{
+    //            model: r.arrayCasas1
+    //            Item{
+    //                width: r.width+r.fs
+    //                height: 3
+    //                anchors.centerIn: parent
+    //                rotation: 0-index*30
+    //                Rectangle{
+    //                    width: parent.width-r.fs
+    //                    height: 3
+    //                    color: 'red'
+    //                    anchors.centerIn: parent
+    //                    antialiasing: true
+    //                }
+    //                Text{
+    //                    text: index!==0?modelData:'Asc\n'+r.cAscName+'\n°'+r.ascDegree+' \''+r.ascMinutes
+    //                    font.pixelSize: r.fs
+    //                    color: 'white'
+    //                    anchors.right: parent.left
+    //                    //anchors.rightMargin: r.fs
+    //                    anchors.verticalCenter: parent.verticalCenter
+    //                    rotation: index*30
+    //                    horizontalAlignment: index!==0?Text.AlignHCenter:Text.AlignRight
+    //                }
+    //                Text{
+    //                    text: r.arrayCasas2[index]
+    //                    font.pixelSize: r.fs
+    //                    color: 'white'
+    //                    anchors.left: parent.right
+    //                    //anchors.rightMargin: r.fs
+    //                    anchors.verticalCenter: parent.verticalCenter
+    //                    rotation: index*30
+    //                }
+    //            }
+    //        }
+    //    }
 
     Rectangle{
         id: bg
@@ -190,194 +190,6 @@ Rectangle {
                                 color='black'
                             }
                         }
-                    }
-                }
-
-                //                Text{
-                //                    text: app.signos[index]
-                //                    font.pixelSize: r.fs
-                //                    color: 'white'
-                //                    anchors.right: parent.left
-                //                    //anchors.rightMargin: r.fs
-                //                    anchors.verticalCenter: parent.verticalCenter
-                //                    rotation: index*30
-                //                }
-                Rectangle{
-                    id: axis
-                    //z:index+1000
-                    width: parent.width+r.fs*2
-                    height: 2
-                    color: 'red'
-                    antialiasing: true
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    //                    Behavior on rotation {
-                    //                        NumberAnimation{duration:3000}
-                    //                    }
-                    //                    Timer{
-                    //                        running: true
-                    //                        repeat: true
-                    //                        interval: 500
-                    //                        onTriggered: axis.height===2?axis.height=10:axis.height=2
-                    //                    }
-                    Item{
-                        id: cirH10
-                        width: r.fs*0.5
-                        height: width
-                        anchors.right:  parent.right
-                        anchors.rightMargin: 0-width*0.5
-                        anchors.verticalCenter: parent.verticalCenter
-                        antialiasing: true
-                        visible: false
-                        Rectangle{
-                            anchors.fill: parent
-                            radius: width*0.5
-                            color: app.c2
-                            antialiasing: true
-                        }
-                    }
-                    Item{
-                        id: rectH1
-                        width: r.fs*0.5
-                        height: width
-                        anchors.left: parent.left
-                        anchors.leftMargin: 0-width*0.5
-                        anchors.verticalCenter: parent.verticalCenter
-                        antialiasing: true
-                        visible: false
-                        MouseArea{
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            onEntered: {
-                                tagHor.visible=true
-                            }
-                            onExited: tagHor.visible=false
-                            onClicked: {
-                                unik.speak('Ascendente '+r.cAscName+' en el grado '+r.ascDegree)
-                            }
-                        }
-                        Rectangle{
-                            rotation: 45
-                            anchors.fill: parent
-                            color: app.c2
-                            antialiasing: true
-                        }
-                        Rectangle{
-                            id: tagHor
-                            visible: false
-                            width: 1
-                            height: r.height*0.5
-                            color: app.c2
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.bottom: parent.top
-                            Rectangle{
-                                width: r.fs*5
-                                height: 1
-                                color: app.c2
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                anchors.bottom: parent.top
-                                Text{
-                                    text: 'Horizonte'
-                                    font.pixelSize: r.fs
-                                    color: app.c2
-                                    anchors.bottom: parent.top
-                                }
-                            }
-                        }
-                    }
-                    Text{
-                        id: l1
-                        text: index!==0?r.arrayCasas1[index]:'Asc\n'+r.cAscName+'\n°'+r.ascDegree+' \''+r.ascMinutes
-                        font.pixelSize: r.fs
-                        color: app.c2
-                        anchors.right: parent.left
-                        anchors.rightMargin: r.fs*0.5
-                        anchors.verticalCenter: parent.verticalCenter
-                        horizontalAlignment: index!==0?Text.AlignHCenter:Text.AlignRight
-                    }
-                    Text{
-                        id: l2
-                        text: r.arrayCasas2[index]
-                        font.pixelSize: r.fs
-                        color: app.c2
-                        anchors.left: parent.right
-                        anchors.leftMargin: r.fs*0.5
-                        anchors.verticalCenter: parent.verticalCenter
-                        rotation: index*30
-                    }
-                    Timer{
-                        running: true
-                        repeat: true
-                        interval: 3000
-                        onTriggered: axis.setRot()
-                    }
-                    function setRot() {
-                        //console.log('r.ascSignIndex: '+r.ascSignIndex+' index: '+index+' r.sh4: '+r.sh4)
-                        if(index===r.sh1){
-                            //axis.color='#88ff33'
-                            //l1.text='II'
-                            rectH1.visible=true
-                            l2.rotation=30-r.angleRotH1
-                            axis.rotation=0-r.angleRotH1
-                        }else if(index===r.sh2){
-                            //axis.color='#ff3388'
-                            l1.text='II'
-                            l1.rotation=60-r.angleRotH2
-                            l2.text='VIII'
-                            l2.rotation=60-r.angleRotH2
-                            axis.rotation=0-r.angleRotH2
-                        }else if(index===r.sh3){
-                            //axis.color='#88ff33'
-                            l1.text='III'
-                            l1.rotation=90-r.angleRotH3
-                            l2.text='IX'
-                            l2.rotation=90-r.angleRotH3
-                            axis.rotation=0-r.angleRotH3
-                        }else if(index===r.sh4){
-                            //axis.color='#ff8833'
-                            cirH10.visible=true
-                            l1.text='IV'
-                            l1.rotation=90+r.angleRotH4
-                            l2.text='X'
-                            l2.rotation=90+r.angleRotH4
-                            axis.rotation=0-r.angleRotH4
-                        }else if(index===r.sh5){
-                            //axis.color='#88dd33'
-                            l1.text='V'
-                            l1.rotation=120+r.angleRotH5
-                            l2.text='XI'
-                            l2.rotation=120+r.angleRotH5
-                            axis.rotation=0-r.angleRotH5
-                        }else if(index===r.sh6){
-                            //axis.color='#99ff22'
-                            l1.text='VI'
-                            l1.rotation=150+r.angleRotH6
-                            l2.text='XII'
-                            l2.rotation=150+r.angleRotH6
-                            axis.rotation=0-r.angleRotH6
-                        }else{
-                            axis.visible=false
-                        }
-                        //                        if(index+r.ascSignIndex===0){
-                        //                            axis.color='#ff8833'
-                        //                            axis.rotation=0-r.angleRotH1
-                        //                            //axis.visible=false
-                        //                        }else if(index+r.ascSignIndex===1){
-                        //                            axis.color='#88ff33'
-                        //                            axis.rotation=0-r.angleRotH2
-                        //                            //axis.visible=false
-                        //                        }else if(index+r.ascSignIndex===2){
-                        //                            axis.color='yellow'
-                        //                            axis.rotation=0-r.angleRotH3
-                        //                            //axis.visible=false
-                        //                        }else if(index+r.ascSignIndex===3){
-                        //                            axis.color='#ff9922'
-                        //                            axis.rotation=0-r.angleRotH4
-                        //                        }/*else if(index+r.ascSignIndex===4){
-                        //                            axis.color='green'
-                        //                            axis.rotation=0-r.angleRotH5
-                        //                        }*/else{
-                        //                            axis.visible=false
-                        //                        }
                     }
                 }
             }
@@ -572,93 +384,6 @@ Rectangle {
             }
         }
     }
-//    Item {
-//        anchors.fill: parent
-//        //        width: r.width
-//        //        height: r.height
-//        //        anchors.centerIn: r
-//        Repeater{
-//            model: 2
-//            Item{
-//                width: r.width
-//                height: 3
-//                anchors.centerIn: parent
-//                rotation: 0-index*90
-//                Rectangle{
-//                    id: lineAxis
-//                    width: parent.width-r.fs
-//                    height: 3
-//                    color: r.axisColor
-//                    anchors.centerIn: parent
-//                    antialiasing: true
-//                }
-//                Item{
-//                    width: r.fs*0.5
-//                    height: width
-//                    anchors.left: parent.left
-//                    anchors.leftMargin: 0-width*0.5
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    antialiasing: true
-//                    visible: index===0
-//                    MouseArea{
-//                        anchors.fill: parent
-//                        hoverEnabled: true
-//                        onEntered: {
-//                            tagHor.visible=true
-//                        }
-//                        onExited: tagHor.visible=false
-//                        onClicked: {
-//                            unik.speak('Ascendente '+r.cAscName+' en el grado '+r.ascDegree)
-//                        }
-//                    }
-//                    Rectangle{
-//                        rotation: 45
-//                        anchors.fill: parent
-//                        color: app.c2
-//                        antialiasing: true
-//                    }
-//                    Rectangle{
-//                        id: tagHor
-//                        visible: false
-//                        width: 1
-//                        height: r.height*0.5
-//                        color: app.c2
-//                        anchors.horizontalCenter: parent.horizontalCenter
-//                        anchors.bottom: parent.top
-//                        Rectangle{
-//                            width: r.fs*5
-//                            height: 1
-//                            color: app.c2
-//                            anchors.horizontalCenter: parent.horizontalCenter
-//                            anchors.bottom: parent.top
-//                            Text{
-//                                text: 'Horizonte'
-//                                font.pixelSize: r.fs
-//                                color: app.c2
-//                                anchors.bottom: parent.top
-//                            }
-//                        }
-//                    }
-//                }
-//                Item{
-//                    width: r.fs*0.5
-//                    height: width
-//                    anchors.right:  parent.right
-//                    anchors.rightMargin: 0-width*0.5
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    antialiasing: true
-//                    visible: index===1
-//                    Rectangle{
-//                        anchors.fill: parent
-//                        radius: width*0.5
-//                        color: app.c2
-//                        antialiasing: true
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     Rectangle{
         id: bg2
         width: r.width*0.2
