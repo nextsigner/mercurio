@@ -203,6 +203,11 @@ ApplicationWindow{
                     xWebViews.children[i].destroy(1)
                 }
             }
+            function addXAsWV(url){
+               xWebViews.clear()
+                let comp=Qt.createComponent('XAsWebView.qml')
+                let obj=comp.createObject(xWebViews, {url:url})
+            }
             function addConsulta(cons){
                xWebViews.clear()
                 let comp=Qt.createComponent('UGetYouTubeVideo.qml')

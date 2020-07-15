@@ -13,6 +13,7 @@ Rectangle {
     property string cuerpo: 'null'
     property string signo: 'null'
     property string casa: 'null'
+    property string url1: 'null'
     MouseArea{
         anchors.fill: r
     }
@@ -44,6 +45,14 @@ Rectangle {
                 onClicked: {
                     let m=['primera', 'segunda', 'tercera', 'cuarta', 'quita', 'sexta', 'septima', 'ocatava', 'novena', 'decima', 'decima primera', 'duodecima']
                     xWebViews.addConsulta(r.cuerpo+' en casa '+r.casa+' '+m[parseInt(r.casa)-1]+' casa')
+                    r.visible=false
+                }
+            }
+            BotonUX{
+                visible: r.url1!==''
+                text: 'Ir a video de '+r.cuerpo+' en casa '+r.casa
+                onClicked: {
+                    xWebViews.addXAsWV(r.url1)
                     r.visible=false
                 }
             }
