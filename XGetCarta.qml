@@ -33,11 +33,12 @@ Rectangle {
         width: r.width
         height: r.height
         contentWidth: width
-        contentHeight: col.height+app.fs*6
+        contentHeight: r.mod===0?col.height+app.fs*6:xCnListDisp.height
         Column{
             id: col
             spacing: app.fs*2
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: r.mod===0
             Flow{
                 id: flowGetCarta
                 width:r.width-app.fs
@@ -79,7 +80,6 @@ Rectangle {
                 }
             }
             Column{
-                visible: r.mod===0
                 spacing: app.fs*2
                 anchors.horizontalCenter: parent.horizontalCenter
                 Text{
@@ -281,11 +281,13 @@ Rectangle {
                     }
                 }
             }
-            XCnListDisp{
-                id: xCnListDisp
-                height: r.height-flowGetCarta.height-col.spacing-app.fs*2
-                visible: r.mod===1
-            }
+        }
+        XCnListDisp{
+            id: xCnListDisp
+            width: r.width
+            height: r.height//-flowGetCarta.height-col.spacing-app.fs*2
+            visible: r.mod===1
+            container: r
         }
     }
     Item{

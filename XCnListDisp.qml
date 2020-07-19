@@ -6,6 +6,7 @@ Item {
     width: parent.width
     height: app.height
     onVisibleChanged: lvCns.focus=visible
+    property var container
     property string cFileName: ''
     FolderListModel{
         id: flmCns
@@ -14,13 +15,46 @@ Item {
     Column{
         spacing: app.fs*0.5
         anchors.horizontalCenter: parent.horizontalCenter
+        Flow{
+            id: flowCnListDisp
+            width:r.width-app.fs
+            spacing: app.fs*0.5
+            BotonUX{
+                text: 'Atras'
+                fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
+                onClicked: {
+                    unik.speak('atras')
+                    r.container.mod=0
+                }
+            }
+            BotonUX{
+                text: 'Ver'
+                visible: r.container.mod===1&&xCnListDisp.cFileName!==''
+                onClicked: {
+                    xCnView.currentImgUrl=app.serverUrl+':'+app.portFiles+'/files/'+xCnListDisp.cFileName.replace('.json', '')+'.png'
+                    xCnView.xcn.setJson(unik.getFile('./cns/'+xCnListDisp.cFileName))
+                    xCnListDisp.cFileName=''
+                    xCnView.visible=true
+                    r.container.mod=0
+                }
+            }
+            BotonUX{
+                visible: xCnListDisp.cFileName!==''
+                text: 'Eliminar'
+                onClicked: {
+                    unik.deleteFile('./cns/'+xCnListDisp.cFileName)
+                    xCnListDisp.cFileName=''
+                }
+            }
+        }
         UText{
+            id:txtTit
             text: '<b>Cartas Disponibles '+flmCns.count+'</b>'
         }
         ListView{
             id: lvCns
             width: r.width
-            height: r.height-app.fs*4
+            height: r.height-flowCnListDisp.height-txtTit.height-app.fs
             model: flmCns
             delegate: compCns
             spacing: app.fs*0.25
@@ -39,6 +73,14 @@ Item {
                     MouseArea{
                         anchors.fill: parent
                         onClicked: r.cFileName=fileName
+                        onDoubleClicked: {
+                            r.cFileName=fileName
+                            xCnView.currentImgUrl=app.serverUrl+':'+app.portFiles+'/files/'+xCnListDisp.cFileName.replace('.json', '')+'.png'
+                            xCnView.xcn.setJson(unik.getFile('./cns/'+xCnListDisp.cFileName))
+                            xCnListDisp.cFileName=''
+                            xCnView.visible=true
+                            r.container.mod=0
+                        }
                     }
                     Row{
                         spacing: app.fs*0.5
@@ -77,9 +119,8 @@ Item {
                         }
                         let jsonData=unik.getFile('./cns/'+fileName)
                         let json=JSON.parse(jsonData)
-                        let s2=' Nacido a las '+json.params.h+':'+json.params.min+' '
-                        txtFN.text=''+of+' '+s2+' creada el '+s
-
+                        //let s2=''//' Nacido a las '+json.params.h+':'+json.params.min+' '
+                        txtFN.text=''+of+' creada el '+s
                     }
                 }
             }
