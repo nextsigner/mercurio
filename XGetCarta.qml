@@ -173,7 +173,7 @@ Rectangle {
                         }
                         UTextInput{
                             id: tiMinutos
-                            label: 'Mes:'
+                            label: 'Minutos:'
                             width:app.fs*6//+diffWidth
                             KeyNavigation.tab: tiCiudad
                             regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
