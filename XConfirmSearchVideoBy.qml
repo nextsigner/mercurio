@@ -36,7 +36,7 @@ Rectangle {
                 id: bot1
                 text: 'Buscar '+r.cuerpo+' en '+r.signo
                 onClicked: {
-                    xWebViews.addConsulta(r.cuerpo+' en '+r.signo)
+                    xAsData.addConsulta(r.cuerpo+' en '+r.signo)
                     r.visible=false
                 }
             }
@@ -44,7 +44,7 @@ Rectangle {
                 text: 'Buscar '+r.cuerpo+' en casa '+r.casa
                 onClicked: {
                     let m=['primera', 'segunda', 'tercera', 'cuarta', 'quita', 'sexta', 'septima', 'ocatava', 'novena', 'decima', 'decima primera', 'duodecima']
-                    xWebViews.addConsulta(r.cuerpo+' en casa '+r.casa+' '+m[parseInt(r.casa)-1]+' casa')
+                    xAsData.addConsulta(r.cuerpo+' en casa '+r.casa+' '+m[parseInt(r.casa)-1]+' casa')
                     r.visible=false
                 }
             }
@@ -52,7 +52,15 @@ Rectangle {
                 visible: r.url1!==''
                 text: 'Ir a video de '+r.cuerpo+' en casa '+r.casa
                 onClicked: {
-                    xWebViews.addXAsWV(r.url1)
+                    xAsData.addXAsWV(r.url1)
+                    r.visible=false
+                }
+            }
+            BotonUX{
+                visible: r.cuerpo==='Lilith'||r.cuerpo==='Quirón'
+                text: 'Texto sobre '+r.cuerpo+' en casa '+r.casa
+                onClicked: {
+                    xAsData.addXAsTextData(cuerpo, casa)
                     r.visible=false
                 }
             }

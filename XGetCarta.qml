@@ -26,6 +26,7 @@ Rectangle {
             getTransNow()
         }
     }
+
     MouseArea{
         anchors.fill: r
     }
@@ -160,26 +161,40 @@ Rectangle {
                     spacing: app.fs*0.5
                     anchors.horizontalCenter: parent.horizontalCenter
                     UText{
-                        text: '<b>Hora de Nacimiento</b>'
+                        text: '<b>Hora de Nacimiento</b> Formato 24hs.'
                     }
                     Row{
                         spacing: app.fs
                         UTextInput{
                             id: tiHora
                             label: 'Hora:'
+                            text: '00'
+                            property int uvv: text
                             width:app.fs*6//+diffWidth
                             KeyNavigation.tab: tiMinutos
                             regularExp: RegExpValidator{regExp:  /^([1-9])[0-9]/}
+                            onTextChanged: {
+                                if(parseInt(text)>24){
+                                    text='24'
+                                }
+                            }
                         }
                         UTextInput{
                             id: tiMinutos
                             label: 'Minutos:'
-                            width:app.fs*6//+diffWidth
+                            text: '00'
+                            property int uvv: text
+                            width:app.fs*7//+diffWidth
                             KeyNavigation.tab: tiCiudad
                             regularExp: RegExpValidator{regExp:  /^[0-9][0-9]/}
                             maximumLength: 2
+                            onTextChanged: {
+                                if(parseInt(text)>60){
+                                    text='60'
+                                }
+                            }
                         }
-                    }
+                    }                    
                 }
                 Column{
                     spacing: app.fs*0.5
@@ -234,20 +249,20 @@ Rectangle {
                             text: 'Ingresar ciudad'
                         }
                     }
-                    UComboBox{
-                        id: uCbCiudades
-                        width: r.width-app.fs
-                        visible: false
-                        z: statusLugar.z+100
-                        property var arrayUrls: []
-                        onCurrentIndexChanged: {
-                            if(currentIndex!==0){
-                                tiCiudad.text=currentText
-                                getCoordsByUrl(arrayUrls[currentIndex - 1])
-                                visible=false
-                            }
-                        }
-                    }
+//                    UComboBox{
+//                        id: uCbCiudades
+//                        width: r.width-app.fs
+//                        visible: false
+//                        z: statusLugar.z+100
+//                        property var arrayUrls: []
+//                        onCurrentIndexChanged: {
+//                            if(currentIndex!==0){
+//                                tiCiudad.text=currentText
+//                                getCoordsByUrl(arrayUrls[currentIndex - 1])
+//                                visible=false
+//                            }
+//                        }
+//                    }
                 }
                 Row{
                     spacing: app.fs*0.5
@@ -323,6 +338,7 @@ Rectangle {
             getHttp(app.serverUrl+':'+app.portRequest+'/ping')
         }
     }
+    XLoadingCoords{id: xLoadingCoords}
     Component.onCompleted: {
         tiNombre.focus=true
     }
@@ -371,6 +387,8 @@ Rectangle {
     }
 
     function getCoords(text){
+        xLoadingCoords.ciudad=text
+        xLoadingCoords.visible=true
         let md=["Seleccionar Ciudad"]
         r.lon=''
         r.lat=''
@@ -384,6 +402,7 @@ Rectangle {
             +'          r.lon=parseFloat(longitude)'+'\n'
             +'          r.lat=parseFloat(latitude)'+'\n'
             +'          statusLugar.text=\'Coordenadas: lon: \'+r.lon+\' lat: \'+r.lat'+'\n'
+            +'          xLoadingCoords.visible=false'+'\n'
             +'  }'+'\n'
             +'}'+'\n'
         let comp=Qt.createQmlObject(c, r, 'getCoords')

@@ -12,7 +12,7 @@ ApplicationWindow{
     property string moduleName: 'mercurio'
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
-    property int fs: isPhone?(app.rot?app.width*0.03:app.width*0.045):app.width*0.02
+    property int fs: isPhone?(app.rot?app.width*0.03:app.width*0.045):app.width*0.015
 
     property bool isPhone: Qt.platform.os==='android'
 
@@ -196,22 +196,27 @@ ApplicationWindow{
             }
         }
         Item{
-            id: xWebViews
+            id: xAsData
             anchors.fill: parent
             function clear(){
-                for(var i=0;i<xWebViews.children.length;i++){
-                    xWebViews.children[i].destroy(1)
+                for(var i=0;i<xAsData.children.length;i++){
+                    xAsData.children[i].destroy(1)
                 }
             }
+            function addXAsTextData(cuerpo, casa){
+               xAsData.clear()
+                let comp=Qt.createComponent('XAsTextData.qml')
+                let obj=comp.createObject(xAsData, {cuerpo: cuerpo, casa: casa})
+            }
             function addXAsWV(url){
-               xWebViews.clear()
+               xAsData.clear()
                 let comp=Qt.createComponent('XAsWebView.qml')
-                let obj=comp.createObject(xWebViews, {url:url})
+                let obj=comp.createObject(xAsData, {url:url})
             }
             function addConsulta(cons){
-               xWebViews.clear()
+               xAsData.clear()
                 let comp=Qt.createComponent('UGetYouTubeVideo.qml')
-                let obj=comp.createObject(xWebViews, {consulta:cons})
+                let obj=comp.createObject(xAsData, {consulta:cons})
             }
         }
         XConfirmSearchVideoBy{id: xConfirmSearchVideoBy;visible:false}
