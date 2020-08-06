@@ -7,9 +7,10 @@
         "mod4":{"tipo":"learn","qml":"XCasas", "label":"Significado de las Casas", "numMod": 2},
         "mod5":{"tipo":"learn","qml":"XCasasLilith", "label":"Lilith en las Casas", "numMod": 3},
         "mod6":{"tipo":"learn","qml":"XCasasQuiron", "label":"Quirón en las Casas", "numMod": 4},
-        "mod7":{"tipo":"trans","qml":"XGetCarta", "label":"Crear o Ver Carta Natal", "numMod": 5},
-        "mod8":{"tipo":"trans","qml":"XTransLunar", "label":"Tránsito Lunar", "numMod": 6},
-        "mod9":{"tipo":"trans","qml":"XTrans", "label":"Tránsitos", "numMod": 7},
-        "mod10":{"tipo":"menu","qml":"XInfo", "label":"Sobre Mercurio", "numMod": 8}
+        "mod7":{"tipo":"trans","qml":"XGetCarta", "label":"Crear Carta Natal", "numMod": 5},
+        "mod8":{"tipo":"trans","qml":"XCnListDisp", "label":"Lista de Carta Natales", "numMod": 6},
+        "mod9":{"tipo":"trans","qml":"XTransLunar", "label":"Tránsito Lunar", "numMod": 7},
+        "mod10":{"tipo":"trans","qml":"XTrans", "label":"Tránsitos", "numMod": 8},
+        "mod11":{"tipo":"menu","qml":"XInfo", "label":"Sobre Mercurio", "numMod": 9}
         }
 }

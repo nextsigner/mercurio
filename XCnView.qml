@@ -260,7 +260,7 @@ Rectangle {
             target.x = target.x - dx
             target.y = target.y - dy
         }
-        }
+    }
 
     Rectangle{
         width: r.width
@@ -283,12 +283,16 @@ Rectangle {
         z:wv.z+100000
         BotonUX{
             text: 'atras'
+            height: app.fs*2
+            fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
             onClicked: r.visible=false
         }
         BotonUX{
             id: botMod
             property bool imageLoaded: false
             text: r.mod===0?imageLoaded?'Ver Imagen':'Preparando Imagen...':'Ver Carta Interactiva'
+            height: app.fs*2
+            fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
             onClicked: {
                 wv.loadImage(r.currentImgUrl)
                 r.mod=r.mod===0?1:0
@@ -297,6 +301,7 @@ Rectangle {
         BotonUX{
             id: botCopyUrl
             text: 'Copiar Enlace'
+            height: app.fs*2
             fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
             onClicked: {
                 console.log('Copy to clipboard: https://nextsigner.github.io/mercurio_server_redir.html?link='+xCnView.currentImgUrl)
@@ -304,14 +309,6 @@ Rectangle {
             }
         }
     }
-    //    Text{
-    //        id: iz
-    //        text: 'S:'+cnCapture.scale//parseFloat(sCnView.zoom).toFixed(2)+' x:'+flCn.contentX
-    //        //text: 'url:'+cnCapture.url
-    //        //text: 'X:'+cn.ppx
-    //        font.pixelSize: 30
-    //        color: 'red'
-    //    }
     Timer{
         id: tAlejar
         running: true
@@ -325,9 +322,4 @@ Rectangle {
             flickCapture.zoom(-120/120, cnCapture, cnCapture.width*0.5, cnCapture.height*0.5)
         }
     }
-    Component.onCompleted: {
-
-    }
-
-
 }

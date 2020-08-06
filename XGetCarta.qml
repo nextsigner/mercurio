@@ -8,6 +8,7 @@ Rectangle {
     height: parent.height
     color: app.c1
     objectName: 'xgetcarta'
+    property alias xcnview: xCnView
     property int cNumSigno: -1
     property int cGradoLuna: -1
     property string cSignoLuna: ''
@@ -297,13 +298,13 @@ Rectangle {
                 }
             }
         }
-        XCnListDisp{
-            id: xCnListDisp
-            width: r.width
-            height: r.height//-flowGetCarta.height-col.spacing-app.fs*2
-            visible: r.mod===1
-            container: r
-        }
+//        XCnListDisp{
+//            id: xCnListDisp
+//            width: r.width
+//            height: r.height//-flowGetCarta.height-col.spacing-app.fs*2
+//            visible: r.mod===1
+//            container: r
+//        }
     }
     Item{
         anchors.horizontalCenter: parent.horizontalCenter
@@ -405,75 +406,7 @@ Rectangle {
             +'          xLoadingCoords.visible=false'+'\n'
             +'  }'+'\n'
             +'}'+'\n'
-        let comp=Qt.createQmlObject(c, r, 'getCoords')
-        //let
-        /*uCbCiudades.arrayUrls=[]
-        let md=["Seleccionar Ciudad"]
-        r.lon=''
-        r.lat=''
-        var req = new XMLHttpRequest();
-        //req.open('GET', 'https://www.geodatos.net/coordenadas/buscar?q='+text.replace(/ /g, '+')+'', true);
-        ///buscar?qs=rosario+santa+fe&ss=&o=coordenadas
-        let url = 'https://www.geodatos.net/buscar?qs='+text.replace(/ /g, '+')+'&ss=&o=coordenadas'
-        console.log('Url Get Coords: '+url)
-        req.open('GET', url, true);
-        req.onreadystatechange = function (aEvt) {
-            if (req.readyState === 4) {
-                if(req.status === 200){
-                    let rt=req.responseText
-                    let m0= rt.split('<div class="flex justify-center text-center">')
-                    let d0 = (''+m0[1])
-                    let m1=m0[1].split('<ul')
-                    let m10=rt.split('<h1>Coordenadas')
-                    //console.log('---------------------------------rt:::'+rt+'-------------------\n\n\n')
-                    console.log('m10 largo: '+m10.length)
-//                    if(m10.length>1){
-//                        console.log('m10::::'+m10[1])
-//                        let m11=m10[1].split('<strong>')
-//                        if(m11.length>1){
-//                            let m2=m11[1].split('</strong>')
-//                            let m3=m2[0].split(', ')
-//                            if(m3.length>0){
-//                                r.lon=m3[1]
-//                                r.lat=m3[0]
-//                                statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
-//                            }
-//                            //console.log('Coordenadas: '+m2[0])
-//                            uCbCiudades.currentIndex=0
-//                        }
-//                        uCbCiudades.model=md
-//                        uCbCiudades.visible=md.length>1
-//                        return
-//                    }
-                    if(m1.length>1){
-                        statusLugar.text='Opciones: '
-                        //logView.showLog('Opciones: '+m1[1])
-                        //console.log('Opciones: '+m1[1])
-                        let m2=m1[1].split('<li ')
-                        for(let i2=0;i2<m2.length;i2++){
-                            let m3=m2[i2].split('</a>')
-                            let murl1=m3[0].split('href="')
-                            if(murl1.length>1){
-                                let murl2=murl1[1].split('"')
-                                console.log('D:::'+m3[0])
-                                console.log('Durl:::'+murl2[0])
-                                let m4=m3[0].split('>')
-                                let data=(m4[m4.length-1]).replace(/,/g, ' ')
-                                //console.log('D:::'+data)
-                                uCbCiudades.arrayUrls.push(murl2[0])
-                                md.push(data)
-                                statusLugar.text='Seleccionar una ciudad'
-                            }
-                        }
-                        uCbCiudades.model=md
-                        uCbCiudades.visible=md.length>1
-                    }
-                }else{
-                    logView.showLog("Error loading page\n");
-                }
-            }
-        };
-        req.send(null);*/
+        let comp=Qt.createQmlObject(c, r, 'getCoords')        
     }
     function getJson(){
         let url=r.serverUrl+':'+r.portRequest+'/cn/get/?'+'nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')

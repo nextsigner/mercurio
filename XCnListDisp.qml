@@ -21,26 +21,28 @@ Item {
             spacing: app.fs*0.5
             BotonUX{
                 text: 'Atras'
+                height: app.fs*2
                 fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                 onClicked: {
                     unik.speak('atras')
-                    r.container.mod=0
+                    app.mod=-2
+                    r.destroy(1)
                 }
             }
             BotonUX{
                 text: 'Ver'
+                height: app.fs*2
+                fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                 visible: r.container.mod===1&&xCnListDisp.cFileName!==''
                 onClicked: {
-                    xCnView.currentImgUrl=app.serverUrl+':'+app.portFiles+'/files/'+xCnListDisp.cFileName.replace('.json', '')+'.png'
-                    xCnView.xcn.setJson(unik.getFile('./cns/'+xCnListDisp.cFileName))
-                    xCnListDisp.cFileName=''
-                    xCnView.visible=true
-                    r.container.mod=0
+                    loadCn()
                 }
             }
             BotonUX{
                 visible: xCnListDisp.cFileName!==''
                 text: 'Eliminar'
+                height: app.fs*2
+                fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                 onClicked: {
                     unik.deleteFile('./cns/'+xCnListDisp.cFileName)
                     xCnListDisp.cFileName=''
@@ -75,11 +77,7 @@ Item {
                         onClicked: r.cFileName=fileName
                         onDoubleClicked: {
                             r.cFileName=fileName
-                            xCnView.currentImgUrl=app.serverUrl+':'+app.portFiles+'/files/'+xCnListDisp.cFileName.replace('.json', '')+'.png'
-                            xCnView.xcn.setJson(unik.getFile('./cns/'+xCnListDisp.cFileName))
-                            xCnListDisp.cFileName=''
-                            xCnView.visible=true
-                            r.container.mod=0
+                            loadCn()
                         }
                     }
                     Row{
@@ -125,5 +123,13 @@ Item {
                 }
             }
         }
+    }
+    function loadCn(){
+        var comp = Qt.createComponent('XCnView.qml')
+        var obj=comp.createObject(xMods, {})
+        obj.currentImgUrl=app.serverUrl+':'+app.portFiles+'/files/'+r.cFileName.replace('.json', '')+'.png'
+        obj.xcn.setJson(unik.getFile('./cns/'+r.cFileName))
+        obj.cFileName=''
+        obj.visible=true
     }
 }
