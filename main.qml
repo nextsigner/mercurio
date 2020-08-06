@@ -128,6 +128,7 @@ ApplicationWindow{
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: app.fs
+            visible: xMenu.visible || xMenuTrans.visible || xMenuLearn.visible
             Behavior on opacity {NumberAnimation{duration: 500}}
             Rectangle{
                 width: xApp.width

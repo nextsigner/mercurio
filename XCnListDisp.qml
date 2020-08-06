@@ -39,13 +39,13 @@ Item {
                 }
             }
             BotonUX{
-                visible: xCnListDisp.cFileName!==''
+                visible: r.cFileName!==''
                 text: 'Eliminar'
                 height: app.fs*2
                 fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                 onClicked: {
-                    unik.deleteFile('./cns/'+xCnListDisp.cFileName)
-                    xCnListDisp.cFileName=''
+                    unik.deleteFile('./cns/'+r.cFileName)
+                    r.cFileName=''
                 }
             }
         }

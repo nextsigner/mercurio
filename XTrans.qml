@@ -24,7 +24,8 @@ Rectangle {
         Item{width: 1;height: app.fs*0.5}
         BotonUX{
             text: 'Atras'
-            fontSize: app.rot?app.fs*0.5:app.fs
+            height: app.fs*2
+            fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
             onClicked: {
                 app.mod=-2
                 unik.speak('atras')

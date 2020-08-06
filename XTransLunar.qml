@@ -32,7 +32,8 @@ Rectangle {
                 spacing: app.fs
                 BotonUX{
                     text: 'Atras'
-                    fontSize: app.rot?app.fs*0.5:app.fs
+                    height: app.fs*2
+                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     onClicked: {
                         app.mod=-2
                         JS.speak('atras')
@@ -41,7 +42,8 @@ Rectangle {
                 BotonUX{
                     visible: cbAsc.currentIndex!==0
                     text: 'Detener Voz'
-                    fontSize: app.rot?app.fs*0.5:app.fs
+                    height: app.fs*2
+                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     onClicked: {
                         JS.speak('Detenido.')
                     }
@@ -49,7 +51,8 @@ Rectangle {
                 BotonUX{
                     visible: cbAsc.currentIndex!==0
                     text: 'Leer'
-                    fontSize: app.rot?app.fs*0.5:app.fs
+                    height: app.fs*2
+                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     onClicked: {
                         r.speak(resTransLunar.text)
                     }
@@ -73,6 +76,7 @@ Rectangle {
                     property var arrayAsc: [0,11, 11, 5, 4, 2, 7, 12, 1, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     width: r.width-app.fs
                     anchors.horizontalCenter: parent.horizontalCenter
+                    z: resTransLunar.z+1
                     onCurrentIndexChanged: {
                         if(currentIndex===0)return
                         let numAsc=parseInt(12 - arrayAsc[currentIndex] + r.cNumSigno)
@@ -128,7 +132,8 @@ Rectangle {
                     visible: cbAsc.currentIndex!==0
                     width: r.width-app.fs
                     text: 'Seleccionar un nombre o Ascendente'
-                    font.pixelSize: app.fs*1.5
+                    //font.pixelSize: app.fs*1.5
+                    font.pixelSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     wrapMode: Text.WordWrap
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
