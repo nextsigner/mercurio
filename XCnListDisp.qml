@@ -81,16 +81,26 @@ Item {
                         }
                     }
                     Row{
-                        spacing: app.fs*0.5
+                        spacing: app.fs
                         anchors.centerIn: parent
                         UText{
                             id: txtFN
                             text: fileName
-                            width: xItemCnFile.width-app.fs
+                            width: xItemCnFile.width-btnRowVer.width-app.fs*2
                             color: r.cFileName===fileName?app.c1:app.c2
                             anchors.verticalCenter: parent.verticalCenter
                             wrapMode: Text.WordWrap
                             horizontalAlignment: Text.AlignHCenter
+                        }
+                        BotonUX{
+                            id: btnRowVer
+                            text: 'Ver'
+                            height: app.fs*2
+                            fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
+                            visible: r.cFileName===fileName
+                            onClicked: {
+                                loadCn()
+                            }
                         }
                     }
                     Component.onCompleted: {

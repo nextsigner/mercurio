@@ -54,14 +54,14 @@ Rectangle {
                         r.destroy(10)
                     }
                 }
-                BotonUX{
-                    id: botSetMod
-                    text: r.mod===0?'Cartas Disponibles':'Crear Carta'
-                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
-                    onClicked: {
-                        r.mod=r.mod===0?1:0
-                    }
-                }
+//                BotonUX{
+//                    id: botSetMod
+//                    text: r.mod===0?'Cartas Disponibles':'Crear Carta'
+//                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
+//                    onClicked: {
+//                        r.mod=r.mod===0?1:0
+//                    }
+//                }
                 BotonUX{
                     text: 'Ver'
                     visible: r.mod===1&&xCnListDisp.cFileName!==''

@@ -9,11 +9,12 @@ Rectangle {
         anchors.fill: r
     }
     Column{
-        spacing: app.fs
+        spacing: app.fs*0.5
         anchors.centerIn: r
         BotonUX{
             text: 'Atras'
-            fontSize: app.rot?app.fs*0.5:app.fs
+            height: app.fs*2
+            fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
             onClicked: {
                 JS.speak('atras')
                 r.destroy(10)
@@ -21,7 +22,7 @@ Rectangle {
         }
         Grid{
             id: gridConfig
-            spacing: app.fs*2
+            spacing: app.fs
             columns: 1
             //width: r.width-app.fs
             anchors.horizontalCenter: parent.horizontalCenter
