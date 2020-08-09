@@ -3,7 +3,6 @@ import QtQuick.Controls 2.12
 
 Rectangle{
     id: r
-    anchors.fill: parent
     color: app.c1
     property string cuerpo: '?'
     property int casa: -1
@@ -12,14 +11,18 @@ Rectangle{
         anchors.fill: r
     }
     Column{
-        anchors.fill: parent
+        width: r.width-app.fs
+        height: r.height-app.fs
+        anchors.centerIn: r
         spacing: app.fs
         Item{
             width: 1
             height: app.fs
         }
-        Row{
+        Flow{
             id: row
+            width: r.width-app.fs
+            anchors.horizontalCenter: parent.horizontalCenter
             spacing: app.fs
             BotonUX{
                 text: 'Cerrar'
@@ -58,9 +61,23 @@ Rectangle{
         }
     }
     Component.onCompleted: {
+        if(app.signos.indexOf(r.cuerpo)>=0){
+            let d1=unik.getFile('dataSignosPalabrasClaves.json').replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')
+            let json = JSON.parse(d1)
+            r.textData=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
+            r.anchors.centerIn=r.parent
+            r.width=app.fs*20
+            r.height=app.fs*20
+            r.border.width= app.fs*0.25
+            r.border.color=app.c2
+            r.radius=app.fs*0.5
+            return
+        }
         let cuerpoCorr=r.cuerpo.replace(/á/g, 'a').replace(/é/g, 'e').replace(/í/g, 'i').replace(/ó/g, 'o').replace(/ú/g, 'u')
         let d1=unik.getFile('dataCasas'+cuerpoCorr+'.json').replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')
         let json = JSON.parse(d1)
         r.textData=json['casas']['casa'+parseInt(r.casa)]
+        r.anchors.fill=r.parent
+
     }
 }

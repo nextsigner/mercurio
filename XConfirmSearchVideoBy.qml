@@ -56,9 +56,19 @@ Rectangle {
                     r.visible=false
                 }
             }
+            //Boton para Texto sobre Lilith o Quirón
             BotonUX{
                 visible: r.cuerpo==='Lilith'||r.cuerpo==='Quirón'
                 text: 'Texto sobre '+r.cuerpo+' en casa '+r.casa
+                onClicked: {
+                    xAsData.addXAsTextData(cuerpo, casa)
+                    r.visible=false
+                }
+            }
+            //Boton para Texto de Signo
+            BotonUX{
+                visible: r.signo!=='null'
+                text: 'Texto sobre '+r.signo
                 onClicked: {
                     xAsData.addXAsTextData(cuerpo, casa)
                     r.visible=false

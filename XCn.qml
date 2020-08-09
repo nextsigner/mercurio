@@ -131,6 +131,7 @@ Rectangle {
                         antialiasing: true
                     }
                     ColorOverlay{
+                        id: colorOverlayIconoSig
                         source: iconoSig
                         anchors.fill: iconoSig
                         color: 'red'
@@ -149,6 +150,20 @@ Rectangle {
                             if(index===3||index===7||index===11){
                                 color='black'
                             }
+                        }
+                        MouseArea{
+                            width: iconoSig.width
+                            height: width
+                            anchors.centerIn: parent
+                            onDoubleClicked: {
+                                xAsData.addXAsTextData(app.signos[index], -1)
+                            }
+//                            Rectangle{
+//                                anchors.fill: parent
+//                                color: 'red'
+//                                radius: width*0.5
+//                                opacity: 0.5
+//                            }
                         }
                     }
                 }
