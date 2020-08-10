@@ -10,6 +10,17 @@ Rectangle {
     property alias xcn: cn
     property string currentImgUrl: 'http://66.97.44.29:8081/files/1591237517000_Ricardo.png'
     property int mod: 0
+
+    //Current Data
+    property string cNombre: ''
+    property int cDia: -1
+    property int cMes: -1
+    property int cAnio: -1
+    property int cHora: -1
+    property int cMinuto: -1
+    property real cLon: 0.0
+    property real cLat: 0.0
+
     onVisibleChanged: {
         cnCapture.url=currentImgUrl
     }
@@ -99,6 +110,24 @@ Rectangle {
         XCn{
             id: cn
             transformOrigin: Item.TopLeft
+            onCnLoaded: {
+                console.log('nombre: '+nombre)
+                console.log('dia: '+dia)
+                console.log('mes: '+mes)
+                console.log('año: '+anio)
+                console.log('hora: '+hora)
+                console.log('minuto: '+minuto)
+                console.log('lon: '+lon)
+                console.log('lat: '+lat)
+                r.cNombre=nombre.replace(/_/g, ' ')
+                r.cDia=dia
+                r.cMes=mes
+                r.cAnio=anio
+                r.cHora=hora
+                r.cMinuto=minuto
+                r.cLon=lon
+                r.cLat=lat
+            }
         }
         function zoomExtents(){
             // Resize image to fit in View
@@ -306,6 +335,34 @@ Rectangle {
             onClicked: {
                 console.log('Copy to clipboard: https://nextsigner.github.io/mercurio_server_redir.html?link='+xCnView.currentImgUrl)
                 clipboard.setText('https://nextsigner.github.io/mercurio_server_redir.html?link='+xCnView.currentImgUrl)
+            }
+        }
+    }
+    Item{
+        id: xCurrentData
+        width: colData1.width+app.fs*2
+        height: colData1.height+app.fs*2
+        anchors.bottom: parent.bottom
+        Rectangle{
+            anchors.fill: parent
+            opacity: 0.5
+            color: app.c1
+            border.width: 2
+            border.color: app.c2
+            radius: app.fs*0.25
+        }
+        Column{
+            id: colData1
+            spacing: app.fs*0.25
+            anchors.centerIn: parent
+            UText{
+                text:  'Carta Natal de '+r.cNombre
+            }
+            UText{
+                text:  'Fecha '+r.cDia+'/'+r.cMes+'/'+r.cAnio
+            }
+            UText{
+                text:  'Hora '+r.cHora+':'+r.cMinuto
             }
         }
     }
