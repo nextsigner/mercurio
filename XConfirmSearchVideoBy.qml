@@ -74,6 +74,15 @@ Rectangle {
                     r.visible=false
                 }
             }
+            //Boton para Texto de Signo Solar
+            BotonUX{
+                visible: r.signo!=='null'&&r.cuerpo==='Sol'
+                text: 'Texto de signo solar '+r.signo
+                onClicked: {
+                    xAsData.addXAsTextData(r.signo, casa)
+                    r.visible=false
+                }
+            }
         }
         BotonUX{
             text: 'Cancelar'
