@@ -97,9 +97,9 @@ Rectangle{
             let d1=unik.getFile('dataSignosPalabrasClaves.json').replace(/\n/g,'<br /><br />').replace('}}<br /><br />','}}')
             let json = JSON.parse(d1)
             r.textData=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
-            r.textData+=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
-            r.textData+=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
-            r.textData+=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
+            //r.textData+=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
+            //r.textData+=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
+            //r.textData+=json['signos']['signo'+parseInt(app.signos.indexOf(r.cuerpo) + 1)]//JSON.stringify(json)
 
             setSize(false)
             return

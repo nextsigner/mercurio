@@ -20,6 +20,7 @@ Rectangle {
     property int cMinuto: -1
     property real cLon: 0.0
     property real cLat: 0.0
+    property string cCiudad: ''
 
     onVisibleChanged: {
         cnCapture.url=currentImgUrl
@@ -127,6 +128,7 @@ Rectangle {
                 r.cMinuto=minuto
                 r.cLon=lon
                 r.cLat=lat
+                r.cCiudad=ciudad
             }
         }
         function zoomExtents(){
@@ -363,6 +365,15 @@ Rectangle {
             }
             UText{
                 text:  'Hora '+r.cHora+':'+r.cMinuto
+            }
+            UText{
+                visible: r.cCiudad!==''
+                text:  'Lugar de Nacimiento '+r.cCiudad
+                font.pixelSize: app.fs*0.5
+            }
+            UText{
+                text:  'Coords: lon='+r.cLon+' lat='+r.cLat
+                font.pixelSize: app.fs*0.5
             }
         }
     }

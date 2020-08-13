@@ -42,7 +42,7 @@ Rectangle {
     property var objSignsNames: ['ari', 'tau', 'gem', 'cnc', 'leo', 'vir', 'lib', 'sco', 'sgr', 'cap', 'aqr', 'psc']
     property var objSigns: [0,0,0,0,0,0,0,0,0,0,0,0]
 
-    signal cnLoaded(string nombre, string dia, string mes, string anio, string hora, string minuto, string lon, string lat)
+    signal cnLoaded(string nombre, string dia, string mes, string anio, string hora, string minuto, string lon, string lat, string ciudad)
     signal doubleClick
     signal posChanged(int px, int py)
 
@@ -1159,8 +1159,8 @@ Rectangle {
         xLilith.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
         repH.model=12
-        //"params":{"ms":"1592110344809","n":"Alejo_Lombardi","a":"1999","m":"12","d":"29","h":"7","min":"20","gmt":"-3","lat":"-31.7413197","lon":"-60.5115471"}
-        cnLoaded(json.params.n, json.params.d, json.params.m, json.params.a, json.params.h, json.params.min, json.params.lon, json.params.lat)
+        console.log('-------------------->>cccccc '+json.params.ciudad)
+        cnLoaded(json.params.n, json.params.d, json.params.m, json.params.a, json.params.h, json.params.min, json.params.lon, json.params.lat, json.params.ciudad)
     }
     function getSigIndex(s){
         let ms=['ari', 'tau', 'gem', 'cnc', 'leo', 'vir', 'lib', 'sco', 'sgr', 'cap', 'aqr', 'psc']
