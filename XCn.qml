@@ -807,6 +807,8 @@ Rectangle {
         XAs{id:xProserpina;fs:r.fs;astro:'proserpina'; numAstro: 11}
         XAs{id:xSelena;fs:r.fs;astro:'selena'; numAstro: 12}
         XAs{id:xLilith;fs:r.fs;astro:'lilith'; numAstro: 13}
+        XAs{id:xNodoPS;fs:r.fs;astro:'nodopolarsur'; numAstro: 14}
+        XAs{id:xNodoPN;fs:r.fs;astro:'nodopolarnorte'; numAstro: 15}
         function pressed(o){
             unik.speak(''+app.planetas[o.numAstro]+' en '+app.signos[o.objData.ns]+' en el grado '+o.objData.g+' en la casa '+o.objData.h)
         }
@@ -1000,6 +1002,8 @@ Rectangle {
         let vRProserpina=30*getSigIndex(json.psc.proserpina.s)
         let vRSelena=30*getSigIndex(json.psc.selena.s)
         let vRLilith=30*getSigIndex(json.psc.lilith.s)
+        let vRNodoPS=30*getSigIndex(json.psc.s.s)
+        let vRNodoPN=30*getSigIndex(json.psc.n.s)
 
         let jo
         let o
@@ -1158,6 +1162,29 @@ Rectangle {
         o.h=jo.h
         xLilith.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
+
+        jo=json.psc.s
+        xNodoPS.rotation=0-vRNodoPS+r.sigRot-jo.g
+        o={}
+        o.p=objSigns[objSignsNames.indexOf(jo.s)]
+        o.ns=objSignsNames.indexOf(jo.s)
+        o.g=jo.g
+        o.m=jo.m
+        o.h=jo.h
+        xNodoPS.objData=o
+        objSigns[objSignsNames.indexOf(jo.s)]++
+
+        jo=json.psc.n
+        xNodoPN.rotation=0-vRNodoPN+r.sigRot-jo.g
+        o={}
+        o.p=objSigns[objSignsNames.indexOf(jo.s)]
+        o.ns=objSignsNames.indexOf(jo.s)
+        o.g=jo.g
+        o.m=jo.m
+        o.h=jo.h
+        xNodoPN.objData=o
+        objSigns[objSignsNames.indexOf(jo.s)]++
+
         repH.model=12
         console.log('-------------------->>cccccc '+json.params.ciudad)
         cnLoaded(json.params.n, json.params.d, json.params.m, json.params.a, json.params.h, json.params.min, json.params.lon, json.params.lat, json.params.ciudad)
