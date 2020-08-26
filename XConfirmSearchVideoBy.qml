@@ -67,7 +67,7 @@ Rectangle {
             }
             //Boton para Texto de Signo
             BotonUX{
-                visible: r.signo!=='null'
+                visible: r.signo!=='null'&&r.cuerpo!=='Lilith'&&r.cuerpo!=='Quirón'
                 text: 'Texto sobre '+r.signo
                 onClicked: {
                     xAsData.addXAsTextData(cuerpo, casa)

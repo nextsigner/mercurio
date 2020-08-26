@@ -40,4 +40,9 @@ Item{
             rotation: 0-parent.parent.rotation
         }
     }
+//    Text{
+//        font.pixelSize: 20
+//        text:  r.objData.h
+//        color: 'red'
+//    }
 }
