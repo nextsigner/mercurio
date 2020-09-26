@@ -185,7 +185,7 @@ ApplicationWindow{
             XTransLunar{id: xTransLunar;visible: app.mod===5;}
             XTrans{id: xTrans;visible: app.mod===6;}*/
             //XGetCarta{}
-            //XCnView{}
+            XCnView{}
             //UGetYouTubeVideo{}
         }
         UProgressDownload{

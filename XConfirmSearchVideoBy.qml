@@ -48,6 +48,7 @@ Rectangle {
                     r.visible=false
                 }
             }
+            //Ir a Video
             BotonUX{
                 visible: r.url1!==''
                 text: 'Ir a video de '+r.cuerpo+' en casa '+r.casa

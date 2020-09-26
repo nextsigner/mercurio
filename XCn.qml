@@ -159,12 +159,12 @@ Rectangle {
                             onDoubleClicked: {
                                 xAsData.addXAsTextData(app.signos[index], -1)
                             }
-//                            Rectangle{
-//                                anchors.fill: parent
-//                                color: 'red'
-//                                radius: width*0.5
-//                                opacity: 0.5
-//                            }
+                            //                            Rectangle{
+                            //                                anchors.fill: parent
+                            //                                color: 'red'
+                            //                                radius: width*0.5
+                            //                                opacity: 0.5
+                            //                            }
                         }
                     }
                 }
@@ -899,10 +899,42 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        //let json='{"params":{"ms":"1594667066141","n":"Florencia_Villalba","a":"1996","m":"01","d":"02","h":"14","min":"30","gmt":"-3","lat":"-34.6157437","lon":"-58.5733832"},"psc":{"sun":{"g":11,"m":36,"s":"cap","h":9,"rh":"ix"},"moon":{"g":7,"m":29,"s":"gem","h":2,"rh":"ii"},"mercury":{"g":1,"m":2,"s":"aqr","h":9,"rh":"ix"},"venus":{"g":14,"m":45,"s":"aqr","h":10,"rh":"x"},"mars":{"g":25,"m":31,"s":"cap","h":9,"rh":"ix"},"jupiter":{"g":29,"m":52,"s":"sgr","h":9,"rh":"ix"},"saturn":{"g":19,"m":31,"s":"psc","h":11,"rh":"xi"},"uranus":{"g":29,"m":27,"s":"cap","h":9,"rh":"ix"},"neptune":{"g":24,"m":44,"s":"cap","h":9,"rh":"ix"},"pluto":{"g":2,"m":0,"s":"sgr","h":8,"rh":"viii"},"n":{"g":23,"m":18,"s":"lib","h":6,"rh":"vi"},"s":{"g":23,"m":18,"s":"ari","h":12,"rh":"xii"},"hiron":{"g":13,"m":41,"s":"lib","h":6,"rh":"vi"},"proserpina":{"g":9,"m":51,"s":"sco","h":7,"rh":"vii"},"selena":{"g":0,"m":0,"s":"ari","h":11,"rh":"xi"},"lilith":{"g":10,"m":41,"s":"cnc","h":3,"rh":"iii"}},"pc":{"h1":{"s":"ari","g":29,"m":40},"h2":{"s":"tau","g":28,"m":14},"h3":{"s":"gem","g":29,"m":47},"h4":{"s":"leo","g":3,"m":16},"h5":{"s":"vir","g":5,"m":57},"h6":{"s":"lib","g":5,"m":3},"h7":{"s":"lib","g":29,"m":40},"h8":{"s":"sco","g":28,"m":14},"h9":{"s":"sgr","g":29,"m":47},"h10":{"s":"aqr","g":3,"m":16},"h11":{"s":"psc","g":5,"m":57},"h12":{"s":"ari","g":5,"m":3}}}'
-       let json='{"params":{"ms":"1592110344809","n":"Alejo_Lombardi","a":"1999","m":"12","d":"29","h":"7","min":"20","gmt":"-3","lat":"-31.7413197","lon":"-60.5115471"},"psc":{"sun":{"g":0,"m":0,"s":"7","h":-1,"rh":"14"},"moon":{"g":5,"m":24,"s":"lib","h":9,"rh":"ix"},"mercury":{"g":27,"m":8,"s":"sgr","h":12,"rh":"xii"},"venus":{"g":27,"m":52,"s":"sco","h":11,"rh":"xi"},"mars":{"g":25,"m":35,"s":"aqr","h":2,"rh":"ii"},"jupiter":{"g":25,"m":8,"s":"ari","h":4,"rh":"iv"},"saturn":{"g":10,"m":27,"s":"tau","h":4,"rh":"iv"},"uranus":{"g":14,"m":39,"s":"aqr","h":1,"rh":"i"},"neptune":{"g":3,"m":5,"s":"aqr","h":1,"rh":"i"},"pluto":{"g":11,"m":21,"s":"sgr","h":11,"rh":"xi"},"n":{"g":4,"m":2,"s":"leo","h":7,"rh":"vii"},"s":{"g":4,"m":2,"s":"aqr","h":1,"rh":"i"},"hiron":{"g":11,"m":16,"s":"sgr","h":11,"rh":"xi"},"proserpina":{"g":11,"m":50,"s":"sco","h":10,"rh":"x"},"selena":{"g":0,"m":0,"s":"ari","h":3,"rh":"iii"},"lilith":{"g":23,"m":7,"s":"sgr","h":12,"rh":"xii"}},"pc":{"h1":{"s":"cap","g":23,"m":59},"h2":{"s":"aqr","g":16,"m":15},"h3":{"s":"psc","g":11,"m":59},"h4":{"s":"ari","g":12,"m":57},"h5":{"s":"tau","g":18,"m":3},"h6":{"s":"gem","g":22,"m":49},"h7":{"s":"cnc","g":23,"m":59},"h8":{"s":"leo","g":16,"m":15},"h9":{"s":"vir","g":11,"m":59},"h10":{"s":"lib","g":12,"m":57},"h11":{"s":"sco","g":18,"m":3},"h12":{"s":"sgr","g":22,"m":49}}}'
-
-        //let json='{"params":{"ms":"1590969573745","n":"Ricardo","a":"1975","m":"06","d":"20","h":"23","min":"00","gmt":"-3","lat":"-35.484462","lon":"-69.5797495"},"psc":{"sun":{"g":29,"m":6,"s":"gem","h":5,"rh":"v"},"moon":{"g":26,"m":51,"s":"sco","h":10,"rh":"x"},"mercury":{"g":15,"m":6,"s":"gem","h":4,"rh":"iv"},"venus":{"g":14,"m":27,"s":"leo","h":6,"rh":"vi"},"mars":{"g":22,"m":45,"s":"ari","h":3,"rh":"iii"},"jupiter":{"g":20,"m":11,"s":"ari","h":3,"rh":"iii"},"saturn":{"g":19,"m":22,"s":"cnc","h":5,"rh":"v"},"uranus":{"g":28,"m":28,"s":"lib","h":9,"rh":"ix"},"neptune":{"g":9,"m":54,"s":"sgr","h":10,"rh":"x"},"pluto":{"g":6,"m":29,"s":"lib","h":8,"rh":"viii"},"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"},"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"},"hiron":{"g":27,"m":25,"s":"ari","h":3,"rh":"iii"},"proserpina":{"g":28,"m":3,"s":"lib","h":9,"rh":"ix"},"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"},"lilith":{"g":15,"m":11,"s":"psc","h":1,"rh":"i"}},"pc":{"h1":{"s":"aqr","g":26,"m":9},"h2":{"s":"psc","g":20,"m":8},"h3":{"s":"ari","g":18,"m":46},"h4":{"s":"tau","g":21,"m":29},"h5":{"s":"gem","g":25,"m":27},"h6":{"s":"cnc","g":27,"m":24},"h7":{"s":"leo","g":26,"m":9},"h8":{"s":"vir","g":20,"m":8},"h9":{"s":"lib","g":18,"m":46},"h10":{"s":"sco","g":21,"m":29},"h11":{"s":"sgr","g":25,"m":27},"h12":{"s":"cap","g":27,"m":24}}}'
+        let json='{
+"params":{
+"ms":"1600209583608","n":"ricardoprueba","a":"1975","m":"06","d":"20","h":"23","min":"00","gmt":"-3","lat":"-34.57","lon":"-69.47","ciudad":"malargue"}
+,"psc":{
+"sun":{"g":29,"m":6,"s":"gem","h":5,"rh":"v"}
+,"moon":{"g":26,"m":51,"s":"sco","h":10,"rh":"x"}
+,"mercury":{"g":15,"m":6,"s":"gem","h":4,"rh":"iv"}
+,"venus":{"g":14,"m":27,"s":"leo","h":6,"rh":"vi"}
+,"mars":{"g":22,"m":45,"s":"ari","h":3,"rh":"iii"}
+,"jupiter":{"g":20,"m":11,"s":"ari","h":3,"rh":"iii"}
+,"saturn":{"g":19,"m":22,"s":"cnc","h":5,"rh":"v"}
+,"uranus":{"g":28,"m":28,"s":"lib","h":9,"rh":"ix"}
+,"neptune":{"g":9,"m":54,"s":"sgr","h":10,"rh":"x"}
+,"pluto":{"g":6,"m":29,"s":"lib","h":8,"rh":"viii"}
+,"n":{"g":0,"m":47,"s":"sgr","h":10,"rh":"x"}
+,"s":{"g":0,"m":47,"s":"gem","h":4,"rh":"iv"}
+,"hiron":{"g":27,"m":25,"s":"ari","h":3,"rh":"iii"}
+,"proserpina":{"g":28,"m":3,"s":"lib","h":9,"rh":"ix"}
+,"selena":{"g":0,"m":0,"s":"ari","h":2,"rh":"ii"}
+,"lilith":{"g":15,"m":11,"s":"psc","h":1,"rh":"i"}
+}
+,"pc":{
+"h1":{"s":"aqr","g":25,"m":59}
+,"h2":{"s":"psc","g":-20,"m":10}
+,"h3":{"s":"ari","g":18,"m":55}
+,"h4":{"s":"tau","g":21,"m":36}
+,"h5":{"s":"gem","g":25,"m":22}
+,"h6":{"s":"cnc","g":27,"m":12}
+,"h7":{"s":"leo","g":25,"m":59}
+,"h8":{"s":"vir","g":-20,"m":10}
+,"h9":{"s":"lib","g":18,"m":55}
+,"h10":{"s":"sco","g":21,"m":36}
+,"h11":{"s":"sgr","g":25,"m":22}
+,"h12":{"s":"cap","g":27,"m":12}
+}
+,"jsonHades":{"Cuerpos":{"SiderealTime":55004.000589683696,"JulianDay":2442584.5,"Order":0,"CelestialBodies":[{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false},{"TotalDegree":236.825,"Name":"Moon","IsRetrograde":false},{"TotalDegree":75.09166666666667,"Name":"Mercury","IsRetrograde":true},{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false},{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false},{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false},{"TotalDegree":109.40833333333333,"Name":"Saturn","IsRetrograde":false},{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true},{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true},{"TotalDegree":186.5,"Name":"Pluto","IsRetrograde":false},{"TotalDegree":239.5,"Name":"MeanNode","IsRetrograde":true},{"TotalDegree":240.8,"Name":"TrueNode","IsRetrograde":false},{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false},{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false},{"TotalDegree":48.13333333333333,"Name":"Ceres","IsRetrograde":false},{"TotalDegree":3.5083333333333333,"Name":"Pallas","IsRetrograde":false},{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false},{"TotalDegree":356.51666666666665,"Name":"Vesta","IsRetrograde":false}]},"Aspectos":[{"type":"Trine","fromDeg":89.08333333333333,"toDeg":208.5,"celestialBodies":[{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false},{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true}]},{"type":"Sextile","fromDeg":89.08333333333333,"toDeg":27.40833333333333,"celestialBodies":[{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false},{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false}]},{"type":"Square","fromDeg":89.08333333333333,"toDeg":3.5083333333333333,"celestialBodies":[{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false},{"TotalDegree":3.5083333333333333,"Name":"Pallas","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":89.08333333333333,"toDeg":87.14999999999999,"celestialBodies":[{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false},{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":236.825,"toDeg":239.5,"celestialBodies":[{"TotalDegree":236.825,"Name":"Moon","IsRetrograde":false},{"TotalDegree":239.5,"Name":"MeanNode","IsRetrograde":true}]},{"type":"Conjunction","fromDeg":236.825,"toDeg":240.8,"celestialBodies":[{"TotalDegree":236.825,"Name":"Moon","IsRetrograde":false},{"TotalDegree":240.8,"Name":"TrueNode","IsRetrograde":false}]},{"type":"Trine","fromDeg":236.825,"toDeg":356.51666666666665,"celestialBodies":[{"TotalDegree":236.825,"Name":"Moon","IsRetrograde":false},{"TotalDegree":356.51666666666665,"Name":"Vesta","IsRetrograde":false}]},{"type":"Sextile","fromDeg":75.09166666666667,"toDeg":134.475,"celestialBodies":[{"TotalDegree":75.09166666666667,"Name":"Mercury","IsRetrograde":true},{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false}]},{"type":"Opposition","fromDeg":75.09166666666667,"toDeg":249.9,"celestialBodies":[{"TotalDegree":75.09166666666667,"Name":"Mercury","IsRetrograde":true},{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true}]},{"type":"Sextile","fromDeg":75.09166666666667,"toDeg":134.475,"celestialBodies":[{"TotalDegree":75.09166666666667,"Name":"Mercury","IsRetrograde":true},{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false}]},{"type":"Sextile","fromDeg":134.475,"toDeg":75.09166666666667,"celestialBodies":[{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false},{"TotalDegree":75.09166666666667,"Name":"Mercury","IsRetrograde":true}]},{"type":"Trine","fromDeg":134.475,"toDeg":20.208333333333332,"celestialBodies":[{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false},{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false}]},{"type":"Trine","fromDeg":134.475,"toDeg":249.9,"celestialBodies":[{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false},{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true}]},{"type":"Conjunction","fromDeg":134.475,"toDeg":134.475,"celestialBodies":[{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false},{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false}]},{"type":"Square","fromDeg":134.475,"toDeg":48.13333333333333,"celestialBodies":[{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false},{"TotalDegree":48.13333333333333,"Name":"Ceres","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":22.758333333333333,"toDeg":20.208333333333332,"celestialBodies":[{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false},{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false}]},{"type":"Square","fromDeg":22.758333333333333,"toDeg":109.40833333333333,"celestialBodies":[{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false},{"TotalDegree":109.40833333333333,"Name":"Saturn","IsRetrograde":false}]},{"type":"Opposition","fromDeg":22.758333333333333,"toDeg":208.5,"celestialBodies":[{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false},{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true}]},{"type":"Conjunction","fromDeg":22.758333333333333,"toDeg":27.40833333333333,"celestialBodies":[{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false},{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false}]},{"type":"Sextile","fromDeg":22.758333333333333,"toDeg":87.14999999999999,"celestialBodies":[{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false},{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false}]},{"type":"Trine","fromDeg":20.208333333333332,"toDeg":134.475,"celestialBodies":[{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false},{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":20.208333333333332,"toDeg":22.758333333333333,"celestialBodies":[{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false},{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false}]},{"type":"Square","fromDeg":20.208333333333332,"toDeg":109.40833333333333,"celestialBodies":[{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false},{"TotalDegree":109.40833333333333,"Name":"Saturn","IsRetrograde":false}]},{"type":"Trine","fromDeg":20.208333333333332,"toDeg":134.475,"celestialBodies":[{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false},{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false}]},{"type":"Square","fromDeg":109.40833333333333,"toDeg":22.758333333333333,"celestialBodies":[{"TotalDegree":109.40833333333333,"Name":"Saturn","IsRetrograde":false},{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false}]},{"type":"Square","fromDeg":109.40833333333333,"toDeg":20.208333333333332,"celestialBodies":[{"TotalDegree":109.40833333333333,"Name":"Saturn","IsRetrograde":false},{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false}]},{"type":"Sextile","fromDeg":109.40833333333333,"toDeg":48.13333333333333,"celestialBodies":[{"TotalDegree":109.40833333333333,"Name":"Saturn","IsRetrograde":false},{"TotalDegree":48.13333333333333,"Name":"Ceres","IsRetrograde":false}]},{"type":"Trine","fromDeg":208.5,"toDeg":89.08333333333333,"celestialBodies":[{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true},{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false}]},{"type":"Opposition","fromDeg":208.5,"toDeg":22.758333333333333,"celestialBodies":[{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true},{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false}]},{"type":"Opposition","fromDeg":208.5,"toDeg":27.40833333333333,"celestialBodies":[{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true},{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false}]},{"type":"Trine","fromDeg":208.5,"toDeg":87.14999999999999,"celestialBodies":[{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true},{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false}]},{"type":"Opposition","fromDeg":249.9,"toDeg":75.09166666666667,"celestialBodies":[{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true},{"TotalDegree":75.09166666666667,"Name":"Mercury","IsRetrograde":true}]},{"type":"Trine","fromDeg":249.9,"toDeg":134.475,"celestialBodies":[{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true},{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false}]},{"type":"Sextile","fromDeg":249.9,"toDeg":186.5,"celestialBodies":[{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true},{"TotalDegree":186.5,"Name":"Pluto","IsRetrograde":false}]},{"type":"Trine","fromDeg":249.9,"toDeg":134.475,"celestialBodies":[{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true},{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false}]},{"type":"Sextile","fromDeg":186.5,"toDeg":249.9,"celestialBodies":[{"TotalDegree":186.5,"Name":"Pluto","IsRetrograde":false},{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true}]},{"type":"Opposition","fromDeg":186.5,"toDeg":3.5083333333333333,"celestialBodies":[{"TotalDegree":186.5,"Name":"Pluto","IsRetrograde":false},{"TotalDegree":3.5083333333333333,"Name":"Pallas","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":239.5,"toDeg":236.825,"celestialBodies":[{"TotalDegree":239.5,"Name":"MeanNode","IsRetrograde":true},{"TotalDegree":236.825,"Name":"Moon","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":239.5,"toDeg":240.8,"celestialBodies":[{"TotalDegree":239.5,"Name":"MeanNode","IsRetrograde":true},{"TotalDegree":240.8,"Name":"TrueNode","IsRetrograde":false}]},{"type":"Trine","fromDeg":239.5,"toDeg":356.51666666666665,"celestialBodies":[{"TotalDegree":239.5,"Name":"MeanNode","IsRetrograde":true},{"TotalDegree":356.51666666666665,"Name":"Vesta","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":240.8,"toDeg":236.825,"celestialBodies":[{"TotalDegree":240.8,"Name":"TrueNode","IsRetrograde":false},{"TotalDegree":236.825,"Name":"Moon","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":240.8,"toDeg":239.5,"celestialBodies":[{"TotalDegree":240.8,"Name":"TrueNode","IsRetrograde":false},{"TotalDegree":239.5,"Name":"MeanNode","IsRetrograde":true}]},{"type":"Trine","fromDeg":240.8,"toDeg":356.51666666666665,"celestialBodies":[{"TotalDegree":240.8,"Name":"TrueNode","IsRetrograde":false},{"TotalDegree":356.51666666666665,"Name":"Vesta","IsRetrograde":false}]},{"type":"Sextile","fromDeg":27.40833333333333,"toDeg":89.08333333333333,"celestialBodies":[{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false},{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":27.40833333333333,"toDeg":22.758333333333333,"celestialBodies":[{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false},{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false}]},{"type":"Opposition","fromDeg":27.40833333333333,"toDeg":208.5,"celestialBodies":[{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false},{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true}]},{"type":"Sextile","fromDeg":27.40833333333333,"toDeg":87.14999999999999,"celestialBodies":[{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false},{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false}]},{"type":"Sextile","fromDeg":134.475,"toDeg":75.09166666666667,"celestialBodies":[{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false},{"TotalDegree":75.09166666666667,"Name":"Mercury","IsRetrograde":true}]},{"type":"Conjunction","fromDeg":134.475,"toDeg":134.475,"celestialBodies":[{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false},{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false}]},{"type":"Trine","fromDeg":134.475,"toDeg":20.208333333333332,"celestialBodies":[{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false},{"TotalDegree":20.208333333333332,"Name":"Jupiter","IsRetrograde":false}]},{"type":"Trine","fromDeg":134.475,"toDeg":249.9,"celestialBodies":[{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false},{"TotalDegree":249.9,"Name":"Neptune","IsRetrograde":true}]},{"type":"Square","fromDeg":134.475,"toDeg":48.13333333333333,"celestialBodies":[{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false},{"TotalDegree":48.13333333333333,"Name":"Ceres","IsRetrograde":false}]},{"type":"Square","fromDeg":48.13333333333333,"toDeg":134.475,"celestialBodies":[{"TotalDegree":48.13333333333333,"Name":"Ceres","IsRetrograde":false},{"TotalDegree":134.475,"Name":"Venus","IsRetrograde":false}]},{"type":"Sextile","fromDeg":48.13333333333333,"toDeg":109.40833333333333,"celestialBodies":[{"TotalDegree":48.13333333333333,"Name":"Ceres","IsRetrograde":false},{"TotalDegree":109.40833333333333,"Name":"Saturn","IsRetrograde":false}]},{"type":"Square","fromDeg":48.13333333333333,"toDeg":134.475,"celestialBodies":[{"TotalDegree":48.13333333333333,"Name":"Ceres","IsRetrograde":false},{"TotalDegree":134.475,"Name":"Vertex","IsRetrograde":false}]},{"type":"Square","fromDeg":3.5083333333333333,"toDeg":89.08333333333333,"celestialBodies":[{"TotalDegree":3.5083333333333333,"Name":"Pallas","IsRetrograde":false},{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false}]},{"type":"Opposition","fromDeg":3.5083333333333333,"toDeg":186.5,"celestialBodies":[{"TotalDegree":3.5083333333333333,"Name":"Pallas","IsRetrograde":false},{"TotalDegree":186.5,"Name":"Pluto","IsRetrograde":false}]},{"type":"Square","fromDeg":3.5083333333333333,"toDeg":87.14999999999999,"celestialBodies":[{"TotalDegree":3.5083333333333333,"Name":"Pallas","IsRetrograde":false},{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false}]},{"type":"Conjunction","fromDeg":87.14999999999999,"toDeg":89.08333333333333,"celestialBodies":[{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false},{"TotalDegree":89.08333333333333,"Name":"Sun","IsRetrograde":false}]},{"type":"Sextile","fromDeg":87.14999999999999,"toDeg":22.758333333333333,"celestialBodies":[{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false},{"TotalDegree":22.758333333333333,"Name":"Mars","IsRetrograde":false}]},{"type":"Trine","fromDeg":87.14999999999999,"toDeg":208.5,"celestialBodies":[{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false},{"TotalDegree":208.5,"Name":"Uranus","IsRetrograde":true}]},{"type":"Sextile","fromDeg":87.14999999999999,"toDeg":27.40833333333333,"celestialBodies":[{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false},{"TotalDegree":27.40833333333333,"Name":"Chiron","IsRetrograde":false}]},{"type":"Square","fromDeg":87.14999999999999,"toDeg":3.5083333333333333,"celestialBodies":[{"TotalDegree":87.14999999999999,"Name":"Juno","IsRetrograde":false},{"TotalDegree":3.5083333333333333,"Name":"Pallas","IsRetrograde":false}]},{"type":"Trine","fromDeg":356.51666666666665,"toDeg":236.825,"celestialBodies":[{"TotalDegree":356.51666666666665,"Name":"Vesta","IsRetrograde":false},{"TotalDegree":236.825,"Name":"Moon","IsRetrograde":false}]},{"type":"Trine","fromDeg":356.51666666666665,"toDeg":239.5,"celestialBodies":[{"TotalDegree":356.51666666666665,"Name":"Vesta","IsRetrograde":false},{"TotalDegree":239.5,"Name":"MeanNode","IsRetrograde":true}]},{"type":"Trine","fromDeg":356.51666666666665,"toDeg":240.8,"celestialBodies":[{"TotalDegree":356.51666666666665,"Name":"Vesta","IsRetrograde":false},{"TotalDegree":240.8,"Name":"TrueNode","IsRetrograde":false}]}],"Casas":[{"House":1,"Sign":{"Name":"Aquarius","StartsAt":300,"EndsAt":330,"Id":10,"Symbol":"k","Element":"a","Mode":"f","Rulers":["Uranus"]},"RelativeDistance":25.98607954272768,"FullDistance":325.9860795427277},{"House":2,"Sign":{"Name":"Pisces","StartsAt":330,"EndsAt":360,"Id":11,"Symbol":"l","Element":"w","Mode":"m","Rulers":["Neptune"]},"RelativeDistance":20.17771096025399,"FullDistance":350.177710960254},{"House":3,"Sign":{"Name":"Aries","StartsAt":0,"EndsAt":30,"Id":0,"Symbol":"a","Element":"f","Mode":"c","Rulers":["Mars"]},"RelativeDistance":18.932533817753566,"FullDistance":18.932533817753566},{"House":4,"Sign":{"Name":"Taurus","StartsAt":30,"EndsAt":60,"Id":1,"Symbol":"b","Element":"e","Mode":"f","Rulers":["Venus"]},"RelativeDistance":21.609774769509045,"FullDistance":51.609774769509045},{"House":5,"Sign":{"Name":"Gemini","StartsAt":60,"EndsAt":90,"Id":2,"Symbol":"c","Element":"a","Mode":"m","Rulers":["Mercury"]},"RelativeDistance":25.373988073379167,"FullDistance":85.37398807337917},{"House":6,"Sign":{"Name":"Cancer","StartsAt":90,"EndsAt":120,"Id":3,"Symbol":"d","Element":"w","Mode":"c","Rulers":["Moon"]},"RelativeDistance":27.204418942190557,"FullDistance":117.20441894219056},{"House":7,"Sign":{"Name":"Leo","StartsAt":120,"EndsAt":150,"Id":4,"Symbol":"e","Element":"f","Mode":"f","Rulers":["Sun"]},"RelativeDistance":25.98607954272768,"FullDistance":145.98607954272768},{"House":8,"Sign":{"Name":"Virgo","StartsAt":150,"EndsAt":180,"Id":5,"Symbol":"f","Element":"e","Mode":"m","Rulers":["Mercury"]},"RelativeDistance":20.17771096025399,"FullDistance":170.177710960254},{"House":9,"Sign":{"Name":"Libra","StartsAt":180,"EndsAt":210,"Id":6,"Symbol":"g","Element":"a","Mode":"c","Rulers":["Venus"]},"RelativeDistance":18.93253381775355,"FullDistance":198.93253381775355},{"House":10,"Sign":{"Name":"Scorpio","StartsAt":210,"EndsAt":240,"Id":7,"Symbol":"h","Element":"w","Mode":"f","Rulers":["Pluto"]},"RelativeDistance":21.609774769509045,"FullDistance":231.60977476950904},{"House":11,"Sign":{"Name":"Sagittarius","StartsAt":240,"EndsAt":270,"Id":8,"Symbol":"i","Element":"f","Mode":"m","Rulers":["Jupiter"]},"RelativeDistance":25.373988073379167,"FullDistance":265.37398807337917},{"House":12,"Sign":{"Name":"Capricorn","StartsAt":270,"EndsAt":300,"Id":9,"Symbol":"j","Element":"e","Mode":"c","Rulers":["Saturn"]},"RelativeDistance":27.204418942190557,"FullDistance":297.20441894219056}]}}'
         setJson(json)
     }
     function setJson(j){
@@ -972,6 +1004,16 @@ Rectangle {
         r.sh4=r.objSignsNames.indexOf(json.pc.h4.s)
         r.sh5=r.objSignsNames.indexOf(json.pc.h5.s)
         r.sh6=r.objSignsNames.indexOf(json.pc.h6.s)
+
+        //Ceres
+        console.log("jsonHades:"+json.jsonHades.Cuerpos.CelestialBodies[14].Name)
+        //Phalas
+        console.log("jsonHades:"+json.jsonHades.Cuerpos.CelestialBodies[15].Name)
+        //Juno
+        console.log("jsonHades:"+json.jsonHades.Cuerpos.CelestialBodies[16].Name)
+        //Vesta
+        console.log("jsonHades:"+json.jsonHades.Cuerpos.CelestialBodies[17].Name)
+
 
         //        let diffHouse1=0
         //        let vd1=json.pc.h1.g-30
@@ -1141,13 +1183,22 @@ Rectangle {
         xProserpina.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
 
+
+        console.log('Selena TotalDegree: '+json.jsonHades.Cuerpos.CelestialBodies[14].TotalDegree)
+        console.log('Selena TotalDegree Conv: '+r.convertToDms(json.jsonHades.Cuerpos.CelestialBodies[14].TotalDegree))
+        let gms=r.convertToDms(json.jsonHades.Cuerpos.CelestialBodies[14].TotalDegree).split('|')
+        let td=parseInt(json.jsonHades.Cuerpos.CelestialBodies[14].TotalDegree)
+        let indexSign=getIndexFromDecimalDeggre(td)
+        console.log('Selena House indexSign: '+indexSign)//)[0].FullDistance)
+        console.log('Selena House: '+getHouse(td, json.jsonHades.Casas))//)[0].FullDistance)
+
         jo=json.psc.selena
-        xSelena.rotation=0-vRSelena+r.sigRot-jo.g
+        xSelena.rotation=r.sigRot-parseInt(json.jsonHades.Cuerpos.CelestialBodies[14].TotalDegree)//0-vRSelena+r.sigRot-jo.g
         o={}
-        o.p=objSigns[objSignsNames.indexOf(jo.s)]
-        o.ns=objSignsNames.indexOf(jo.s)
-        o.g=jo.g
-        o.m=jo.m
+        o.p=objSigns[indexSign]//objSigns[objSignsNames.indexOf(jo.s)]
+        o.ns=indexSign
+        o.g=td>29?parseInt(td-indexSign*30):td//jo.g
+        o.m=gms[1]//jo.m
         o.h=jo.h
         xSelena.objData=o
         objSigns[objSignsNames.indexOf(jo.s)]++
@@ -1193,5 +1244,64 @@ Rectangle {
         let ms=['ari', 'tau', 'gem', 'cnc', 'leo', 'vir', 'lib', 'sco', 'sgr', 'cap', 'aqr', 'psc']
         return ms.indexOf(s)
     }
-
+    function convertToDms(dd) {
+        var absDd = Math.abs(dd);
+        var deg = absDd | 0;
+        var frac = absDd - deg;
+        var min = (frac * 60) | 0;
+        var sec = frac * 3600 - min * 60;
+        // Round it to 2 decimal points.
+        sec = Math.round(sec * 100) / 100;
+        return deg + "|" + min + "|" + sec ;
+    }
+    function getHouse(dd, json) {
+        let sigName0=(''+json[0].Sign.Name).replace('Aquarius', r.objSignsNames[10])
+        console.log('getHouse Signo:'+sigName0)
+        console.log('getHouse 1:'+dd)
+        let ret=0
+        let tdh1=json[0].FullDistance
+        let tdh2=json[1].FullDistance
+        let diff1=360-tdh1
+        let diff2=360-tdh2
+        let ran1H1=0-diff1
+        let ran2H1=0-diff2
+        if(dd>0&&dd<tdh1){
+            ret=1
+        }
+        return ret
+     }
+    function getIndexFromDecimalDeggre(dd) {
+        console.log('getIndexFromDecimalDeggre 1:'+dd)
+        let ret=0
+        let d=parseInt(dd)
+        if(d>0&&d<29){
+            ret=0
+        }else if(d>=30&&d<59){
+            ret=1
+        }else if(d>=60&&d<89){
+            ret=2
+        }else if(d>=90&&d<119){
+            ret=3
+        }else if(d>=120&&d<149){
+            ret=4
+        }else if(d>=150&&d<179){
+            ret=5
+        }else if(d>=180&&d<209){
+            ret=6
+        }else if(d>=210&&d<239){
+            ret=7
+        }else if(d>=240&&d<269){
+            ret=8
+        }else if(d>=270&&d<299){
+            ret=9
+        }else if(d>=300&&d<329){
+            ret=10
+        }else if(d>=330&&d<359){
+            ret=11
+        }else{
+            ret=0
+        }
+       console.log('getIndexFromDecimalDeggre 2:'+ret)
+        return ret
+    }
 }
