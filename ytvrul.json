@@ -1,31 +1,45 @@
 {
-    "Marte":{
-        "h1":{"link":"https://youtu.be/f84wnRT3-3Y?t=96"},
-        "h2":{"link":"https://youtu.be/f84wnRT3-3Y?t=164"},
-        "h3":{"link":"https://youtu.be/f84wnRT3-3Y?t=219"},
-        "h4":{"link":"https://youtu.be/f84wnRT3-3Y?t=256"},
-        "h5":{"link":"https://youtu.be/f84wnRT3-3Y?t=317"},
-        "h6":{"link":"https://youtu.be/f84wnRT3-3Y?t=376"},
-        "h7":{"link":"https://youtu.be/f84wnRT3-3Y?t=442"},
-        "h8":{"link":"https://youtu.be/f84wnRT3-3Y?t=499"},
-        "h9":{"link":"https://youtu.be/f84wnRT3-3Y?t=545"},
-        "h10":{"link":"https://youtu.be/f84wnRT3-3Y?t=604"},
-        "h11":{"link":"https://youtu.be/f84wnRT3-3Y?t=673"},
-        "h12":{"link":"https://youtu.be/f84wnRT3-3Y?t=722"}
-        },
-        "Júpiter":{
-            "h1":{"link":"https://youtu.be/Mv0s1ug702U?t=100"},
-            "h2":{"link":"https://youtu.be/Mv0s1ug702U?t=142"},
-            "h3":{"link":"https://youtu.be/Mv0s1ug702U?t=205"},
-            "h4":{"link":"https://youtu.be/Mv0s1ug702U?t=256"},
-            "h5":{"link":"https://youtu.be/Mv0s1ug702U?t=297"},
-            "h6":{"link":"https://youtu.be/Mv0s1ug702U?t=346"},
-            "h7":{"link":"https://youtu.be/Mv0s1ug702U?t=401"},
-            "h8":{"link":"https://youtu.be/Mv0s1ug702U?t=484"},
-            "h9":{"link":"https://youtu.be/Mv0s1ug702U?t=553"},
-            "h10":{"link":"https://youtu.be/Mv0s1ug702U?t=615"},
-            "h11":{"link":"https://youtu.be/Mv0s1ug702U?t=663"},
-            "h12":{"link":"https://youtu.be/Mv0s1ug702U?t=719"}
-            }
+"Marte":{
+"h1":{"link":"https://youtu.be/f84wnRT3-3Y?t=96"},
+"h2":{"link":"https://youtu.be/f84wnRT3-3Y?t=164"},
+"h3":{"link":"https://youtu.be/f84wnRT3-3Y?t=219"},
+"h4":{"link":"https://youtu.be/f84wnRT3-3Y?t=256"},
+"h5":{"link":"https://youtu.be/f84wnRT3-3Y?t=317"},
+"h6":{"link":"https://youtu.be/f84wnRT3-3Y?t=376"},
+"h7":{"link":"https://youtu.be/f84wnRT3-3Y?t=442"},
+"h8":{"link":"https://youtu.be/f84wnRT3-3Y?t=499"},
+"h9":{"link":"https://youtu.be/f84wnRT3-3Y?t=545"},
+"h10":{"link":"https://youtu.be/f84wnRT3-3Y?t=604"},
+"h11":{"link":"https://youtu.be/f84wnRT3-3Y?t=673"},
+"h12":{"link":"https://youtu.be/f84wnRT3-3Y?t=722"}
+},
+"Venus":{
+"h1":{"link":"https://youtu.be/cZdBLc6Te4o?t=101"},
+"h2":{"link":"https://youtu.be/cZdBLc6Te4o?t=144"},
+"h3":{"link":"https://youtu.be/cZdBLc6Te4o?t=187"},
+"h4":{"link":"https://youtu.be/cZdBLc6Te4o?t=234"},
+"h5":{"link":"https://youtu.be/cZdBLc6Te4o?t=290"},
+"h6":{"link":"https://youtu.be/cZdBLc6Te4o?t=345"},
+"h7":{"link":"https://youtu.be/cZdBLc6Te4o?t=392"},
+"h8":{"link":"https://youtu.be/cZdBLc6Te4o?t=429"},
+"h9":{"link":"https://youtu.be/cZdBLc6Te4o?t=490"},
+"h10":{"link":"https://youtu.be/cZdBLc6Te4o?t=555"},
+"h11":{"link":"https://youtu.be/cZdBLc6Te4o?t=600"},
+"h12":{"link":"https://youtu.be/cZdBLc6Te4o?t=649"}
+},
+"Júpiter":{
+"h1":{"link":"https://youtu.be/Mv0s1ug702U?t=100"},
+"h2":{"link":"https://youtu.be/Mv0s1ug702U?t=142"},
+"h3":{"link":"https://youtu.be/Mv0s1ug702U?t=205"},
+"h4":{"link":"https://youtu.be/Mv0s1ug702U?t=256"},
+"h5":{"link":"https://youtu.be/Mv0s1ug702U?t=297"},
+"h6":{"link":"https://youtu.be/Mv0s1ug702U?t=346"},
+"h7":{"link":"https://youtu.be/Mv0s1ug702U?t=401"},
+"h8":{"link":"https://youtu.be/Mv0s1ug702U?t=484"},
+"h9":{"link":"https://youtu.be/Mv0s1ug702U?t=553"},
+"h10":{"link":"https://youtu.be/Mv0s1ug702U?t=615"},
+"h11":{"link":"https://youtu.be/Mv0s1ug702U?t=663"},
+"h12":{"link":"https://youtu.be/Mv0s1ug702U?t=719"}
+}
 
 }
