@@ -9,6 +9,7 @@ ApplicationWindow{
     color:app.c1
     width: isPhone?Screen.width:Screen.width-30//360
     height: isPhone?Screen.height:Screen.height-30//600
+    title: 'Mercurio'
     property string moduleName: 'mercurio'
     property bool rot: Qt.platform.os !== 'android'?app.width>app.height:isLandScape
     property bool isLandScape: (Screen.primaryOrientation === Qt.LandscapeOrientation || Screen.primaryOrientation === Qt.InvertedLandscapeOrientation)
