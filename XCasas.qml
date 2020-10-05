@@ -17,7 +17,7 @@ Rectangle {
         Item{width: 1;height: app.fs*0.5}
         BotonUX{
             text: 'Atras'
-            fontSize: app.rot?app.fs*0.5:app.fs
+            fontSize: app.rot?app.fs:app.fs
             onClicked: {
                 app.mod=-3
                 JS.speak('atras')
@@ -26,7 +26,7 @@ Rectangle {
         Text{
             text: '<b>Significado de las Casas</b>'
             color: app.c2
-            font.pixelSize: app.fs*1.5
+            font.pixelSize: app.fs
             width: r.width-app.fs
             wrapMode: Text.WordWrap
             anchors.horizontalCenter: parent.horizontalCenter
@@ -40,7 +40,7 @@ Rectangle {
                 id: repIconCasas
                 model: 12
                 BotonUX{
-                    width: app.rot?app.fs*3:app.fs*5
+                    width: app.rot?app.fs*5:app.fs*5
                     height: width
                     text: "Casa "+parseInt(modelData + 1)
                     fontSize: app.rot?app.fs:app.fs
@@ -107,7 +107,7 @@ Rectangle {
                             width: xApp.width-app.fs*2
                             text: modelData
                             color: app.c2
-                            font.pixelSize: app.fs*1.5
+                            font.pixelSize: app.fs
                             wrapMode: Text.WordWrap
                             textFormat: Text.RichText
                         }

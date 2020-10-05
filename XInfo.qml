@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import "func.js" as JS
 
 Rectangle {
     id: r
@@ -28,7 +29,7 @@ Rectangle {
                     fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     onClicked: {
                         app.mod=-1
-                        unik.speak('atras')
+                        JS.speak('atras')
                     }
                 }
             }

@@ -17,7 +17,7 @@ Rectangle {
         Item{width: 1;height: app.fs*0.5}
         BotonUX{
             text: 'Atras'
-            fontSize: app.rot?app.fs*0.5:app.fs
+            fontSize: app.rot?app.fs:app.fs
             onClicked: {
                 app.mod=-3
                 JS.speak('atras')
@@ -42,10 +42,10 @@ Rectangle {
                 id: repIconCasas
                 model: 12
                 BotonUX{
-                    width: app.rot?app.fs*3:app.fs*5
+                    width: app.rot?app.fs*5:app.fs*5
                     height: width
                     text: "Casa "+parseInt(modelData + 1)
-                    fontSize: app.rot?app.fs*0.5:app.fs
+                    fontSize: app.rot?app.fs:app.fs
                     onClicked: r.cCasa=index
                 }
             }

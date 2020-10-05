@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import "func.js" as JS
 import "qrc:/"
 
 Rectangle {
@@ -49,7 +50,7 @@ Rectangle {
                     text: 'Atras'
                     fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
                     onClicked: {
-                        unik.speak('atras')
+                        JS.speak('atras')
                         app.mod=-2
                         r.destroy(10)
                     }
@@ -222,6 +223,7 @@ Rectangle {
                             onTextChanged: {
                                 botSearch.enabled=true
                                 statusLugar.text='Presionar Boton <b>Buscar</b>'
+                                botCopyCoords.visible=false
                                 r.lat=''
                                 r.lon=''
                             }
@@ -230,7 +232,7 @@ Rectangle {
                             id: botSearch
                             text: 'Buscar'
                             opacity: tiCiudad.text!==''?1.0:0.0
-                            KeyNavigation.tab: botEnviar
+                            KeyNavigation.tab: botCopyCoords
                             anchors.verticalCenter: parent.horizontalCenter
                             onClicked: {
                                 getCoords(tiCiudad.text)
@@ -239,15 +241,29 @@ Rectangle {
                     }
                     Row{
                         spacing: app.fs*2
+                        //height: botCopyCoords.height
                         UText{
                             id: statusLugar1
                             font.pixelSize: app.fs*0.5
                             text: ''
+                            anchors.verticalCenter: parent.horizontalCenter
                         }
                         UText{
                             id: statusLugar
-                            font.pixelSize: app.fs*0.5
+                            font.pixelSize: app.fs
                             text: 'Ingresar ciudad'
+                            anchors.verticalCenter: parent.horizontalCenter
+                        }
+                        BotonUX{
+                            id: botCopyCoords
+                            text: 'Copiar Coordenadas'
+                            visible: false
+                            KeyNavigation.tab: botEnviar
+                            anchors.verticalCenter: parent.horizontalCenter
+                            property string coords: ''
+                            onClicked: {
+                                clipboard.setText(coords)
+                            }
                         }
                     }
 //                    UComboBox{
@@ -371,6 +387,8 @@ Rectangle {
                         r.lon=parseFloat(m222[0])
                         r.lat=parseFloat(m111[0])
                         statusLugar.text='Coordenadas: lon: '+r.lon+' lat: '+r.lat
+                        botCopyCoords.coords='lon: '+r.lon+' lat: '+r.lat
+                        botCopyCoords.visible=true
                         //}
                         //console.log('Coordenadas: '+m2[0])
                         //uCbCiudades.currentIndex=0
@@ -403,6 +421,8 @@ Rectangle {
             +'          r.lon=parseFloat(longitude)'+'\n'
             +'          r.lat=parseFloat(latitude)'+'\n'
             +'          statusLugar.text=\'Coordenadas: lon: \'+r.lon+\' lat: \'+r.lat'+'\n'
+            +'          botCopyCoords.coords=\'lon: \'+r.lon+\' lat:\'+r.lat\n'
+            +'          botCopyCoords.visible=true\n'
             +'          xLoadingCoords.visible=false'+'\n'
             +'  }'+'\n'
             +'}'+'\n'
