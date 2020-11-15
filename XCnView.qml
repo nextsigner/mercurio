@@ -24,6 +24,7 @@ Rectangle {
 
     onVisibleChanged: {
         cnCapture.url=currentImgUrl
+        botLaunchZodiac.visible=apps.zodiacLocation!==''&&unik.fileExist(apps.zodiacLocation)
     }
     onCurrentImgUrlChanged: wv.loadImage(currentImgUrl)
     Settings{
@@ -337,6 +338,37 @@ Rectangle {
             onClicked: {
                 console.log('Copy to clipboard: https://nextsigner.github.io/mercurio_server_redir.html?link='+xCnView.currentImgUrl)
                 clipboard.setText('https://nextsigner.github.io/mercurio_server_redir.html?link='+xCnView.currentImgUrl)
+            }
+        }
+        BotonUX{
+            id: botLaunchZodiac
+            text: 'Abrir en Zodiac'
+            height: app.fs*2
+            fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
+            visible: false
+            onClicked: {
+                let url=app.serverUrl+':'+app.portFiles+'/zodiacserver/bin/user/'+r.cNombre+'.dat'
+                console.log('cNombre:'+r.cNombre+' url:'+url)
+                httpObjGetDatFile.fileName=r.cNombre
+                httpObjGetDatFile.getHttp(url)
+            }
+            HttpObject{
+                id: httpObjGetDatFile
+                property string fileName: ''
+                onHttpResponse: {
+                    //console.log('R:'+r)
+                    let zf='/media/nextsigner/ZONA-A12/nsp/unik-dev-apps/zodiacserver/bin'
+                    let fileNameDat=zf+'/user/'+fileName+'.dat'
+                    //console.log('FileNameData:'+fileNameDat)
+                    //console.log('FileNameData Exist:'+unik.fileExist(fileNameDat))
+                    let saved=unik.setFile(fileNameDat, r)
+                    unik.ejecutarLineaDeComandoAparte(zf+'/zodiac_server '+fileName)
+                }
+            }
+            Component.onCompleted: {
+                if(apps.zodiacLocation!==''&&unik.fileExist(apps.zodiacLocation)){
+                    botLaunchZodiac.visible=true
+                }
             }
         }
     }

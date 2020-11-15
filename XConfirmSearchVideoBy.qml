@@ -20,14 +20,29 @@ Rectangle {
     Column{
         id: col1
         spacing: app.fs
-        anchors.centerIn: parent
-        Item{width: 1;height: app.fs*0.5}
-        UText{
-            text: '<b>Seleccionar tipo de búsqueda</b>'
-            color: app.c2
-            width: r.width-app.fs
-            wrapMode: Text.WordWrap
+        anchors.top: parent.top
+        anchors.topMargin: app.fs*0.5
+        anchors.horizontalCenter: parent.horizontalCenter
+        Row{
+            spacing: app.fs*0.5
             anchors.horizontalCenter: parent.horizontalCenter
+            UText{
+                text: '<b>Seleccionar tipo de búsqueda</b>'
+                color: app.c2
+                width: r.width-btnCerrar.width-app.fs*2
+                wrapMode: Text.WordWrap
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            UxBotCirc{
+                id: btnCerrar
+                text: 'X'
+                fontSize: app.fs
+                width: app.fs*2
+                anchors.verticalCenter: parent.verticalCenter
+                onClicked: {
+                    r.visible=false
+                }
+            }
         }
         Column{
             spacing: app.fs
@@ -83,14 +98,6 @@ Rectangle {
                     xAsData.addXAsTextData(r.signo, casa)
                     r.visible=false
                 }
-            }
-        }
-        BotonUX{
-            text: 'Cancelar'
-            anchors.right: parent.right
-            //anchors.rightMargin: app.fs
-            onClicked: {
-                r.visible=false
             }
         }
     }

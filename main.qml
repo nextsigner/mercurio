@@ -56,6 +56,11 @@ ApplicationWindow{
         }
     }
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
+    Settings{
+        id: apps
+        fileName:'mercurio.cfg'
+        property string zodiacLocation: ''
+    }
     USettings{
         id: unikSettings
         //url:pws+'/launcher.json'
@@ -188,6 +193,7 @@ ApplicationWindow{
             //XGetCarta{}
             //XCnView{}
             //UGetYouTubeVideo{}
+            //XSetZodiacLocation{}
         }
         UProgressDownload{
             id:upd

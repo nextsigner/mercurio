@@ -20,16 +20,40 @@ Item{
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         MouseArea{
+            id: maSig
+            property int vClick: 0
             anchors.fill: parent
             hoverEnabled: true
             onEntered: {
+                vClick=0
                 r.parent.cAs=r
             }
             onExited: {
+                vClick=0
                 //r.parent.cAs=r.parent
             }
-            onClicked: r.parent.pressed(r)
-            onDoubleClicked: r.parent.doublePressed(r)
+            onClicked: {
+                vClick++
+                tClick.restart()
+                //r.parent.pressed(r)
+            }
+            onDoubleClicked: {
+                tClick.stop()
+                r.parent.doublePressed(r)
+            }
+            Timer{
+                id: tClick
+                running: false
+                repeat: false
+                interval: 500
+                onTriggered: {
+                    if(maSig.vClick<=1){
+                        r.parent.pressed(r)
+                    }else{
+                        r.parent.doublePressed(r)
+                    }
+                }
+            }
         }
         Image {
             id: img
