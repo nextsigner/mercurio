@@ -35,7 +35,7 @@ Rectangle{
                 //visible: (''+wv.url).indexOf('results?search_query=')<0
                 text: 'Leer Texto'
                 height: app.fs*1.2
-                onClicked: unik.speak(textData.text)
+                onClicked: Qt.platform.os!=='linux'?unik.speak(textData.text):uText2Mp3.speak(textData.text)
             }
             BotonUX{
                 //visible: (''+wv.url).indexOf('results?search_query=')<0

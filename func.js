@@ -10,7 +10,12 @@ function capital_letter(str){
 function speak(text){
     if(!unikSettings.sound)return
     let s = ''+text.replace(/<br \/>/g, '')
-    unik.speak(s)
+    if(Qt.platform.os!=='linux'){
+        unik.speak(s)
+    }else{
+        xText2Mp3.speak(s)
+    }
+
 }
 
 function getHttpToItem(url, item){

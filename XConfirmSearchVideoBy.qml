@@ -77,7 +77,7 @@ Rectangle {
                 visible: r.cuerpo==='Lilith'||r.cuerpo==='Quirón'
                 text: 'Texto sobre '+r.cuerpo+' en casa '+r.casa
                 onClicked: {
-                    xAsData.addXAsTextData(cuerpo, casa)
+                    xAsData.addXAsTextData(cuerpo, r.signo, casa)
                     r.visible=false
                 }
             }
@@ -86,7 +86,7 @@ Rectangle {
                 visible: r.signo!=='null'&&r.cuerpo!=='Lilith'&&r.cuerpo!=='Quirón'
                 text: 'Texto sobre '+r.signo
                 onClicked: {
-                    xAsData.addXAsTextData(cuerpo, casa)
+                    xAsData.addXAsTextData(r.cuerpo, r.signo, r.casa)
                     r.visible=false
                 }
             }
@@ -95,7 +95,7 @@ Rectangle {
                 visible: r.signo!=='null'&&r.cuerpo==='Sol'
                 text: 'Texto de signo solar '+r.signo
                 onClicked: {
-                    xAsData.addXAsTextData(r.signo, casa)
+                    xAsData.addXAsTextData(r.cuerpo, r.signo, r.casa)
                     r.visible=false
                 }
             }

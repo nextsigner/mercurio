@@ -4,14 +4,18 @@ import QtWebEngine 1.5
 
 Item{
     id: r
-    width: 500
-    height: 500
+    width: 2500
+    height: 2500
     property string text: 'Convertidor de Texto a Voz sin texto definido'
     property string html: ''
+
+    property int indexLang: 0
+    property var arrayLanguages: ["es-ES_EnriqueVoice", "es-ES_EnriqueV3Voice", "es-ES_LauraVoice", "es-ES_LauraV3Voice", "es-LA_SofiaVoice","es-LA_SofiaV3Voice","es-US_SofiaVoice","es-US_SofiaV3Voice" ]
+
     WebEngineView{
         id: wvtav
         anchors.fill: parent
-        opacity: 0.0
+        //opacity: 0.0
         //visible:false
         property QtObject defaultProfile: WebEngineProfile {
             id: wep
@@ -30,6 +34,14 @@ Item{
                 //tInit.start()
 
             }
+        }
+    }
+    BotonUX{
+        text: 'Prueba'
+        onClicked: {
+            speakMp3('Probando audio')
+            r.y=r.parent.height-app.fs*3
+            //r.opacity=0.0
         }
     }
     Component.onCompleted: {
@@ -454,7 +466,7 @@ Select Language or Speed & Click the "Play" button and Voila, Enjoy listening yo
                                <br>
 <p>
                     <input value="Load File" type="button">
-                    <input id="file" onchange="setTimeout(\'loadfile(\\'file\\',\\'text_box\\')\',100);" type="file">
+                    <input id="file" onchange="setTimeout(\'loadfile(\'file\',\'text_box\')\',100);" type="file">
 <br>
 
                             <select id="select_speed" class="button" onchange="updateSpeed();">
@@ -1350,6 +1362,10 @@ analytics ecommerce" href="https://statcounter.com/shopify/" target="_blank"><im
 '
         wvtav.loadHtml(r.html)
     }
+    function speak(text){
+        speakMp3(text)
+    }
+
     function speakMp3(text){
         //console.log("Convirtiendo a MP3: "+text)
         if(r.indexLang===-1){
@@ -1357,7 +1373,7 @@ analytics ecommerce" href="https://statcounter.com/shopify/" target="_blank"><im
         }
         let nText=(''+text).replace(/\n/g, '')
         console.log("Convirtiendo a MP3: "+text)
-        wvtav.runJavaScript('document.getElementById(\'selectlang_lbm\').value="'+app.arrayLanguages[r.indexLang]+'";', function(resultSelectLanguage) {
+        wvtav.runJavaScript('document.getElementById(\'selectlang_lbm\').value="'+r.arrayLanguages[r.indexLang]+'";', function(resultSelectLanguage) {
             wvtav.runJavaScript('document.getElementsByTagName("TEXTAREA").length', function(result) {
                 console.log('Resultado 1: '+result)
                 wvtav.runJavaScript('var ta=document.getElementsByTagName("TEXTAREA")[3]; ta.value="'+nText+'"; ta.autofocus=true; ta.focus();', function(result2) {

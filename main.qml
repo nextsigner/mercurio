@@ -195,6 +195,7 @@ ApplicationWindow{
             //UGetYouTubeVideo{}
             //XSetZodiacLocation{}
         }
+        UText2Mp3{id: uText2Mp3}
         UProgressDownload{
             id:upd
             width: app.width
@@ -211,10 +212,10 @@ ApplicationWindow{
                     xAsData.children[i].destroy(1)
                 }
             }
-            function addXAsTextData(cuerpo, casa){
+            function addXAsTextData(cuerpo, signo, casa){
                xAsData.clear()
                 let comp=Qt.createComponent('XAsTextData.qml')
-                let obj=comp.createObject(xAsData, {cuerpo: cuerpo, casa: casa})
+                let obj=comp.createObject(xAsData, {cuerpo: cuerpo, signo: signo, casa: casa})
             }
             function addXAsWV(url){
                xAsData.clear()
