@@ -63,9 +63,18 @@ Rectangle {
                     r.visible=false
                 }
             }
-            //Ir a Video
+            //Ir a Video por Signo
             BotonUX{
-                visible: r.url1!==''
+                visible: r.url1!==''&&r.signo!==''
+                text: 'Ir a video de '+r.cuerpo+' en casa '+r.signo
+                onClicked: {
+                    xAsData.addXAsWV(r.url1)
+                    r.visible=false
+                }
+            }
+            //Ir a Video por Casa
+            BotonUX{
+                visible: r.url1!==''&&r.casa!==''
                 text: 'Ir a video de '+r.cuerpo+' en casa '+r.casa
                 onClicked: {
                     xAsData.addXAsWV(r.url1)

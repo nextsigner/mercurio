@@ -1,47 +1,57 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
-import QtWebEngine 1.5
+import QtWebView 1.1
 
 Item{
     id: r
     width: 2500
     height: 2500
+    anchors.top: parent.bottom
+
     property string text: 'Convertidor de Texto a Voz sin texto definido'
     property string html: ''
-
+    
+    property string activationMessage: 'Audio Activado.'
     property int indexLang: 0
     property var arrayLanguages: ["es-ES_EnriqueVoice", "es-ES_EnriqueV3Voice", "es-ES_LauraVoice", "es-ES_LauraV3Voice", "es-LA_SofiaVoice","es-LA_SofiaV3Voice","es-US_SofiaVoice","es-US_SofiaV3Voice" ]
-
-    WebEngineView{
+    WebView{
         id: wvtav
-        anchors.fill: parent
-        //opacity: 0.0
-        //visible:false
-        property QtObject defaultProfile: WebEngineProfile {
-            id: wep
-            httpUserAgent: 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36'
-            storageName: "Default"
-            persistentCookiesPolicy: WebEngineProfile.ForcePersistentCookies
-        }
-        settings.javascriptCanOpenWindows: true
-        settings.allowRunningInsecureContent: false
-        //settings.hyperlinkAuditingEnabled:  true
-        settings.javascriptCanAccessClipboard: true
-        settings.localStorageEnabled: true
-        settings.javascriptEnabled: true
+        width: parent.width
+        height: parent.height
+        opacity:0.5
+        anchors.top: btnAudioActivation.top
         onLoadProgressChanged:{
             if(loadProgress===100){
-                //tInit.start()
-
             }
         }
     }
     BotonUX{
-        text: 'Prueba'
+        id: btnAudioActivation
+        text: 'Activar Audio'
+        anchors.bottom: r.top
+        enabled: false
         onClicked: {
-            speakMp3('Probando audio')
-            r.y=r.parent.height-app.fs*3
-            //r.opacity=0.0
+            //speakMp3(r.activationMessage)
+        }
+    }
+    Timer{
+        id: tInit3
+        running: true
+        repeat: true
+        interval: 500
+        onTriggered: {
+            running=false
+            wvtav.runJavaScript('function aip(){var audio100=document.getElementById(\'audioElement1\');return audio100.duration > 0 && !audio100.paused}; aip();', function(result) {
+                //console.log('RP: '+result)
+                if(result===true){
+                    stop()
+                    //xStart.color='red'
+                    btnAudioActivation.visible=false
+                    wvtav.opacity=0.0
+                    return
+                }
+                running=true
+            });
         }
     }
     Component.onCompleted: {
@@ -1365,7 +1375,7 @@ analytics ecommerce" href="https://statcounter.com/shopify/" target="_blank"><im
     function speak(text){
         speakMp3(text)
     }
-
+    
     function speakMp3(text){
         //console.log("Convirtiendo a MP3: "+text)
         if(r.indexLang===-1){
