@@ -32,13 +32,19 @@ ApplicationWindow {
         }
         Shortcut{
             sequence: 'Esc'
-            onActivated: Qt.quit()
+            onActivated: {
+                if(xData.desplegado){
+                    xData.reset()
+                    return
+                }
+                Qt.quit()
+            }
         }
 
-        Shortcut{
-            sequence: 'Up'
-            onActivated: xData.up()
-        }
+//        Shortcut{
+//            sequence: 'Up'
+//            onActivated: xData.up()
+//        }
         Shortcut{
             sequence: '1'
             onActivated: xData.a1()

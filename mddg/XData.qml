@@ -4,6 +4,7 @@ import QtQuick.Controls 2.0
 Item {
     id: r
     anchors.fill: parent
+    property bool desplegado: cbPlanetas.currentIndex!==0
     Flickable{
         id: flick
         anchors.fill: r
@@ -19,6 +20,16 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 model: app.planetas
                 onCurrentIndexChanged: updateData()
+                Rectangle{
+                    width: parent.width+4
+                    height: parent.height+4
+                    color: 'transparent'
+                    border.width: 3
+                    border.color: 'red'
+                    //z: parent.z-1
+                    anchors.centerIn: parent
+                    visible: parent.focus
+                }
             }
             Row{
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -72,6 +83,16 @@ Item {
                 onCurrentIndexChanged: {
                     r.updateData()
                 }
+                Rectangle{
+                    width: parent.width+4
+                    height: parent.height+4
+                    color: 'transparent'
+                    border.width: 3
+                    border.color: 'red'
+                    //z: parent.z-1
+                    anchors.centerIn: parent
+                    visible: parent.focus
+                }
             }
             ComboBox{
                 id: cbCasas
@@ -81,6 +102,16 @@ Item {
                 visible: rb2.checked
                 onCurrentIndexChanged: {
                     r.updateData()
+                }
+                Rectangle{
+                    width: parent.width+4
+                    height: parent.height+4
+                    color: 'transparent'
+                    border.width: 3
+                    border.color: 'red'
+                    //z: parent.z-1
+                    anchors.centerIn: parent
+                    visible: parent.focus
                 }
             }
             Column{
@@ -99,7 +130,7 @@ Item {
     }
     function setData(json){
         let tipo=cbSignos.visible?'s':'h'
-        let num=cbSignos.visible?parseInt(cbSignos.currentIndex +1):cbCasas.currentIndex
+        let num=cbSignos.visible?cbSignos.currentIndex:cbCasas.currentIndex
         let data=json[tipo+''+num]
         if(!data){
             return
@@ -129,18 +160,14 @@ Item {
         }
         request.send()
     }
-    function up(){
-        if(cbCasas.visible||cbSignos.visible){
-            cbPlanetas.focus=true
-            rb1.checked=false
-            rb2.checked=false
-            updateData()
-            return
-        }
+    function reset(){
+        cbSignos.currentIndex=0
+        cbCasas.currentIndex=0
         rb1.checked=false
         rb2.checked=false
-        cbPlanetas.focus=true
         updateData()
+        cbPlanetas.currentIndex=0
+        cbPlanetas.focus=true
     }
     function a1(){
         rb1.checked=false
