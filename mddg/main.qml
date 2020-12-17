@@ -1,11 +1,12 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
-import QtQuick.Window 2.0
+import QtQuick.Window 2.12
 import Qt.labs.settings 1.0
 
 ApplicationWindow {
         id: app
         visible: true
+        visibility: "Windowed"
         width: Screen.width*0.2
         height: Screen.height*0.8
         title: 'Mercurio Data Desktop Gadget'
@@ -17,7 +18,7 @@ ApplicationWindow {
         property color c3: 'red'
         property color c4: 'green'
 
-        property var planetas: ['seleccionar','neptuno']
+        property var planetas: ['seleccionar','neptuno', 'pluton']
         property var signos: ['seleccionar','aries', 'tauro','geminis', 'cancer', 'leo', 'virgo','libra', 'escorpio', 'sagitario', 'capricornio', 'acuario', 'piscis']
 
         Settings{
