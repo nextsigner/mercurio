@@ -7,6 +7,7 @@ Item{
     width: 2500
     height: 2500
     anchors.top: parent.bottom
+    property bool speaked: false
 
     property string text: 'Convertidor de Texto a Voz sin texto definido'
     property string html: ''
@@ -14,26 +15,38 @@ Item{
     property string activationMessage: 'Audio Activado.'
     property int indexLang: 0
     property var arrayLanguages: ["es-ES_EnriqueVoice", "es-ES_EnriqueV3Voice", "es-ES_LauraVoice", "es-ES_LauraV3Voice", "es-LA_SofiaVoice","es-LA_SofiaV3Voice","es-US_SofiaVoice","es-US_SofiaV3Voice" ]
+    BotonUX{
+        id: btnAudioActivation
+        text: 'Activar Audio'
+        anchors.bottom: r.top
+        //enabled: false
+        onClicked: {
+            //speakMp3(r.activationMessage)
+        }
+    }
     WebView{
         id: wvtav
         width: parent.width
         height: parent.height
-        opacity:0.5
+        opacity:0.0
         anchors.top: btnAudioActivation.top
+        anchors.horizontalCenter: btnAudioActivation.horizontalCenter
+        //anchors.topMargin: -300
         onLoadProgressChanged:{
             if(loadProgress===100){
             }
         }
     }
-    BotonUX{
-        id: btnAudioActivation
-        text: 'Activar Audio'
-        anchors.bottom: r.top
-        enabled: false
-        onClicked: {
-            //speakMp3(r.activationMessage)
+    Timer{
+        id: tInit
+        running: true
+        repeat: true
+        interval: 2000
+        onTriggered: {
+            speakMp3(r.activationMessage)
         }
     }
+
     Timer{
         id: tInit3
         running: true
@@ -44,10 +57,13 @@ Item{
             wvtav.runJavaScript('function aip(){var audio100=document.getElementById(\'audioElement1\');return audio100.duration > 0 && !audio100.paused}; aip();', function(result) {
                 //console.log('RP: '+result)
                 if(result===true){
+                    tInit.stop()
+                    btnAudioActivation.clicked()
                     stop()
                     //xStart.color='red'
                     btnAudioActivation.visible=false
                     wvtav.opacity=0.0
+                    r.speaked=true
                     return
                 }
                 running=true

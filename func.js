@@ -8,12 +8,13 @@ function capital_letter(str){
     return str.join(" ");
 }
 function speak(text){
-    if(!unikSettings.sound)return
+    if(!unikSettings.sound&&!uText2Mp3.speaked)return
     let s = ''+text.replace(/<br \/>/g, '')
     if(Qt.platform.os!=='linux'){
         unik.speak(s)
     }else{
-        xText2Mp3.speak(s)
+        //unik.speak(s)
+        uText2Mp3.speak(s)
     }
 
 }
