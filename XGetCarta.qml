@@ -55,14 +55,14 @@ Rectangle {
                         r.destroy(10)
                     }
                 }
-//                BotonUX{
-//                    id: botSetMod
-//                    text: r.mod===0?'Cartas Disponibles':'Crear Carta'
-//                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
-//                    onClicked: {
-//                        r.mod=r.mod===0?1:0
-//                    }
-//                }
+                //                BotonUX{
+                //                    id: botSetMod
+                //                    text: r.mod===0?'Cartas Disponibles':'Crear Carta'
+                //                    fontSize: Qt.platform.os==='android'?(app.rot?app.fs*0.5:app.fs):app.fs
+                //                    onClicked: {
+                //                        r.mod=r.mod===0?1:0
+                //                    }
+                //                }
                 BotonUX{
                     text: 'Ver'
                     visible: r.mod===1&&xCnListDisp.cFileName!==''
@@ -93,7 +93,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 Column{
-                    spacing: app.fs*0.5
+                    spacing: app.fs*0.25
                     anchors.horizontalCenter: parent.horizontalCenter
                     UText{
                         text: '<b>Nombre</b>'
@@ -108,7 +108,7 @@ Rectangle {
                     }
                 }
                 Column{
-                    spacing: app.fs*0.5
+                    spacing: app.fs*0.25
                     anchors.horizontalCenter: parent.horizontalCenter
                     UText{
                         text: '<b>Fecha de Nacimiento</b>'
@@ -160,7 +160,7 @@ Rectangle {
                     }
                 }
                 Column{
-                    spacing: app.fs*0.5
+                    spacing: app.fs*0.25
                     anchors.horizontalCenter: parent.horizontalCenter
                     UText{
                         text: '<b>Hora de Nacimiento</b> Formato 24hs.'
@@ -196,10 +196,10 @@ Rectangle {
                                 }
                             }
                         }
-                    }                    
+                    }
                 }
                 Column{
-                    spacing: app.fs*0.5
+                    spacing: app.fs*0.25
                     anchors.horizontalCenter: parent.horizontalCenter
                     UText{
                         text: '<b>Lugar de Nacimiento</b>'
@@ -266,20 +266,18 @@ Rectangle {
                             }
                         }
                     }
-//                    UComboBox{
-//                        id: uCbCiudades
-//                        width: r.width-app.fs
-//                        visible: false
-//                        z: statusLugar.z+100
-//                        property var arrayUrls: []
-//                        onCurrentIndexChanged: {
-//                            if(currentIndex!==0){
-//                                tiCiudad.text=currentText
-//                                getCoordsByUrl(arrayUrls[currentIndex - 1])
-//                                visible=false
-//                            }
-//                        }
-//                    }
+                    Row{
+                        spacing: app.fs
+                        UText{
+                            font.pixelSize: app.fs
+                            text: 'Selectionar GMT:'
+                        }
+                        UComboBox{
+                            id: uCbGMT
+                            width: app.fs*6
+                            model: ['-12','-11','-10','-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+                        }
+                    }
                 }
                 Row{
                     spacing: app.fs*0.5
@@ -295,6 +293,7 @@ Rectangle {
                             tiHora.text='23'
                             tiMinutos.text='00'
                             tiCiudad.text='Malargue'
+                            uCbGMT.currentIndex=9
                             getCoords(tiCiudad.text)
                         }
                     }
@@ -311,16 +310,34 @@ Rectangle {
                             getJson()
                         }
                     }
+                    BotonUX{
+                        id: botLanzar
+                        text: 'Lanzar'
+                        visible: tiNombre.text!==''&&tiDia.text!==''&&tiMes.text!==''&&tiAnio.text!==''&&tiHora.text!==''&&tiMinutos.text!==''&&r.lon!==''&&r.lat!==''
+                        KeyNavigation.tab: tiNombre
+                        onClicked: {
+                            let cmd=r.serverUrl+':'+r.portRequest+'/cn/get/?'+'nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')
+                            let d=new Date(Date.now())
+                            let ms=d.getTime()
+                            let cmd2='wine /home/ns/zodiacserver/bin/zodiac_server.exe '+tiNombre.text.replace(/ /g, '_')+' '+tiAnio.text+' '+tiMes.text+' '+tiDia.text+' '+tiHora.text+' '+tiMinutos.text+' '+parseInt(uCbGMT.currentText)+' '+r.lat+' '+r.lon+' '+tiCiudad.text.replace(/ /g, '_')+' /home/ns/temp-screenshots/'+ms+'.json '+ms+' 3 "/home/ns/temp-screenshots/cap_'+ms+'.png" 2560x1440 2560x1440'
+                            unik.run(cmd2)
+                            /*if(unikSettings.sound){
+                                unik.speak('Creando carta natal. Un momento por favor. Espero unos segundos.')
+                            }
+                            enabled=false
+                            getJson()*/
+                        }
+                    }
                 }
             }
         }
-//        XCnListDisp{
-//            id: xCnListDisp
-//            width: r.width
-//            height: r.height//-flowGetCarta.height-col.spacing-app.fs*2
-//            visible: r.mod===1
-//            container: r
-//        }
+        //        XCnListDisp{
+        //            id: xCnListDisp
+        //            width: r.width
+        //            height: r.height//-flowGetCarta.height-col.spacing-app.fs*2
+        //            visible: r.mod===1
+        //            container: r
+        //        }
     }
     Item{
         anchors.horizontalCenter: parent.horizontalCenter
@@ -416,8 +433,8 @@ Rectangle {
             +'UGeoLocCoordsSearch{'+'\n'
             +'  url: \'https://www.google.com/maps?q='+text.replace(/ /g, '%20')+'\''+'\n'
             +'  onCoordsLoaded: {'+'\n'
-            //+'      console.log(\'Url final: \'+url)'+'\n'
-            //+'      console.log(\'lon: \'+longitude+\' lat: \'+latitude+\' alt: \'+altitude)'+'\n'
+        //+'      console.log(\'Url final: \'+url)'+'\n'
+        //+'      console.log(\'lon: \'+longitude+\' lat: \'+latitude+\' alt: \'+altitude)'+'\n'
             +'          r.lon=parseFloat(longitude)'+'\n'
             +'          r.lat=parseFloat(latitude)'+'\n'
             +'          statusLugar.text=\'Coordenadas: lon: \'+r.lon+\' lat: \'+r.lat'+'\n'
@@ -426,7 +443,7 @@ Rectangle {
             +'          xLoadingCoords.visible=false'+'\n'
             +'  }'+'\n'
             +'}'+'\n'
-        let comp=Qt.createQmlObject(c, r, 'getCoords')        
+        let comp=Qt.createQmlObject(c, r, 'getCoords')
     }
     function getJson(){
         let url=r.serverUrl+':'+r.portRequest+'/cn/get/?'+'nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')
