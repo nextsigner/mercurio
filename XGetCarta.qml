@@ -9,6 +9,15 @@ Rectangle {
     height: parent.height
     color: app.c1
     objectName: 'xgetcarta'
+
+    //Auto Launch
+    property bool autoLaunch: false
+    property string alNom
+    property string alFecha
+    property string alHora
+    property string alLugar
+    property string alGMT
+
     property alias xcnview: xCnView
     property int cNumSigno: -1
     property int cGradoLuna: -1
@@ -374,7 +383,20 @@ Rectangle {
     }
     XLoadingCoords{id: xLoadingCoords}
     Component.onCompleted: {
+        if(r.autoLaunch){
+            unik.speak('Lanzando Zodiac.')
+            getCoords(r.alLugar)
+        }
         tiNombre.focus=true
+    }
+    function runAutoLaunch(lon, lat){
+        let mFecha=r.alFecha.split('/')
+        let mHora=r.alHora.split(':')
+        let d=new Date(Date.now())
+        let ms=d.getTime()
+        let cmd2='wine /home/ns/zodiacserver/bin/zodiac_server.exe '+r.alNom.replace(/ /g, '_')+' '+mFecha[2]+' '+mFecha[1]+' '+mFecha[0]+' '+mHora[0]+' '+mHora[1]+' '+r.alGMT+' '+lat+' '+lon+' '+r.alLugar.replace(/ /g, '_')+' /home/ns/temp-screenshots/'+ms+'.json '+ms+' 3 "/home/ns/temp-screenshots/cap_'+ms+'.png" 2560x1440 2560x1440'
+        unik.run(cmd2)
+        Qt.quit()
     }
     function getCoordsByUrl(url){
         let md=["Seleccionar Ciudad"]
@@ -437,6 +459,10 @@ Rectangle {
         //+'      console.log(\'lon: \'+longitude+\' lat: \'+latitude+\' alt: \'+altitude)'+'\n'
             +'          r.lon=parseFloat(longitude)'+'\n'
             +'          r.lat=parseFloat(latitude)'+'\n'
+            +'          if(r.autoLaunch){'+'\n'
+            +'                runAutoLaunch(r.lon, r.lat)'+'\n'
+            +'                return'+'\n'
+            +'           }'+'\n'
             +'          statusLugar.text=\'Coordenadas: lon: \'+r.lon+\' lat: \'+r.lat'+'\n'
             +'          botCopyCoords.coords=\'lon: \'+r.lon+\' lat:\'+r.lat\n'
             +'          botCopyCoords.visible=true\n'

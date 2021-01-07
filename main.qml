@@ -300,6 +300,34 @@ ApplicationWindow{
             }
             unik.ttsLanguageSelected(index)
             //unik.speak('Idioma Español seleccionado.')
+            if(Qt.application.arguments.length >= 6){
+                var num=1
+                var args=[]
+                for(var i=0;i<Qt.application.arguments.length;i++){
+                    if((''+Qt.application.arguments[i].length>=1)){
+                        args.push(Qt.application.arguments[i])
+                    }
+                }
+                //unik.setFile('/home/ns/arg.txt', 'Args: '+args.toString())
+                unik.speak('Argumentos '+args.length)
+                //return
+                if(Qt.application.arguments.length === 7){
+                    num=1
+                }
+
+                let nom=args[num+1]
+                unik.setFile('/home/ns/arg.txt', 'Args: '+nom)
+
+                let fecha=args[num+2]
+                let hora=args[num+3]
+                let lugar=args[num+4]
+                let gmt=args[num+5]
+                //console.log('6 Argumentos')
+                unik.speak('Cargando datos de carta natal de '+nom+'.')
+                let comp = Qt.createComponent('XGetCarta.qml')
+                let obj=comp.createObject(xMods, {autoLaunch: true, alNom: nom, alFecha:fecha, alHora: hora, alLugar: lugar, alGMT: gmt})
+               // return
+            }
         }
         getServerUrl()
     }
