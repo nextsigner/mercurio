@@ -309,7 +309,7 @@ ApplicationWindow{
                     }
                 }
                 //unik.setFile('/home/ns/arg.txt', 'Args: '+args.toString())
-                unik.speak('Argumentos '+args.length)
+                //unik.speak('Argumentos '+args.length)
                 //return
                 if(Qt.application.arguments.length === 7){
                     num=1

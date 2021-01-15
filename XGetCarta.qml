@@ -384,7 +384,7 @@ Rectangle {
     XLoadingCoords{id: xLoadingCoords}
     Component.onCompleted: {
         if(r.autoLaunch){
-            unik.speak('Lanzando Zodiac.')
+            //unik.speak('Lanzando Zodiac.')
             getCoords(r.alLugar)
         }
         tiNombre.focus=true
