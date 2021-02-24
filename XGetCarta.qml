@@ -328,7 +328,7 @@ Rectangle {
                             let cmd=r.serverUrl+':'+r.portRequest+'/cn/get/?'+'nom='+tiNombre.text.replace(/ /g, '_')+'&d='+tiDia.text+'&m='+tiMes.text+'&a='+tiAnio.text+'&h='+tiHora.text+'&min='+tiMinutos.text+'&lon='+r.lon+'&lat='+r.lat+'&loc='+tiCiudad.text.replace(/ /g, '_')
                             let d=new Date(Date.now())
                             let ms=d.getTime()
-                            let cmd2='wine /home/ns/zodiacserver/bin/zodiac_server.exe '+tiNombre.text.replace(/ /g, '_')+' '+tiAnio.text+' '+tiMes.text+' '+tiDia.text+' '+tiHora.text+' '+tiMinutos.text+' '+parseInt(uCbGMT.currentText)+' '+r.lat+' '+r.lon+' '+tiCiudad.text.replace(/ /g, '_')+' /home/ns/temp-screenshots/'+tiNombre.text.replace(/ /g, '_')+'.json '+ms+' 3 "/home/ns/temp-screenshots/cap_'+ms+'.png" 2560x1440 2560x1440'
+                            let cmd2='wine /home/ns/zodiacserver/bin/zodiac_server.exe '+tiNombre.text.replace(/ /g, '_')+' '+tiAnio.text+' '+tiMes.text+' '+tiDia.text+' '+tiHora.text+' '+tiMinutos.text+' '+parseInt(uCbGMT.currentText)+' '+r.lat+' '+r.lon+' '+tiCiudad.text.replace(/ /g, '_')+' /home/ns/temp-screenshots/'+ms+'.json '+ms+' 3 "/home/ns/temp-screenshots/cap_'+ms+'.png" 2560x1440 2560x1440'
                             unik.run(cmd2)
                             /*if(unikSettings.sound){
                                 unik.speak('Creando carta natal. Un momento por favor. Espero unos segundos.')
